@@ -27,7 +27,7 @@ GO
 
 INSERT INTO Acce.tbRoles(role_Nombre, role_UsuCreacion)
 VALUES					('Digitador', 1),
-						('Visualizador', 1)
+						('Visualizador', 1),
 						('Miembro',1)
 
 --**********************************************************TABLA PANTALLAS***************************************************************---
