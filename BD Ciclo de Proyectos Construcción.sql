@@ -25,6 +25,11 @@ CREATE TABLE Acce.tbRoles(
 );
 GO
 
+INSERT INTO Acce.tbRoles(role_Nombre, role_UsuCreacion)
+VALUES					('Digitador', 1),
+						('Visualizador', 1)
+						('Miembro',1)
+
 --**********************************************************TABLA PANTALLAS***************************************************************---
 CREATE TABLE Acce.tbPantallas(
 	pant_Id					INT IDENTITY,
