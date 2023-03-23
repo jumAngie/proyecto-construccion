@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Construccion.BusinessLogic
 {
-    class ServiceResult
+    public class ServiceResult
     {
         /// <summary>
         /// Indica el tipo de solicitud.

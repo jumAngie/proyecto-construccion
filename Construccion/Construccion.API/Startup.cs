@@ -1,3 +1,5 @@
+using AutoMapper;
+using Construccion.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Construccion.BusinessLogic;
 
 namespace Construccion
 {
@@ -27,6 +30,18 @@ namespace Construccion
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.DataAccess(Configuration.GetConnectionString("ConexionCons"));
+            services.BusinessLogic();
+            services.AddAutoMapper(x => x.AddProfile<MappingProfileExntensions>(), AppDomain.CurrentDomain.GetAssemblies());
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddMvc();
+            services.AddControllersWithViews();
             services.AddControllers();
             AddSwagger(services);
         }

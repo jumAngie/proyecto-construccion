@@ -1,0 +1,15 @@
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.csproj.AssemblyReference.cache
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.AssemblyInfoInputs.cache
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.AssemblyInfo.cs
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\bin\Debug\net5.0\Construccion.DataAccess.deps.json
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\bin\Debug\net5.0\Construccion.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\bin\Debug\net5.0\ref\Construccion.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\bin\Debug\net5.0\Construccion.DataAccess.pdb
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\bin\Debug\net5.0\Construccion.Entities.dll
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\bin\Debug\net5.0\Construccion.Entities.pdb
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.csproj.CopyComplete
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\ref\Construccion.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.DataAccess\obj\Debug\net5.0\Construccion.DataAccess.pdb

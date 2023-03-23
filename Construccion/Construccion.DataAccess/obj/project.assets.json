@@ -1863,6 +1863,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Construccion.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Construccion.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Construccion.Entities.dll": {}
+        }
       }
     }
   },
@@ -6575,10 +6585,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Construccion.Entities/1.0.0": {
+      "type": "project",
+      "path": "../Construccion.Entities/Construccion.Entities.csproj",
+      "msbuildProject": "../Construccion.Entities/Construccion.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Construccion.Entities >= 1.0.0",
       "Dapper >= 2.0.123",
       "Microsoft.AspNetCore.Http.Features >= 5.0.17",
       "Microsoft.AspNetCore.Mvc.Core >= 2.2.5",
@@ -6617,7 +6633,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
+              "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

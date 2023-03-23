@@ -30,6 +30,28 @@ VALUES					('Digitador', 1),
 						('Visualizador', 1),
 						('Miembro',1)
 
+GO
+CREATE OR ALTER VIEW WW_tbRoles
+AS
+ SELECT role_Id, role_Nombre FROM Acce.tbRoles
+GO
+
+CREATE OR ALTER PROC Acce.UDP_tbRoles_Insert
+	@role_Nombre	NVARCHAR(100)
+AS
+BEGIN
+		
+				INSERT INTO Acce.tbRoles
+				VALUES		(@role_Nombre, 1, GETDATE(), NULL, NULL, 1);
+				SELECT 1
+	
+		
+END
+GO
+EXEC Acce.UDP_tbRoles_Insert 'EQUIS'
+
+SELECT * FROM Acce.tbRoles
+
 --**********************************************************TABLA PANTALLAS***************************************************************---
 CREATE TABLE Acce.tbPantallas(
 	pant_Id					INT IDENTITY,

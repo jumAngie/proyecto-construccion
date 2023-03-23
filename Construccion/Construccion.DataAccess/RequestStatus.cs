@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Construccion.DataAccess
 {
-    class RequestStatus
+    public class RequestStatus
     {
         public int CodeStatus { get; set; }
         public string MessageStatus { get; set; }
