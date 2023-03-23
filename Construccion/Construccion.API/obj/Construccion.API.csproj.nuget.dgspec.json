@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.API\\Construccion.API.csproj": {}
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.API\\Construccion.API.csproj": {
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.API\\Construccion.API.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj",
         "projectName": "Construccion.API",
-        "projectPath": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.API\\Construccion.API.csproj",
+        "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj",
         "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.API\\obj\\",
+        "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,28 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"

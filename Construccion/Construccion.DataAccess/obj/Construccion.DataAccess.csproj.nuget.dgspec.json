@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {}
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
         "projectName": "Construccion.DataAccess",
-        "projectPath": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
+        "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
         "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,6 +43,28 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

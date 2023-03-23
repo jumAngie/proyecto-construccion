@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
       "projectName": "Construccion.BusinessLogic",
-      "projectPath": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
+      "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
       "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB02\\source\\repos\\Construccion\\Construccion.BusinessLogic\\obj\\",
+      "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
