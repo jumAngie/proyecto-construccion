@@ -223,7 +223,7 @@ CREATE TABLE Cons.tbConstrucciones(
         cons_FechaCreacion				DATETIME NOT NULL CONSTRAINT DF_tbConstrucciones_user_FechaCreacion DEFAULT(GETDATE()),
         user_UsuModificacion			INT,
         cons_FechaModificacion			DATETIME,
-        user_Estado						BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+        cons_Estado						BIT NOT NULL CONSTRAINT DF_tbConstrucciones_cons_Estado DEFAULT(1)
 		CONSTRAINT PK_Cons_tbConstrucciones_cons_Id								PRIMARY KEY(cons_Id),
 		CONSTRAINT FK_Cons_tbConstrucciones_muni_Id_Gral_tbMunicipios_muni_Id	FOREIGN KEY(muni_Id)	REFERENCES Gral.tbMunicipios(muni_Id)
 );
@@ -1435,11 +1435,11 @@ GO
 
 --****************************************************************TABLA CONSTRUCCIONES********************************************************************--
 --TABLA CONSTRUCCIONES
-INSERT INTO Cons.tbConstrucciones(cons_Proyecto,cons_ProyectoDescripcion, muni_Id, cons_Direccion, cons_FechaInicio, cons_FechaFin, user_UsuCreacion,user_Estado)
+INSERT INTO Cons.tbConstrucciones(cons_Proyecto,cons_ProyectoDescripcion, muni_Id, cons_Direccion, cons_FechaInicio, cons_FechaFin, user_UsuCreacion, cons_Estado)
 VALUES        ('Proyecto Construccion Edificio', 'Construccion completa de un Edificio con 2 plantas', '0501', '1ra Calle, 3ra Avenida, Frente al Parque Central', '11/12/23', '11/12/25', 1,1)
 GO
 
-INSERT INTO Cons.tbConstrucciones(cons_Proyecto,cons_ProyectoDescripcion, muni_Id, cons_Direccion, cons_FechaInicio, cons_FechaFin, user_UsuCreacion,user_Estado)
+INSERT INTO Cons.tbConstrucciones(cons_Proyecto,cons_ProyectoDescripcion, muni_Id, cons_Direccion, cons_FechaInicio, cons_FechaFin, user_UsuCreacion, cons_Estado)
 VALUES        ('Proyecto Arreglo Sucursal', 'Arreglo de primer piso completo de Sucursal', '0803', '5ta Calle, 3ra Avenida, Atrás de Tropigas', '11/12/23', '11/12/25', 1,1)
 GO
 
@@ -1838,11 +1838,134 @@ GO
 --************************************************************** LAS TABLAS **********************************************************************--
 --***********************************************************************************************************************************************--
 
+--- *************************************************** VISTAS ****************************************************************
+
+--1
 GO
-CREATE OR ALTER VIEW WW_tbRoles
+CREATE OR ALTER VIEW Acce.WV_tbRoles
 AS
  SELECT role_Id, role_Nombre FROM Acce.tbRoles
+ WHERE	role_Estado = 1
 GO
+GO
+--2
+CREATE OR ALTER VIEW Acce.WV_tbPantallasRoles
+AS
+ SELECT ptro_Id, rol.role_Nombre, pant_Nombre FROM Acce.tbPantallasRoles ptro
+ INNER JOIN Acce.tbPantallas pant
+ ON			ptro.pant_Id = pant.pant_Id
+ INNER JOIN Acce.tbRoles rol
+ ON			ptro.role_Id = rol.role_Id
+ WHERE		ptro.ptro_Estado = 1
+GO
+--3
+CREATE OR ALTER VIEW Acce.WV_tbPantallas
+AS
+ SELECT pant.pant_Id, pant.pant_Nombre, pant.pant_Menu, pant.pant_URL FROM Acce.tbPantallas pant
+ WHERE	pant.pant_Estado = 1
+GO
+--3
+CREATE OR ALTER VIEW Acce.WV_tbUsuarios
+AS
+ SELECT usua.user_Id, usua.user_NombreUsuario, rol.role_Nombre,
+		CASE usua.user_EsAdmin
+		WHEN '1' THEN 'Sí'
+		WHEN '0' THEN 'No'
+		END AS 'Es Admin' 
+		FROM Acce.tbUsuarios usua INNER JOIN Acce.tbRoles rol
+		ON	 usua.role_Id = rol.role_Id
+ WHERE	usua.user_Estado = 1
+GO
+--4
+CREATE OR ALTER VIEW Cons.VW_tbClientes
+AS
+ SELECT client.clie_Id, clie_Nombre, client.clie_Identificacion, client.clie_Telefono, client.clie_CorreoElectronico, deptos.depa_Nombre,
+		muni.muni_Nombre, client.clie_DireccionExacta FROM Cons.tbClientes client
+		INNER JOIN Gral.tbMunicipios muni
+		ON			client.muni_Id = muni.muni_id
+		INNER JOIN  Gral.tbDepartamentos deptos
+		ON			muni.depa_Id = deptos.depa_Id
+		WHERE		client.clie_Estado = 1
+GO
+--5
+CREATE OR ALTER VIEW Cons.VW_tbConstrucciones
+AS
+SELECT const.cons_Id, const.cons_Proyecto, const.cons_ProyectoDescripcion, deptos.depa_Nombre, muni.muni_Nombre, const.cons_Direccion,
+	   const.cons_FechaInicio, const.cons_FechaFin 
+	   FROM Cons.tbConstrucciones const  INNER JOIN Gral.tbMunicipios muni
+	   ON	const.muni_Id = muni.muni_id INNER JOIN Gral.tbDepartamentos deptos
+	   ON	muni.depa_Id = deptos.depa_Id
+	   WHERE const.cons_Estado = 1
+GO
+--6
+CREATE OR ALTER VIEW Cons.VW_tbEmpleadosPorConstruccion
+AS
+SELECT  emco_Id, const.cons_Proyecto, emple.empl_Nombre + ' ' + emple.empl_Apellidos AS empl_Nombre FROM Cons.tbEmpleadosPorConstruccion emco
+		INNER JOIN  Cons.tbConstrucciones const
+		ON		    emco.cons_Id = const.cons_Id
+		INNER JOIN  Gral.tbEmpleados emple
+		ON			emco.empl_Id = emple.empl_Id
+WHERE	emco.cons_Estado = 1
+GO
+--7
+CREATE OR ALTER VIEW Cons.VW_tbIncidencia
+AS
+SELECT  inci_Id, cons.cons_Proyecto, inci_Descripcion FROM Cons.tbIncidencia inci
+		INNER JOIN Cons.tbConstrucciones cons
+		ON			inci.cons_Id = cons.cons_Id
+WHERE	user_Estado = 1
+GO
+--8
+CREATE OR ALTER VIEW Cons.VW_tbInsumos
+AS
+SELECT	insu.insm_Id, insu.insm_Descripcion FROM Cons.tbInsumos insu
+WHERE	insu.user_Estado = 1
+GO
+--9
+CREATE OR ALTER VIEW Cons.VW_tbInsumosConstruccion
+AS
+SELECT	inco_Id, const.cons_Proyecto, insu.insm_Descripcion FROM Cons.tbInsumosConstruccion ic
+		INNER JOIN   Cons.tbConstrucciones const
+		ON			 ic.cons_Id = const.cons_Id
+		INNER JOIN   Cons.tbInsumos insu
+		ON			 ic.insm_Id = insu.insm_Id
+WHERE   ic.user_Estado = 1
+GO
+--10
+CREATE OR ALTER VIEW Cons.VW_tbUnidadesMedida
+AS
+SELECT	unim_Id, unim_Descripcion FROM Cons.tbUnidadesMedida um
+WHERE   user_Estado = 1
+GO
+--11
+CREATE OR ALTER VIEW Gral.VW_tbCargos
+AS
+SELECT	carg.carg_Id, carg.carg_Cargo FROM Gral.tbCargos carg
+GO
+--12
+CREATE OR ALTER VIEW Gral.VW_tbEmpleados
+AS
+SELECT	emp.empl_Id, emp.empl_DNI, emp.empl_Nombre + ' ' + emp.empl_Apellidos AS empl_Nombre,  emp.empl_FechaNacimiento,
+		emp.empl_CorreoEletronico, carg.carg_Cargo, emp.empl_DireccionExacta  FROM Gral.tbEmpleados emp
+		INNER JOIN Gral.tbCargos carg ON emp.carg_Id = carg.carg_Id
+		WHERE  emp.empl_Estado = 1
+GO
+
+SELECT*FROM Acce.WV_tbPantallas
+SELECT*FROM Acce.WV_tbPantallasRoles
+SELECT*FROM Acce.WV_tbRoles
+SELECT*FROM Gral.VW_tbCargos
+SELECT*FROM Gral.VW_tbEmpleados
+SELECT*FROM Cons.VW_tbClientes
+SELECT*FROM Cons.VW_tbConstrucciones
+SELECT*FROM Cons.VW_tbEmpleadosPorConstruccion
+SELECT*FROM Cons.VW_tbIncidencia
+SELECT*FROM Cons.VW_tbInsumos
+SELECT*FROM Cons.VW_tbInsumosConstruccion
+SELECT*FROM Cons.VW_tbUnidadesMedida
+
+GO
+--****************************************************************************************************************************************
 
 CREATE OR ALTER PROC Acce.UDP_tbRoles_Insert
 	@role_Nombre	NVARCHAR(100),
