@@ -11,11 +11,13 @@ namespace Construccion.BusinessLogic.Services
     public class AccessService
     {
         private readonly RolesRepository _rolesRepository;
+        private readonly UsuariosRepository _usuariosRepository;
     
 
-        public AccessService(RolesRepository rolesRepository)
+        public AccessService(RolesRepository rolesRepository, UsuariosRepository usuariosRepository)
         {
             _rolesRepository = rolesRepository;
+            _usuariosRepository = usuariosRepository;
         }
 
         #region Roles
@@ -97,5 +99,23 @@ namespace Construccion.BusinessLogic.Services
         }
         #endregion
 
+        #region Usuarios
+        public ServiceResult ListUsuarios()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _usuariosRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        #endregion
     }
 }

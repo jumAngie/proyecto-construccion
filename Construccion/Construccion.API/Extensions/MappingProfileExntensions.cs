@@ -13,8 +13,11 @@ namespace Construccion.API.Extensions
         public MappingProfileExntensions()
        {
 
-            CreateMap<RolesViewModel, WW_tbRoles>().ReverseMap();
+            CreateMap<RolesViewModel, WV_tbRoles>().ReverseMap();
             CreateMap<tbRoles, RolesViewModel>().ReverseMap();
+
+            CreateMap<UsuariosViewModel, WV_tbUsuarios>().ReverseMap();
+            CreateMap<tbUsuarios, UsuariosViewModel>().ReverseMap();
 
 
         }

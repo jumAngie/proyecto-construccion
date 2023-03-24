@@ -16,9 +16,4 @@
     <ProjectReference Include="..\Construccion.Entities\Construccion.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Gral\" />
-    <Folder Include="Repositories\Cons\" />
-  </ItemGroup>
-
 </Project>
