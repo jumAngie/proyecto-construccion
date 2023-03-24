@@ -41,10 +41,10 @@ CREATE TABLE Acce.tbRoles(
 	role_Id					INT IDENTITY,
 	role_Nombre				NVARCHAR(100) NOT NULL,
 	user_UsuCreacion		INT NOT NULL,
-	role_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_role_FechaCreacion DEFAULT(GETDATE()),
+	role_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbRoles_role_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion	INT,
 	role_FechaModificacion	DATETIME,
-	role_Estado				BIT NOT NULL CONSTRAINT DF_role_Estado DEFAULT(1)
+	role_Estado				BIT NOT NULL CONSTRAINT DF_tbRoles_role_Estado DEFAULT(1)
 	CONSTRAINT PK_Acce_tbRoles_role_Id PRIMARY KEY(role_Id)
 );
 GO
@@ -59,10 +59,10 @@ CREATE TABLE Acce.tbUsuarios(
 	role_Id					INT,
 	empe_Id					INT,
 	user_UsuCreacion		INT,
-	user_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+	user_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbUsuarios_user_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion	INT,
 	user_FechaModificacion	DATETIME,
-	user_Estado				BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+	user_Estado				BIT NOT NULL CONSTRAINT DF_tbUsuarios_user_Estado DEFAULT(1)
 	CONSTRAINT PK_Acce_tbUsuarios_user_Id  PRIMARY KEY(user_Id),
 );
 GO
@@ -76,10 +76,10 @@ CREATE TABLE Acce.tbPantallas(
     pant_Menu               NVARCHAR(300) NOT NULL,
     pant_HtmlId             NVARCHAR(80) NOT NULL,
 	user_UsuCreacion		INT NOT NULL,
-	pant_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_pant_FechaCreacion DEFAULT(GETDATE()),
+	pant_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbPantallas_pant_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion	INT,
 	pant_FechaModificacion	DATETIME,
-	pant_Estado				BIT NOT NULL CONSTRAINT DF_pant_Estado DEFAULT(1)
+	pant_Estado				BIT NOT NULL CONSTRAINT DF_tbPantallas_pant_Estado DEFAULT(1)
 	CONSTRAINT PK_Acce_tbPantallas_pant_Id PRIMARY KEY(pant_Id)
 );
 GO
@@ -91,10 +91,10 @@ CREATE TABLE Acce.tbPantallasRoles(
 	role_Id					INT NOT NULL,
 	pant_Id					INT NOT NULL,
 	user_UsuCreacion		INT NOT NULL,
-	ptro_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_pantrole_FechaCreacion DEFAULT(GETDATE()),
+	ptro_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbPantallasRoles_pantrole_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion	INT,
 	ptro_FechaModificacion	DATETIME,
-	ptro_Estado				BIT NOT NULL CONSTRAINT DF_pantrole_Estado DEFAULT(1)
+	ptro_Estado				BIT NOT NULL CONSTRAINT DF_tbPantallasRoles_pantrole_Estado DEFAULT(1)
 	CONSTRAINT PK_Acce_tbPantallasPorRoles_pantrole_Id				PRIMARY KEY(ptro_Id),
 	CONSTRAINT FK_Acce_tbPantallasPorRoles_Acce_tbRoles_role_Id		FOREIGN KEY(role_Id)		REFERENCES Acce.tbRoles(role_Id),
 	CONSTRAINT FK_Acce_tbPantallasPorRoles_Acce_tbPantallas_pant_Id FOREIGN KEY(pant_Id)		REFERENCES Acce.tbPantallas(pant_Id),
@@ -107,7 +107,7 @@ CREATE TABLE Gral.tbDepartamentos (
 	depa_Id  					CHAR(2) NOT NULL,
 	depa_Nombre 				NVARCHAR(100) NOT NULL,
 	user_UsuCreacion			INT NOT NULL,
-	depa_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_depa_FechaCreacion DEFAULT(GETDATE()),
+	depa_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_tbDepartamentos_depa_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion		INT,
 	depa_FechaModificacion		DATETIME
 	CONSTRAINT PK_Gral_tbDepartamentos_depa_Id 											PRIMARY KEY(depa_Id),
@@ -123,7 +123,7 @@ CREATE TABLE Gral.tbMunicipios(
 	muni_Nombre				NVARCHAR(80) NOT NULL,
 	depa_Id					CHAR(2)	NOT NULL,
 	user_UsuCreacion		INT	NOT NULL,
-	muni_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_muni_FechaCreacion DEFAULT(GETDATE()),
+	muni_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbMunicipios_muni_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion	INT,
 	muni_FechaModificacion	DATETIME
 	CONSTRAINT PK_Gral_tbMunicipios_muni_Id 										PRIMARY KEY(muni_Id),
@@ -136,10 +136,10 @@ GO
 --*************************************************************TABLA ESTADOS CIVILES*****************************************************---
 --TABLA ESTADOS CIVILES
 CREATE TABLE Gral.tbEstadosCiviles(
-        esta_ID                INT IDENTITY(1,1),
+        esta_ID                CHAR(1),
         esta_Descripcion	   NVARCHAR(250) NOT NULL,
         user_IdCreacion		   INT  NOT NULL,
-        esta_FechaCrea         DATETIME DEFAULT GETDATE(),
+        esta_FechaCrea         DATETIME NOT NULL CONSTRAINT DF_tbEstadosCiviles_estaFechaCrea DEFAULT (GETDATE()),
         user_IdModificacion	   INT,
         esta_FechaModi         DATETIME
 		CONSTRAINT PK_Gral_tbEstadosCiviles_esta_ID PRIMARY KEY(esta_ID),
@@ -155,7 +155,7 @@ CREATE TABLE Gral.tbCargos(
 	carg_Id					INT IDENTITY(1,1),
 	carg_Cargo				NVARCHAR(250) NOT NULL,
 	user_UsuCreacion		INT NOT NULL,
-	carg_FechaCreacion		DATETIME DEFAULT GETDATE(), 
+	carg_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbCargos_cargFechaCreacion DEFAULT (GETDATE()), 
 	user_IdModificacion		INT,
 	carg_FechaModificacion	DATETIME
 	CONSTRAINT PK_Gral_tbCargos_carg_Id PRIMARY KEY(carg_Id)
@@ -169,8 +169,8 @@ CREATE TABLE Gral.tbEmpleados(
 	empl_DNI				VARCHAR(13) NOT NULL,
 	empl_Nombre				NVARCHAR(255)NOT NULl,
 	empl_Apellidos			NVARCHAR(255) NOT NULL,
-	empl_Sexo				INT NOT NULL,
-	esta_ID					INT NOT NULL,
+	empl_Sexo				CHAR(1) NOT NULL,
+	esta_ID					CHAR(1) NOT NULL,
 	muni_Id					CHAR(4) NOT NULL,
 	carg_Id					INT NOT NULL,
 	empl_DireccionExacta	NVARCHAR(250)NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE Gral.tbEmpleados(
 	empl_Telefono			NVARCHAR(9)NOT NULL,
 	empl_CorreoEletronico	NVARCHAR(255)NOT NULL,
 	user_IdCreacion			INT NOT NULL,
-	empl_FechaCreacion		DATETIME DEFAULT GETDATE(),
+	empl_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbEmpleados_empl_FechaCreacion DEFAULT (GETDATE()),
 	user_IdModificacion		INT,
 	empl_FechaModificacion	DATETIME,
 	empl_Estado				BIT DEFAULT 1, 
@@ -200,7 +200,7 @@ CREATE TABLE Cons.tbClientes(
 	clie_Telefono			NVARCHAR(9)NOT NULL,
 	clie_CorreoElectronico	NVARCHAR(255) NOT NULL,
 	user_IdCreacion			INT NOT NULL,
-	clie_FechaCreacion		DATETIME DEFAULT GETDATE(), 
+	clie_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_tbClientes_clieFechaCreacion DEFAULT (GETDATE()), 
 	user_IdModificacion		INT,
 	clie_FechaModificacion	DATETIME,
 	clie_Estado				BIT DEFAULT 1, 
@@ -220,7 +220,7 @@ CREATE TABLE Cons.tbConstrucciones(
         cons_FechaInicio				DATE,
         cons_FechaFin					DATE,
         user_UsuCreacion				INT,
-        cons_FechaCreacion				DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+        cons_FechaCreacion				DATETIME NOT NULL CONSTRAINT DF_tbConstrucciones_user_FechaCreacion DEFAULT(GETDATE()),
         user_UsuModificacion			INT,
         cons_FechaModificacion			DATETIME,
         user_Estado						BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
@@ -235,10 +235,10 @@ CREATE TABLE Cons.tbInsumos(
         insm_Id						INT IDENTITY(1,1),
         insm_Descripcion			NVARCHAR(200),
         user_UsuCreacion			INT,
-        insm_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+        insm_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_tbInsumos_user_FechaCreacion DEFAULT(GETDATE()),
         user_UsuModificacion		INT,
         insm_FechaModificacion		DATETIME,
-        user_Estado					BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+        user_Estado					BIT NOT NULL CONSTRAINT DF_tbInsumos_user_Estado DEFAULT(1)
 		CONSTRAINT PK_Cons_tbInsumos_insm_Id PRIMARY KEY(insm_Id),
         CONSTRAINT FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuCreacion_user_Id          FOREIGN KEY(user_UsuCreacion)                 REFERENCES Acce.tbUsuarios(user_Id),
         CONSTRAINT FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id)
@@ -252,10 +252,10 @@ CREATE TABLE Cons.tbInsumosConstruccion(
         cons_Id						INT,
         insm_Id						INT,
         user_UsuCreacion            INT,
-        user_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+        user_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_tbInsumosConstruccion_user_FechaCreacion DEFAULT(GETDATE()),
         user_UsuModificacion        INT,
         user_FechaModificacion      DATETIME,
-        user_Estado                 BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+        user_Estado                 BIT NOT NULL CONSTRAINT DF_tbInsumosConstruccion_user_Estado DEFAULT(1)
 		CONSTRAINT PK_Cons_tbInsumosConstruccion_inco_Id										   PRIMARY KEY(inco_Id),
         CONSTRAINT FK_Cons_tbInsumosConstruccion_insm_Id_Cons_tbInsumos_insm_Id					   FOREIGN KEY (insm_Id)					 	 REFERENCES Cons.tbInsumos(insm_Id),
         CONSTRAINT FK_Cons_tbConstrucciones_cons_Id_Cons_tbConstrucciones_cons_Id				   FOREIGN KEY (cons_Id)						 REFERENCES Cons.tbConstrucciones (cons_Id),
@@ -271,10 +271,10 @@ CREATE TABLE Cons.tbEmpleadosPorConstruccion(
 	cons_Id						INT NOT NULL,
 	empl_Id						INT NOT NULL,
 	user_UsuCreacion			INT NULL,
-	cons_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+	cons_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_tbEmpleadosPorConstruccion_user_FechaCreacion DEFAULT(GETDATE()),
 	user_UsuModificacion		INT,
 	cons_FechaModificacion		DATETIME,
-	cons_Estado					BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+	cons_Estado					BIT NOT NULL CONSTRAINT DF_tbEmpleadosPorConstruccion_user_Estado DEFAULT(1)
 	CONSTRAINT PK_Cons_tbEmpleadosPorConstruccion_emco_Id PRIMARY KEY(emco_Id),
 	CONSTRAINT FK_Cons_tbEmpleadosPorConstruccion_Cons_tbConstrucciones_cons_Id		FOREIGN KEY(cons_Id)	REFERENCES Cons.tbConstrucciones(cons_Id),
 	CONSTRAINT FK_Cons_tbEmpleadosPorConstruccion_Gral_tbEmpleados_empl_Id			FOREIGN KEY(empl_Id)	REFERENCES Gral.tbEmpleados(empl_Id)
@@ -287,10 +287,10 @@ GO
 				unim_Id						INT IDENTITY(1,1) PRIMARY KEY,
 				unim_Descripcion			NVARCHAR(100),
 				user_UsuCreacion            INT,
-				user_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+				user_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_tbUnidadesMedida_user_FechaCreacion DEFAULT(GETDATE()),
 				user_UsuModificacion        INT,
 				user_FechaModificacion		DATETIME,
-				user_Estado                 BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+				user_Estado                 BIT NOT NULL CONSTRAINT DF_tbUnidadesMedida_user_Estado DEFAULT(1)
 				CONSTRAINT FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuCreacion_user_Id          FOREIGN KEY(user_UsuCreacion)                 REFERENCES Acce.tbUsuarios(user_Id),
 				CONSTRAINT FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id)
 	);
@@ -303,10 +303,10 @@ GO
                 cons_Id						INT        NOT NULL,
                 inci_Descripcion			NVARCHAR(MAX) NOT NULL,
                 user_UsuCreacion            INT,
-                inci_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_user_FechaCreacion DEFAULT(GETDATE()),
+                inci_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_tbIncidencia_user_FechaCreacion DEFAULT(GETDATE()),
                 user_UsuModificacion        INT,
                 inci_FechaModificacion		DATETIME,
-                user_Estado                 BIT NOT NULL CONSTRAINT DF_user_Estado DEFAULT(1)
+                user_Estado                 BIT NOT NULL CONSTRAINT DF_tbIncidencia_user_Estado DEFAULT(1)
 				CONSTRAINT FK_Cons_tbIncidencia_cons_Id_Cons_tbConstrucciones_cons_Id			  FOREIGN KEY(cons_Id)							REFERENCES Cons.tbConstrucciones (cons_Id),
 				CONSTRAINT FK_Cons_tbIncidencia_Acce_tbUsuarios_user_UsuCreacion_user_Id          FOREIGN KEY(user_UsuCreacion)                 REFERENCES Acce.tbUsuarios(user_Id),
 				CONSTRAINT FK_Cons_tbIncidencia_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id)
@@ -505,31 +505,31 @@ GO
 --****************************************************************TABLA ESTADOSCIVILES********************************************************************--
 --TABLA ESTADOSCIVILES
 INSERT INTO Gral.tbEstadosCiviles
-VALUES  ('Amante',				1, GETDATE(), null, null);
+VALUES  ('A','Amante',				1, GETDATE(), null, null);
 GO
 
 INSERT INTO Gral.tbEstadosCiviles
-VALUES  ('Casado(a)',			1, GETDATE(), null, null);
+VALUES  ('C','Casado(a)',			1, GETDATE(), null, null);
 GO
 
 INSERT INTO Gral.tbEstadosCiviles
-VALUES  ('Comprometido(a)',		1, GETDATE(), null, null);
+VALUES  ('N','Comprometido(a)',		1, GETDATE(), null, null);
 GO
 
 INSERT INTO Gral.tbEstadosCiviles
-VALUES  ('Divorciado(a)',		1, GETDATE(), null, null);
+VALUES  ('D','Divorciado(a)',		1, GETDATE(), null, null);
 GO
 
 INSERT INTO Gral.tbEstadosCiviles
-VALUES	('Soltero(a)',			1, GETDATE(), null, null);
+VALUES	('S','Soltero(a)',			1, GETDATE(), null, null);
 GO
 
 INSERT INTO Gral.tbEstadosCiviles
-VALUES  ('Unión Libre',			1, GETDATE(), null, null);
+VALUES  ('U','Unión Libre',			1, GETDATE(), null, null);
 GO
 
 INSERT INTO Gral.tbEstadosCiviles
-VALUES        ('Viudo(a)',			1, GETDATE(), null, null);
+VALUES        ('V','Viudo(a)',			1, GETDATE(), null, null);
 GO
 
 
@@ -1595,67 +1595,87 @@ INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
 VALUES							('Sacos', 1);
 GO
 
+
+--****************************************************************TABLA CARGOS ********************************************************************--
+--TABLA CARGOS	
+INSERT INTO GRAL.tbCargos(carg_Cargo, user_UsuCreacion)
+VALUES									   ('Ingeniero', 1);
+GO
+
+INSERT INTO GRAL.tbCargos(carg_Cargo, user_UsuCreacion)
+VALUES									   ('Jefe de obra', 1);
+GO
+	
+INSERT INTO GRAL.tbCargos(carg_Cargo, user_UsuCreacion)
+VALUES									   ('Ingenieros de sistema', 1);
+GO
+
+INSERT INTO GRAL.tbCargos(carg_Cargo, user_UsuCreacion)
+VALUES									   ('Arquitecto', 1);
+GO
+
+
 	
 --****************************************************************TABLA EMPLEADOS ********************************************************************--
 --TABLA EMPLEADOS								 
 INSERT INTO Gral.tbEmpleados
-VALUES('1884200105691', 'Ian Alexander', 'Hernandez Escobar', 'M', 'S','0501',1,'3ra Ave Sur, Col. 2 de Mrazo','10-22-2001', '9471-3500', 'ianh8902@gmail.com', 1, 1, GETDATE(), NULL, NULL,1);
+VALUES('1884200105691', 'Ian Alexander', 'Hernandez Escobar', 'M', 'S','0501',1,'3ra Ave Sur, Col. 2 de Mrazo','10-22-2001', '9471-3500', 'ianh8902@gmail.com', 1,  GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0501200209630', 'Axel Dario', 'Rivera Murillo', 'M', 'C','0802',2,'4ta Ave. Norte, Frente al Supermercado la Antorcha', '03-05-2002', '3165-0161', 'axeldm05@gmail.com', 1, 1, GETDATE(), NULL, NULL,1);
+VALUES('0501200209630', 'Axel Dario', 'Rivera Murillo', 'M', 'C','0802',2,'4ta Ave. Norte, Frente al Supermercado la Antorcha', '03-05-2002', '3165-0161', 'axeldm05@gmail.com', 1,  GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0613199817853', 'Jose Miguel', 'Murcia Castro', 'M', 'C','0701',1,'Entre 4ta Calle y 5ta Calle, Ave. Sur, Col. Los Olivos' ,'03-14-1998', '3831-3029', 'miguel.castro@gmail.com', 1, 1,GETDATE(), NULL, NULL,1);
+VALUES('0613199817853', 'Jose Miguel', 'Murcia Castro', 'M', 'C','0701',1,'Entre 4ta Calle y 5ta Calle, Ave. Sur, Col. Los Olivos' ,'03-14-1998', '3831-3029', 'miguel.castro@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('1801200000010', 'Noe Edil', 'Barnica Ramos', 'M', 'S','0102',1,'Entre 5ta Calle y 6ta Calle, Ave Norte', '05-19-2000','8925-8314', 'noe3@gmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES('1801200000010', 'Noe Edil', 'Barnica Ramos', 'M', 'S','0102',1,'Entre 5ta Calle y 6ta Calle, Ave Norte', '05-19-2000','8925-8314', 'noe3@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0501200110543', 'Loany Michelle', 'Paz Guerra', 'F', 'V','0501',3,'Col. Primavera, Frente a la Municipalidad','03-27-2001', '8586-2314', 'loany15@gmail.com', 1,1, GETDATE(), NULL, NULL,1);
+VALUES('0501200110543', 'Loany Michelle', 'Paz Guerra', 'F', 'V','0501',3,'Col. Primavera, Frente a la Municipalidad','03-27-2001', '8586-2314', 'loany15@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0409199934517', 'Daniel Enrique', 'Matamoros De la O', 'M', 'D','0106',1,'Res. Campisa','04-30-1999','9991-4436', 'enrique.99@gmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES('0409199934517', 'Daniel Enrique', 'Matamoros De la O', 'M', 'D','0106',1,'Res. Campisa','04-30-1999','9991-4436', 'enrique.99@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0503200207911', 'Andrea Nicolle', 'Crivelli Zamorano', 'F', 'S','1101',3,'Res. Quintas Marta Elena', '10-29-2002', '3915-1658', 'nicolle29@gmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES('0503200207911', 'Andrea Nicolle', 'Crivelli Zamorano', 'F', 'S','1101',3,'Res. Quintas Marta Elena', '10-29-2002', '3915-1658', 'nicolle29@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0607199301185', 'M?gdaly', 'Z?niga Alvarado', 'F', 'C','0502',2,'Res. Cerro Verde','11-25-1993', '3339-6645', 'magdalyz22@gmail.com', 1,1 , GETDATE(), NULL, NULL,1);
+VALUES('0607199301185', 'M?gdaly', 'Z?niga Alvarado', 'F', 'C','0502',2,'Res. Cerro Verde','11-25-1993', '3339-6645', 'magdalyz22@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0501200506681', 'Javier Eduardo', 'L?pez', 'M', 'V','0502',1,'Res. Los Olivos','03-09-2005', '9821-4819', 'javslopez7@gmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES('0501200506681', 'Javier Eduardo', 'L?pez', 'M', 'V','0502',1,'Res. Los Olivos','03-09-2005', '9821-4819', 'javslopez7@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('1615200500062', 'Juan David', 'Molina Sagastume', 'M', 'D','0502',2,'Res. Los 3 Hermanos', '02-22-2005', '9451-9231', 'juanmolinasagastume@gmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES('1615200500062', 'Juan David', 'Molina Sagastume', 'M', 'D','0502',2,'Res. Los 3 Hermanos', '02-22-2005', '9451-9231', 'juanmolinasagastume@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('1615200500069', 'Eder Jesus', 'Sanchez Mantinez', 'M', 'C','0501',1,'Ave Sur, 4ta Calle, Col. Esperanza', '04-22-2002', '9858-7548', 'eder85@hotmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES('1615200500069', 'Eder Jesus', 'Sanchez Mantinez', 'M', 'C','0501',1,'Ave Sur, 4ta Calle, Col. Esperanza', '04-22-2002', '9858-7548', 'eder85@hotmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES ('1615201504069', 'Mario Adalid', 'Escobar Flores', 'M', 'C','0501',3,'3ra Ave Sur, Col. 2 de Mrazo','10-05-2002','8478-6474', 'marioescobar87@hotmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES ('1615201504069', 'Mario Adalid', 'Escobar Flores', 'M', 'C','0501',3,'3ra Ave Sur, Col. 2 de Mrazo','10-05-2002','8478-6474', 'marioescobar87@hotmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES ('1154200504869', 'Esdra', 'Cerna', 'F', 'S','0802',1,'4ta Ave. Norte, Frente al Supermercado la Antorcha','10-05-1986','8745-9885', 'esdraCerna45@hotmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES ('1154200504869', 'Esdra', 'Cerna', 'F', 'S','0802',1,'4ta Ave. Norte, Frente al Supermercado la Antorcha','10-05-1986','8745-9885', 'esdraCerna45@hotmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES ('1804200804125', 'Giovanny Antonio', 'Hernandez Escobar', 'M', 'C','0701',1,'Entre 4ta Calle y 5ta Calle, Ave. Sur, Col. Los Olivos','10-11-2001','8478-6474', 'gioantony@gmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES ('1804200804125', 'Giovanny Antonio', 'Hernandez Escobar', 'M', 'C','0701',1,'Entre 4ta Calle y 5ta Calle, Ave. Sur, Col. Los Olivos','10-11-2001','8478-6474', 'gioantony@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES ('1804200305214', 'Edgardo Alexander', 'Sandoval Diaz', 'M', 'D','0102',3,'Entre 5ta Calle y 6ta Calle, Ave Norte','02-14-2002','9784-5841', 'edgar84@hotmail.com', 1, 1 ,GETDATE(), NULL, NULL,1);
+VALUES ('1804200305214', 'Edgardo Alexander', 'Sandoval Diaz', 'M', 'D','0102',3,'Entre 5ta Calle y 6ta Calle, Ave Norte','02-14-2002','9784-5841', 'edgar84@hotmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
@@ -1746,56 +1766,39 @@ VALUES									   (2, 10, 1);
 GO
 		
 
---****************************************************************TABLA CARGOS ********************************************************************--
---TABLA CARGOS	
-INSERT INTO GRAL.tbCargos(carg_Cargo, user_IdModificacion)
-VALUES									   ('Ingeniero', 10, 1);
-GO
-
-INSERT INTO GRAL.tbCargos(carg_Cargo, user_IdModificacion)
-VALUES									   ('Jefe de obra', 10, 1);
-GO
-	
-INSERT INTO GRAL.tbCargos(carg_Cargo, user_IdModificacion)
-VALUES									   ('Ingenieros de sistema', 10, 1);
-GO
-
-INSERT INTO GRAL.tbCargos(carg_Cargo, user_IdModificacion)
-VALUES									   ('Arquitecto', 10, 1);
-GO
 
 --****************************************************************TABLA CLIENTES ********************************************************************--
 --TABLA CLIENTES
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('1615199009008', 'Hugo Alcerro', '0901', 'Calle hacia Armenta, atras de Mall Altara.', '9009-6778','hugalcerro@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado )
+VALUES						('1615199009008', 'Hugo Alcerro', '0901', 'Calle hacia Armenta, atras de Mall Altara.', '9009-6778','hugalcerro@gmail.com', 1 , 1);
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('0910197600977', 'Mariela Vega', '0901', '3ra Avenida, 2da Calle Prolonogación Pasaje Valle', '9878-3241','marvega@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('0910197600977', 'Mariela Vega', '0901', '3ra Avenida, 2da Calle Prolonogación Pasaje Valle', '9878-3241','marvega@gmail.com', 1 , 1);
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('0901199209034', 'Oliver Membreño', '0901', 3, '1ra Calle, Salida a La Lima', '8909-3343','olimem@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('0901199209034', 'Oliver Membreño', '0901', '1ra Calle, Salida a La Lima', '8909-3343','olimem@gmail.com', 1 , 1);
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('0304199790567', 'Ernestina Juarez', '0901', '5ta Calle, 5ta Avenida, Barrio El Centro', '9780-5463','ernesmia@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('0304199790567', 'Ernestina Juarez', '0901', '5ta Calle, 5ta Avenida, Barrio El Centro', '9780-5463','ernesmia@gmail.com', 1 , 1);
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('1002199062718', 'Juana Yanez', '1001', '2da Calle, Avenida Junior', '9231-6512','juajua@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('1002199062718', 'Juana Yanez', '1001', '2da Calle, Avenida Junior', '9231-6512','juajua@gmail.com', 1, 1 );
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('1210197600097', 'Victor Carcasa', '0101', '16 Avenida, Barrio Suyapa', '9767-6657','sandroyane@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('1210197600097', 'Victor Carcasa', '0101', '16 Avenida, Barrio Suyapa', '9767-6657','sandroyane@gmail.com', 1, 1 );
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('0912199090790', 'Ilinois Herrera', '0201', '2da Calle, Avenida Junior', '9567-7789','ilinourquia@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('0912199090790', 'Ilinois Herrera', '0201', '2da Calle, Avenida Junior', '9567-7789','ilinourquia@gmail.com', 1 , 1);
 GO
 
-INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
-VALUES						('0915199056281', 'Elia Carcasa', '0301', 'Col. El Carmen, Calle Principal', '9123-5434','eliameji@gmail.com', 1 );
+INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion, clie_Estado)
+VALUES						('0915199056281', 'Elia Carcasa', '0301', 'Col. El Carmen, Calle Principal', '9123-5434','eliameji@gmail.com', 1, 1 );
 GO
 
 
@@ -1816,9 +1819,9 @@ ADD CONSTRAINT FK_Acce_tbUsuarios_Acce_tbUsuarios_user_UsuCreacion_user_Id  FORE
 	CONSTRAINT FK_Acce_tbUsuarios_Acce_tbRoles_role_Id FOREIGN KEY(role_Id) REFERENCES Acce.tbRoles(role_Id)
 
 GO 
-ALTER TABLE Acce.tbPantallasPorRoles
-ADD CONSTRAINT FK_Acce_tbPantallasPorRoles_Acce_tbUsuarios_pantrole_UsuCreacion_user_Id FOREIGN KEY([pantrole_UsuCreacion]) REFERENCES Acce.tbUsuarios([user_Id]),
-	CONSTRAINT FK_Acce_tbPantallasPorRoles_Acce_tbUsuarios_pantrole_UsuModificacion_user_Id FOREIGN KEY([pantrole_UsuModificacion]) REFERENCES Acce.tbUsuarios([user_Id])
+ALTER TABLE Acce.tbPantallasRoles
+ADD CONSTRAINT FK_Acce_tbPantallasPorRoles_Acce_tbUsuarios_pantrole_UsuCreacion_user_Id FOREIGN KEY([user_UsuCreacion]) REFERENCES Acce.tbUsuarios([user_Id]),
+	CONSTRAINT FK_Acce_tbPantallasPorRoles_Acce_tbUsuarios_pantrole_UsuModificacion_user_Id FOREIGN KEY([user_UsuModificacion]) REFERENCES Acce.tbUsuarios([user_Id])
 
 --***************************************************************************************************************************************--
 GO
