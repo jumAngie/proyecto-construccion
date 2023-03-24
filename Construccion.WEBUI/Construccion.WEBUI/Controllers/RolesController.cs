@@ -21,6 +21,7 @@ namespace Construccion.WEBUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            
             HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44341/api/Rol/List");
 
             if (response.IsSuccessStatusCode)
@@ -28,7 +29,6 @@ namespace Construccion.WEBUI.Controllers
                 string content = await response.Content.ReadAsStringAsync();
 
                 var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
-                ViewBag.Mensaje = result.message;
                 return View(result.data);
             }
             else
@@ -52,8 +52,9 @@ namespace Construccion.WEBUI.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string res = await response.Content.ReadAsStringAsync();
-                var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(res);
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
                 var mensaje = respuestaX.message;
+                ViewBag.Mensaje = mensaje;
                 return RedirectToAction("Index");
 
             }

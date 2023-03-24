@@ -15,6 +15,7 @@ namespace Construccion.BusinessLogic
         public static void DataAccess(this IServiceCollection services, string connection)
         {
             services.AddScoped<RolesRepository>();
+            services.AddScoped<UsuariosRepository>();
             ConstruccionCon.BuildConnectionString(connection);
         }
 
