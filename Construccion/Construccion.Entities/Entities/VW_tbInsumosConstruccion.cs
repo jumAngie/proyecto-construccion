@@ -6,9 +6,10 @@ using System.Collections.Generic;
 
 namespace Construccion.Entities.Entities
 {
-    public partial class WW_tbRoles
+    public partial class VW_tbInsumosConstruccion
     {
-        public int role_Id { get; set; }
-        public string role_Nombre { get; set; }
+        public int inco_Id { get; set; }
+        public string cons_Proyecto { get; set; }
+        public string insm_Descripcion { get; set; }
     }
 }

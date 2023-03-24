@@ -6,23 +6,24 @@ using System.Collections.Generic;
 
 namespace Construccion.Entities.Entities
 {
-    public partial class tbRoles
+    public partial class tbPantallas
     {
-        public tbRoles()
+        public tbPantallas()
         {
             tbPantallasRoles = new HashSet<tbPantallasRoles>();
-            tbUsuarios = new HashSet<tbUsuarios>();
         }
 
-        public int role_Id { get; set; }
-        public string role_Nombre { get; set; }
+        public int pant_Id { get; set; }
+        public string pant_Nombre { get; set; }
+        public string pant_URL { get; set; }
+        public string pant_Menu { get; set; }
+        public string pant_HtmlId { get; set; }
         public int user_UsuCreacion { get; set; }
-        public DateTime role_FechaCreacion { get; set; }
+        public DateTime pant_FechaCreacion { get; set; }
         public int? user_UsuModificacion { get; set; }
-        public DateTime? role_FechaModificacion { get; set; }
-        public bool? role_Estado { get; set; }
+        public DateTime? pant_FechaModificacion { get; set; }
+        public bool? pant_Estado { get; set; }
 
         public virtual ICollection<tbPantallasRoles> tbPantallasRoles { get; set; }
-        public virtual ICollection<tbUsuarios> tbUsuarios { get; set; }
     }
 }

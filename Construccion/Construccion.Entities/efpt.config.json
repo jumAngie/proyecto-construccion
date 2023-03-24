@@ -14,15 +14,123 @@
    "SelectedToBeGenerated": 2,
    "Tables": [
       {
+         "Name": "[Acce].[tbPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbPantallasRoles]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Acce].[tbRoles]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[WW_tbRoles]",
+         "Name": "[Acce].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbClientes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbConstrucciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbEmpleadosPorConstruccion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbIncidencia]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbInsumos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbInsumosConstruccion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Cons].[tbUnidadesMedida]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbCargos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbDepartamentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbEmpleados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbEstadosCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbMunicipios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[WV_tbPantallas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Acce].[WV_tbPantallasRoles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Acce].[WV_tbRoles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Acce].[WV_tbUsuarios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbClientes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbConstrucciones]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbEmpleadosPorConstruccion]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbIncidencia]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbInsumos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbInsumosConstruccion]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Cons].[VW_tbUnidadesMedida]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gral].[VW_tbCargos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gral].[VW_tbEmpleados]",
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-6FS11M8\\MSSQLSERVER1.Construccion",
+   "UiHint": "DESKTOP-BSILECU\\SQLEXPRESS.Construccion",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

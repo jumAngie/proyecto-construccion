@@ -50,9 +50,9 @@ namespace Construccion.DataAccess.Repositories.Acce
         }
 
             
-        public IEnumerable<WW_tbRoles> List()
+        public IEnumerable<WV_tbRoles> List()
         {
-            return con.WW_tbRoles.AsList();
+            return con.WV_tbRoles.AsList();
         }
 
         public RequestStatus Delete(int id, int mod)

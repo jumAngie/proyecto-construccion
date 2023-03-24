@@ -19,24 +19,765 @@ namespace Construccion.DataAccess.Context
         {
         }
 
-        public virtual DbSet<WW_tbRoles> WW_tbRoles { get; set; }
+        public virtual DbSet<VW_tbCargos> VW_tbCargos { get; set; }
+        public virtual DbSet<VW_tbClientes> VW_tbClientes { get; set; }
+        public virtual DbSet<VW_tbConstrucciones> VW_tbConstrucciones { get; set; }
+        public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
+        public virtual DbSet<VW_tbEmpleadosPorConstruccion> VW_tbEmpleadosPorConstruccion { get; set; }
+        public virtual DbSet<VW_tbIncidencia> VW_tbIncidencia { get; set; }
+        public virtual DbSet<VW_tbInsumos> VW_tbInsumos { get; set; }
+        public virtual DbSet<VW_tbInsumosConstruccion> VW_tbInsumosConstruccion { get; set; }
+        public virtual DbSet<VW_tbUnidadesMedida> VW_tbUnidadesMedida { get; set; }
+        public virtual DbSet<WV_tbPantallas> WV_tbPantallas { get; set; }
+        public virtual DbSet<WV_tbPantallasRoles> WV_tbPantallasRoles { get; set; }
+        public virtual DbSet<WV_tbRoles> WV_tbRoles { get; set; }
+        public virtual DbSet<WV_tbUsuarios> WV_tbUsuarios { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
+        public virtual DbSet<tbClientes> tbClientes { get; set; }
+        public virtual DbSet<tbConstrucciones> tbConstrucciones { get; set; }
+        public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
+        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
+        public virtual DbSet<tbEmpleadosPorConstruccion> tbEmpleadosPorConstruccion { get; set; }
+        public virtual DbSet<tbEstadosCiviles> tbEstadosCiviles { get; set; }
+        public virtual DbSet<tbIncidencia> tbIncidencia { get; set; }
+        public virtual DbSet<tbInsumos> tbInsumos { get; set; }
+        public virtual DbSet<tbInsumosConstruccion> tbInsumosConstruccion { get; set; }
+        public virtual DbSet<tbMunicipios> tbMunicipios { get; set; }
+        public virtual DbSet<tbPantallas> tbPantallas { get; set; }
+        public virtual DbSet<tbPantallasRoles> tbPantallasRoles { get; set; }
         public virtual DbSet<tbRoles> tbRoles { get; set; }
+        public virtual DbSet<tbUnidadesMedida> tbUnidadesMedida { get; set; }
+        public virtual DbSet<tbUsuarios> tbUsuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
-            modelBuilder.Entity<WW_tbRoles>(entity =>
+            modelBuilder.Entity<VW_tbCargos>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToView("WW_tbRoles");
+                entity.ToView("VW_tbCargos", "Gral");
+
+                entity.Property(e => e.carg_Cargo)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.carg_Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<VW_tbClientes>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbClientes", "Cons");
+
+                entity.Property(e => e.clie_CorreoElectronico)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.clie_DireccionExacta)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.clie_Identificacion)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.clie_Telefono)
+                    .IsRequired()
+                    .HasMaxLength(9);
+
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.muni_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(80);
+            });
+
+            modelBuilder.Entity<VW_tbConstrucciones>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbConstrucciones", "Cons");
+
+                entity.Property(e => e.cons_FechaFin).HasColumnType("date");
+
+                entity.Property(e => e.cons_FechaInicio).HasColumnType("date");
+
+                entity.Property(e => e.cons_Proyecto).HasMaxLength(100);
+
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.muni_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(80);
+            });
+
+            modelBuilder.Entity<VW_tbEmpleados>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbEmpleados", "Gral");
+
+                entity.Property(e => e.carg_Cargo)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.empl_CorreoEletronico)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.empl_DNI)
+                    .IsRequired()
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_DireccionExacta)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.empl_FechaNacimiento).HasColumnType("date");
+
+                entity.Property(e => e.empl_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(511);
+            });
+
+            modelBuilder.Entity<VW_tbEmpleadosPorConstruccion>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbEmpleadosPorConstruccion", "Cons");
+
+                entity.Property(e => e.cons_Proyecto).HasMaxLength(100);
+
+                entity.Property(e => e.empl_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(511);
+            });
+
+            modelBuilder.Entity<VW_tbIncidencia>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbIncidencia", "Cons");
+
+                entity.Property(e => e.cons_Proyecto).HasMaxLength(100);
+
+                entity.Property(e => e.inci_Descripcion).IsRequired();
+            });
+
+            modelBuilder.Entity<VW_tbInsumos>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbInsumos", "Cons");
+
+                entity.Property(e => e.insm_Descripcion).HasMaxLength(200);
+
+                entity.Property(e => e.insm_Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<VW_tbInsumosConstruccion>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbInsumosConstruccion", "Cons");
+
+                entity.Property(e => e.cons_Proyecto).HasMaxLength(100);
+
+                entity.Property(e => e.insm_Descripcion).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VW_tbUnidadesMedida>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbUnidadesMedida", "Cons");
+
+                entity.Property(e => e.unim_Descripcion).HasMaxLength(100);
+
+                entity.Property(e => e.unim_Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<WV_tbPantallas>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("WV_tbPantallas", "Acce");
+
+                entity.Property(e => e.pant_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.pant_Menu)
+                    .IsRequired()
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.pant_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.pant_URL)
+                    .IsRequired()
+                    .HasMaxLength(300);
+            });
+
+            modelBuilder.Entity<WV_tbPantallasRoles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("WV_tbPantallasRoles", "Acce");
+
+                entity.Property(e => e.pant_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.role_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<WV_tbRoles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("WV_tbRoles", "Acce");
 
                 entity.Property(e => e.role_Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.role_Nombre)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<WV_tbUsuarios>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("WV_tbUsuarios", "Acce");
+
+                entity.Property(e => e.Es_Admin)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("Es Admin");
+
+                entity.Property(e => e.role_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.user_NombreUsuario)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<tbCargos>(entity =>
+            {
+                entity.HasKey(e => e.carg_Id)
+                    .HasName("PK_Gral_tbCargos_carg_Id");
+
+                entity.ToTable("tbCargos", "Gral");
+
+                entity.Property(e => e.carg_Cargo)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.carg_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.carg_FechaModificacion).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<tbClientes>(entity =>
+            {
+                entity.HasKey(e => e.clie_Id)
+                    .HasName("PK_Cons_tbClientes_clie_Id");
+
+                entity.ToTable("tbClientes", "Cons");
+
+                entity.HasIndex(e => e.clie_Id, "UQ__tbClient__EDD96AC9C783DB07")
+                    .IsUnique();
+
+                entity.Property(e => e.clie_CorreoElectronico)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.clie_DireccionExacta)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.clie_Estado).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.clie_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.clie_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.clie_Identificacion)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.clie_Telefono)
+                    .IsRequired()
+                    .HasMaxLength(9);
+
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.muni)
+                    .WithMany(p => p.tbClientes)
+                    .HasForeignKey(d => d.muni_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cons_tbClientes_muni_Id_Gral_tbMunicipios_muni_Id");
+            });
+
+            modelBuilder.Entity<tbConstrucciones>(entity =>
+            {
+                entity.HasKey(e => e.cons_Id)
+                    .HasName("PK_Cons_tbConstrucciones_cons_Id");
+
+                entity.ToTable("tbConstrucciones", "Cons");
+
+                entity.Property(e => e.cons_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.cons_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.cons_FechaFin).HasColumnType("date");
+
+                entity.Property(e => e.cons_FechaInicio).HasColumnType("date");
+
+                entity.Property(e => e.cons_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.cons_Proyecto).HasMaxLength(100);
+
+                entity.Property(e => e.muni_Id)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.muni)
+                    .WithMany(p => p.tbConstrucciones)
+                    .HasForeignKey(d => d.muni_Id)
+                    .HasConstraintName("FK_Cons_tbConstrucciones_muni_Id_Gral_tbMunicipios_muni_Id");
+            });
+
+            modelBuilder.Entity<tbDepartamentos>(entity =>
+            {
+                entity.HasKey(e => e.depa_Id)
+                    .HasName("PK_Gral_tbDepartamentos_depa_Id");
+
+                entity.ToTable("tbDepartamentos", "Gral");
+
+                entity.Property(e => e.depa_Id)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.depa_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.depa_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.tbDepartamentosuser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbDepartamentos_Acce_tbUsuarios_user_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.tbDepartamentosuser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Gral_tbDepartamentos_Acce_tbUsuarios_user_UsuModificacion_user_Id");
+            });
+
+            modelBuilder.Entity<tbEmpleados>(entity =>
+            {
+                entity.HasKey(e => e.empl_Id)
+                    .HasName("PK_Gral_tbEmpleados_empl_Id");
+
+                entity.ToTable("tbEmpleados", "Gral");
+
+                entity.Property(e => e.empl_Apellidos)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.empl_CorreoEletronico)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.empl_DNI)
+                    .IsRequired()
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_DireccionExacta)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.empl_Estado).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.empl_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.empl_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.empl_FechaNacimiento).HasColumnType("date");
+
+                entity.Property(e => e.empl_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.empl_Sexo)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.empl_Telefono)
+                    .IsRequired()
+                    .HasMaxLength(9);
+
+                entity.Property(e => e.esta_ID)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.carg)
+                    .WithMany(p => p.tbEmpleados)
+                    .HasForeignKey(d => d.carg_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbEmpleados_carg_Id_Gral_tbCargos_carg_Id");
+
+                entity.HasOne(d => d.esta)
+                    .WithMany(p => p.tbEmpleados)
+                    .HasForeignKey(d => d.esta_ID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbEmpleados_esta_ID_Gral_tbEstadosCiviles_esta_ID");
+            });
+
+            modelBuilder.Entity<tbEmpleadosPorConstruccion>(entity =>
+            {
+                entity.HasKey(e => e.emco_Id)
+                    .HasName("PK_Cons_tbEmpleadosPorConstruccion_emco_Id");
+
+                entity.ToTable("tbEmpleadosPorConstruccion", "Cons");
+
+                entity.Property(e => e.cons_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.cons_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.cons_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.cons)
+                    .WithMany(p => p.tbEmpleadosPorConstruccion)
+                    .HasForeignKey(d => d.cons_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cons_tbEmpleadosPorConstruccion_Cons_tbConstrucciones_cons_Id");
+
+                entity.HasOne(d => d.empl)
+                    .WithMany(p => p.tbEmpleadosPorConstruccion)
+                    .HasForeignKey(d => d.empl_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cons_tbEmpleadosPorConstruccion_Gral_tbEmpleados_empl_Id");
+            });
+
+            modelBuilder.Entity<tbEstadosCiviles>(entity =>
+            {
+                entity.HasKey(e => e.esta_ID)
+                    .HasName("PK_Gral_tbEstadosCiviles_esta_ID");
+
+                entity.ToTable("tbEstadosCiviles", "Gral");
+
+                entity.Property(e => e.esta_ID)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.esta_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.esta_FechaCrea)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.esta_FechaModi).HasColumnType("datetime");
+
+                entity.HasOne(d => d.user_IdCreacionNavigation)
+                    .WithMany(p => p.tbEstadosCivilesuser_IdCreacionNavigation)
+                    .HasForeignKey(d => d.user_IdCreacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbEstadosCiviles_est_UsuarioCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.user_IdModificacionNavigation)
+                    .WithMany(p => p.tbEstadosCivilesuser_IdModificacionNavigation)
+                    .HasForeignKey(d => d.user_IdModificacion)
+                    .HasConstraintName("FK_Gral_tbEstadosCiviles_est_UsuarioModi_Gral_tbUsuarios_usu_ID");
+            });
+
+            modelBuilder.Entity<tbIncidencia>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("tbIncidencia", "Cons");
+
+                entity.Property(e => e.inci_Descripcion).IsRequired();
+
+                entity.Property(e => e.inci_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.inci_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.inci_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.user_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.cons)
+                    .WithMany()
+                    .HasForeignKey(d => d.cons_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cons_tbIncidencia_cons_Id_Cons_tbConstrucciones_cons_Id");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .HasConstraintName("FK_Cons_tbIncidencia_Acce_tbUsuarios_user_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Cons_tbIncidencia_Acce_tbUsuarios_user_UsuModificacion_user_Id");
+            });
+
+            modelBuilder.Entity<tbInsumos>(entity =>
+            {
+                entity.HasKey(e => e.insm_Id)
+                    .HasName("PK_Cons_tbInsumos_insm_Id");
+
+                entity.ToTable("tbInsumos", "Cons");
+
+                entity.Property(e => e.insm_Descripcion).HasMaxLength(200);
+
+                entity.Property(e => e.insm_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.insm_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.user_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.tbInsumosuser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .HasConstraintName("FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.tbInsumosuser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuModificacion_user_Id");
+            });
+
+            modelBuilder.Entity<tbInsumosConstruccion>(entity =>
+            {
+                entity.HasKey(e => e.inco_Id)
+                    .HasName("PK_Cons_tbInsumosConstruccion_inco_Id");
+
+                entity.ToTable("tbInsumosConstruccion", "Cons");
+
+                entity.Property(e => e.user_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.user_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.user_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.cons)
+                    .WithMany(p => p.tbInsumosConstruccion)
+                    .HasForeignKey(d => d.cons_Id)
+                    .HasConstraintName("FK_Cons_tbConstrucciones_cons_Id_Cons_tbConstrucciones_cons_Id");
+
+                entity.HasOne(d => d.insm)
+                    .WithMany(p => p.tbInsumosConstruccion)
+                    .HasForeignKey(d => d.insm_Id)
+                    .HasConstraintName("FK_Cons_tbInsumosConstruccion_insm_Id_Cons_tbInsumos_insm_Id");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.tbInsumosConstruccionuser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .HasConstraintName("FK_Cons_tbInsumosConstruccion_Acce_tbUsuarios_user_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.tbInsumosConstruccionuser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Cons_tbInsumosConstruccion_Acce_tbUsuarios_user_UsuModificacion_user_Id");
+            });
+
+            modelBuilder.Entity<tbMunicipios>(entity =>
+            {
+                entity.HasKey(e => e.muni_id)
+                    .HasName("PK_Gral_tbMunicipios_muni_Id");
+
+                entity.ToTable("tbMunicipios", "Gral");
+
+                entity.Property(e => e.muni_id)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.depa_Id)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.muni_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.muni_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.muni_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(80);
+
+                entity.HasOne(d => d.depa)
+                    .WithMany(p => p.tbMunicipios)
+                    .HasForeignKey(d => d.depa_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbMunicipios_Gral_tbDepartamentos_depa_Id");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.tbMunicipiosuser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbMunicipios_Acce_tbUsuarios_muni_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.tbMunicipiosuser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Gral_tbMunicipios_Acce_tbUsuarios_muni_UsuModificacion_user_Id");
+            });
+
+            modelBuilder.Entity<tbPantallas>(entity =>
+            {
+                entity.HasKey(e => e.pant_Id)
+                    .HasName("PK_Acce_tbPantallas_pant_Id");
+
+                entity.ToTable("tbPantallas", "Acce");
+
+                entity.Property(e => e.pant_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.pant_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.pant_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.pant_HtmlId)
+                    .IsRequired()
+                    .HasMaxLength(80);
+
+                entity.Property(e => e.pant_Menu)
+                    .IsRequired()
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.pant_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.pant_URL)
+                    .IsRequired()
+                    .HasMaxLength(300);
+            });
+
+            modelBuilder.Entity<tbPantallasRoles>(entity =>
+            {
+                entity.HasKey(e => e.ptro_Id)
+                    .HasName("PK_Acce_tbPantallasPorRoles_pantrole_Id");
+
+                entity.ToTable("tbPantallasRoles", "Acce");
+
+                entity.Property(e => e.ptro_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ptro_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.ptro_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.pant)
+                    .WithMany(p => p.tbPantallasRoles)
+                    .HasForeignKey(d => d.pant_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Acce_tbPantallasPorRoles_Acce_tbPantallas_pant_Id");
+
+                entity.HasOne(d => d.role)
+                    .WithMany(p => p.tbPantallasRoles)
+                    .HasForeignKey(d => d.role_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Acce_tbPantallasPorRoles_Acce_tbRoles_role_Id");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.tbPantallasRolesuser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Acce_tbPantallasPorRoles_Acce_tbUsuarios_pantrole_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.tbPantallasRolesuser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Acce_tbPantallasPorRoles_Acce_tbUsuarios_pantrole_UsuModificacion_user_Id");
             });
 
             modelBuilder.Entity<tbRoles>(entity =>
@@ -59,6 +800,78 @@ namespace Construccion.DataAccess.Context
                 entity.Property(e => e.role_Nombre)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<tbUnidadesMedida>(entity =>
+            {
+                entity.HasKey(e => e.unim_Id)
+                    .HasName("PK__tbUnidad__764443649267220B");
+
+                entity.ToTable("tbUnidadesMedida", "Cons");
+
+                entity.Property(e => e.unim_Descripcion).HasMaxLength(100);
+
+                entity.Property(e => e.user_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.user_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.user_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.tbUnidadesMedidauser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .HasConstraintName("FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.tbUnidadesMedidauser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuModificacion_user_Id");
+            });
+
+            modelBuilder.Entity<tbUsuarios>(entity =>
+            {
+                entity.HasKey(e => e.user_Id)
+                    .HasName("PK_Acce_tbUsuarios_user_Id");
+
+                entity.ToTable("tbUsuarios", "Acce");
+
+                entity.HasIndex(e => e.user_NombreUsuario, "UQ__tbUsuari__2E8D82A49FCCCB2B")
+                    .IsUnique();
+
+                entity.Property(e => e.user_Contrasena).IsRequired();
+
+                entity.Property(e => e.user_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.user_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.user_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.user_NombreUsuario)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.role)
+                    .WithMany(p => p.tbUsuarios)
+                    .HasForeignKey(d => d.role_Id)
+                    .HasConstraintName("FK_Acce_tbUsuarios_Acce_tbRoles_role_Id");
+
+                entity.HasOne(d => d.user_UsuCreacionNavigation)
+                    .WithMany(p => p.Inverseuser_UsuCreacionNavigation)
+                    .HasForeignKey(d => d.user_UsuCreacion)
+                    .HasConstraintName("FK_Acce_tbUsuarios_Acce_tbUsuarios_user_UsuCreacion_user_Id");
+
+                entity.HasOne(d => d.user_UsuModificacionNavigation)
+                    .WithMany(p => p.Inverseuser_UsuModificacionNavigation)
+                    .HasForeignKey(d => d.user_UsuModificacion)
+                    .HasConstraintName("FK_Acce_tbUsuarios_Acce_tbUsuarios_user_UsuModificacion_user_Id");
             });
 
             OnModelCreatingPartial(modelBuilder);
