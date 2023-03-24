@@ -25,15 +25,27 @@ namespace Construccion.DataAccess.Repositories.Acce
             throw new NotImplementedException();
         }
 
+        public RequestStatus Update(int id,tbRoles item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@role_Id", id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@role_Nombre", item.role_Nombre, DbType.String, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.UpdateRoles, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+
         public RequestStatus Insert(tbRoles item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@role_Nombre", item.role_Nombre, DbType.String, ParameterDirection.Input);
-
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);  
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
-
-           
-            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.InsertarRoles, parameters, commandType: CommandType.StoredProcedure);
+            db.Query<RequestStatus>(ScriptsDatabase.InsertarRoles, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
             return result;
         }
 
@@ -43,17 +55,32 @@ namespace Construccion.DataAccess.Repositories.Acce
             return con.WW_tbRoles.AsList();
         }
 
-        public int Update(tbRoles item)
+        public RequestStatus Delete(int id, int mod)
+        {   
+            var parameters = new DynamicParameters();
+            parameters.Add("@role_Id", id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@role_UsuModificacion", mod, DbType.Int32, ParameterDirection.Input);
+
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            return db.QueryFirst<RequestStatus>(ScriptsDatabase.DeleteRoles, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public RequestStatus Inserts(tbRoles item)
         {
             throw new NotImplementedException();
         }
 
-        RequestStatus IRepository<tbRoles>.Delete(tbRoles item)
+        public IEnumerable<tbRoles> Lists()
         {
             throw new NotImplementedException();
         }
 
-        RequestStatus IRepository<tbRoles>.Insert(tbRoles item)
+        public RequestStatus Update(tbRoles item, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RequestStatus Deletes(tbRoles item)
         {
             throw new NotImplementedException();
         }
@@ -63,7 +90,7 @@ namespace Construccion.DataAccess.Repositories.Acce
             throw new NotImplementedException();
         }
 
-        RequestStatus IRepository<tbRoles>.Update(tbRoles item)
+        RequestStatus IRepository<tbRoles>.Delete(tbRoles item)
         {
             throw new NotImplementedException();
         }

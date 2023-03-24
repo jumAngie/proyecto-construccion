@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ha+4O9NYK0mTidmnjevzRTj/ZoPHvu8cUdCoXccsBklHcd2mD6vlQH54luJ3SUvh5/dhuEho2FMJsL43uYys/w==",
+  "dgSpecHash": "aYHAA6eB1aIX10IBWZx9sDjzvTvA9FDxS7vpMuykWITiY0gmVbKnBh8s4/Vnm1baa79IzqV+1kQnR9mn9zd04Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\axel2\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\axel2\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\axel2\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

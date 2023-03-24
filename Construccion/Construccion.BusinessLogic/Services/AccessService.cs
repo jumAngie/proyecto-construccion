@@ -41,17 +41,23 @@ namespace Construccion.BusinessLogic.Services
 
             try
             {
-                var map = _rolesRepository.Insert(item);
-                if (map.CodeStatus > 0)
+                if (item.role_Nombre != "")
                 {
-                    return result.Ok(map);
+                    var map = _rolesRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {                       
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }                   
                 }
                 else
                 {
-                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
-                    return result.Error(map);
+                   return result.SetMessage("La solicitud contiene sintaxis erronea",ServiceResultType.BadRecuest);
                 }
-
             }
             catch (Exception ex)
             {
@@ -60,7 +66,35 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult UpdateRoles(int id,tbRoles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                if (item.role_Nombre != "")
+                {
+                    var map = _rolesRepository.Update(id, item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
 
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
     }

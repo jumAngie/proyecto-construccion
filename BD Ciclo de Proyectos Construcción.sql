@@ -37,20 +37,69 @@ AS
 GO
 
 CREATE OR ALTER PROC Acce.UDP_tbRoles_Insert
-	@role_Nombre	NVARCHAR(100)
+	@role_Nombre	NVARCHAR(100),
+	@status			INT OUTPUT
 AS
 BEGIN
-		
-				INSERT INTO Acce.tbRoles
-				VALUES		(@role_Nombre, 1, GETDATE(), NULL, NULL, 1);
-				SELECT 1
-	
-		
-END
-GO
-EXEC Acce.UDP_tbRoles_Insert 'EQUIS'
 
-SELECT * FROM Acce.tbRoles
+	BEGIN TRY
+		INSERT INTO Acce.tbRoles
+		VALUES		(@role_Nombre, 1, GETDATE(), NULL, NULL, 1);
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+
+
+GO
+
+CREATE OR ALTER PROC Acce.UDP_tbRoles_Update
+	@role_Id		INT,
+	@role_Nombre	NVARCHAR(100),
+	@status			INT OUTPUT
+AS
+BEGIN	
+
+	BEGIN TRY
+		UPDATE [Acce].[tbRoles]
+		SET [role_Nombre] = @role_Nombre
+			,[role_UsuModificacion] = 1
+			,[role_FechaModificacion] = GETDATE()
+		WHERE [role_Id] = @role_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+
+GO
+
+
+CREATE OR ALTER PROC Acce.UDP_tbRoles_Delete
+	@role_Id					INT,
+	@role_role_UsuModificacion	INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+
+	BEGIN TRY
+	   UPDATE [Acce].[tbRoles]
+	   SET [role_UsuModificacion] = @role_role_UsuModificacion
+		  ,[role_FechaModificacion] = GETDATE()
+		  ,[role_Estado] = 0
+	 WHERE [role_Id] = @role_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
 
 --**********************************************************TABLA PANTALLAS***************************************************************---
 CREATE TABLE Acce.tbPantallas(

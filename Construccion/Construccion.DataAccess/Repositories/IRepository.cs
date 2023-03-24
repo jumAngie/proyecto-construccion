@@ -13,7 +13,7 @@ namespace Construccion.DataAccess.Repositories
 
             public RequestStatus Insert(T item);
 
-            public RequestStatus Update(T item);
+            public RequestStatus Update(T item, int id);
 
             public RequestStatus Delete(T item);
 

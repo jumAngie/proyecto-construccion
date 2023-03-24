@@ -9,3 +9,15 @@ C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.
 C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.dll
 C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\ref\Construccion.Entities.dll
 C:\Users\LAB02\Documents\GitHub\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.pdb
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\bin\Debug\net5.0\Construccion.Entities.deps.json
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\bin\Debug\net5.0\Construccion.Entities.dll
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\bin\Debug\net5.0\ref\Construccion.Entities.dll
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\bin\Debug\net5.0\Construccion.Entities.pdb
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.csproj.AssemblyReference.cache
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.AssemblyInfoInputs.cache
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.AssemblyInfo.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.csproj.CoreCompileInputs.cache
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.dll
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\ref\Construccion.Entities.dll
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion\Construccion.Entities\obj\Debug\net5.0\Construccion.Entities.pdb

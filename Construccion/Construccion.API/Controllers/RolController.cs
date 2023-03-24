@@ -43,5 +43,14 @@ namespace Construccion.API.Controllers
             var response = _accessService.CreateRoles(item);
             return Ok(response);
         }
+
+        [HttpPut("Update")]
+
+        public IActionResult Update(RolesViewModel roles)
+        {
+            var item = _mapper.Map<tbRoles>(roles);
+            var response = _accessService.UpdateRoles(1,item);
+            return Ok(response);
+        }
     }
 }
