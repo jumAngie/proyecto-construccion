@@ -49,7 +49,7 @@ namespace Construccion.DataAccess.Repositories.Acce
             return result;
         }
 
-
+            
         public IEnumerable<WW_tbRoles> List()
         {
             return con.WW_tbRoles.AsList();
