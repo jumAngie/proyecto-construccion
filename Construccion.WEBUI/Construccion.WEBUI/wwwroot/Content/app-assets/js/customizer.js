@@ -83,7 +83,8 @@ $(document).ready(function() {
   $(".cz-bg-image img").on("click", function() {
     var $this = $(this),
       src = $this.attr("src");
-    $(".sidebar-background").css("background-image", "url(" + src + ")");
+      $(".sidebar-background").css("background-image", "url(" + src + ")");
+      localStorage.setItem('sidebarImage', $this);
     $this
       .closest(".cz-bg-image")
       .find(".selected")

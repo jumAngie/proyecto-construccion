@@ -7663,25 +7663,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\axel2\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
+      "projectUniqueName": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
       "projectName": "Construccion.WEBUI",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\obj\\",
+      "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
+      "packagesPath": "C:\\Users\\axel2\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\axel2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -7741,7 +7744,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
       }
     }
   }
