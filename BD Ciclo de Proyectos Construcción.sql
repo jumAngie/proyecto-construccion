@@ -1619,7 +1619,7 @@ GO
 --****************************************************************TABLA EMPLEADOS ********************************************************************--
 --TABLA EMPLEADOS								 
 INSERT INTO Gral.tbEmpleados
-VALUES('1884200105691', 'Ian Alexander', 'Hernandez Escobar', 'M', 'S','0501',1,'3ra Ave Sur, Col. 2 de Mrazo','10-22-2001', '9471-3500', 'ianh8902@gmail.com', 1,  GETDATE(), NULL, NULL,1);
+VALUES('1884200105691', 'Ian Alexander', 'Hernandez Escobar', 'M', 'S','0501',1,'3ra Ave Sur, Col. 2 de Mrazo','10-12-2001', '9471-3500', 'ianh8902@gmail.com', 1,  GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
@@ -1627,27 +1627,27 @@ VALUES('0501200209630', 'Axel Dario', 'Rivera Murillo', 'M', 'C','0802',2,'4ta A
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0613199817853', 'Jose Miguel', 'Murcia Castro', 'M', 'C','0701',1,'Entre 4ta Calle y 5ta Calle, Ave. Sur, Col. Los Olivos' ,'03-14-1998', '3831-3029', 'miguel.castro@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('0613199817853', 'Jose Miguel', 'Murcia Castro', 'M', 'C','0701',1,'Entre 4ta Calle y 5ta Calle, Ave. Sur, Col. Los Olivos' ,'03-04-1998', '3831-3029', 'miguel.castro@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('1801200000010', 'Noe Edil', 'Barnica Ramos', 'M', 'S','0102',1,'Entre 5ta Calle y 6ta Calle, Ave Norte', '05-19-2000','8925-8314', 'noe3@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('1801200000010', 'Noe Edil', 'Barnica Ramos', 'M', 'S','0102',1,'Entre 5ta Calle y 6ta Calle, Ave Norte', '05-12-2000','8925-8314', 'noe3@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0501200110543', 'Loany Michelle', 'Paz Guerra', 'F', 'V','0501',3,'Col. Primavera, Frente a la Municipalidad','03-27-2001', '8586-2314', 'loany15@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('0501200110543', 'Loany Michelle', 'Paz Guerra', 'F', 'V','0501',3,'Col. Primavera, Frente a la Municipalidad','03-12-2001', '8586-2314', 'loany15@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0409199934517', 'Daniel Enrique', 'Matamoros De la O', 'M', 'D','0106',1,'Res. Campisa','04-30-1999','9991-4436', 'enrique.99@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('0409199934517', 'Daniel Enrique', 'Matamoros De la O', 'M', 'D','0106',1,'Res. Campisa','04-03-1999','9991-4436', 'enrique.99@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0503200207911', 'Andrea Nicolle', 'Crivelli Zamorano', 'F', 'S','1101',3,'Res. Quintas Marta Elena', '10-29-2002', '3915-1658', 'nicolle29@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('0503200207911', 'Andrea Nicolle', 'Crivelli Zamorano', 'F', 'S','1101',3,'Res. Quintas Marta Elena', '10-09-2002', '3915-1658', 'nicolle29@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('0607199301185', 'M?gdaly', 'Z?niga Alvarado', 'F', 'C','0502',2,'Res. Cerro Verde','11-25-1993', '3339-6645', 'magdalyz22@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('0607199301185', 'M?gdaly', 'Z?niga Alvarado', 'F', 'C','0502',2,'Res. Cerro Verde','11-05-1993', '3339-6645', 'magdalyz22@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
@@ -1655,11 +1655,11 @@ VALUES('0501200506681', 'Javier Eduardo', 'L?pez', 'M', 'V','0502',1,'Res. Los O
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('1615200500062', 'Juan David', 'Molina Sagastume', 'M', 'D','0502',2,'Res. Los 3 Hermanos', '02-22-2005', '9451-9231', 'juanmolinasagastume@gmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('1615200500062', 'Juan David', 'Molina Sagastume', 'M', 'D','0502',2,'Res. Los 3 Hermanos', '02-12-2005', '9451-9231', 'juanmolinasagastume@gmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES('1615200500069', 'Eder Jesus', 'Sanchez Mantinez', 'M', 'C','0501',1,'Ave Sur, 4ta Calle, Col. Esperanza', '04-22-2002', '9858-7548', 'eder85@hotmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES('1615200500069', 'Eder Jesus', 'Sanchez Mantinez', 'M', 'C','0501',1,'Ave Sur, 4ta Calle, Col. Esperanza', '04-12-2002', '9858-7548', 'eder85@hotmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
@@ -1675,11 +1675,11 @@ VALUES ('1804200804125', 'Giovanny Antonio', 'Hernandez Escobar', 'M', 'C','0701
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES ('1804200305214', 'Edgardo Alexander', 'Sandoval Diaz', 'M', 'D','0102',3,'Entre 5ta Calle y 6ta Calle, Ave Norte','02-14-2002','9784-5841', 'edgar84@hotmail.com', 1, GETDATE(), NULL, NULL,1);
+VALUES ('1804200305214', 'Edgardo Alexander', 'Sandoval Diaz', 'M', 'D','0102',3,'Entre 5ta Calle y 6ta Calle, Ave Norte','02-04-2002','9784-5841', 'edgar84@hotmail.com', 1, GETDATE(), NULL, NULL,1);
 GO
 
 INSERT INTO Gral.tbEmpleados
-VALUES ('789456487254', 'Esdra Maria', 'Cerna', 'F', 'S','0501',2,'Ave Sur, 4ta Calle, Col. Esperanza','04-20-1992','4512-1205', 'Esdra_Cerna@hotmail.com', 1 ,GETDATE(), NULL, NULL,1);
+VALUES ('789456487254', 'Esdra Maria', 'Cerna', 'F', 'S','0501',2,'Ave Sur, 4ta Calle, Col. Esperanza','04-02-1992','4512-1205', 'Esdra_Cerna@hotmail.com', 1 ,GETDATE(), NULL, NULL,1);
 GO								 
 								 
 
