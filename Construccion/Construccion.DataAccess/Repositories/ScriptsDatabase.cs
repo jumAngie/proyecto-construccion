@@ -35,6 +35,9 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Construcciones
+        public static string InsertarConstrucciones = "Cons.UDP_tbConstrucciones_Insert";
+        public static string UpdateConstrucciones = "Cons.UDP_tbConstrucciones_Update";
+        public static string DeleteConstrucciones = "Cons.UDP_tbConstrucciones_Delete";
         #endregion
 
         #region EmpleadosPorConstruccion

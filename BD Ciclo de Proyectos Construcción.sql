@@ -2086,7 +2086,7 @@ BEGIN
 END
 
 GO
-CREATE OR ALTER PROC Acce.UDP_tbClientes_Delete
+CREATE OR ALTER PROC Cons.UDP_tbClientes_Delete
 	@clie_Id					INT,
 	@clie_IdModificacion		INT,
 	@status						INT OUTPUT
@@ -2106,7 +2106,84 @@ BEGIN
 
 END
 GO
+								--- ***** CONSTRUCCIONES ****** ----
+GO
+CREATE OR ALTER PROC Cons.UDP_tbConstrucciones_Insert
+	@cons_Proyecto              NVARCHAR(100), 
+	@cons_ProyectoDescripcion	NVARCHAR(MAX),
+	@muni_Id					CHAR(4), 
+	@cons_Direccion				NVARCHAR(MAX), 
+	@cons_FechaInicio			DATE,
+	@cons_FechaFin				DATE, 
+	@user_UsuCreacion			INT,
+	@status						INT OUTPUT
+AS
+BEGIN
 
+	BEGIN TRY
+		INSERT INTO Cons.tbConstrucciones(cons_Proyecto, cons_ProyectoDescripcion, muni_Id, cons_Direccion, cons_FechaInicio, 
+										  cons_FechaFin, user_UsuCreacion)
+		VALUES							 (@cons_Proyecto, @cons_ProyectoDescripcion, @muni_Id, @cons_Direccion, @cons_FechaInicio,
+										  @cons_FechaFin, @user_UsuCreacion);
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+GO
+CREATE OR ALTER PROC Cons.UDP_tbConstrucciones_Update
+	@cons_Id					INT,
+	@cons_Proyecto              NVARCHAR(100), 
+	@cons_ProyectoDescripcion	NVARCHAR(MAX),
+	@muni_Id					CHAR(4), 
+	@cons_Direccion				NVARCHAR(MAX), 
+	@cons_FechaInicio			DATE,
+	@cons_FechaFin				DATE, 
+	@user_UsuCreacion			INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+	BEGIN TRY
+		UPDATE Cons.tbConstrucciones
+		SET		cons_Proyecto = @cons_Proyecto,
+				cons_ProyectoDescripcion = @cons_ProyectoDescripcion,
+				muni_Id = @muni_Id,
+				cons_Direccion = @cons_Direccion,
+				cons_FechaInicio = @cons_FechaInicio,
+				cons_FechaFin	 = @cons_FechaFin,
+				user_UsuCreacion = @user_UsuCreacion
+		WHERE	cons_Id = @cons_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+
+GO
+CREATE OR ALTER PROC Cons.UDP_tbClientes_Delete
+	@cons_Id					INT,
+	@user_UsuModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+
+	BEGIN TRY
+	   UPDATE Cons.tbConstrucciones
+	   SET    cons_Estado = 0,
+			  user_UsuModificacion = @user_UsuModificacion
+	   WHERE  cons_Id = @cons_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+GO
+								--- ***** Municipios ****** ----
+GO
 GO
 								--- ***** LOGIN ****** ----
 
