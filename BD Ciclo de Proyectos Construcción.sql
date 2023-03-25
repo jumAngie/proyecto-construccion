@@ -2162,7 +2162,7 @@ BEGIN
 END
 
 GO
-CREATE OR ALTER PROC Cons.UDP_tbClientes_Delete
+CREATE OR ALTER PROC Cons.UDP_tbConstrucciones_Delete
 	@cons_Id					INT,
 	@user_UsuModificacion		INT,
 	@status						INT OUTPUT
