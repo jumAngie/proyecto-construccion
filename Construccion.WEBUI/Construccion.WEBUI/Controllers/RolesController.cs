@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using Construccion.API.Models;
 using Construccion.WEBUI.Models;
 using System.Net.Http.Json;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Construccion.WEBUI.Controllers
 {
@@ -21,8 +23,8 @@ namespace Construccion.WEBUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            
-            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44341/api/Rol/List");
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");
 
             if (response.IsSuccessStatusCode)
             {
@@ -46,8 +48,8 @@ namespace Construccion.WEBUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RolesViewModel rolesViewModel)
         {
-
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<RolesViewModel>("https://localhost:44341/api/Rol/Insert", rolesViewModel);
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<RolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/Insert", rolesViewModel);
 
             if (response.IsSuccessStatusCode)
             {
