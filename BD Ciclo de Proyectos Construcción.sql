@@ -2193,12 +2193,13 @@ CREATE OR ALTER PROC Acce.UDP_Login
 AS
 BEGIN
 	SET @user_Contrasena = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena),2)
-    PRINT @user_Contrasena
-	SELECT user_Id, user_NombreUsuario, user_EsAdmin, role_Id, empe_Id
-	FROM Acce.tbUsuarios
-	WHERE user_NombreUsuario = @user_NombreUsuario
-	AND	  user_Contrasena = @user_Contrasena
-	AND	  user_Estado = 1
+    PRINT   @user_Contrasena
+	SELECT  user_Id, user_NombreUsuario, user_EsAdmin, role_Id, empe_Id, t2.empl_Nombre
+	FROM	Acce.tbUsuarios t1 INNER JOIN Gral.tbEmpleados t2
+	ON		t1.empe_Id = t2.empl_Id
+	WHERE	user_NombreUsuario = @user_NombreUsuario
+	AND		user_Contrasena = @user_Contrasena
+	AND		user_Estado = 1
 
 END
 GO
