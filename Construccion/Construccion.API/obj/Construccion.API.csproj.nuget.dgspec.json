@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj": {}
+    "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj": {
+    "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj",
         "projectName": "Construccion.API",
-        "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj",
-        "packagesPath": "C:\\Users\\axel2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.API\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\Construccion.API.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\axel2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -34,11 +32,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj"
+              "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj"
               },
-              "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
-                "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj"
+              "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj"
               }
             }
           }
@@ -98,28 +96,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj": {
+    "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
         "projectName": "Construccion.BusinessLogic",
-        "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\axel2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\Construccion.BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\axel2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -132,8 +128,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj"
+              "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj"
               }
             }
           }
@@ -162,28 +158,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {
+    "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
         "projectName": "Construccion.DataAccess",
-        "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\axel2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\Construccion.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\axel2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -196,8 +190,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
-                "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj"
+              "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj"
               }
             }
           }
@@ -248,28 +242,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
+    "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj",
         "projectName": "Construccion.Entities",
-        "projectPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj",
-        "packagesPath": "C:\\Users\\axel2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion\\Construccion.Entities\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\Construccion.Entities.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-construccion\\Construccion\\Construccion.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\axel2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -308,7 +300,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
         }
       }
     }
