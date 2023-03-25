@@ -8,6 +8,11 @@ namespace Construccion.DataAccess.Repositories
 {
     public class ScriptsDatabase
     {
+
+        #region Login
+        public static string ValidarLogin = "Acce.UDP_Login";
+        #endregion
+
         #region Roles
         public static string InsertarRoles = "Acce.UDP_tbRoles_Insert";
         public static string UpdateRoles = "Acce.UDP_tbRoles_Update";
@@ -24,6 +29,9 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Clientes
+        public static string InsertarClientes = "Cons.UDP_tbClientes_Insert";
+        public static string UpdateClientes = "Cons.UDP_tbClientes_Update";
+        public static string DeleteClientes = "Cons.UDP_tbClientes_Delete";
         #endregion
 
         #region Construcciones
