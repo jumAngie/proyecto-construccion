@@ -35,6 +35,16 @@ namespace Construccion.API.Controllers
             return Ok(list);
         }
 
+        //[HttpGet("(Id)")]
+        //public Student GetStudent(int Id)
+        //{
+            
+        //    context.students.Where(a => a.Id == Id).SingleOrDefault();
+        //    var student = return student;
+
+        //}
+
+
         [HttpPost("Insert")]
 
         public IActionResult Insert (RolesViewModel roles)

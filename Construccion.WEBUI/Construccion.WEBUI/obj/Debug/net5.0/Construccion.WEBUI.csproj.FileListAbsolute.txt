@@ -296,3 +296,4 @@ C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Cons
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\ref\Construccion.WEBUI.dll
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Construccion.WEBUI.pdb
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Construccion.WEBUI.genruntimeconfig.cache
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Roles\_Create.cshtml.g.cs

@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/css/toastr.min.css" rel="stylesheet" />
 <h1>Index</h1>
 
 <p>
-<a asp-action="Create">Create New</a>
+    <a data-toggle="modal" data-target="#ModalExample">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -33,27 +33,28 @@
                     @Html.DisplayFor(modelItem => item.role_Nombre)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                    <a onclick="CargarDatos(@item.role_Id)" class="btn btn-warning" style="color:white;">Editar</a>
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+</td>
             </tr>
         }
     </tbody>
 </table>
+<script src="~/js/Prueba.js"></script>
+<script src="~/js/toastr.js"></script>
+<script src="~/js/toastr.min.js"></script>
+<partial name="_Create" />
 
 @{
-    if (ViewBag.Mensaje != "" && ViewBag.Mensaje != null)
-    {
-        
-    <div>
-        @ViewBag.Mensaje
-    </div>
-        @*string mensaje = ViewBag.Mensaje;
 
+    if (ViewBag.Mensaje != null && ViewBag.Mensaje != "")
+    {
+        string mensaje = ViewBag.Mensaje;
         <script>
-            alert('@mensaje');
-        </script>*@
+            MostrarMensajeSuccess('@mensaje');
+        </script>
     }
+
 
 }

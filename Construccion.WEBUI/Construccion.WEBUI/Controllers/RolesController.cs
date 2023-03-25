@@ -10,6 +10,7 @@ using Construccion.WEBUI.Models;
 using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Construccion.WEBUI.Controllers
 {
@@ -24,12 +25,12 @@ namespace Construccion.WEBUI.Controllers
         public async Task<IActionResult> Index()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");
-
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");      
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-
+                var mensaje = HttpContext.Session.GetString("NombreUsuario");
+                ViewBag.Mensaje = mensaje;
                 var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
                 return View(result.data);
             }
@@ -56,9 +57,8 @@ namespace Construccion.WEBUI.Controllers
                 string res = await response.Content.ReadAsStringAsync();
                 var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
                 var mensaje = respuestaX.message;
-                ViewBag.Mensaje = mensaje;
+                HttpContext.Session.SetString("NombreUsuario", mensaje);
                 return RedirectToAction("Index");
-
             }
             return View();
         }
