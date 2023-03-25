@@ -1965,8 +1965,9 @@ SELECT*FROM Cons.VW_tbInsumosConstruccion
 SELECT*FROM Cons.VW_tbUnidadesMedida
 
 GO
---****************************************************************************************************************************************
+--******************************************* PROCS **********************************************************************
 
+									--- ***** ROLES ****** ----
 CREATE OR ALTER PROC Acce.UDP_tbRoles_Insert
 	@role_Nombre	NVARCHAR(100),
 	@status			INT OUTPUT
@@ -2031,7 +2032,98 @@ BEGIN
 	END CATCH;
 
 END
+GO
+								--- ***** CLIENTES ****** ----
+CREATE OR ALTER PROC Cons.UDP_tbClientes_Insert
+	@clie_Identificacion		VARCHAR(150), 
+	@clie_Nombre				NVARCHAR(255), 
+	@muni_Id					CHAR(4), 
+	@clie_DireccionExacta		NVARCHAR(250), 
+	@clie_Telefono				NVARCHAR(9), 
+	@clie_CorreoElectronico		NVARCHAR(255), 
+	@user_IdCreacion			INT, 
+	@status						INT OUTPUT
+AS
+BEGIN
 
+	BEGIN TRY
+		INSERT INTO Cons.tbClientes(clie_Identificacion, clie_Nombre, muni_Id, clie_DireccionExacta, clie_Telefono, clie_CorreoElectronico, user_IdCreacion)
+		VALUES					   (@clie_Identificacion, @clie_Nombre, @muni_Id, @clie_DireccionExacta, @clie_Telefono, @clie_CorreoElectronico, @user_IdCreacion);
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+GO
+CREATE OR ALTER PROC Cons.UDP_tbClientes_Update
+	@clie_Id					INT,
+	@clie_Identificacion		VARCHAR(150), 
+	@clie_Nombre				NVARCHAR(255), 
+	@muni_Id					CHAR(4), 
+	@clie_DireccionExacta		NVARCHAR(250), 
+	@clie_Telefono				NVARCHAR(9), 
+	@clie_CorreoElectronico		NVARCHAR(255), 
+	@user_IdModificacion		INT, 
+	@status						INT OUTPUT
+AS
+BEGIN	
+	BEGIN TRY
+		UPDATE [Cons].[tbClientes]
+		SET  [clie_Identificacion] = @clie_Identificacion,
+			 clie_Nombre = @clie_Nombre,
+			 muni_Id = @muni_Id,
+			 clie_DireccionExacta = @clie_DireccionExacta,
+			 clie_Telefono = @clie_Telefono,
+			 clie_CorreoElectronico = @clie_CorreoElectronico,
+			 user_IdModificacion = @user_IdModificacion
+		WHERE clie_Id = @clie_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+
+GO
+CREATE OR ALTER PROC Acce.UDP_tbClientes_Delete
+	@clie_Id					INT,
+	@clie_IdModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+
+	BEGIN TRY
+	   UPDATE Cons.tbClientes
+	   SET    clie_Estado = 0,
+			  user_IdModificacion = @clie_IdModificacion
+	   WHERE  clie_Id = @clie_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+GO
+
+GO
+								--- ***** LOGIN ****** ----
+
+CREATE OR ALTER PROC Acce.UDP_Login
+	@user_NombreUsuario	NVARCHAR(100),
+	@user_Contrasena NVARCHAR(200)
+AS
+BEGIN
+	SET @user_Contrasena = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena),2)
+    PRINT @user_Contrasena
+	SELECT user_Id, user_NombreUsuario, user_EsAdmin, role_Id, empe_Id
+	FROM Acce.tbUsuarios
+	WHERE user_NombreUsuario = @user_NombreUsuario
+	AND	  user_Contrasena = @user_Contrasena
+	AND	  user_Estado = 1
+
+END
 GO
 --********************************************** UDP INSERTAR USUARIOS *************************************************--
 --Procediminetos de Usuarios
@@ -2041,10 +2133,10 @@ CREATE OR ALTER PROCEDURE Acce.UDP_InsertUsuario
 	@empe_Id INT										
 AS
 BEGIN
-	DECLARE @password NVARCHAR(MAX)=(SELECT HASHBYTES('Sha2_512', @user_Contrasena));
+	SET @user_Contrasena = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena),2)
 
 	INSERT Acce.tbUsuarios(user_NombreUsuario, user_Contrasena, user_EsAdmin, role_Id, empe_Id, user_UsuCreacion)
-	VALUES(@user_NombreUsuario, @password, @user_EsAdmin, @role_Id, @empe_Id, 1);
+	VALUES(@user_NombreUsuario, @user_Contrasena, @user_EsAdmin, @role_Id, @empe_Id, 1);
 END;
 
 GO
