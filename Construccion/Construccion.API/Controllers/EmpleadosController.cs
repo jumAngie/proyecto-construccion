@@ -11,7 +11,7 @@ namespace Construccion.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpleadosController : Controller
+    public class EmpleadosController : ControllerBase
     {
         private readonly GeneralesService _generalesServices;
         private readonly IMapper _mapper;

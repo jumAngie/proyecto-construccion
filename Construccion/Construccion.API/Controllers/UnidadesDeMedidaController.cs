@@ -11,13 +11,14 @@ namespace Construccion.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesController : ControllerBase
+
+    public class UnidadesDeMedidaController : Controller
     {
         private readonly ConstruccionServices _construccionServices;
         private readonly IMapper _mapper;
         public ConstruccionCon db = new ConstruccionCon();
 
-        public ClientesController(ConstruccionServices construccionServices, IMapper mapper)
+        public UnidadesDeMedidaController(ConstruccionServices construccionServices, IMapper mapper)
         {
             _construccionServices = construccionServices;
             _mapper = mapper;
@@ -26,8 +27,9 @@ namespace Construccion.API.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _construccionServices.ListClientes();
+            var list = _construccionServices.ListUnidadesMedida();
             return Ok(list);
         }
+
     }
 }
