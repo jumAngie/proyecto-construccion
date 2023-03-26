@@ -229,6 +229,11 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        //public IEnumerable<tbPantallas> MenuPantallas(tbPantallas item)
+        //{
+        //    return _rolesPorPantallaRepository.MenuPantallas(item);
+        //}
         #endregion
 
         #region Roles Por Pantalla Repository
