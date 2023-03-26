@@ -2324,7 +2324,59 @@ BEGIN CATCH
         SET @status = 0;
 END CATCH
 END
+
+
 GO
+
+
+--PROCEDURE PARA EVALUAR SI LA CONTRASEÑA Y USUARIO INGRESADO EN RESTABLECER CONTRASEÑA SON CORRECTAS Y COINCIDEN CON ALGUN USUARIO
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_ValidarUsuarioRestablecerContraseña
+(
+    @user_NombreUsuario NVARCHAR(150),
+	@user_Contrasena	NVARCHAR(150)
+)
+AS
+BEGIN
+	DECLARE @Pass AS NVARCHAR(MAX);
+    SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena), 2);
+
+    SELECT    user_Id
+      FROM  [Acce].[tbUsuarios]
+     WHERE  user_NombreUsuario = @user_NombreUsuario 
+	   AND	user_Contrasena = @Pass
+       AND  user_Estado = 1
+END
+
+
+GO
+
+
+--CREATE PROCEDURE PARA RESTABLECER CONTRASEÑA DE USUARIOS
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_ResetPassword
+(
+	@user_NombreUsuario			NVARCHAR(150),
+	@NewPassword				NVARCHAR(150),
+	@status						INT OUTPUT
+)
+AS
+BEGIN
+BEGIN TRY
+	DECLARE @Pass AS NVARCHAR(MAX);
+	SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @NewPassword), 2);
+
+	UPDATE Acce.[tbUsuarios]
+	   SET user_Contrasena = @Pass
+	 WHERE user_NombreUsuario = @user_NombreUsuario
+
+	 SET @status = 1;
+END TRY
+BEGIN CATCH
+	SET @status = 0;
+END CATCH
+END
+GO
+
+
 --********************************************** UDP INSERTAR USUARIOS *************************************************--
 --Procediminetos de Usuarios
 CREATE OR ALTER PROCEDURE Acce.UDP_InsertUsuario

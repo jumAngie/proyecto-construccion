@@ -65,6 +65,21 @@ namespace Construccion.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("EvaluarUsuarioRestablecer")]
+        public IActionResult EvaluarUsuarioRestablecer(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.ValidarUsuarioRestablecer(item);
+            return Ok(response);
+        }
 
+        [HttpPost("Restablecer")]
+
+        public IActionResult RestablecerPassword(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.RestablecerPassword(item);
+            return Ok(response);
+        }
     }
 }

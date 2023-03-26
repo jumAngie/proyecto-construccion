@@ -13,6 +13,8 @@ namespace Construccion.DataAccess.Repositories
         public static string ValidarLogin = "Acce.UDP_Login";
         public static string CambiarPassword = "Acce.UDP_tbUsuarios_CambiarPassword";
         public static string ValidarUsuario = "Acce.UDP_tbUsuarios_ValidarExisteUsername";
+        public static string RestablecerPassword = "Acce.UDP_tbUsuarios_ResetPassword";
+        public static string ValidarRestablecerPassword = "Acce.UDP_tbUsuarios_ValidarUsuarioRestablecerContraseña";
         #endregion
 
         #region Roles

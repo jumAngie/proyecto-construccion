@@ -116,6 +116,13 @@
                     MostrarMensajeSuccess('@Mensaje');
                 </script>
             }
+            if (ViewBag.MensajeRestablecer != "" && ViewBag.MensajeRestablecer != null)
+            {
+                string Mensaje2 = ViewBag.MensajeRestablecer;
+                <script>
+                    MostrarMensajeSuccess('@Mensaje2');
+                </script>
+            }
         }
 
     </div>

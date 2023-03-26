@@ -24,6 +24,7 @@ namespace Construccion.WEBUI.Controllers
         public IActionResult Index()
         {
             string Sesion = HttpContext.Session.GetString("InicioSesion");
+            HttpContext.Session.SetString("InicioSesion", "");
             if (Sesion == "1")
             {
                 ViewBag.User = HttpContext.Session.GetString("User");
@@ -43,11 +44,21 @@ namespace Construccion.WEBUI.Controllers
                 return View();
             }
             string errores = HttpContext.Session.GetString("Cambiar");
-            if(errores == "1")
+            HttpContext.Session.SetString("Cambiar", "");
+            if (errores == "1")
             {
                 ViewBag.MensajeCambia = HttpContext.Session.GetString("MensajeCam");
                 ViewBag.Cambiar = "Logrado";
+                return View();
             }
+            string Restablecer = HttpContext.Session.GetString("MensajeRes");
+            HttpContext.Session.SetString("MensajeRes", "");
+            if (Restablecer != "" && Restablecer != null)
+            {
+                ViewBag.MensajeRestablecer = Restablecer;
+                return View();
+            }
+
             return View();
         }
 
@@ -110,6 +121,133 @@ namespace Construccion.WEBUI.Controllers
             }
             return View();
         }
+
+        public IActionResult ResetPassword()
+        {
+            string Restablecer = HttpContext.Session.GetString("Restablecer");
+            HttpContext.Session.SetString("Restablecer", "");
+            if (Restablecer == "1")
+            {
+                ModelState.AddModelError("ErrorSesion", "Usuario o contraseña incorrectos");
+                ModelState.AddModelError("ErrorSesion1", "*");
+                ModelState.AddModelError("ErrorSesion2", "*");
+                ViewBag.user = HttpContext.Session.GetString("User");
+                ViewBag.contra = HttpContext.Session.GetString("contra");
+                ViewBag.newcontra = HttpContext.Session.GetString("NewContra");
+                ViewBag.contracon = HttpContext.Session.GetString("Confirm");
+                ViewBag.ResX = Restablecer;
+                return View();
+            }
+            if (Restablecer == "2")
+            {
+                ModelState.AddModelError("ErrorSesion", "Todos los campos son requeridos");
+                ModelState.AddModelError("ErrorSesion1", "*");
+                ModelState.AddModelError("ErrorSesion2", "*");
+                ModelState.AddModelError("ErrorSesion3", "*");
+                ModelState.AddModelError("ErrorSesion4", "*");
+                return View();
+            }
+            if (Restablecer == "3")
+            {
+                ModelState.AddModelError("ErrorSesion", "La nueva contraseña y la contraseña de confirmación no coinciden");
+                ModelState.AddModelError("ErrorSesion3", "*");
+                ModelState.AddModelError("ErrorSesion4", "*");
+                ViewBag.user2 = HttpContext.Session.GetString("User");
+                ViewBag.contra2 = HttpContext.Session.GetString("contra");
+                ViewBag.newcontra2 = HttpContext.Session.GetString("NewContra");
+                ViewBag.contracon2 = HttpContext.Session.GetString("Confirm");
+                ViewBag.Res3 = Restablecer;
+                return View();
+            }
+            if (Restablecer == "4")
+            {
+                ViewBag.Error = "Error al realizar la operación";
+                return View();
+            }
+            if (Restablecer == "5")
+            {
+                ViewBag.Error2 = "Error al realizar la operación";
+                return View();
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(UsuarioViewModel usuarioViewModel, string NewPassword, string ConfirmPassword)
+        {
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName != "" && UserName != null)
+            {
+                if(usuarioViewModel.user_Contrasena != null && usuarioViewModel.user_NombreUsuario != null && (NewPassword != "" ||  NewPassword != null) && (ConfirmPassword != "" || ConfirmPassword != null))
+                {
+                    if (NewPassword == ConfirmPassword)
+                    {
+                        var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+                        HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/EvaluarUsuarioRestablecer", usuarioViewModel);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string res = await response.Content.ReadAsStringAsync();
+                            var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModel>>(res);
+                            if (respuestaX.data.Count > 0)
+                            {
+                                usuarioViewModel.user_Contrasena = NewPassword;
+                                HttpResponseMessage response2 = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/Restablecer", (usuarioViewModel));
+                                if (response2.IsSuccessStatusCode)
+                                {
+                                    var mensaje2 = "Operacion realizada con exito";
+                                    HttpContext.Session.SetString("user_Nombre", "");
+                                    HttpContext.Session.Clear();
+                                    HttpContext.Session.SetString("MensajeRes", mensaje2);
+                                    return RedirectToAction("Index", "Login");
+                                }
+                                else
+                                {
+                                    HttpContext.Session.SetString("Restablecer", "5");
+                                    return RedirectToAction("ResetPassword", "Login");
+                                }
+                            }
+                            else
+                            {
+                                HttpContext.Session.SetString("User", usuarioViewModel.user_NombreUsuario);
+                                HttpContext.Session.SetString("contra", usuarioViewModel.user_Contrasena);
+                                HttpContext.Session.SetString("NewContra",NewPassword);
+                                HttpContext.Session.SetString("Confirm", ConfirmPassword);
+                                HttpContext.Session.SetString("Restablecer", "1");
+                                return RedirectToAction("ResetPassword", "Login");
+                            }
+                        }
+                        else
+                        {
+                            HttpContext.Session.SetString("Restablecer", "4");
+                            return RedirectToAction("ResetPassword", "Login");
+                        }
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("User", usuarioViewModel.user_NombreUsuario);
+                        HttpContext.Session.SetString("contra", usuarioViewModel.user_Contrasena);
+                        HttpContext.Session.SetString("NewContra", NewPassword);
+                        HttpContext.Session.SetString("Confirm", ConfirmPassword);
+                        HttpContext.Session.SetString("Restablecer", "3");
+                        return RedirectToAction("ResetPassword", "Login");
+                    }
+                    
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Restablecer", "2");
+                    return RedirectToAction("ResetPassword", "Login");
+                }
+                
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+
 
         [HttpPost("/Login/Cambiar")]
         public async Task<JsonResult> CambiarPassword(UsuarioViewModel usuarioViewModel)
