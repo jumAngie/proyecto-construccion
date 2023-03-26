@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Construccion.API.Models;
 using Construccion.BusinessLogic.Services;
 using Construccion.DataAccess;
+using Construccion.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,5 +31,22 @@ namespace Construccion.API.Controllers
             var list = _accessService.ListUsuarios();
             return Ok(list);
         }
+
+        [HttpPost("Login/Index")]
+        public IActionResult Index(UsuariosViewModel usuariosViewModel)
+        {          
+            if (usuariosViewModel.user_NombreUsuario != null && usuariosViewModel.user_Contrasena != null)
+            {
+                var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+                var listado = _accessService.IniciarSesion(item);
+                return Ok(listado);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
     }
 }

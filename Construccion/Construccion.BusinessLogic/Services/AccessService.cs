@@ -117,5 +117,23 @@ namespace Construccion.BusinessLogic.Services
         }
 
         #endregion
+
+        #region Login
+        public ServiceResult IniciarSesion(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _usuariosRepository.IniciarSesion(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
     }
 }

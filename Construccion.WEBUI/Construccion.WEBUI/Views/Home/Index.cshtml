@@ -1,8 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 
 <div class="text-center">
     <h1 class="display-4">Bienvenido</h1>
     <p>Hola angie! que ondas estamos haciendo una pagina que epico, no?.</p>
 </div>
+
+
+@{
+    if (ViewBag.Mensaje != "" && ViewBag.Mensaje != null)
+    {
+        string Mensaje = ViewBag.Nombre;
+        <script>
+            MostrarMensajeSuccess("Bienvenido"+ @Mensaje);
+        </script>
+    }
+
+}

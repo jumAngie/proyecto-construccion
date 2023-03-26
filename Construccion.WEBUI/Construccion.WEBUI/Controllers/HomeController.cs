@@ -1,4 +1,5 @@
 ﻿using Construccion.WEBUI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,6 +21,9 @@ namespace Construccion.WEBUI.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
+            ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
+            ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
             return View();
         }
 

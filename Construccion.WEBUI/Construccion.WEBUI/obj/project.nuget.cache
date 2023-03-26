@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2R+NUBcik/cUwNQix7Mm4ZfdFQ+d05kdAeaciiapmXT3ARgef/l3Vl+ySMqDf+wWlTC11hh3bcKPBnpT+qWstQ==",
+  "dgSpecHash": "HcRgS6UNsHntAPYwBKbHiq949W5m5vlOHsXRuBZthGDqNw9J4ugRmKrRsEVbSggK8YczCNjK5I6YeShj4VT+nA==",
   "success": true,
   "projectFilePath": "C:\\Users\\axel2\\OneDrive\\Documentos\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\axel2\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\enums.net\\4.0.0\\enums.net.4.0.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\mathnet.numerics.signed\\4.15.0\\mathnet.numerics.signed.4.15.0.nupkg.sha512",
@@ -26,6 +27,7 @@
     "C:\\Users\\axel2\\.nuget\\packages\\microsoft.codeanalysis.csharp.workspaces\\3.8.0\\microsoft.codeanalysis.csharp.workspaces.3.8.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\microsoft.codeanalysis.razor\\5.0.0\\microsoft.codeanalysis.razor.5.0.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\3.8.0\\microsoft.codeanalysis.workspaces.common.3.8.0.nupkg.sha512",
+    "C:\\Users\\axel2\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\2.2.0\\microsoft.extensions.caching.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.2.0\\microsoft.extensions.configuration.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\axel2\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.0\\microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",

@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "Construccion.WEBUI/1.0.0": {
         "dependencies": {
+          "AutoMapper": "11.0.0",
           "Microsoft.AspNetCore.Session": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
           "NPOI": "2.6.0",
@@ -114,7 +115,7 @@
           "Microsoft.AspNetCore.StaticFiles": "5.0.0.0",
           "Microsoft.AspNetCore.WebSockets": "5.0.0.0",
           "Microsoft.AspNetCore.WebUtilities": "5.0.0.0",
-          "Microsoft.CSharp": "5.0.0.0",
+          "Microsoft.CSharp.Reference": "5.0.0.0",
           "Microsoft.Extensions.Caching.Abstractions.Reference": "5.0.0.0",
           "Microsoft.Extensions.Caching.Memory": "5.0.0.0",
           "Microsoft.Extensions.Configuration.Abstractions.Reference": "5.0.0.0",
@@ -319,6 +320,20 @@
         },
         "compile": {
           "Construccion.WEBUI.dll": {}
+        }
+      },
+      "AutoMapper/11.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
         }
       },
       "Enums.NET/4.0.0": {
@@ -688,6 +703,7 @@
           "lib/netcoreapp3.1/Microsoft.CodeAnalysis.Workspaces.dll": {}
         }
       },
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Extensions.Caching.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "2.2.0"
@@ -2442,7 +2458,7 @@
         },
         "compileOnly": true
       },
-      "Microsoft.CSharp/5.0.0.0": {
+      "Microsoft.CSharp.Reference/5.0.0.0": {
         "compile": {
           "Microsoft.CSharp.dll": {}
         },
@@ -3644,6 +3660,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "AutoMapper/11.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+596AnKykYCk9RxXCEF4GYuapSebQtFVvIA1oVG1rrRkCLAC7AkWehJ0brCfYUbdDW3v1H/p0W3hob7JoXGjMw==",
+      "path": "automapper/11.0.0",
+      "hashPath": "automapper.11.0.0.nupkg.sha512"
+    },
     "Enums.NET/4.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3797,6 +3820,13 @@
       "sha512": "sha512-GPYVydsmOmScOWDJA1LFky7/MkoXpx1JI3lZJShxC+bvVUvL9zVKE8WDZMLsYJ5MAbry2xkZftdfeMpZ+kvLDQ==",
       "path": "microsoft.codeanalysis.workspaces.common/3.8.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.3.8.0.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/2.2.0": {
       "type": "package",
@@ -5037,7 +5067,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.CSharp/5.0.0.0": {
+    "Microsoft.CSharp.Reference/5.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
