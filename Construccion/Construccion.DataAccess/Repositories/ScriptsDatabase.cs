@@ -25,6 +25,7 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region RolesPorPantalla
+        public static string Menu_PantallaPorRol = "Acce.UDP_Menu_PantallasPorRol";
         #endregion
 
         #region Usuarios

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Construccion.BusinessLogic.Services;
 using Construccion.DataAccess;
+using Construccion.Entities.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,18 @@ namespace Construccion.API.Controllers
         {
             var list = _accessService.ListPantallas();
             return Ok(list);
+        }
+
+        [HttpGet]
+        public IActionResult MenuPantallas(tbPantallas item)
+        {
+            // variables de sesion
+            item.role_Id = (int)HttpContext.Session.GetInt32("role_Id");
+            item.esAdmin = Convert.ToBoolean(HttpContext.Session.GetString("user_EsAdmin"));
+
+            var pantallas = _accessService.MenuPantallas(item);
+
+            return Ok(pantallas);
         }
     }
 }

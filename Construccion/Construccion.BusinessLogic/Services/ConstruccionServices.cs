@@ -92,7 +92,8 @@ namespace Construccion.BusinessLogic.Services
 
             try
             {
-                if (item.clie_Nombre != "" && item.clie_Identificacion != "" && item.clie_Telefono != "")
+                if (item.clie_Nombre != "" && item.clie_Identificacion != "" && item. clie_Telefono != "" && item.muni_Id != ""
+                    && item.clie_DireccionExacta != "" && item.clie_CorreoElectronico != "")
                 {
                     var map = _clientesRepository.Insert(item);
                     if (map.CodeStatus > 0)
