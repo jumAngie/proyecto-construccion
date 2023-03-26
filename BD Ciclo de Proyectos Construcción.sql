@@ -2185,7 +2185,7 @@ GO
 								--- ***** Municipios ****** ----
 GO
 GO
------- EDITAR ESTE PROC  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-- 　　　　　　　　　　　　　　　　　　　　　　　　 EDITAR ESTE PROC  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 CREATE OR ALTER PROC Gral.UDP_tbMunicipios_Insert
 	@muni_Nombre				NVARCHAR(80), 
 	@depa_Id					CHAR(2), 
@@ -2226,47 +2226,97 @@ BEGIN
 END
 GO
 								--- ***** EMPLEADOS ****** ----
---GO
---CREATE OR ALTER PROC Gral.UDP_tbEmpleados_Insert
---	@empl_DNI					VARCHAR(13), 
---	@empl_Nombre				NVARCHAR(255), 
---	@empl_Apellidos				NVARCHAR(255), 
---	@empl_Sexo					CHAR(1), esta_ID, muni_Id, carg_Id, empl_DireccionExacta, empl_FechaNacimiento, empl_Telefono, empl_CorreoEletronico, user_IdCreacion, empl_FechaCreacion, user_IdModificacion, empl_FechaModificacion, empl_Estado
---	@status						INT OUTPUT
---AS
---BEGIN
+GO
+CREATE OR ALTER PROC Gral.UDP_tbEmpleados_Insert
+	@empl_DNI					VARCHAR(13), 
+	@empl_Nombre				NVARCHAR(255), 
+	@empl_Apellidos				NVARCHAR(255), 
+	@empl_Sexo					CHAR(1), 
+	@esta_ID					CHAR(1), 
+	@muni_Id					CHAR(4), 
+	@carg_Id					INT, 
+	@empl_DireccionExacta		NVARCHAR(250), 
+	@empl_FechaNacimiento		DATE, 
+	@empl_Telefono				NVARCHAR(9), 
+	@empl_CorreoEletronico		NVARCHAR(255), 
+	@user_IdCreacion			INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+	BEGIN TRY
+		INSERT INTO Gral.tbEmpleados(empl_DNI, empl_Nombre, empl_Apellidos, empl_Sexo, esta_ID, muni_Id, 
+								     carg_Id, empl_DireccionExacta, empl_FechaNacimiento, empl_Telefono, 
+									 empl_CorreoEletronico, user_IdCreacion)
+		VALUES						(@empl_DNI, @empl_Nombre, @empl_Apellidos, @empl_Sexo, @esta_ID, @muni_Id,
+									@carg_Id, @empl_DireccionExacta, @empl_FechaNacimiento, @empl_Telefono,
+									@empl_CorreoEletronico, @user_IdCreacion)
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+GO
+CREATE OR ALTER PROC Gral.UDP_tbEmpleados_Update
+	@empl_Id					INT,
+	@empl_DNI					VARCHAR(13), 
+	@empl_Nombre				NVARCHAR(255), 
+	@empl_Apellidos				NVARCHAR(255), 
+	@empl_Sexo					CHAR(1), 
+	@esta_ID					CHAR(1), 
+	@muni_Id					CHAR(4), 
+	@carg_Id					INT, 
+	@empl_DireccionExacta		NVARCHAR(250), 
+	@empl_FechaNacimiento		DATE, 
+	@empl_Telefono				NVARCHAR(9), 
+	@empl_CorreoEletronico		NVARCHAR(255), 
+	@user_IdModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+		UPDATE  Gral.tbEmpleados
+		SET		empl_DNI =		@empl_DNI,
+				empl_Nombre =	@empl_Nombre,
+				empl_Apellidos = @empl_Apellidos, 
+				empl_Sexo = @empl_Sexo, 
+				esta_ID = @esta_ID, 
+				muni_Id = @muni_Id, 
+				carg_Id = @carg_Id, 
+				empl_DireccionExacta = @empl_DireccionExacta, 
+				empl_FechaNacimiento = @empl_FechaNacimiento, 
+				empl_Telefono = @empl_Telefono, 
+				empl_CorreoEletronico = @empl_CorreoEletronico, 
+				user_IdModificacion  = @user_IdModificacion
+		WHERE	empl_Id = @empl_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+GO
+GO
+CREATE OR ALTER PROC Gral.UDP_tbEmpleados_Delete
+	@empl_Id					INT,
+	@user_IdModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
 
---	BEGIN TRY
---							 (@muni_Nombre, @depa_Id, @user_UsuCreacion)
---		SET @status = 1;
---	END TRY
---	BEGIN CATCH
---		SET @status = 0;
---	END CATCH;
---END
---GO
---CREATE OR ALTER PROC Gral.UDP_tbEmpleados_Update
---	@muni_Id					CHAR(4),
---	@muni_Nombre				NVARCHAR(80), 
---	@depa_Id					CHAR(2), 
---	@user_UsuModificacion		INT,
---	@status						INT OUTPUT
---AS
---BEGIN	
---	BEGIN TRY
---		UPDATE  Gral.tbMunicipios
---		SET		muni_Nombre = @muni_Nombre,
---				depa_Id = @depa_Id,
---				user_UsuModificacion = @user_UsuModificacion
---		WHERE	muni_id = @muni_Id
---		SET @status = 1;
---	END TRY
---	BEGIN CATCH
---		SET @status = 0;
---	END CATCH;
---END
---GO
---GO
+	BEGIN TRY
+	   UPDATE Gral.tbEmpleados
+	   SET    empl_Estado = 0,
+			  user_IdModificacion = @user_IdModificacion
+	   WHERE  empl_Id = @empl_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+GO
 								--- ***** LOGIN ****** ----
 
 CREATE OR ALTER PROC Acce.UDP_Login

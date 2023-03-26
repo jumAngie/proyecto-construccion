@@ -64,6 +64,9 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Empleados
+        public static string InsertarEmpleados = "Gral.UDP_tbEmpleados_Insert";
+        public static string UpdateEmpleados = "Gral.UDP_tbEmpleados_Update";
+        public static string DeleteEmpleados = "Gral.UDP_tbEmpleados_Delete";
         #endregion
 
         #region Estados Civiles
