@@ -32,6 +32,11 @@ namespace Construccion.API.Extensions
             CreateMap<tbEmpleados, EmpleadosViewModel>().ReverseMap();
             #endregion
 
+            #region Construcciones
+            CreateMap<ConstruccionesViewModel, VW_tbConstrucciones>().ReverseMap();
+            CreateMap<tbConstrucciones, ConstruccionesViewModel>().ReverseMap();
+            #endregion
+
         }
     }
 }
