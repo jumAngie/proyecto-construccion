@@ -50,21 +50,21 @@
                         <div class="login-main">
                             <form asp-action="ValidarSesion" method="post">
                                 <h4>Iniciar Sesión</h4>
-                                @Html.ValidationMessage("ErrorSesion", new { @class = "text-danger", @style = "font-size:17px;" })
-                                <p>Ingresa tu usuario y contraseña para logearte</p>
+                                @Html.ValidationMessage("ErrorSesion", new { @class = "text-danger", @style = "font-size:14px;" })
                                 <div class="form-group">
                                     <label class="col-form-label">Usuario</label>
                                     <input type="text" id="txtUserSes" name="user_NombreUsuario" class="form-control mb-3" placeholder="Usuario" />
-                                    @Html.ValidationMessage("ErrorSesion1", new { @class = "text-danger", @style = "font-size:17px;" })
+                                    @Html.ValidationMessage("ErrorSesion1", new { @class = "text-danger", @style = "font-size:14px;" })
                                 </div>
+                                <br />
                                 <div class="form-group">
                                     <label class="col-form-label">Contraseña</label>
                                     <div class="form-input position-relative">
                                         <input type="password" id="txtPasswordSes" name="user_Contrasena" class="form-control mb-1" placeholder="Contraseña" />
-                                        @Html.ValidationMessage("ErrorSesion2", new { @class = "text-danger", @style = "font-size:17px;" })
-                                        <div class="show-hide"><span class="show"></span></div>
+                                        @Html.ValidationMessage("ErrorSesion2", new { @class = "text-danger", @style = "font-size:14px;" })
                                     </div>
                                 </div>
+                                <br />
                                 <div class="form-group mb-0">
                                     <a class="link" href="#">¿Olvido su contraseña?</a>
                                     <div class="text-end mt-3">
@@ -94,6 +94,19 @@
         <script src="Content/js/script.js"></script>
         <!-- login js-->
         <!-- Plugin used-->
+        @{
+            if (ViewBag.Sesion == "Sesion" && ViewBag.Sesion != "")
+            {
+                string var1 = ViewBag.User;
+                string var2 = ViewBag.Contra;
+                <script>
+                $("#txtUserSes").val('@var1');
+                $("#txtPasswordSes").val('@var2');
+                </script>
+            }
+
+        }
+
     </div>
 </body>
 </html>

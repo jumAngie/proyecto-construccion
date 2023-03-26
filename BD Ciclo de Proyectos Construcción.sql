@@ -2285,6 +2285,40 @@ BEGIN
 
 END
 GO
+
+
+--CREATE PROCEDURE 'UDP_tbUsuarios_ValidarExisteUsername'
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_ValidarExisteUsername
+(
+	@user_NombreUsuario NVARCHAR(150)
+)
+AS
+BEGIN
+	SELECT	user_Id
+	  FROM  [Acce].[tbUsuarios]
+	 WHERE  user_NombreUsuario = @user_NombreUsuario 
+	   AND  user_Estado = 1
+END
+GO
+
+
+--CREATE PROCEDURE 'UDP_tbUsuarios_ActualizarContraseniausuario'
+CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_CambiarPassword
+(
+	@user_NombreUsuario NVARCHAR(150),
+	@user_Contrasena   NVARCHAR(150)
+)
+AS
+BEGIN
+	DECLARE @Pass AS NVARCHAR(MAX);
+	SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena), 2);
+
+	UPDATE [ACCE].[tbUsuarios]
+	   SET user_Contrasena = @user_Contrasena
+	 WHERE user_NombreUsuario = @user_NombreUsuario
+END
+GO
+
 --********************************************** UDP INSERTAR USUARIOS *************************************************--
 --Procediminetos de Usuarios
 CREATE OR ALTER PROCEDURE Acce.UDP_InsertUsuario

@@ -26,6 +26,8 @@ namespace Construccion.WEBUI.Controllers
             string Sesion = HttpContext.Session.GetString("InicioSesion");
             if (Sesion == "1")
             {
+                ViewBag.User = HttpContext.Session.GetString("User");
+                ViewBag.Contra = HttpContext.Session.GetString("contra");
                 ModelState.AddModelError("ErrorSesion", "Usuario o contraseña incorrecta");
                 ModelState.AddModelError("ErrorSesion1", "Usuario incorrecto");
                 ModelState.AddModelError("ErrorSesion2", "contraseña incorrecta");
@@ -35,6 +37,8 @@ namespace Construccion.WEBUI.Controllers
             if (Sesion == "2")
             {
                 ModelState.AddModelError("ErrorSesion", "El campo de usuario y contraseña son requeridos");
+                ModelState.AddModelError("ErrorSesion1", "campo requerido");
+                ModelState.AddModelError("ErrorSesion2", "campo requerido");
                 ViewBag.Sesion = "Sesion";
                 return View();
             }
@@ -85,6 +89,8 @@ namespace Construccion.WEBUI.Controllers
                     }
                     else
                     {
+                        HttpContext.Session.SetString("User", usuarioViewModel.user_NombreUsuario);
+                        HttpContext.Session.SetString("contra", usuarioViewModel.user_Contrasena);
                         HttpContext.Session.SetString("Com", "12");
                         HttpContext.Session.SetString("InicioSesion", "1");
                         return RedirectToAction("Index", "Login");
@@ -97,6 +103,14 @@ namespace Construccion.WEBUI.Controllers
                 return RedirectToAction("Index", "Login");  
             }
             return View();
+        }
+
+        [HttpPost("/Login/Cambiar")]
+        public async Task<JsonResult> CambiarPassword(UsuarioViewModel usuarioViewModel)
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "", usuarioViewModel);
+            return Json("hola");
         }
 
         public ActionResult CerrarSesion()

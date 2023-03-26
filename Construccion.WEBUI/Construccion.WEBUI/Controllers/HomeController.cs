@@ -21,7 +21,8 @@ namespace Construccion.WEBUI.Controllers
 
         public IActionResult Index()
         {
-            if(HttpContext.Session.GetString("user_Nombre") != "" || HttpContext.Session.GetString("user_Nombre") != null)
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName  != "" && UserName != null)
             {
                 ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
                 ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");

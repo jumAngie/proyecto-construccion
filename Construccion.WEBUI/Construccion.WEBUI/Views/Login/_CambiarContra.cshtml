@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<div class="modal fade" id="ModalCambiarContra" tabindex="-1" role="dialog" aria-labelledby="ModalCambiarContra" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Cambiar contraseña</h5>
+                &nbsp;&nbsp;<label id="LbGeneral" style="color:red; font-size:20px; margin-top:8px;"></label>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="ValidarSesion" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="col-form-label" for="recipient-name">Usuario:<label id="Lb1" hidden style="color:red;">*</label></label>
+                                <input class="form-control" type="text" id="txtUsuarioModal" name="user_NombreUsuario" placeholder="Usuario">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="col-form-label" for="message-text">Contraseña:<label id="Lb2" hidden style="color:red;">*</label></label>
+                                <input class="form-control" type="text" id="txtpasswordModal" name="user_Contrasena" placeholder="Contraseña" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" onclick="Cerrar()">Cancelar</button>
+                    <a class="btn btn-primary" onclick="CambiarPassword()">Cambiar Contraseña</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
