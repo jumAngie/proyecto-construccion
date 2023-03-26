@@ -22,10 +22,19 @@ namespace Construccion.API.Extensions
             CreateMap<tbUsuarios, UsuariosViewModel>().ReverseMap();
             #endregion
 
-
             #region Clientes
             CreateMap<ClientesViewModel, VW_tbClientes>().ReverseMap();
             CreateMap<tbClientes, ClientesViewModel>().ReverseMap();
+            #endregion
+
+            #region Empleados
+            CreateMap<EmpleadosViewModel, VW_tbEmpleados>().ReverseMap();
+            CreateMap<tbEmpleados, EmpleadosViewModel>().ReverseMap();
+            #endregion
+
+            #region Construcciones
+            CreateMap<ConstruccionesViewModel, VW_tbConstrucciones>().ReverseMap();
+            CreateMap<tbConstrucciones, ConstruccionesViewModel>().ReverseMap();
             #endregion
 
         }

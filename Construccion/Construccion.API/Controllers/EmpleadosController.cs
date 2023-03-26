@@ -35,18 +35,9 @@ namespace Construccion.API.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(EmpleadosViewModel empleados)
         {
-            //if(ExisteDNI(clientes.clie_Identificacion) == false)
-            //{
             var item = _mapper.Map<tbEmpleados>(empleados);
             var response = _generalesServices.CreateEmpleados(item);
             return Ok(response);
-
-            //}
-            //else
-            //{
-            //    return Ok(clientes);
-            //    // esto va en el front lol
-            //}
 
         }
     }
