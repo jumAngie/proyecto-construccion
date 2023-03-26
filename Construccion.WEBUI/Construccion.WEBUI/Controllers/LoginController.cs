@@ -23,6 +23,21 @@ namespace Construccion.WEBUI.Controllers
         }
         public IActionResult Index()
         {
+            string Sesion = HttpContext.Session.GetString("InicioSesion");
+            if (Sesion == "1")
+            {
+                ModelState.AddModelError("ErrorSesion", "Usuario o contraseña incorrecta");
+                ModelState.AddModelError("ErrorSesion1", "Usuario incorrecto");
+                ModelState.AddModelError("ErrorSesion2", "contraseña incorrecta");
+                ViewBag.Sesion = "Sesion";
+                return View();
+            }
+            if (Sesion == "2")
+            {
+                ModelState.AddModelError("ErrorSesion", "El campo de usuario y contraseña son requeridos");
+                ViewBag.Sesion = "Sesion";
+                return View();
+            }
             return View();
         }
 
@@ -31,40 +46,65 @@ namespace Construccion.WEBUI.Controllers
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/Login/Index", usuarioViewModel);
-
-            if (response.IsSuccessStatusCode)
+            HttpContext.Session.SetString("InicioSesion", "");
+            if ((usuarioViewModel.user_Contrasena != null) && ( usuarioViewModel.user_NombreUsuario != null))
             {
-                string res = await response.Content.ReadAsStringAsync();
-                var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModel>>(res);
-                int UsuarioId = 0;
-                var usuario = string.Empty;
-                var empleado = string.Empty;
-                string admin = string.Empty;
-                foreach (var item in respuestaX.data)
+                if (response.IsSuccessStatusCode)
                 {
-                     UsuarioId = item.user_Id;
-                     usuario   = item.user_NombreUsuario;
-                     empleado  = item.empl_Nombre;
-                     admin     = (item.user_EsAdmin).ToString();
-                }
-                var mensaje = respuestaX.message;
-                string resultado = string.Empty;
-                if (admin == "True")
-                {
-                     resultado = "Admin";                    
-                }
-                else
-                {
-                     resultado = "No administrador";
-                }
-                HttpContext.Session.SetString("user_EsAdmin", resultado);
-                HttpContext.Session.SetString("empl_Nombre", empleado);
-                HttpContext.Session.SetString("user_Nombre", usuario);
-                HttpContext.Session.SetInt32("UsuarioId", UsuarioId);
-                HttpContext.Session.SetString("Mensaje", mensaje);
-                return RedirectToAction("Index","Home");
+                    string res = await response.Content.ReadAsStringAsync();
+                    var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModel>>(res);
+                    if (respuestaX.data.Count > 0)
+                    {
+                        int UsuarioId = 0;
+                        var usuario = string.Empty;
+                        var empleado = string.Empty;
+                        string admin = string.Empty;
+                        foreach (var item in respuestaX.data)
+                        {
+                            UsuarioId = item.user_Id;
+                            usuario = item.user_NombreUsuario;
+                            empleado = item.empl_Nombre;
+                            admin = (item.user_EsAdmin).ToString();
+                        }
+                        var mensaje = respuestaX.message;
+                        string resultado = string.Empty;
+                        if (admin == "True")
+                        {
+                            resultado = "Admin";
+                        }
+                        else
+                        {
+                            resultado = "No administrador";
+                        }
+                        HttpContext.Session.SetString("user_EsAdmin", resultado);
+                        HttpContext.Session.SetString("empl_Nombre", empleado);
+                        HttpContext.Session.SetString("user_Nombre", usuario);
+                        HttpContext.Session.SetInt32("UsuarioId", UsuarioId);
+                        HttpContext.Session.SetString("Mensaje", mensaje);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("Com", "12");
+                        HttpContext.Session.SetString("InicioSesion", "1");
+                        return RedirectToAction("Index", "Login");
+                    }
+                }               
+            }
+            else
+            {
+                HttpContext.Session.SetString("InicioSesion", "2");
+                return RedirectToAction("Index", "Login");  
             }
             return View();
         }
+
+        public ActionResult CerrarSesion()
+        {
+            HttpContext.Session.SetString("user_Nombre","");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Login");
+        }
+
     }
 }

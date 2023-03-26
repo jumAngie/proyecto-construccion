@@ -50,15 +50,18 @@
                         <div class="login-main">
                             <form asp-action="ValidarSesion" method="post">
                                 <h4>Iniciar Sesión</h4>
+                                @Html.ValidationMessage("ErrorSesion", new { @class = "text-danger", @style = "font-size:17px;" })
                                 <p>Ingresa tu usuario y contraseña para logearte</p>
                                 <div class="form-group">
                                     <label class="col-form-label">Usuario</label>
                                     <input type="text" id="txtUserSes" name="user_NombreUsuario" class="form-control mb-3" placeholder="Usuario" />
+                                    @Html.ValidationMessage("ErrorSesion1", new { @class = "text-danger", @style = "font-size:17px;" })
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Contraseña</label>
                                     <div class="form-input position-relative">
-                                       <input type="password" id="txtPasswordSes" name="user_Contrasena" class="form-control mb-1" placeholder="Contraseña" />
+                                        <input type="password" id="txtPasswordSes" name="user_Contrasena" class="form-control mb-1" placeholder="Contraseña" />
+                                        @Html.ValidationMessage("ErrorSesion2", new { @class = "text-danger", @style = "font-size:17px;" })
                                         <div class="show-hide"><span class="show"></span></div>
                                     </div>
                                 </div>

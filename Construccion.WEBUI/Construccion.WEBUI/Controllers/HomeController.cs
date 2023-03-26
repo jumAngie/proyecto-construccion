@@ -21,10 +21,17 @@ namespace Construccion.WEBUI.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
-            ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
-            ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
-            return View();
+            if(HttpContext.Session.GetString("user_Nombre") != "" || HttpContext.Session.GetString("user_Nombre") != null)
+            {
+                ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
+                ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
+                ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
+                return View();
+            }
+           else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         public IActionResult Privacy()
