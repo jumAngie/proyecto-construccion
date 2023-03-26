@@ -2286,36 +2286,43 @@ BEGIN
 END
 GO
 
-
---CREATE PROCEDURE 'UDP_tbUsuarios_ValidarExisteUsername'
+--PROCEDURE PARA EVALUAR SI EXISTE USUARIO CON T NOMBRE DE USUARIO
 CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_ValidarExisteUsername
 (
-	@user_NombreUsuario NVARCHAR(150)
+    @user_NombreUsuario NVARCHAR(150)
 )
 AS
 BEGIN
-	SELECT	user_Id
-	  FROM  [Acce].[tbUsuarios]
-	 WHERE  user_NombreUsuario = @user_NombreUsuario 
-	   AND  user_Estado = 1
+    SELECT    user_Id
+      FROM  [Acce].[tbUsuarios]
+     WHERE  user_NombreUsuario = @user_NombreUsuario 
+       AND  user_Estado = 1
 END
 GO
 
 
---CREATE PROCEDURE 'UDP_tbUsuarios_ActualizarContraseniausuario'
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_CambiarPassword
+--PROCEDURE CAMBIAR PASSWORD DE USUARIO QUE EXISTE
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_CambiarPassword
 (
-	@user_NombreUsuario NVARCHAR(150),
-	@user_Contrasena   NVARCHAR(150)
+    @user_NombreUsuario NVARCHAR(150),
+    @user_Contrasena   NVARCHAR(150),
+    @status                        INT OUTPUT
 )
 AS
 BEGIN
-	DECLARE @Pass AS NVARCHAR(MAX);
-	SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena), 2);
+BEGIN TRY
+    DECLARE @Pass AS NVARCHAR(MAX);
+    SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena), 2);
 
-	UPDATE [ACCE].[tbUsuarios]
-	   SET user_Contrasena = @user_Contrasena
-	 WHERE user_NombreUsuario = @user_NombreUsuario
+    UPDATE [ACCE].[tbUsuarios]
+       SET user_Contrasena = @user_Contrasena
+     WHERE user_NombreUsuario = @user_NombreUsuario
+
+     SET @status = 1;
+END TRY
+BEGIN CATCH
+        SET @status = 0;
+END CATCH
 END
 GO
 
