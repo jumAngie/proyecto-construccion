@@ -141,7 +141,7 @@ namespace Construccion.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                if (item.user_Id != 0)
+                if (item.user_Contrasena != "")
                 {
                     var map = _usuariosRepository.UpdatePassword(item);
                     if (map.CodeStatus > 0)

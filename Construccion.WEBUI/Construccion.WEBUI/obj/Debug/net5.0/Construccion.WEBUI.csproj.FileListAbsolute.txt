@@ -450,3 +450,4 @@ C:\Users\Usuario\Documents\GitHub\proyecto-construccion\Construccion.WEBUI\Const
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Login\Index.cshtml.g.cs
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Roles\_CrearRol.cshtml.g.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Login\_CambiarContra.cshtml.g.cs

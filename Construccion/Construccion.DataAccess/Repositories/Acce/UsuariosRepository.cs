@@ -23,9 +23,7 @@ namespace Construccion.DataAccess.Repositories.Acce
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
             var parametro = new DynamicParameters();
             parametro.Add("@user_NombreUsuario", item.user_NombreUsuario, DbType.String, ParameterDirection.Input);
-            parametro.Add("@user_Contrasena", item.user_Contrasena, DbType.String, ParameterDirection.Input);
-
-            return db.Query<tbUsuarios>(ScriptsDatabase.ValidarLogin, parametro, commandType: CommandType.StoredProcedure);
+            return db.Query<tbUsuarios>(ScriptsDatabase.ValidarUsuario, parametro, commandType: CommandType.StoredProcedure);
         }
 
 

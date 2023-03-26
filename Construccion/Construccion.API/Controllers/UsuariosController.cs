@@ -49,19 +49,19 @@ namespace Construccion.API.Controllers
         }
 
         [HttpPost("Evaluar")]
-        public IActionResult Insert(RolesViewModel roles)
+        public IActionResult Evaluar(UsuariosViewModel usuariosViewModel)
         {
-            var item = _mapper.Map<tbRoles>(roles);
-            var response = _accessService.CreateRoles(item);
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.ValidarUsername(item);
             return Ok(response);
         }
 
-        [HttpPut("Update")]
+        [HttpPost("Update")]
 
-        public IActionResult Update(RolesViewModel roles)
+        public IActionResult Update(UsuariosViewModel usuariosViewModel)
         {
-            var item = _mapper.Map<tbRoles>(roles);
-            var response = _accessService.UpdateRoles(1, item);
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.UpdatePassword(item);
             return Ok(response);
         }
 

@@ -2315,7 +2315,7 @@ BEGIN TRY
     SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena), 2);
 
     UPDATE [ACCE].[tbUsuarios]
-       SET user_Contrasena = @user_Contrasena
+       SET user_Contrasena = @Pass
      WHERE user_NombreUsuario = @user_NombreUsuario
 
      SET @status = 1;
@@ -2325,7 +2325,6 @@ BEGIN CATCH
 END CATCH
 END
 GO
-
 --********************************************** UDP INSERTAR USUARIOS *************************************************--
 --Procediminetos de Usuarios
 CREATE OR ALTER PROCEDURE Acce.UDP_InsertUsuario

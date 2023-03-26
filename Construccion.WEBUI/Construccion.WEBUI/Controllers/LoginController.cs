@@ -42,6 +42,12 @@ namespace Construccion.WEBUI.Controllers
                 ViewBag.Sesion = "Sesion";
                 return View();
             }
+            string errores = HttpContext.Session.GetString("Cambiar");
+            if(errores == "1")
+            {
+                ViewBag.MensajeCambia = HttpContext.Session.GetString("MensajeCam");
+                ViewBag.Cambiar = "Logrado";
+            }
             return View();
         }
 
@@ -108,9 +114,46 @@ namespace Construccion.WEBUI.Controllers
         [HttpPost("/Login/Cambiar")]
         public async Task<JsonResult> CambiarPassword(UsuarioViewModel usuarioViewModel)
         {
+            var errores = -1;
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "", usuarioViewModel);
-            return Json("hola");
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/Evaluar", usuarioViewModel);
+            if ((usuarioViewModel.user_Contrasena != null) && (usuarioViewModel.user_NombreUsuario != null))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string res = await response.Content.ReadAsStringAsync();
+                    var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModel>>(res);
+                    if (respuestaX.data.Count > 0)
+                    {
+                        HttpResponseMessage response2 = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/Update", usuarioViewModel);
+                        if (response2.IsSuccessStatusCode)
+                        {
+                            var mensaje2 = "Operacion realizada con exito";
+                            HttpContext.Session.SetString("MensajeCam", mensaje2);
+                            HttpContext.Session.SetString("Cambiar", "1");
+                            return Json(errores = 1);
+                        }
+                        else
+                        {
+                            HttpContext.Session.SetString("Cambiar", "2");
+                            return Json(errores = 2);
+                        }
+                    }
+                    else
+                    {
+
+                        return Json(errores = 3);
+                    }
+                }
+                else
+                {
+                    return Json(errores = 4);
+                }
+            }
+            else
+            {
+                return Json(errores = 5);
+            }
         }
 
         public ActionResult CerrarSesion()
