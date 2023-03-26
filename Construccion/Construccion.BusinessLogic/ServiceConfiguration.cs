@@ -39,7 +39,6 @@ namespace Construccion.BusinessLogic
             services.AddScoped<MunicipiosRepository>();
 
 
-
             ConstruccionCon.BuildConnectionString(connection);
 
         }

@@ -31,12 +31,17 @@ namespace Construccion.DataAccess.Repositories.Gral
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbEmpleados> List()
+        public IEnumerable<tbEmpleados> Lista()
         {
             throw new NotImplementedException();
         }
 
         public RequestStatus Update(tbEmpleados item, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tbEmpleados> IRepository<tbEmpleados>.List()
         {
             throw new NotImplementedException();
         }

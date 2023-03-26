@@ -31,12 +31,17 @@ namespace Construccion.DataAccess.Repositories.Cons
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbIncidencia> List()
+        public IEnumerable<tbIncidencia> Lista()
         {
             throw new NotImplementedException();
         }
 
         public RequestStatus Update(tbIncidencia item, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tbIncidencia> IRepository<tbIncidencia>.List()
         {
             throw new NotImplementedException();
         }

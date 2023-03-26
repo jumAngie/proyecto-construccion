@@ -11,23 +11,22 @@ namespace Construccion.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
-    public class PantallasController : ControllerBase
+    public class ConstruccionesController : ControllerBase
     {
-        private readonly AccessService _accessService;
+        private readonly ConstruccionServices _construccionServices;
         private readonly IMapper _mapper;
         public ConstruccionCon db = new ConstruccionCon();
 
-        public PantallasController(AccessService accessService, IMapper mapper)
+        public ConstruccionesController(ConstruccionServices construccionServices, IMapper mapper)
         {
-            _accessService = accessService;
+            _construccionServices = construccionServices;
             _mapper = mapper;
         }
 
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _accessService.ListPantallas();
+            var list = _construccionServices.ListConstrucciones();
             return Ok(list);
         }
     }
