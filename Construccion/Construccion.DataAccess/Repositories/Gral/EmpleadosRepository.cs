@@ -1,4 +1,5 @@
 ﻿using Construccion.Entities.Entities;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace Construccion.DataAccess.Repositories.Gral
 {
     public class EmpleadosRepository : IRepository<tbEmpleados>
     {
+        ConstruccionCon con = new ConstruccionCon();
+        public IEnumerable<VW_tbEmpleados> List()
+        {
+            return con.VW_tbEmpleados.AsList();
+        }
+        // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
         public RequestStatus Delete(tbEmpleados item)
         {
             throw new NotImplementedException();

@@ -15,10 +15,7 @@ namespace Construccion.DataAccess.Repositories.Acce
     {
         ConstruccionCon con = new ConstruccionCon();
 
-        public int Delete(tbRoles item)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public tbRoles Find(int? id)
         {
@@ -91,6 +88,11 @@ namespace Construccion.DataAccess.Repositories.Acce
         }
 
         RequestStatus IRepository<tbRoles>.Delete(tbRoles item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Delete(tbRoles item)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 ﻿using Construccion.Entities.Entities;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,21 @@ namespace Construccion.DataAccess.Repositories.Acce
 {
     public class PantallasRepository : IRepository<tbPantallas>
     {
+        ConstruccionCon con = new ConstruccionCon();
+
+        public IEnumerable<WV_tbPantallas> List()
+        {
+            return con.WV_tbPantallas.AsList();
+        }
+
+
+
+
+
+
+
+
+        /// /////////////////////////////////////////////
         public RequestStatus Delete(tbPantallas item)
         {
             throw new NotImplementedException();
@@ -24,12 +40,14 @@ namespace Construccion.DataAccess.Repositories.Acce
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbPantallas> List()
+        
+
+        public RequestStatus Update(tbPantallas item, int id)
         {
             throw new NotImplementedException();
         }
 
-        public RequestStatus Update(tbPantallas item, int id)
+        IEnumerable<tbPantallas> IRepository<tbPantallas>.List()
         {
             throw new NotImplementedException();
         }

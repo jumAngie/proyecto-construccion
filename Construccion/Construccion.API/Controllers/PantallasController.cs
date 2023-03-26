@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Construccion.API.Controllers
 {
-    public class PantallasController : Controller
+    public class PantallasController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //[HttpGet("List")]
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Construccion.Entities.Entities;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace Construccion.DataAccess.Repositories.Cons
 {
     public class ConstruccionesRepository : IRepository<tbConstrucciones>
     {
+
+        ConstruccionCon con = new ConstruccionCon();
+        public IEnumerable<VW_tbConstrucciones> List()
+        {
+            return con.VW_tbConstrucciones.AsList();
+        }
+
+        // // // // // // // // // // // // // // // // // // // // // /// // // // // // // // // // // // // //
         public RequestStatus Delete(tbConstrucciones item)
         {
             throw new NotImplementedException();
@@ -24,12 +33,17 @@ namespace Construccion.DataAccess.Repositories.Cons
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbConstrucciones> List()
+        public IEnumerable<tbConstrucciones> Lista()
         {
             throw new NotImplementedException();
         }
 
         public RequestStatus Update(tbConstrucciones item, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tbConstrucciones> IRepository<tbConstrucciones>.List()
         {
             throw new NotImplementedException();
         }
