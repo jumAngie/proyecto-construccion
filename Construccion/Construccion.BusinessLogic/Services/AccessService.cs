@@ -185,10 +185,10 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
-        public IEnumerable<tbPantallas> MenuPantallas(tbPantallas item)
-        {
-            return _rolesPorPantallaRepository.MenuPantallas(item);
-        }
+        //public IEnumerable<tbPantallas> MenuPantallas(tbPantallas item)
+        //{
+        //    return _rolesPorPantallaRepository.MenuPantallas(item);
+        //}
         #endregion
 
         #region Roles Por Pantalla Repository

@@ -33,16 +33,16 @@ namespace Construccion.API.Controllers
             return Ok(list);
         }
 
-        [HttpGet]
-        public IActionResult MenuPantallas(tbPantallas item)
-        {
-            // variables de sesion
-            item.role_Id = (int)HttpContext.Session.GetInt32("role_Id");
-            item.esAdmin = Convert.ToBoolean(HttpContext.Session.GetString("user_EsAdmin"));
+        //[HttpGet("PantallasPorMenu")]
+        //public IActionResult MenuPantallas(tbPantallas item)
+        //{
+        //    variables de sesion
+        //    item.role_Id = (int)HttpContext.Session.GetInt32("role_Id");
+        //    item.esAdmin = Convert.ToBoolean(HttpContext.Session.GetString("user_EsAdmin"));
 
-            var pantallas = _accessService.MenuPantallas(item);
+        //    var pantallas = _accessService.MenuPantallas(item);
 
-            return Ok(pantallas);
-        }
+        //    return Ok(pantallas);
+        //}
     }
 }

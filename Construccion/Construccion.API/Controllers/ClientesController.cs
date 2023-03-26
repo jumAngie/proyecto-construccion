@@ -27,10 +27,10 @@ namespace Construccion.API.Controllers
         }
 
         #region Validaciones
-        public bool ExisteDNI(string DNI)
-        {
-            return db.tbClientes.Any(p => p.clie_Identificacion == DNI);
-        }
+        //public bool ExisteDNI(string DNI)
+        //{
+        //    return db.tbClientes.Any(p => p.clie_Identificacion == DNI);
+        //}
         #endregion
 
         #region Listado
@@ -46,18 +46,18 @@ namespace Construccion.API.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(ClientesViewModel clientes)
         {
-            if(ExisteDNI(clientes.clie_Identificacion) == false)
-            {
+            //if(ExisteDNI(clientes.clie_Identificacion) == false)
+            //{
                 var item = _mapper.Map<tbClientes>(clientes);
                 var response = _construccionServices.CreateClientes(item);
                 return Ok(response);
 
-            }
-            else
-            {
-                return Ok(clientes);
-                // esto va en el front lol
-            }
+            //}
+            //else
+            //{
+            //    return Ok(clientes);
+            //    // esto va en el front lol
+            //}
             
         }
         #endregion
