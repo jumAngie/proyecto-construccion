@@ -11,25 +11,24 @@ namespace Construccion.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
-    public class UnidadesDeMedidaController : ControllerBase
+    public class RolPantallasController : Controller
     {
-        private readonly ConstruccionServices _construccionServices;
+        private readonly AccessService _accessService;
         private readonly IMapper _mapper;
         public ConstruccionCon db = new ConstruccionCon();
 
-        public UnidadesDeMedidaController(ConstruccionServices construccionServices, IMapper mapper)
+
+        public RolPantallasController(AccessService accessService, IMapper mapper)
         {
-            _construccionServices = construccionServices;
+            _accessService = accessService;
             _mapper = mapper;
         }
 
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _construccionServices.ListUnidadesMedida();
+            var list = _accessService.ListRolesPorPantalla();
             return Ok(list);
         }
-
     }
 }

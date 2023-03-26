@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Construccion.API.Models;
 using Construccion.BusinessLogic.Services;
 using Construccion.DataAccess;
-using Construccion.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,13 +11,14 @@ namespace Construccion.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesController : ControllerBase
+
+    public class IncidenciasController : Controller
     {
         private readonly ConstruccionServices _construccionServices;
         private readonly IMapper _mapper;
         public ConstruccionCon db = new ConstruccionCon();
 
-        public ClientesController(ConstruccionServices construccionServices, IMapper mapper)
+        public IncidenciasController(ConstruccionServices construccionServices, IMapper mapper)
         {
             _construccionServices = construccionServices;
             _mapper = mapper;
@@ -28,16 +27,8 @@ namespace Construccion.API.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _construccionServices.ListClientes();
+            var list = _construccionServices.ListIncidencias();
             return Ok(list);
-        }
-
-        [HttpPost("Insert")]
-        public IActionResult Insert(ClientesViewModel clientes)
-        {
-            var item = _mapper.Map<tbClientes>(clientes);
-            var response = _construccionServices.CreateClientes(item);
-            return Ok(response);
         }
     }
 }

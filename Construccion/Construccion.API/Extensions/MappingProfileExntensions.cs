@@ -22,6 +22,12 @@ namespace Construccion.API.Extensions
             CreateMap<tbUsuarios, UsuariosViewModel>().ReverseMap();
             #endregion
 
+
+            #region Clientes
+            CreateMap<ClientesViewModel, VW_tbClientes>().ReverseMap();
+            CreateMap<tbClientes, ClientesViewModel>().ReverseMap();
+            #endregion
+
         }
     }
 }

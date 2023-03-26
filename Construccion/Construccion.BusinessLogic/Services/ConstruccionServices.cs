@@ -1,4 +1,5 @@
 ﻿using Construccion.DataAccess.Repositories.Cons;
+using Construccion.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,62 @@ namespace Construccion.BusinessLogic.Services
         private readonly ClientesRepository         _clientesRepository;
         private readonly ConstruccionesRepository   _construccionesRepository;
         private readonly InsumosRepository          _insumosRepository;
-        private readonly UnidadesMedidaRepository _unidadesMedidaRepository;
+        private readonly UnidadesMedidaRepository   _unidadesMedidaRepository;
+        private readonly CargosRepository           _cargosRepository;
+        private readonly IncidenciasRepository      _incidenciasRepository;
+        private readonly InsumosConstruccionRepository _insumosConstruccionRepository;
+        private readonly EmpleadosPorConstruccionRepository _empleadosPorConstruccionRepository;
 
         public ConstruccionServices(ClientesRepository clientesRepository, ConstruccionesRepository construccionesRepository,
-                                    InsumosRepository insumosRepository, UnidadesMedidaRepository unidadesMedidaRepository)
+                                    InsumosRepository insumosRepository, UnidadesMedidaRepository unidadesMedidaRepository,
+                                    CargosRepository cargosRepository, IncidenciasRepository incidenciasRepository,
+                                    InsumosConstruccionRepository insumosConstruccionRepository,
+                                    EmpleadosPorConstruccionRepository empleadosPorConstruccionRepository)
         {
             _clientesRepository = clientesRepository;
             _construccionesRepository = construccionesRepository;
             _insumosRepository = insumosRepository;
             _unidadesMedidaRepository = unidadesMedidaRepository;
+            _cargosRepository = cargosRepository;
+            _incidenciasRepository = incidenciasRepository;
+            _insumosConstruccionRepository = insumosConstruccionRepository;
+            _empleadosPorConstruccionRepository = empleadosPorConstruccionRepository;
         }
+
+
+        #region Empleados Por Construccion
+        public ServiceResult ListEmpleadosConstruccion()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _empleadosPorConstruccionRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Insumos Por Construccion
+        public ServiceResult ListInsumosConstruccion()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _insumosConstruccionRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
 
         #region Clientes
         public ServiceResult ListClientes()
@@ -35,6 +82,37 @@ namespace Construccion.BusinessLogic.Services
             }
             catch (Exception ex)
             {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult CreateClientes(tbClientes item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.clie_Nombre != "" && item.clie_Identificacion != "" && item.clie_Telefono != "")
+                {
+                    var map = _clientesRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
                 return result.Error(ex.Message);
             }
         }
@@ -82,6 +160,40 @@ namespace Construccion.BusinessLogic.Services
             try
             {
                 var list = _unidadesMedidaRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Cargos
+        public ServiceResult ListCargos()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _cargosRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Incidencias
+        public ServiceResult ListIncidencias()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _incidenciasRepository.List();
                 return result.Ok(list);
             }
             catch (Exception ex)
