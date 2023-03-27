@@ -1,6 +1,0 @@
-- Terminar el CRUD.
-- Arreglar la plantilla.
-- Login.
-- Dibujar Menú.
-- Editar Roles Por Pantalla.
-- Empezar Pantalla de Construccion.
