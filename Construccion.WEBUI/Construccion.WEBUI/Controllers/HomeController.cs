@@ -1,22 +1,29 @@
 ﻿using Construccion.WEBUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 namespace Construccion.WEBUI.Controllers
 {
     public class HomeController : Controller
     {
         
-    private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;
+        private readonly HttpClient _httpClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, HttpClient httpClient)
         {
             _logger = logger;
+            _httpClient = httpClient;
         }
 
         public IActionResult Index()
@@ -35,6 +42,26 @@ namespace Construccion.WEBUI.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> PantallasMenu(PantallasViewModel pantallasViewModel)
+        {
+            
+
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            pantallasViewModel.role_Id = 1;
+            pantallasViewModel.esAdmin = false;
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<PantallasViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "RolPantallas/PantallasPorMenu", pantallasViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                HttpContext.Session.SetString("NombreUsuario", mensaje);
+                return Json(res);
+            }
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

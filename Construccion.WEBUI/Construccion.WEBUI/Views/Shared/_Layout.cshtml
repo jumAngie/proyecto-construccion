@@ -120,32 +120,32 @@
                                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="#"><i data-feather="globe"></i><span>Generales</span></a>
-                                    <ul class="sidebar-submenu">
-                                        <li><a asp-area="" asp-controller="Departamentos" asp-action="Index"><span>Departamentos</span></a></li>
-                                        <li><a asp-area="" asp-controller="Municipios" asp-action="Index"><span>Municipios</span></a></li>
-                                        <li><a asp-area="" asp-controller="EstadosCiviles" asp-action="Index"><span>Estados Civiles</span></a></li>
+                                    <a class="sidebar-link sidebar-title" id="menuGeneral" hidden><i data-feather="globe"></i><span id="menuGeneral">Generales</span></a>
+                                    <ul class="sidebar-submenu" id="subMenuGeneral" hidden>
+                                        @*<li><a asp-area="" asp-controller="Departamentos" asp-action="Index"><span>Departamentos</span></a></li>
+                                            <li><a asp-area="" asp-controller="Municipios" asp-action="Index"><span>Municipios</span></a></li>
+                                            <li><a asp-area="" asp-controller="EstadosCiviles" asp-action="Index"><span>Estados Civiles</span></a></li>*@
                                     </ul>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="#"><i data-feather="dollar-sign"></i><span> Construcciones</span></a>
-                                    <ul class="sidebar-submenu">
-                                        <li><a asp-area="" asp-controller="Categorias" asp-action="Index"><span>Categorias Productos</span></a></li>
-                                        <li><a asp-area="" asp-controller="Clientes" asp-action="Index"><span>Clientes</span></a></li>
-                                        <li><a asp-area="" asp-controller="Compras" asp-action="Index"><span>Compras</span></a></li>
-                                        <li><a asp-area="" asp-controller="DetallesCompras" asp-action="Index"><span>Detalles de Compras</span></a></li>
-                                        <li><a asp-area="" asp-controller="Ventas" asp-action="Index"><span>Ventas</span></a></li>
-                                        <li><a asp-area="" asp-controller="DetallesVentas" asp-action="Index"><span>Detalles de Ventas</span></a></li>
-                                        <li><a asp-area="" asp-controller="Productos" asp-action="Index"><span>Productos</span></a></li>
-                                        <li><a asp-area="" asp-controller="Proveedores" asp-action="Index"><span>Proveedores</span></a></li>
-                                        <li><a asp-area="" asp-controller="Sucursales" asp-action="Index"><span>Sucursales</span></a></li>
+                                    <a class="sidebar-link sidebar-title" id="menuConstrucciones" hidden><i data-feather="dollar-sign"></i><span id="menuConstrucciones"> Construcciones</span></a>
+                                    <ul class="sidebar-submenu" id="subMenuConstrucciones" hidden>
+                                        @*<li><a asp-area="" asp-controller="Categorias" asp-action="Index"><span>Categorias Productos</span></a></li>
+                                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index"><span>Clientes</span></a></li>
+                                            <li><a asp-area="" asp-controller="Compras" asp-action="Index"><span>Compras</span></a></li>
+                                            <li><a asp-area="" asp-controller="DetallesCompras" asp-action="Index"><span>Detalles de Compras</span></a></li>
+                                            <li><a asp-area="" asp-controller="Ventas" asp-action="Index"><span>Ventas</span></a></li>
+                                            <li><a asp-area="" asp-controller="DetallesVentas" asp-action="Index"><span>Detalles de Ventas</span></a></li>
+                                            <li><a asp-area="" asp-controller="Productos" asp-action="Index"><span>Productos</span></a></li>
+                                            <li><a asp-area="" asp-controller="Proveedores" asp-action="Index"><span>Proveedores</span></a></li>
+                                            <li><a asp-area="" asp-controller="Sucursales" asp-action="Index"><span>Sucursales</span></a></li>*@
                                     </ul>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="#"><i data-feather="users"></i><span> Acceso</span></a>
-                                    <ul class="sidebar-submenu">
-                                        <li><a asp-area="" asp-controller="Roles" asp-action="Index"><span>Roles</span></a></li>
-                                        <li><a asp-area="" asp-controller="Usuarios" asp-action="Index"><span>Usuarios</span></a></li>
+                                    <a class="sidebar-link sidebar-title" id="menuAcceso" hidden><i data-feather="users"></i><span id="menuAcceso"> Acceso</span></a>
+                                    <ul class="sidebar-submenu" id="subMenuAcceso" hidden>
+                                        @*<li><a asp-area="" asp-controller="Roles" asp-action="Index"><span>Roles</span></a></li>
+                                            <li><a asp-area="" asp-controller="Usuarios" asp-action="Index"><span>Usuarios</span></a></li>*@
                                     </ul>
                                 </li>
                             </ul>
@@ -218,5 +218,63 @@
     <!-- login js-->
     <!-- Plugin used-->
 
+    <script>
+        $(document).ready(function () {
+            $.getJSON('/Home/PantallasMenu', {})
+                .done(function (res) {
+                    $.each(res, function (index, item) {
+                        console.log(item);
+                        if (item.pant_Menu == "General") {
+                            $("#subMenuGeneral").append($('<li>', {
+                                class: 'nav-item',
+                            }).append($('<a>', {
+                                href: item.pant_Url,
+                                class: 'nav-link',
+                                text: item.pant_Nombre,
+                                id: item.pant_HtmlId
+                            })));
+
+                            $("#menuGeneral").prop('hidden', false);
+                            $("#subMenuGeneral").prop('hidden', false);
+                        }
+
+                        if (item.pant_Menu == "Construccion") {
+                            $("#subMenuConstruccion").append($('<li>', {
+                                class: 'nav-item',
+                            }).append($('<a>', {
+                                href: item.pant_Url,
+                                class: 'nav-link',
+                                text: item.pant_Nombre,
+                                id: item.pant_HtmlId
+                            })));
+
+                            $("#menuConstruccion").prop('hidden', false);
+                            $("#subMenuConstruccion").prop('hidden', false);
+                        }
+
+                        if (item.pant_Menu == "Acceso") {
+                            $("#subMenuAcceso").append($('<li>', {
+                                class: 'nav-item',
+                            }).append($('<a>', {
+                                href: item.pant_Url,
+                                class: 'nav-link',
+                                text: item.pant_Nombre,
+                                id: item.pant_HtmlId
+                            })));
+
+                            $("#menuAcceso").prop('hidden', false);
+                            $("#subMenuAcceso").prop('hidden', false);
+                        }
+                    })
+
+
+                    console.log(pantallas);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error('Error al cargar los municipios: ' + textStatus + ', ' + errorThrown);
+                });
+
+        });
+    </script>
 </body>
 </html>

@@ -2457,10 +2457,11 @@ BEGIN
 			FROM Acce.tbPantallas
 		END
 	ELSE
-			SELECT DISTINCT pant.pant_Id, pant_Nombre, pant_URL, pant_HtmlId, @rol_Id AS role_Id, @EsAdmin AS esAdmin 
+			SELECT DISTINCT pant.pant_Id, pant_Nombre, pant_URL, pant_Menu, pant_HtmlId, @rol_Id AS role_Id, @EsAdmin AS esAdmin 
 			FROM Acce.tbPantallas pant
 			INNER JOIN Acce.tbPantallasRoles pantrol
 			ON		   pant.pant_Id = pantrol.pant_Id
 			WHERE	   pantrol.role_Id = @rol_Id
 
 END
+
