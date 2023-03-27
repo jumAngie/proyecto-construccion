@@ -5,8 +5,11 @@ function format(d) {
         '<table cellpadding="8" cellspacing="0" border="0" class="col-12" >' +
         '<thead>' +
             '<tr>' +
-                '<th> Pantalla Id </th>' +
-                '<th> Pantalla </th>' +
+                '<th> Id </th>' +
+                '<th> Id Servicio </th>' +
+                '<th> Servicio </th>' +
+                '<th> Id Empleado </th>' +
+                '<th> Empleado </th>' +
             '</tr>'+
         '</thead>' +
         '<tbody>' +
@@ -16,16 +19,16 @@ function format(d) {
 }
 
 
-//var fechaActual = new Date().toISOString().substring(0, 10);
-//document.getElementById("cita_FechaReservada").value = fechaActual;
-//$("#cita_FechaReservada").attr("min", fechaActual);
-//$("#cita_FechaReservadaEditar").attr("min", fechaActual);
+var fechaActual = new Date().toISOString().substring(0, 10);
+document.getElementById("cita_FechaReservada").value = fechaActual;
+$("#cita_FechaReservada").attr("min", fechaActual);
+$("#cita_FechaReservadaEditar").attr("min", fechaActual);
 
 $(document).ready(function () {
-    var table = $('#TableRoles').DataTable({
+    var table = $('#tbCitas').DataTable({
         destroy: true,
         ajax: ({
-            url: "/Roles/Listar",
+            url: "/Citas/Listado",
             method: "POST",
             dataSrc: ""
         }),
@@ -37,26 +40,35 @@ $(document).ready(function () {
                 defaultContent: '',
             },
             {
-                data: 'role_Id'
+                data: 'cita_Id'
             },
             {
-                data: 'role_Nombre'
+                data: 'cita_FechaReservada'
             },
             {
-                data: null,
-                defaultContent: '<a class="btn btn-warning" style="color:white;"><div class="d-flex align-items-center"><span class="nav-link-icon"><span><i data-feather="edit"></i></span></span><span class="nav-link-text ps-1">Editar</span></div></a>',
+                data: 'cita_HoraCita'
             },
             {
-                data: null,
-                defaultContent: '<a class="btn btn-info" style="color:white;"><div class="d-flex align-items-center"><span class="nav-link-icon"><span><i data-feather="info"></i></span></span><span class="nav-link-text ps-1">Detalles</span></div></a>',
+                data: 'clie_Id'
             },
             {
-                data: null,
-                defaultContent: '<a class="btn btn-danger" style="color:white;"><div class="d-flex align-items-center"><span class="nav-link-icon"><span><i data-feather="trash"></i></span></span><span class="nav-link-text ps-1">Eliminar</span></div></a>',
+                data: 'clie_Nombre'
             },
             {
                 data: null,
-                defaultContent: '<a class="btn btn-primary"><div class="d-flex align-items-center"><span class="nav-link-icon"><span> <i data-feather="plus"></i></span></span><span class="nav-link-text ps-1">Nuevo</span></div></a>',
+                defaultContent: '<a class=\"btn btn-gradient-warning\" style=\"color: white;\" ><i data-feather=\'edit-2\'></i></a>',
+            },
+            {
+                data: null,
+                defaultContent: '<a class=\"btn btn-gradient-info\" style=\"color: white;\"><i data-feather=\'list\'></i></a>',
+            },
+            {
+                data: null,
+                defaultContent: '<a class=\"btn btn-gradient-danger\" style=\"color: white;\"><i data-feather=\'trash-2\'></i></a>',
+            },
+            {
+                data: null,
+                defaultContent: '<a class=\"btn btn-gradient-success\" style=\"color: white;\"><i data-feather=\'plus\'></i></a>',
             }
         ],
         order: [[1, 'asc']],
@@ -66,7 +78,7 @@ $(document).ready(function () {
     });
 
     // Add event listener for opening and closing details
-    $('#TableRoles tbody').on('click', 'td.dt-control', function () {
+    $('#tbCitas tbody').on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -110,11 +122,12 @@ $(document).ready(function () {
             });
         }
     });
+
     // Add event listener for opening and closing details
-    $('#TableCompras tbody').on('click', 'a.btn.btn-gradient-warning', function () {
+    $('#tbCitas tbody').on('click', 'a.btn.btn-gradient-warning', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
-        
+
         $.ajax({
             url: "/Citas/preEdit",
             method: "POST",
@@ -138,7 +151,7 @@ $(document).ready(function () {
     });
 
     // Add event listener for opening and closing details
-    $('#TableCompras tbody').on('click', 'a.btn.btn-gradient-success', function () {
+    $('#tbCitas tbody').on('click', 'a.btn.btn-gradient-success', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -182,7 +195,7 @@ $(document).ready(function () {
     });
 
     // Add event listener for opening and closing details
-    $('#TableCompras tbody').on('click', 'a.btn.btn-gradient-info', function () {
+    $('#tbCitas tbody').on('click', 'a.btn.btn-gradient-info', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -200,7 +213,7 @@ $(document).ready(function () {
     });
 
     // Add event listener for opening and closing details
-    $('#TableCompras tbody').on('click', 'a.btn.btn-gradient-danger', function () {
+    $('#tbCitas tbody').on('click', 'a.btn.btn-gradient-danger', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -208,3 +221,7 @@ $(document).ready(function () {
         MostrarModalEliminarCita();
     });
 });
+
+setTimeout(function () {
+    cargarIconos();
+}, 50)

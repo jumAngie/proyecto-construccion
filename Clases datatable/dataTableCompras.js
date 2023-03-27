@@ -5,8 +5,12 @@ function format(d) {
         '<table cellpadding="8" cellspacing="0" border="0" class="col-12" >' +
         '<thead>' +
             '<tr>' +
-                '<th> Pantalla Id </th>' +
-                '<th> Pantalla </th>' +
+                '<th> Detalle compra Id </th>' +
+                '<th> Compra Id </th>' +
+                '<th> Codigo del producto </th>' +
+                '<th> Producto  </th>' +
+                '<th> Cantidad del producto  </th>' +
+                '<th> Precio de compra </th>' +
             '</tr>'+
         '</thead>' +
         '<tbody>' +
@@ -22,10 +26,10 @@ function format(d) {
 //$("#cita_FechaReservadaEditar").attr("min", fechaActual);
 
 $(document).ready(function () {
-    var table = $('#TableRoles').DataTable({
+    var table = $('#TableCompras').DataTable({
         destroy: true,
         ajax: ({
-            url: "/Roles/Listar",
+            url: "/Compras/Listado",
             method: "POST",
             dataSrc: ""
         }),
@@ -37,10 +41,13 @@ $(document).ready(function () {
                 defaultContent: '',
             },
             {
-                data: 'role_Id'
+                data: 'comp_Id'
             },
             {
-                data: 'role_Nombre'
+                data: 'comp_Fecha'
+            },
+            {
+                data: 'prov_Nombre'
             },
             {
                 data: null,
@@ -66,7 +73,7 @@ $(document).ready(function () {
     });
 
     // Add event listener for opening and closing details
-    $('#TableRoles tbody').on('click', 'td.dt-control', function () {
+    $('#TableCompras tbody').on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -79,9 +86,9 @@ $(document).ready(function () {
             var listado = "";
 
             $.ajax({
-                url: "/CitaServicios/ServiciosCita",
+                url: "/DetallesCompras/ListarDetallesComprasPorIdCompra",
                 method: "POST",
-                data: { cita_Id: row.data().cita_Id },
+                data: { comp_Id: row.data().comp_Id },
                 success: function (data) {
                     if (data.success) {
                         $.each(data.listado, function (index, item) {
@@ -110,11 +117,12 @@ $(document).ready(function () {
             });
         }
     });
+
     // Add event listener for opening and closing details
     $('#TableCompras tbody').on('click', 'a.btn.btn-gradient-warning', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
-        
+
         $.ajax({
             url: "/Citas/preEdit",
             method: "POST",
@@ -208,3 +216,7 @@ $(document).ready(function () {
         MostrarModalEliminarCita();
     });
 });
+
+setTimeout(function () {
+    cargarIconos();
+}, 50)

@@ -451,3 +451,4 @@ C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Cons
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Roles\_CrearRol.cshtml.g.cs
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Login\_CambiarContra.cshtml.g.cs
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Login\ResetPassword.cshtml.g.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Roles\Index.cshtml.g.cs
