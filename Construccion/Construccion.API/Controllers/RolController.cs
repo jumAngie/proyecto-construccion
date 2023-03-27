@@ -38,11 +38,19 @@ namespace Construccion.API.Controllers
         //[HttpGet("(Id)")]
         //public Student GetStudent(int Id)
         //{
-            
+
         //    context.students.Where(a => a.Id == Id).SingleOrDefault();
         //    var student = return student;
 
         //}
+
+        [HttpPost("RolPantalla")]
+        public IActionResult ListarRolPantalla(RolesViewModel rolesViewModel)
+        {
+            var item = _mapper.Map<tbRoles>(rolesViewModel);
+            var list = _accessService.ListRolesPantalla(item);
+            return Ok(list);
+        }
 
 
         [HttpPost("Insert")]

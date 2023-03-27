@@ -25,7 +25,7 @@ $(document).ready(function () {
     var table = $('#TableRoles').DataTable({
         destroy: true,
         ajax: ({
-            url: "/Roles/Index",
+            url: "/Roles/Listar",
             method: "POST",
             dataSrc: ""
         }),
@@ -81,10 +81,10 @@ $(document).ready(function () {
             $.ajax({
                 url: "/Roles/RolesPantalla",
                 method: "POST",
-                data: { comp_Id: row.data().comp_Id },
+                data: { role_Id: row.data().role_Id },
                 success: function (data) {
                     if (data.success) {
-                        $.each(data.listado, function (index, item) {
+                        $.each(data, function (index, item) {
                             listado += "<tr>";
                             $.each(item, function (i, value) {
                                 if (value != 0 && value != null) {
@@ -209,7 +209,3 @@ $(document).ready(function () {
         MostrarModalEliminarCita();
     });
 });
-
-setTimeout(function () {
-    cargarIconos();
-}, 50)

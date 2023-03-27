@@ -22,17 +22,22 @@ namespace Construccion.WEBUI.Controllers
         {
             _httpClient = httpClient;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost("/Roles/Listar")]
+        public async Task<IActionResult> Listado()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");      
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-                var mensaje = HttpContext.Session.GetString("NombreUsuario");
-                ViewBag.Mensaje = mensaje;
                 var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
-                return View(result.data);
+                var res = result.data;
+                return Json(res.ToList());
             }
             else
             {
@@ -40,6 +45,29 @@ namespace Construccion.WEBUI.Controllers
                 return null;
             }
         }
+
+        public async Task<JsonResult> RolesPantalla(int role_Id)
+        {
+            RolesViewModel roles = new RolesViewModel();
+            roles.role_Id = role_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<RolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List", roles);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var mensaje = HttpContext.Session.GetString("NombreUsuario");
+                ViewBag.Mensaje = mensaje;
+                var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
+
+                return Json(result.data);
+            }
+            else
+            {
+                return Json(1);
+            }
+        }
+
+
 
         public IActionResult Create()
         {

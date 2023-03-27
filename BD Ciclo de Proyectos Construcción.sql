@@ -2465,3 +2465,20 @@ BEGIN
 
 END
 
+
+GO
+
+
+---- UDP para seleccionar las pantallas de un rol en especifico.
+CREATE OR ALTER PROC Acce.UDP_tbRolesPorPantalla_ListarPantallas
+		@rol_Id		NVARCHAR(10)
+AS
+BEGIN	
+		SELECT DISTINCT pant.pant_Id, pant_Nombre
+		FROM Acce.tbPantallas pant
+		INNER JOIN Acce.tbPantallasRoles pantrol
+		ON		   pant.pant_Id = pantrol.pant_Id
+		WHERE	   pantrol.role_Id = @rol_Id
+
+END
+

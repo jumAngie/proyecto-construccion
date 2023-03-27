@@ -22,6 +22,14 @@ namespace Construccion.DataAccess.Repositories.Acce
             throw new NotImplementedException();
         }
 
+        public IEnumerable<tbRoles> ListarRolesPantalla(tbRoles item)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@rol_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbRoles>(ScriptsDatabase.RolesPorPantalla, parametro, commandType: CommandType.StoredProcedure);
+        }
+
         public RequestStatus Update(int id,tbRoles item)
         {
             var parameters = new DynamicParameters();

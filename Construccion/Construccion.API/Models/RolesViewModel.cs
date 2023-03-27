@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,5 +15,10 @@ namespace Construccion.API.Models
         public int? role_UsuModificacion { get; set; }
         public DateTime? role_FechaModificacion { get; set; }
         public bool? role_Estado { get; set; }
+
+        [NotMapped]
+        public int pant_Id { get; set; }
+        [NotMapped]
+        public string pant_Nombre { get; set; }
     }
 }
