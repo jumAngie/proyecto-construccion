@@ -59,6 +59,8 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Cargos
+        public static string InsertarCargos = "Gral.UDP_tbCargo_Insert";
+        public static string UpdateCargos = "Gral.UDP_tbCargos_Update";
         #endregion
 
         #region Departamentos
