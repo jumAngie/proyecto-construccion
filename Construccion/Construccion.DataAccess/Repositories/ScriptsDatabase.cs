@@ -61,6 +61,10 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Unidades Medida
+        public static string InsertarUnidadesMedida = "Cons.UDP_tbUnidadesMedidas_Insert";
+        public static string UpdateUnidadesMedida = "Cons.UDP_tbUnidadesMedidas_Update";
+        public static string DeleteUnidadesMedida = "Cons.UDP_tbUnidadesMedida_Delete";
+
         #endregion
 
         #region Cargos

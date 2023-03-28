@@ -21,10 +21,10 @@ namespace Construccion.DataAccess.Repositories.Cons
         public RequestStatus Insert(tbInsumos item)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@insm_Descripcion",             item.insm_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@unim_Id",                      item.unim_Id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@user_UsuCreacion",             item.user_UsuCreacion, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@insm_Descripcion",             item.insm_Descripcion, DbType.String,   ParameterDirection.Input);
+            parameters.Add("@unim_Id",                      item.unim_Id,          DbType.Int32,    ParameterDirection.Input);
+            parameters.Add("@user_UsuCreacion",             item.user_UsuCreacion, DbType.Int32,    ParameterDirection.Input);
+            parameters.Add("@status",                                              DbType.Int32,    direction: ParameterDirection.Output);
 
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
             db.Query<RequestStatus>(ScriptsDatabase.InsertarInsumos, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
