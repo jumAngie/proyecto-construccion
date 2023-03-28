@@ -13,7 +13,7 @@
     <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/013/869/806/original/yellow-safety-helmet-png.png" type="image/x-icon">
+    <link rel="icon" href="~/Content/images/ICON.png" type="image/x-icon">
     <title>ACROPOLIS - Iniciar Sesión</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
@@ -46,15 +46,11 @@
             <div class="col-12 p-0">
                 <div class="login-card" style="background-image: url(https://i.pinimg.com/originals/6c/67/ce/6c67ce1557d591b11d36100307ad5c30.gif)">
                     <div>
-                        <div class="header">
-                            <div class="text-center">
-                                <img src="" width="100" />
-                            </div>
-                        </div>
                         <div class="login-main">
                             <form asp-action="ValidarSesion" method="post">
                                 <div class="text-center">
-                                    <h4>Iniciar Sesión</h4>
+                                    <img src="~/Content/images/ACROPOLIS-LOGO.png" width="250" />
+                                    <h4 style="font-family:Virgina"><strong>Iniciar Sesión</strong></h4>
                                 </div>
                                     @Html.ValidationMessage("ErrorSesion", new { @class = "text-danger", @style = "font-size:14px;" })
                                     <div class="form-group">
@@ -72,7 +68,7 @@
                                     </div>
                                     <br />
                                     <div class="form-group mb-0">
-                                        <a class="link" onclick="AbrirModal()"><strong>¿Olvido su contraseña?</strong></a>
+                                        <a  class="link" onclick="AbrirModal()"><strong>¿Olvido su contraseña?</strong></a>
                                         <div class="text-end mt-3">
                                             <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
                                         </div>
