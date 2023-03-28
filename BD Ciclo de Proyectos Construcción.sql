@@ -209,6 +209,21 @@ CREATE TABLE Cons.tbClientes(
 );
 GO
 
+--***********************************************************TABLA UNIDADESDEMEDIDA************************************************************--
+--TABLA UNIDADESDEMEDIDA
+	CREATE TABLE Cons.tbUnidadesMedida(
+				unim_Id						INT IDENTITY(1,1) PRIMARY KEY,
+				unim_Descripcion			NVARCHAR(100),
+				user_UsuCreacion            INT,
+				user_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_tbUnidadesMedida_user_FechaCreacion DEFAULT(GETDATE()),
+				user_UsuModificacion        INT,
+				user_FechaModificacion		DATETIME,
+				user_Estado                 BIT NOT NULL CONSTRAINT DF_tbUnidadesMedida_user_Estado DEFAULT(1)
+				CONSTRAINT FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuCreacion_user_Id          FOREIGN KEY(user_UsuCreacion)                 REFERENCES Acce.tbUsuarios(user_Id),
+				CONSTRAINT FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id)
+	);
+GO
+
 --***********************************************************TABLA CONSTRUCCIONES************************************************************--
 --TABLA CONSTRUCCIONES
 CREATE TABLE Cons.tbConstrucciones(
@@ -234,14 +249,16 @@ GO
 CREATE TABLE Cons.tbInsumos(
         insm_Id						INT IDENTITY(1,1),
         insm_Descripcion			NVARCHAR(200),
-        user_UsuCreacion			INT,
+		unim_Id						INT	     NOT NULL,
+        user_UsuCreacion			INT		 NOT NULL,
         insm_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_tbInsumos_user_FechaCreacion DEFAULT(GETDATE()),
         user_UsuModificacion		INT,
         insm_FechaModificacion		DATETIME,
         user_Estado					BIT NOT NULL CONSTRAINT DF_tbInsumos_user_Estado DEFAULT(1)
 		CONSTRAINT PK_Cons_tbInsumos_insm_Id PRIMARY KEY(insm_Id),
         CONSTRAINT FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuCreacion_user_Id          FOREIGN KEY(user_UsuCreacion)                 REFERENCES Acce.tbUsuarios(user_Id),
-        CONSTRAINT FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id)
+        CONSTRAINT FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id),
+		CONSTRAINT FK_Cons_tbInsumos_unim_Id_Cons_tbUnidadesMedida_unim_Id			   FOREIGN KEY(unim_Id)							 REFERENCES Cons.tbUnidadesMedida(unim_Id)
 );
 GO
 
@@ -279,21 +296,6 @@ CREATE TABLE Cons.tbEmpleadosPorConstruccion(
 	CONSTRAINT FK_Cons_tbEmpleadosPorConstruccion_Cons_tbConstrucciones_cons_Id		FOREIGN KEY(cons_Id)	REFERENCES Cons.tbConstrucciones(cons_Id),
 	CONSTRAINT FK_Cons_tbEmpleadosPorConstruccion_Gral_tbEmpleados_empl_Id			FOREIGN KEY(empl_Id)	REFERENCES Gral.tbEmpleados(empl_Id)
 );
-GO
-
---***********************************************************TABLA UNIDADESDEMEDIDA************************************************************--
---TABLA UNIDADESDEMEDIDA
-	CREATE TABLE Cons.tbUnidadesMedida(
-				unim_Id						INT IDENTITY(1,1) PRIMARY KEY,
-				unim_Descripcion			NVARCHAR(100),
-				user_UsuCreacion            INT,
-				user_FechaCreacion          DATETIME NOT NULL CONSTRAINT DF_tbUnidadesMedida_user_FechaCreacion DEFAULT(GETDATE()),
-				user_UsuModificacion        INT,
-				user_FechaModificacion		DATETIME,
-				user_Estado                 BIT NOT NULL CONSTRAINT DF_tbUnidadesMedida_user_Estado DEFAULT(1)
-				CONSTRAINT FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuCreacion_user_Id          FOREIGN KEY(user_UsuCreacion)                 REFERENCES Acce.tbUsuarios(user_Id),
-				CONSTRAINT FK_Cons_tbUnidadesMedida_Acce_tbUsuarios_user_UsuModificacion_user_Id      FOREIGN KEY(user_UsuModificacion)             REFERENCES Acce.tbUsuarios(user_Id)
-	);
 GO
 
 --***********************************************************TABLA INCIDENCIAS************************************************************--
@@ -1444,54 +1446,106 @@ VALUES        ('Proyecto Arreglo Sucursal', 'Arreglo de primer piso completo de 
 GO
 
 
+
+--****************************************************************TABLA INCIDENCIAS********************************************************************--
+--TABLA INCIDENCIAS
+INSERT INTO Cons.tbIncidencia(cons_Id, inci_Descripcion, user_UsuCreacion)
+VALUES  (1, 'No se pudo conectar el cableado correctamente', 1);
+GO
+
+
+--****************************************************************TABLA UNIDADES DE MEDIDA ********************************************************************--
+--TABLA UNIDADES DE MEDIDA
+INSERT INTO Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							 ('Libra', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Kilogramo', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Gramo', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Kilo', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Metro', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('CentÃ­metro', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Pulgada', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Pie', 1);
+GO
+
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Onza', 1);
+GO
+		
+INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+VALUES							('Sacos', 1);
+GO
+
+
+
 --****************************************************************TABLA INSUMOS********************************************************************--
 --TABLA INSUMOS
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES                   ('Puertas', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES                   ('Puertas', 1, 2);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Ventas', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Ventas', 1, 1);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Cerrajería', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Cerrajería', 1, 3);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Chapas', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Chapas', 1,5);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Inodoros', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Inodoros', 1,3);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Lavabos', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Lavabos', 1,4);
 GO                          
                           
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Enchufes', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Enchufes', 1,3);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Sierras', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Sierras', 1,2);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Martillos', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Martillos', 1,5);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Clavos', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Clavos', 1, 6);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Lavabos', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Lavabos', 1,4);
 GO
 
-INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion)
-VALUES					('Destornilladores', 1);
+INSERT INTO Cons.tbInsumos(insm_Descripcion, user_UsuCreacion, unim_Id)
+VALUES					('Destornilladores', 1,5);
 GO                         
    
    
@@ -1543,56 +1597,6 @@ GO
 
 INSERT INTO Cons.tbInsumosConstruccion(cons_Id, insm_Id,user_UsuCreacion)
 VALUES									(2, 12, 1);
-GO
-
-
---****************************************************************TABLA INCIDENCIAS********************************************************************--
---TABLA INCIDENCIAS
-INSERT INTO Cons.tbIncidencia(cons_Id, inci_Descripcion, user_UsuCreacion)
-VALUES  (1, 'No se pudo conectar el cableado correctamente', 1);
-GO
-
-
---****************************************************************TABLA UNIDADES DE MEDIDA ********************************************************************--
---TABLA UNIDADES DE MEDIDA
-INSERT INTO Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							 ('Libra', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Kilogramo', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Gramo', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Kilo', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Metro', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('CentÃ­metro', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Pulgada', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Pie', 1);
-GO
-
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Onza', 1);
-GO
-		
-INSERT INTO  Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
-VALUES							('Sacos', 1);
 GO
 
 
@@ -1918,7 +1922,9 @@ GO
 --8
 CREATE OR ALTER VIEW Cons.VW_tbInsumos
 AS
-SELECT	insu.insm_Id, insu.insm_Descripcion FROM Cons.tbInsumos insu
+SELECT	insu.insm_Id, insu.insm_Descripcion, uni.unim_Descripcion FROM Cons.tbInsumos insu
+		INNER JOIN Cons.tbUnidadesMedida uni
+		ON		   insu.unim_Id = uni.unim_Id
 WHERE	insu.user_Estado = 1
 GO
 --9
