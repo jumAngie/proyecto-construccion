@@ -54,6 +54,10 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Insumos
+        public static string InsertarInsumos = "Cons.UDP_tbInsumos_Insert";
+        public static string UpdateInsumos = "Cons.UDP_tbInsumos_Update";
+        public static string DeleteInsumos = "Cons.UDP_tbInsumos_Delete";
+
         #endregion
 
         #region Unidades Medida
