@@ -19,9 +19,6 @@ namespace Construccion.API.Controllers
         private readonly AccessService _accessService;
         private readonly IMapper _mapper;
         public ConstruccionCon db = new ConstruccionCon();
-
-
-
         public RolController(AccessService accessService, IMapper mapper)
         {
             _accessService = accessService;
@@ -44,10 +41,10 @@ namespace Construccion.API.Controllers
 
         //}
 
-        [HttpPost("RolPantalla")]
-        public IActionResult ListarRolPantalla(RolesViewModel rolesViewModel)
+        [HttpPost("RolPantallaPorIdRol")]
+        public IActionResult ListarRolPantalla(PantallasRolesViewModel pantallasRolesViewModel)
         {
-            var item = _mapper.Map<tbRoles>(rolesViewModel);
+            var item = _mapper.Map<tbPantallasRoles>(pantallasRolesViewModel);
             var list = _accessService.ListRolesPantalla(item);
             return Ok(list);
         }

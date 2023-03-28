@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construccion.API", "Construccion.API\Construccion.API.csproj", "{D5E03913-1245-428A-BA1C-0DD2A7CFFE64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construccion.API", "Construccion.API\Construccion.API.csproj", "{D5E03913-1245-428A-BA1C-0DD2A7CFFE64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construccion.DataAccess", "Construccion.DataAccess\Construccion.DataAccess.csproj", "{F80B8155-2832-4EC3-83EF-BC29F25C7ED2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construccion.DataAccess", "Construccion.DataAccess\Construccion.DataAccess.csproj", "{F80B8155-2832-4EC3-83EF-BC29F25C7ED2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construccion.BusinessLogic", "Construccion.BusinessLogic\Construccion.BusinessLogic.csproj", "{6606917D-18D7-4199-B70B-8A4C99F68D52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construccion.BusinessLogic", "Construccion.BusinessLogic\Construccion.BusinessLogic.csproj", "{6606917D-18D7-4199-B70B-8A4C99F68D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Construccion.Entities", "Construccion.Entities\Construccion.Entities.csproj", "{BF27089C-797E-42CE-957C-11F4DDBC0042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Construccion.Entities", "Construccion.Entities\Construccion.Entities.csproj", "{BF27089C-797E-42CE-957C-11F4DDBC0042}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

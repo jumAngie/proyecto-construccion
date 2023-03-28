@@ -1,41 +1,85 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
-<!-- Modal -->
-    <div class="modal fade text-left" id="onshow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel21"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel21">Basic Modal</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<div class="modal fade bd-example-modal-lg" id="ModalAcceso" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Permisos de Acceso de roles</h4>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input type="text" name="name" value="" id="txtIdRol" hidden/>
+            </div>
+            <div class="modal-body">
+                @*<div class="col-sm-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="list-group" id="list-tab" role="tablist"><a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Generales</a><a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Construcción</a><a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Acceso</a></div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                                    <label>
+                                        <input type="checkbox" id="ckUnidades" class="checkbox-animated" >
+                                        Unidades de medida
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" id="ckCargos" class="checkbox-animated" >
+                                        Cargos
+                                    </label>
+                                    <br>
+                                </div>
+                                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                                    <label>
+                                        <input type="checkbox" id="ckClientes" class="checkbox-animated">
+                                        Clientes
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" id="ckConstrucciones" class="checkbox-animated" >
+                                        Construcciones
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" id="ckInsumos" class="checkbox-animated">
+                                        Insumos
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" id="ckIncidencias" class="checkbox-animated">
+                                        Incidencias
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" id="ckEmpleados" class="checkbox-animated">
+                                        Empleados
+                                    </label>
+                                </div>
+                                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                                    <label>
+                                        <input type="checkbox" id="ckRoles" class="checkbox-animated">
+                                        Roles
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" id="ckUsuarios" class="checkbox-animated">
+                                        Usuarios
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <h5>Check First Paragraph</h5>
-                    <p>
-                        Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pie.
-                        Brownie carrot cake candy canes bonbon fruitcake topping halvah. Cake sweet roll cake
-                        cheesecake cookie chocolate cake liquorice. Apple pie sugar plum powder donut soufflé.
-                    </p>
-                    <p>
-                        Sweet roll biscuit donut cake gingerbread. Chocolate cupcake chocolate bar ice cream.
-                        Danish candy cake.
-                    </p>
-                    <hr>
-                    <h5>Some More Text</h5>
-                    <p>
-                        Cupcake sugar plum dessert tart powder chocolate fruitcake jelly. Tootsie roll bonbon
-                        toffee danish. Biscuit sweet cake gummies danish. Tootsie roll cotton candy tiramisu
-                        lollipop candy cookie biscuit pie.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-primary">Save changes</button>
-                </div>
+            </div>
+        </div>*@
+                <div id="contenedor-pantallas"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-secondary" type="button">Aplicar</button>
             </div>
         </div>
     </div>
+</div>

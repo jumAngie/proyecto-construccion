@@ -22,11 +22,11 @@ namespace Construccion.DataAccess.Repositories.Acce
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbRoles> ListarRolesPantalla(tbRoles item)
+        public IEnumerable<tbRoles> ListarRolesPantalla(tbPantallasRoles tbPantallasRoles)
         {
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
             var parametro = new DynamicParameters();
-            parametro.Add("@rol_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            parametro.Add("@rol_Id", tbPantallasRoles.role_Id, DbType.String, ParameterDirection.Input);
             return db.Query<tbRoles>(ScriptsDatabase.RolesPorPantalla, parametro, commandType: CommandType.StoredProcedure);
         }
 

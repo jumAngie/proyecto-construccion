@@ -40,6 +40,7 @@ namespace Construccion.API.Extensions
             #region Rol Pantallas
             CreateMap<PantallasViewModel, WV_tbPantallas>().ReverseMap();
             CreateMap<tbPantallas, PantallasViewModel>().ReverseMap();
+            CreateMap<PantallasRolesViewModel, tbPantallasRoles>().ReverseMap();
             #endregion
 
         }

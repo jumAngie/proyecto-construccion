@@ -40,13 +40,13 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
-        public ServiceResult ListRolesPantalla(tbRoles tbRoles)
+        public ServiceResult ListRolesPantalla(tbPantallasRoles tbPantallasRoles)
         {
             var result = new ServiceResult();
 
             try
             {
-                var list = _rolesRepository.ListarRolesPantalla(tbRoles);
+                var list = _rolesRepository.ListarRolesPantalla(tbPantallasRoles);
                 return result.Ok(list);
             }
             catch (Exception ex)

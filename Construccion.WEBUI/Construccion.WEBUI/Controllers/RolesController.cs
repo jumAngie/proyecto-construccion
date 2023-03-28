@@ -47,12 +47,24 @@ namespace Construccion.WEBUI.Controllers
         }
 
         [HttpPost("/Roles/RolesPantalla")]
-        public JsonResult RolesPantalla(int role_Id)
+        public async Task<JsonResult> RolesPantalla(int role_Id)
         {
-            RolesViewModel roles = new RolesViewModel();
-            roles.role_Id = role_Id;
+            PantallasRolesViewModel pantallas = new PantallasRolesViewModel();
+            pantallas.role_Id = role_Id;
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            return Json(1);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<PantallasRolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/RolPantallaPorIdRol", pantallas);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<PantallasRolesViewModel>>(content);
+                var res = result.data;
+                return Json(new { success = true, res });
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
         }
 
 

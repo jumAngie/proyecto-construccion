@@ -2011,7 +2011,6 @@ END
 
 GO
 
-
 CREATE OR ALTER PROC Acce.UDP_tbRoles_Delete
 	@role_Id					INT,
 	@role_role_UsuModificacion	INT,
