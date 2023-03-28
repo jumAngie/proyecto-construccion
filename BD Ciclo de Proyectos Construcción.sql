@@ -2555,3 +2555,15 @@ BEGIN
 
 END
 
+GO
+-------------------------------------
+CREATE OR ALTER PROC Cons.UDP_EmpleadosPorConstruccion
+	@cons_Id  INT
+AS
+BEGIN
+	SELECT empleados.empl_Id, empl_Nombre, empl_Apellidos, empl_Telefono, empl_CorreoEletronico FROM Gral.tbEmpleados empleados
+		   INNER JOIN	Cons.tbEmpleadosPorConstruccion construc
+		   ON			empleados.empl_Id = construc.empl_Id
+		   WHERE		construc.cons_Id = 2
+END
+
