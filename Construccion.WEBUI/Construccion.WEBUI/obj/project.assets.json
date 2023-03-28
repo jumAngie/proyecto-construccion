@@ -7770,23 +7770,22 @@
   },
   "packageFolders": {
     "C:\\Users\\LAB02\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LAB02\\Documents\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
+      "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
       "projectName": "Construccion.WEBUI",
-      "projectPath": "C:\\Users\\LAB02\\Documents\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
+      "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\Construccion.WEBUI.csproj",
       "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB02\\Documents\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\obj\\",
+      "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-construccion\\Construccion.WEBUI\\Construccion.WEBUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7843,6 +7842,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.17, 5.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -7851,7 +7868,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
       }
     }
   }

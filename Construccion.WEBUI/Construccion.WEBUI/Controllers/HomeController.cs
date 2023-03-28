@@ -44,21 +44,29 @@ namespace Construccion.WEBUI.Controllers
 
         [HttpGet]
         public async Task<IActionResult> PantallasMenu(PantallasViewModel pantallasViewModel)
-        {
-            
-
+         {
+            var EsAdmin = HttpContext.Session.GetString("user_EsAdmin");
+            bool esAdmin = false;
+            if(EsAdmin == "Admin")
+            {
+                esAdmin = true;
+            }
+            else
+            {
+                esAdmin = false;
+            }
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             pantallasViewModel.role_Id = 1;
-            pantallasViewModel.esAdmin = false;
+            pantallasViewModel.esAdmin = esAdmin;
+            
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync<PantallasViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "RolPantallas/PantallasPorMenu", pantallasViewModel);
 
             if (response.IsSuccessStatusCode)
             {
                 string res = await response.Content.ReadAsStringAsync();
-                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
-                var mensaje = respuestaX.message;
-                HttpContext.Session.SetString("NombreUsuario", mensaje);
-                return Json(res);
+                var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<PantallasViewModel>>(res);
+                var pantallas = respuestaX.data;
+                return Json(pantallas.ToList());
             }
             return View();
         }
