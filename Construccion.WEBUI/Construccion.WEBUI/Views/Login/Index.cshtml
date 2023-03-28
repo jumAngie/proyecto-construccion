@@ -13,9 +13,8 @@
     <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="Content/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="Content/images/favicon.png" type="image/x-icon">
-    <title>Cuba - Premium Admin Template</title>
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/013/869/806/original/yellow-safety-helmet-png.png" type="image/x-icon">
+    <title>ACROPOLIS - Iniciar Sesión</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -42,36 +41,42 @@
 </head>
 <body>
     <!-- login page start-->
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0" >
         <div class="row m-0">
             <div class="col-12 p-0">
-                <div class="login-card">
+                <div class="login-card" style="background-image: url(https://i.pinimg.com/originals/6c/67/ce/6c67ce1557d591b11d36100307ad5c30.gif)">
                     <div>
-                        <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="Content/images/logo/login.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
+                        <div class="header">
+                            <div class="text-center">
+                                <img src="" width="100" />
+                            </div>
+                        </div>
                         <div class="login-main">
                             <form asp-action="ValidarSesion" method="post">
-                                <h4>Iniciar Sesión</h4>
-                                @Html.ValidationMessage("ErrorSesion", new { @class = "text-danger", @style = "font-size:14px;" })
-                                <div class="form-group">
-                                    <label class="col-form-label">Usuario</label>
-                                    <input type="text" id="txtUserSes" name="user_NombreUsuario" class="form-control mb-3" placeholder="Usuario" />
-                                    @Html.ValidationMessage("ErrorSesion1", new { @class = "text-danger", @style = "font-size:14px;" })
+                                <div class="text-center">
+                                    <h4>Iniciar Sesión</h4>
                                 </div>
-                                <br />
-                                <div class="form-group">
-                                    <label class="col-form-label">Contraseña</label>
-                                    <div class="form-input position-relative">
-                                        <input type="password" id="txtPasswordSes" name="user_Contrasena" class="form-control mb-1" placeholder="Contraseña" />
-                                        @Html.ValidationMessage("ErrorSesion2", new { @class = "text-danger", @style = "font-size:14px;" })
+                                    @Html.ValidationMessage("ErrorSesion", new { @class = "text-danger", @style = "font-size:14px;" })
+                                    <div class="form-group">
+                                        <label class="col-form-label">Usuario</label>
+                                        <input type="text" id="txtUserSes" name="user_NombreUsuario" class="form-control mb-3" placeholder="Usuario" />
+                                        @Html.ValidationMessage("ErrorSesion1", new { @class = "text-danger", @style = "font-size:14px;" })
                                     </div>
-                                </div>
-                                <br />
-                                <div class="form-group mb-0">
-                                    <a class="link" onclick="AbrirModal()">¿Olvido su contraseña?</a>
-                                    <div class="text-end mt-3">
-                                        <button class="btn btn-primary btn-block w-100" type="submit">Iniciar Sesión</button>
+                                    <br />
+                                    <div class="form-group">
+                                        <label class="col-form-label">Contraseña</label>
+                                        <div class="form-input position-relative">
+                                            <input type="password" id="txtPasswordSes" name="user_Contrasena" class="form-control mb-1" placeholder="Contraseña" />
+                                            @Html.ValidationMessage("ErrorSesion2", new { @class = "text-danger", @style = "font-size:14px;" })
+                                        </div>
                                     </div>
-                                </div>
+                                    <br />
+                                    <div class="form-group mb-0">
+                                        <a class="link" onclick="AbrirModal()"><strong>¿Olvido su contraseña?</strong></a>
+                                        <div class="text-end mt-3">
+                                            <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                                        </div>
+                                    </div>
                             </form>
                         </div>
                     </div>
