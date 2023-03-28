@@ -51,7 +51,7 @@ namespace Construccion.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<VW_tbCargos>(entity =>
             {
@@ -185,7 +185,7 @@ namespace Construccion.DataAccess.Context
 
                 entity.Property(e => e.insm_Descripcion).HasMaxLength(200);
 
-                entity.Property(e => e.insm_Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.unim_Descripcion).HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_tbInsumosConstruccion>(entity =>
@@ -304,7 +304,7 @@ namespace Construccion.DataAccess.Context
 
                 entity.ToTable("tbClientes", "Cons");
 
-                entity.HasIndex(e => e.clie_Id, "UQ__tbClient__EDD96AC9C783DB07")
+                entity.HasIndex(e => e.clie_Id, "UQ__tbClient__EDD96AC90D2CF485")
                     .IsUnique();
 
                 entity.Property(e => e.clie_CorreoElectronico)
@@ -610,9 +610,16 @@ namespace Construccion.DataAccess.Context
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
+                entity.HasOne(d => d.unim)
+                    .WithMany(p => p.tbInsumos)
+                    .HasForeignKey(d => d.unim_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cons_tbInsumos_unim_Id_Cons_tbUnidadesMedida_unim_Id");
+
                 entity.HasOne(d => d.user_UsuCreacionNavigation)
                     .WithMany(p => p.tbInsumosuser_UsuCreacionNavigation)
                     .HasForeignKey(d => d.user_UsuCreacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cons_tbInsumos_Acce_tbUsuarios_user_UsuCreacion_user_Id");
 
                 entity.HasOne(d => d.user_UsuModificacionNavigation)
@@ -805,7 +812,7 @@ namespace Construccion.DataAccess.Context
             modelBuilder.Entity<tbUnidadesMedida>(entity =>
             {
                 entity.HasKey(e => e.unim_Id)
-                    .HasName("PK__tbUnidad__764443649267220B");
+                    .HasName("PK__tbUnidad__7644436406059294");
 
                 entity.ToTable("tbUnidadesMedida", "Cons");
 
@@ -839,7 +846,7 @@ namespace Construccion.DataAccess.Context
 
                 entity.ToTable("tbUsuarios", "Acce");
 
-                entity.HasIndex(e => e.user_NombreUsuario, "UQ__tbUsuari__2E8D82A49FCCCB2B")
+                entity.HasIndex(e => e.user_NombreUsuario, "UQ__tbUsuari__2E8D82A436CEBF21")
                     .IsUnique();
 
                 entity.Property(e => e.user_Contrasena).IsRequired();

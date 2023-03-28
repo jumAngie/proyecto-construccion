@@ -15,12 +15,14 @@ namespace Construccion.Entities.Entities
 
         public int insm_Id { get; set; }
         public string insm_Descripcion { get; set; }
-        public int? user_UsuCreacion { get; set; }
+        public int unim_Id { get; set; }
+        public int user_UsuCreacion { get; set; }
         public DateTime insm_FechaCreacion { get; set; }
         public int? user_UsuModificacion { get; set; }
         public DateTime? insm_FechaModificacion { get; set; }
         public bool? user_Estado { get; set; }
 
+        public virtual tbUnidadesMedida unim { get; set; }
         public virtual tbUsuarios user_UsuCreacionNavigation { get; set; }
         public virtual tbUsuarios user_UsuModificacionNavigation { get; set; }
         public virtual ICollection<tbInsumosConstruccion> tbInsumosConstruccion { get; set; }

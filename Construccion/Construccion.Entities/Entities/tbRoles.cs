@@ -22,11 +22,11 @@ namespace Construccion.Entities.Entities
         public int? user_UsuModificacion { get; set; }
         public DateTime? role_FechaModificacion { get; set; }
         public bool? role_Estado { get; set; }
-
         [NotMapped]
         public int pant_Id { get; set; }
         [NotMapped]
         public string pant_Nombre { get; set; }
+
 
         public virtual ICollection<tbPantallasRoles> tbPantallasRoles { get; set; }
         public virtual ICollection<tbUsuarios> tbUsuarios { get; set; }
