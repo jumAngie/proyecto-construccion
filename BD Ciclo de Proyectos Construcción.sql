@@ -356,18 +356,14 @@ GO
 --****************************************************************TABLA PANTALLAS********************************************************************--
 --TABLA PANTALLAS
 INSERT INTO Acce.tbPantallas(pant_Nombre, pant_Url, pant_Menu, pant_HtmlId, user_UsuCreacion) 
-VALUES ('Usuarios',                         '/Usuario/Listado',                          'Acceso',          'usuariosItem',                      1),
-       ('Roles',                            '/Roles/Listado',                            'Acceso',          'rolesItem',                         1),
-       ('Roles Por Pantallas',              '/Roles Por Pantallas/Listado',              'Acceso',          'rolesporpantallasItem',             1),
-       ('Cargos',                           '/Cargos/Listado',                           'General',         'cargosItem',                        1),
-       ('Clientes',                         '/Clientes/Listado',                         'General',         'clientesItem',                      1),
-       ('Empleados',                        '/Empleados/Listado',                        'General',         'empleadosItem',                     1),
-       ('Empleados Por Construccion',       '/EmpleadosPorConstruccion/Listado',         'General',         'empleadosporconstruccionItem',      1),
-       ('Construcciones',                   '/Construcciones/Listado',                   'Construccion',    'construccionItem',                  1),
-       ('Empleados Por Construccion',       '/EmpleadosPorConstruccion/Listado',         'Construccion',    'empleadosporconstruccionItem',		 1),
-       ('Insumos por Construccion',         '/InsumosPorConstruccion/Listado',           'Construccion',    'insumosporconstruccionItem',		 1),
-       ('Unidades de Medida',               '/UnidadesDeMedida/Listado',                 'Construccion',    'unidadesdemedidaItem',				 1),
-       ('Insumos',                          '/Insumos/Listado',                          'Construccion',    'insumosItem',						 1)
+VALUES ('Usuarios',                         '/Usuario/Index',                          'Acceso',          'usuariosItem',                      1),
+       ('Roles',                            '/Roles/Index',                            'Acceso',          'rolesItem',                         1),
+       ('Cargos',                           '/Cargos/Index',                           'General',         'cargosItem',                        1),
+       ('Clientes',                         '/Clientes/Index',                         'General',         'clientesItem',                      1),
+       ('Empleados',                        '/Empleados/Index',                        'General',         'empleadosItem',                     1),
+       ('Construcciones',                   '/Construcciones/Index',                   'Construccion',    'construccionItem',                  1),
+       ('Unidades de Medida',               '/UnidadesDeMedida/Index',                 'Construccion',    'unidadesdemedidaItem',				1),
+       ('Insumos',                          '/Insumos/Index',                          'Construccion',    'insumosItem',						1)
 
 
 --****************************************************************TABLA ROLES POR PANTALLA********************************************************************--
@@ -392,40 +388,14 @@ INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
 VALUES                             (1, 8, 1)
 GO
 
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (1, 9, 1)
-GO
-
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (1, 10, 1)
-GO
-
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (1, 11, 1)
-GO
-
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (1, 12, 1)
-GO
 
 INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
 VALUES                             (2, 8, 1)
 GO
 
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (2, 9, 1)
-GO
 
 INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (2, 10, 1)
-GO
-
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (2, 11, 1)
-GO
-
-INSERT INTO Acce.tbPantallasRoles(role_Id, pant_Id, user_UsuCreacion)
-VALUES                             (2, 12, 1)
+VALUES                             (3, 1, 1)
 GO
 
 
