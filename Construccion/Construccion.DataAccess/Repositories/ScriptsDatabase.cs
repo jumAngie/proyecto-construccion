@@ -47,6 +47,7 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region EmpleadosPorConstruccion
+        public static string EmpleadosPorConstruccionListar = "Cons.UDP_EmpleadosPorConstruccion";
         #endregion
 
         #region Incidencias
