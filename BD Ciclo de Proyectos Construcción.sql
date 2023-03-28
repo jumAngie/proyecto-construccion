@@ -2222,6 +2222,65 @@ BEGIN
 END
 
 GO
+								--- ***** Unidades de Medida ****** ----
+GO
+CREATE OR ALTER PROC Cons.UDP_tbUnidadesMedidas_Insert
+	@unim_Descripcion			NVARCHAR(100), 
+	@user_UsuCreacion			INT, 
+	@status						INT OUTPUT
+AS
+BEGIN
+
+	BEGIN TRY
+		INSERT INTO Cons.tbUnidadesMedida(unim_Descripcion, user_UsuCreacion)
+		VALUES							 (@unim_Descripcion, @user_UsuCreacion);
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+GO
+CREATE OR ALTER PROC Cons.UDP_tbUnidadesMedidas_Update
+	@unim_Id					INT, 
+	@unim_Descripcion			NVARCHAR(100), 
+	@user_UsuModificaion		INT, 
+	@status						INT OUTPUT
+AS
+BEGIN	
+	BEGIN TRY
+		UPDATE Cons.tbUnidadesMedida
+		SET		unim_Descripcion = @unim_Descripcion,
+				user_UsuModificacion = @user_UsuModificaion
+		WHERE	unim_Id = @unim_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+
+GO
+CREATE OR ALTER PROC Cons.UDP_tbUnidadesMedida_Delete
+	@unim_Id					INT,
+	@user_UsuModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+
+	BEGIN TRY
+	   UPDATE Cons.tbUnidadesMedida
+	   SET    user_Estado = 0,
+			  user_UsuModificacion = @user_UsuModificacion
+	   WHERE  unim_Id = @unim_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+GO
 								--- ***** Municipios ****** ----
 GO
 -- 　　　　　　　　　　　　　　　　　　　　　　　　 EDITAR ESTE PROC  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
