@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+
+<div class="card">
+    <div class="card-title">
+        <h1>CONSTRUCCIONES</h1>
+    </div>
+    <div class="card-body">
+        <div class="content" id="listado">
+            <div class="table table-responsive">
+                <table class="display" id="TableConstrucciones">
+                    <thead>
+                        <tr>
+                            <th>
+
+                            </th>
+                            <th>
+                                Construcción Id
+                            </th>
+                            <th>
+                                Nombre Proyecto
+                            </th>
+                            <th>
+                                Descripcion del proyecto
+                            </th>
+                            <th>
+                                Departamento
+                            </th>
+                            <th>
+                                Municipio
+                            </th>
+                            <th>
+                                Dirección
+                            </th>
+                            <th>
+                                Editar
+                            </th>
+                            <th>
+                                Insumos
+                            </th>
+                            <th>
+                                Eliminar
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+    <script src="~/js/Validaciones y otros/Construcciones/dataTableConstruccionesEmpleados.js"></script>
+}
+

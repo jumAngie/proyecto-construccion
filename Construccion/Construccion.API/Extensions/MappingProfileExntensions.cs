@@ -43,6 +43,11 @@ namespace Construccion.API.Extensions
             CreateMap<PantallasRolesViewModel, tbPantallasRoles>().ReverseMap();
             #endregion
 
+            #region EmpleadosPorConstrucciones
+            CreateMap<EmpleadosPorConstruccionViewModel, VW_tbEmpleadosPorConstruccion>().ReverseMap();
+            CreateMap<tbEmpleadosPorConstruccion, EmpleadosPorConstruccionViewModel>().ReverseMap();
+            #endregion
+
         }
     }
 }
