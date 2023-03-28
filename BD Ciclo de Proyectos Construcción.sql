@@ -2182,8 +2182,47 @@ BEGIN
 
 END
 GO
-								--- ***** Municipios ****** ----
+								--- ***** CARGOS ****** ----
 GO
+CREATE OR ALTER PROC Gral.UDP_tbCargo_Insert
+	@carg_Cargo					NVARCHAR(250), 
+	@user_UsuCreacion			INT,
+	@status						INT OUTPUT
+AS
+BEGIN
+
+	BEGIN TRY
+		INSERT INTO Gral.tbCargos(carg_Cargo, user_UsuCreacion)
+		VALUES				     (@carg_Cargo, @user_UsuCreacion)
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+GO
+
+CREATE OR ALTER PROC Gral.UDP_tbCargos_Update
+	@carg_Id					INT, 
+	@carg_Cargo					NVARCHAR(250), 
+	@user_IdModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+	BEGIN TRY
+		UPDATE Gral.tbCargos
+		SET		carg_Cargo = @carg_Cargo,
+				user_IdModificacion = @user_IdModificacion
+		WHERE	carg_Id = @carg_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END
+
+GO
+								--- ***** Municipios ****** ----
 GO
 -- 　　　　　　　　　　　　　　　　　　　　　　　　 EDITAR ESTE PROC  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 CREATE OR ALTER PROC Gral.UDP_tbMunicipios_Insert
