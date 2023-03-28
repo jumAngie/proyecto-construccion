@@ -51,6 +51,23 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult ListarEmpleadosPorConstruccion(tbEmpleadosPorConstruccion tbEmpleadosPorConstruccion)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _empleadosPorConstruccionRepository.ListarEmpleadosPorConstruccion(tbEmpleadosPorConstruccion);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Insumos Por Construccion

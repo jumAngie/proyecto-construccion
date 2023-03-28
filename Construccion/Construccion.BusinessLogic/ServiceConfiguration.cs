@@ -21,7 +21,6 @@ namespace Construccion.BusinessLogic
             services.AddScoped<UsuariosRepository>();
             services.AddScoped<PantallasRepository>();
             services.AddScoped<RolesPorPantallaRepository>();
-
             // CONS
             services.AddScoped<ClientesRepository>();
             services.AddScoped<ConstruccionesRepository>();

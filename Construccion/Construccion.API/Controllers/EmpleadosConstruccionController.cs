@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Construccion.API.Models;
 using Construccion.BusinessLogic.Services;
 using Construccion.DataAccess;
+using Construccion.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,14 @@ namespace Construccion.API.Controllers
         {
             var list = _construccionServices.ListEmpleadosConstruccion();
             return Ok(list);
+        }
+
+        [HttpPost("EmpleadosPorIdConstruccion")]
+        public IActionResult EmpleadosPorConstruccion(EmpleadosPorConstruccionViewModel empleadosPorConstruccionViewModel)
+        {
+            var item = _mapper.Map<tbEmpleadosPorConstruccion>(empleadosPorConstruccionViewModel);
+            var pantallas = _construccionServices.ListarEmpleadosPorConstruccion(item);
+            return Ok(pantallas);
         }
     }
 }

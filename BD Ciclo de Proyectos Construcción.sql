@@ -2564,6 +2564,6 @@ BEGIN
 	SELECT empleados.empl_Id, empl_Nombre, empl_Apellidos, empl_Telefono, empl_CorreoEletronico FROM Gral.tbEmpleados empleados
 		   INNER JOIN	Cons.tbEmpleadosPorConstruccion construc
 		   ON			empleados.empl_Id = construc.empl_Id
-		   WHERE		construc.cons_Id = 2
+		   WHERE		construc.cons_Id = @cons_Id
 END
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Models
 {
-    public class EmpleadosPorConstruccion
+    public class EmpleadosPorConstruccionViewModel
     {
         public int emco_Id { get; set; }
         public int cons_Id { get; set; }
