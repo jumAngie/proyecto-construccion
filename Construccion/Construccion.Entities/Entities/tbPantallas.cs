@@ -25,7 +25,6 @@ namespace Construccion.Entities.Entities
         public DateTime? pant_FechaModificacion { get; set; }
         public bool? pant_Estado { get; set; }
 
-
         [NotMapped]
         public int role_Id { get; set; }
 

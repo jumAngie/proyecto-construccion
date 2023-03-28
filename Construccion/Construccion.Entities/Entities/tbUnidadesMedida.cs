@@ -8,6 +8,11 @@ namespace Construccion.Entities.Entities
 {
     public partial class tbUnidadesMedida
     {
+        public tbUnidadesMedida()
+        {
+            tbInsumos = new HashSet<tbInsumos>();
+        }
+
         public int unim_Id { get; set; }
         public string unim_Descripcion { get; set; }
         public int? user_UsuCreacion { get; set; }
@@ -18,5 +23,6 @@ namespace Construccion.Entities.Entities
 
         public virtual tbUsuarios user_UsuCreacionNavigation { get; set; }
         public virtual tbUsuarios user_UsuModificacionNavigation { get; set; }
+        public virtual ICollection<tbInsumos> tbInsumos { get; set; }
     }
 }

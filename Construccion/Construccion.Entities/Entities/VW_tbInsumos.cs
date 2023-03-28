@@ -10,5 +10,6 @@ namespace Construccion.Entities.Entities
     {
         public int insm_Id { get; set; }
         public string insm_Descripcion { get; set; }
+        public string unim_Descripcion { get; set; }
     }
 }
