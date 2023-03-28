@@ -1,80 +1,30 @@
-﻿
-<div class="modal fade" id="ModalAccesos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+﻿<div class="modal fade" id="ModalCambiarContra" tabindex="-1" role="dialog" aria-labelledby=" ModalCambiarContra" aria-hidden="true">
+    <div class=" modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Accesos de roles</h5>
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel2">Cambiar contraseña</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" onclick="CerrarModal()"></button>
             </div>
-            <div class="modal-body">
-                <div class="col-sm-12 col-xl-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="list-group" id="list-tab" role="tablist"><a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Generales</a><a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Construcción</a><a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Acceso</a></div>
-                                </div>
-                                <div class="col-sm-8">
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                                            <label>
-                                                <input type="checkbox" name="" class="checkbox-primary" value="opcion1">
-                                                Unidades de medida
-                                            </label>
-                                            <br>
-                                            <label>
-                                                <input type="checkbox" name="" class="checkbox-primary" value="opcion2">
-                                                Cargos
-                                            </label>
-                                            <br>
-                                        </div>
-                                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                                            <label>
-                                                <input type="checkbox" name="" value="opcion1">
-                                                Clientes
-                                            </label>
-                                            <br>
-                                            <label>
-                                                <input type="checkbox" name="" value="opcion2">
-                                                Construcciones
-                                            </label>
-                                            <br>
-                                            <label>
-                                                <input type="checkbox" name="" value="opcion1">
-                                                Insumos
-                                            </label>
-                                            <br>
-                                            <label>
-                                                <input type="checkbox" name="" value="opcion2">
-                                                Incidencias
-                                            </label>
-                                            <br>
-                                            <label>
-                                                <input type="checkbox" name="" value="opcion1">
-                                                Empleados
-                                            </label>
-                                        </div>
-                                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                                            <label>
-                                                <input type="checkbox" name="opciones" value="opcion1">
-                                                Roles
-                                            </label>
-                                            <br>
-                                            <label>
-                                                <input type="checkbox" name="opciones" value="opcion2">
-                                                Usuarios
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class=" modal-body">
+                <label id="LbGeneral" style="color:red; left:5px; font-size:20px; margin-top:8px;"></label>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="col-form-label" for="recipient-name">Usuario:<label id="Lb1" hidden style="color:red;">*</label></label>
+                            <input class="form-control" type="text" id="txtUsuarioModal" name=" user_NombreUsuario" placeholder="Usuario">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="col-form-label" for="message-text">Contraseña:<label id="Lb2" hidden style="color:red;">*</label></label>
+                            <input class="form-control" type="text" id="txtpasswordModal" name="user_Contrasena" placeholder="Contraseña" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-secondary" type="button">Aplicar</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" onclick="CerrarModal()">Cancelar</button>
+                <a class="btn btn-primary" onclick="CambiarPassword()">Cambiar Contraseña</a>
             </div>
         </div>
     </div>

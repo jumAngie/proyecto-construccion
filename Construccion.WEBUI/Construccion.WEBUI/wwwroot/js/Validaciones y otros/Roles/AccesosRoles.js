@@ -6,18 +6,7 @@
         data: { role_Id: $("#txtIdRol").val() },
         success: function (data) {
             if (data.success) {
-                var html = '';
-                $.each(data.res, function (index, item) {
-                    html += '<div>';
-                    html += '<input type="checkbox" id="pantalla_' + item.pant_Id + '" name="pantallas" value="' + item.pant_Id + '"';
-                    if (item.Activo) {
-                        html += ' checked';
-                    }
-                    html += '>';
-                    html += '<label for="pantalla_' + item.pant_Id + '">' + item.pant_Nombre + '</label>';
-                    html += '</div>';
-                })
-                $('#contenedor-pantallas').html(html);
+                
             } 
         }
     });
