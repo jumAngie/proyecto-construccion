@@ -25,18 +25,18 @@ namespace Construccion.WEBUI.Controllers
         }
         public IActionResult Index()
         {
-            //var UserName = HttpContext.Session.GetString("user_Nombre");
-            //if (UserName != "" && UserName != null)
-            //{
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName != "" && UserName != null)
+            {
                 ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
                 ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
                 ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
                 return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
+             }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         [HttpPost("/Construcciones/Listar")]
@@ -168,5 +168,24 @@ namespace Construccion.WEBUI.Controllers
             return Json(0);
         }
 
+
+        [HttpGet("/Construcciones/ListarEmpleados")]
+        public async Task<JsonResult> ListarEmpleadosSinCons()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Empleados/ListarEmpleadosSinCons");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<EmpleadosViewModel>>(content);
+                var res = result.data;
+                return Json(res);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
     }
 }

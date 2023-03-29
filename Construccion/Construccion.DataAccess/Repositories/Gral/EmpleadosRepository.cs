@@ -18,6 +18,15 @@ namespace Construccion.DataAccess.Repositories.Gral
             return con.VW_tbEmpleados.AsList();
         }
 
+        public IEnumerable<tbEmpleados> ListarEmpleadosSinCons()
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@empl_Id", null, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbEmpleados>(ScriptsDatabase.DdlEmpleados, parametros, commandType: CommandType.StoredProcedure);
+
+        }
 
         public RequestStatus Insert(tbEmpleados item)
         {

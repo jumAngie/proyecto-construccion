@@ -2694,21 +2694,13 @@ BEGIN
 	END CATCH;
 END
 
-
 GO
 
-
-CREATE OR ALTER PROCEDURE UDP_tbUsuarios_DDLEmpleadosTieneUsuario
-	@empl_Id NVARCHAR(250)
-AS
-BEGIN
-	SELECT t2.empl_Id, t2.empl_Nombre, t2.empl_Apellidos FROM ACCE.tbUsuarios t1 FULL JOIN ABRR.tbEmpleados t2  ON t1.empl_Id = t2.empl_Id WHERE t1.Usua_Id IS NULL AND t2.empl_Estado = 1
-END
-GO
-
-CREATE OR ALTER PROCEDURE UDP_tbEmpleadosConstruccion_EmpleadosTieneConstruccion
+CREATE OR ALTER PROCEDURE Gral.UDP_tbEmpleadosConstruccion_EmpleadosTieneConstruccion
 	@empl_Id	INT
 AS
 BEGIN
 	SELECT t2.empl_Id ,t2.empl_Nombre +' '+t2.empl_Apellidos as empl_Nombre FROM Cons.tbEmpleadosPorConstruccion t1 FULL JOIN Gral.tbEmpleados t2 ON t1.empl_Id = t2.empl_Id WHERE t1.empl_Id IS NULL AND t2.empl_Estado = 1
 END;
+
+

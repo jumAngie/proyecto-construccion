@@ -80,6 +80,7 @@ namespace Construccion.DataAccess.Repositories
         public static string InsertarEmpleados = "Gral.UDP_tbEmpleados_Insert";
         public static string UpdateEmpleados = "Gral.UDP_tbEmpleados_Update";
         public static string DeleteEmpleados = "Gral.UDP_tbEmpleados_Delete";
+        public static string DdlEmpleados = "UDP_tbEmpleadosConstruccion_EmpleadosTieneConstruccion";
         #endregion
 
         #region Estados Civiles

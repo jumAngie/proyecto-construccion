@@ -38,6 +38,21 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ListarEmpleadosSinCons()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _empleadosRepository.ListarEmpleadosSinCons();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
         public ServiceResult CreateEmpleados(tbEmpleados item)
         {
             var result = new ServiceResult();

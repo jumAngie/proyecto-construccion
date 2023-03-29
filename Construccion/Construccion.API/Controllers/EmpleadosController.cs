@@ -40,5 +40,12 @@ namespace Construccion.API.Controllers
             return Ok(response);
 
         }
+
+        [HttpGet("ListarEmpleadosSinCons")]
+        public IActionResult ListarEmpleadosSinCons()
+        {   
+            var list = _generalesServices.ListarEmpleadosSinCons();
+            return Ok(list);
+        }
     }
 }
