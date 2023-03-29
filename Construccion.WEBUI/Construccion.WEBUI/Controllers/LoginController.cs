@@ -79,12 +79,14 @@ namespace Construccion.WEBUI.Controllers
                         int UsuarioId = 0;
                         var usuario = string.Empty;
                         var empleado = string.Empty;
+                        int? role_Id;
                         string admin = string.Empty;
                         foreach (var item in respuestaX.data)
                         {
                             UsuarioId = item.user_Id;
                             usuario = item.user_NombreUsuario;
                             empleado = item.empl_Nombre;
+                            role_Id = item.role_Id;
                             admin = (item.user_EsAdmin).ToString();
                         }
                         var mensaje = respuestaX.message;
