@@ -64,7 +64,7 @@ namespace Construccion.WEBUI.Controllers
 
         [HttpPost]
         public async Task<IActionResult> ValidarSesion(UsuarioViewModel usuarioViewModel)
-        {
+        { 
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/Login/Index", usuarioViewModel);
             HttpContext.Session.SetString("InicioSesion", "");
