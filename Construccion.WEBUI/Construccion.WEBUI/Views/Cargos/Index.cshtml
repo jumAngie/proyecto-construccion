@@ -5,21 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-<br />
 <div class="col-lg-12 mb-0 order-0">
     <div class="card" style="background-color: white">
         <div class="d-flex align-items-end row">
             <div class="col-sm-12">
                 <div class="card-header" style="background-color:#ffbd26">
                     <div class="text-center">
-                        <img src="~/Content/images/ACROPOLIS-LOGO-V3.png" width="140" />
-                        <h3 style="color:black">Listado Cargos</h3>
+                        <img src="~/Content/images/ACROPOLIS-LOGO.png" width="200" />
+                        <h3 style="color:black"><strong>Listado de Cargos</strong></h3>
                     </div>
                 </div>
                 <div class="card-body">
-
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#CreateCargos">Nuevo</a>
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateCargos"><i class="fa fa-plus-square"></i>  Nuevo</a>
+                    <br />
                     <br />
                     <table class="table table-report -mt-2" id="DataTable">
                         <thead>
@@ -30,7 +28,12 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.carg_Cargo)
                                 </th>
-                                <th></th>
+                                <th>
+                                    Editar
+                                </th>
+                                <th>
+                                    Detalles
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,9 +47,10 @@
                                         @Html.DisplayFor(modelItem => item.carg_Cargo)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.carg_Id,@item.carg_Cargo')"><i class="fa fa-edit"></i> Editar</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" asp-action="Details" asp-route-id="@item.carg_Id"><i class="fa fa-file-text"></i> Detalles</a>
                                     </td>
                                 </tr>
                             }
@@ -60,3 +64,4 @@
 </div>
 <br />
 <partial name="_Create">
+@Html.Partial("_Edit", new Construccion.WEBUI.Models.CargosViewModel())
