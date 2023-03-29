@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Construccion.API.Models
+namespace Construccion.WEBUI.Models
 {
     public class EmpleadosViewModel
     {
@@ -16,7 +16,6 @@ namespace Construccion.API.Models
         public string esta_ID { get; set; }
         public string muni_Id { get; set; }
         public int carg_Id { get; set; }
-
         [NotMapped]
         public string carg_Cargo { get; set; }
         public string empl_DireccionExacta { get; set; }

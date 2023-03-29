@@ -22,6 +22,8 @@ namespace Construccion.Entities.Entities
         public string esta_ID { get; set; }
         public string muni_Id { get; set; }
         public int carg_Id { get; set; }
+        [NotMapped]
+        public string carg_Cargo { get; set; }
         public string empl_DireccionExacta { get; set; }
         public DateTime empl_FechaNacimiento { get; set; }
         public string empl_Telefono { get; set; }

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Construccion.WEBUI.Models.ClientesViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_Identificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_DireccionExacta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_CorreoElectronico)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_Identificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_DireccionExacta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_CorreoElectronico)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
