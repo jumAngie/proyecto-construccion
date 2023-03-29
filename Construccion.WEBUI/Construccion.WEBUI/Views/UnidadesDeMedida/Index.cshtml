@@ -28,25 +28,32 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.unim_Descripcion)
                                 </th>
-                                <th></th>
+                                <th>
+                                    Editar
+                                </th>
+                                <th>
+                                    Detalles
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.unim_Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.unim_Descripcion)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.unim_Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.unim_Descripcion)
+                                </td>
+                                <td>
+                                <td>
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.unim_Id,@item.unim_Descripcion')"><i class="fa fa-edit"></i> Editar</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.unim_Id"><i class="fa fa-file-text"></i> Detalles</a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

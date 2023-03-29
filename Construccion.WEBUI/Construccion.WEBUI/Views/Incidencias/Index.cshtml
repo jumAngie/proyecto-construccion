@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Construccion.WEBUI.Models.InsumosViewModel>
+﻿@model IEnumerable<Construccion.WEBUI.Models.IncidenciasViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,24 +12,24 @@
                 <div class="card-header" style="background-color:#ffbd26">
                     <div class="text-center">
                         <img src="~/Content/images/ACROPOLIS-LOGO.png" width="200" />
-                        <h3 style="color:black">
-                            <strong>Listado de Insumos</strong>
-                        </h3>
+                        <h3 style="color:black"><strong>Listado de Incidencias</strong></h3>
                     </div>
                 </div>
                 <div class="card-body">
                     <a class="btn btn-primary" asp-action="Create">Nuevo</a>
-                    <table class="table">
+                    <br />
+                    <br />
+                    <table class="table table-responsive table-report -mt-2" id="DataTable">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.insm_Id)
+                                    @Html.DisplayNameFor(model => model.inci_Id)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.insm_Descripcion)
+                                    @Html.DisplayNameFor(model => model.cons_Proyecto)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.unim_Descripcion)
+                                    @Html.DisplayNameFor(model => model.inci_Descripcion)
                                 </th>
                                 <th></th>
                             </tr>
@@ -39,13 +39,13 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.insm_Id)
+                                        @Html.DisplayFor(modelItem => item.inci_Id)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.insm_Descripcion)
+                                        @Html.DisplayFor(modelItem => item.cons_Proyecto)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.unim_Descripcion)
+                                        @Html.DisplayFor(modelItem => item.inci_Descripcion)
                                     </td>
                                     <td>
                                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -58,6 +58,7 @@
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
