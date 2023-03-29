@@ -56,6 +56,17 @@ function CargarDataTable() {
 
 
 
+$('#TableConstrucciones tbody').on('click', 'a.btn.btn-primary', function () {
+    var tr = $(this).closest('tr');
+    var row = table.row(tr);
+
+    $("#txtIdRol").val(row.data().role_Id);
+    alert(row.data().role_Id);
+    AbrirModalAccesos();
+});
+
+
+
 
 $('#TableConstrucciones tbody').on('click', 'td.dt-control', function () {
     var tr = $(this).closest('tr');

@@ -48,29 +48,6 @@
     });
 }
 
-
-
-//$(function () {
-//    var idRol = 1; // El ID del rol que quieres cargar los checkboxes
-
-//    $.getJSON("/MiControlador/ObtenerPantallas", { idRol: idRol }, function (data) {
-//        var html = '';
-
-//        $.each(data, function (i, pantalla) {
-//            html += '<div>';
-//            html += '<input type="checkbox" id="pantalla_' + pantalla.Id + '" name="pantallas" value="' + pantalla.Id + '"';
-//            if (pantalla.Activo) {
-//                html += ' checked';
-//            }
-//            html += '>';
-//            html += '<label for="pantalla_' + pantalla.Id + '">' + pantalla.Nombre + '</label>';
-//            html += '</div>';
-//        });
-
-//        $('#contenedor-pantallas').html(html);
-//    });
-//});
-
 function CerrarModalAccesos() {
     $("#ModalAcceso").modal("hide");
 }

@@ -57,7 +57,7 @@ namespace Construccion.WEBUI.Controllers
             }
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             pantallasViewModel.role_Id = 1;
-            pantallasViewModel.esAdmin = false;
+            pantallasViewModel.esAdmin = true;
             
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync<PantallasViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "RolPantallas/PantallasPorMenu", pantallasViewModel);
 
