@@ -203,6 +203,68 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult CreateInsumos(tbInsumos item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.unim_Descripcion != "" && item.insm_Descripcion != "")
+                {
+                    var map = _insumosRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EditarInsumos(tbInsumos item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.unim_Descripcion != "" )
+                {
+                    var map = _insumosRepository.Update(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
         #region Unidades Medida
@@ -220,6 +282,70 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult CreateUnidades(tbUnidadesMedida item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.unim_Descripcion != "")
+                {
+                    var map = _unidadesMedidaRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EditarUnidades(tbUnidadesMedida item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.unim_Descripcion != "")
+                {
+                    var map = _unidadesMedidaRepository.Update(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
         #endregion
 
         #region Cargos
@@ -319,5 +445,6 @@ namespace Construccion.BusinessLogic.Services
             }
         }
         #endregion
+
     }
 }
