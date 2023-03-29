@@ -14,5 +14,8 @@ namespace Construccion.WEBUI.Models
         public string muni_Nombre { get; set; }
         public string muni_Id { get; set; }
         public string cons_Direccion { get; set; }
+        public int? user_UsuCreacion { get; set; }
+        public DateTime? cons_FechaInicio { get; set; }
+        public DateTime? cons_FechaFin { get; set; }
     }
 }

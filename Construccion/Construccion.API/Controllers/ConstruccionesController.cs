@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Construccion.API.Models;
 using Construccion.BusinessLogic.Services;
 using Construccion.DataAccess;
+using Construccion.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,15 @@ namespace Construccion.API.Controllers
         {
             var list = _construccionServices.ListConstrucciones();
             return Ok(list);
+        }
+
+        [HttpPost("Insert")]
+
+        public IActionResult Insert(ConstruccionesViewModel construccionesViewModel)
+        {
+            var item = _mapper.Map<tbConstrucciones>(construccionesViewModel);
+            var response = _construccionServices.CreateConstruccion(item);
+            return Ok(response);
         }
     }
 }

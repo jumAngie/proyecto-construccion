@@ -2162,13 +2162,18 @@ BEGIN
 										  cons_FechaFin, user_UsuCreacion)
 		VALUES							 (@cons_Proyecto, @cons_ProyectoDescripcion, @muni_Id, @cons_Direccion, @cons_FechaInicio,
 										  @cons_FechaFin, @user_UsuCreacion);
-		SET @status = 1;
+		
+		SELECT TOP 1 @status = cons_Id
+		FROM	Cons.tbConstrucciones
+		ORDER BY cons_Id DESC	
 	END TRY
 	BEGIN CATCH
-		SET @status = 0;
+		SET @status = 0
 	END CATCH;
 END
+
 GO
+
 CREATE OR ALTER PROC Cons.UDP_tbConstrucciones_Update
 	@cons_Id					INT,
 	@cons_Proyecto              NVARCHAR(100), 
@@ -2682,3 +2687,6 @@ BEGIN
 		SELECT 0
 	END CATCH;
 END
+
+
+GO

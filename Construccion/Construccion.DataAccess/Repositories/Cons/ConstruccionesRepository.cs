@@ -19,6 +19,23 @@ namespace Construccion.DataAccess.Repositories.Cons
             return con.VW_tbConstrucciones.AsList();
         }
 
+        public RequestStatus InsertarConstruccion(tbConstrucciones item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@cons_Proyecto", item.cons_Proyecto, DbType.String, ParameterDirection.Input);
+            parameters.Add("@cons_ProyectoDescripcion", item.cons_ProyectoDescripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@cons_Direccion", item.cons_Direccion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@cons_FechaInicio", item.cons_FechaInicio, DbType.String, ParameterDirection.Input);
+            parameters.Add("@cons_FechaFin", item.cons_FechaFin, DbType.String, ParameterDirection.Input);
+            parameters.Add("@user_UsuCreacion", item.user_UsuCreacion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.InsertarConstrucciones, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
         //public RequestStatus Insert(tbConstrucciones item)
         //{
         //    var parameters = new DynamicParameters();

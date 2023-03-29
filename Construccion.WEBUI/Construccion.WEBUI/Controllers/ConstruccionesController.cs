@@ -120,5 +120,31 @@ namespace Construccion.WEBUI.Controllers
             }
         }
 
+        [HttpPost("/Construcciones/InsertarConstruccion")]
+        public async Task<JsonResult> Create(string cons_Proyecto, string cons_ProyectoDescripcion, string muni_id, string cons_Direccion,DateTime cons_FechaInicio, DateTime cons_FechaFin)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            ConstruccionesViewModel construccionesViewModel1 = new ConstruccionesViewModel();
+            construccionesViewModel1.cons_Proyecto = cons_Proyecto;
+            construccionesViewModel1.cons_ProyectoDescripcion = cons_ProyectoDescripcion;
+            construccionesViewModel1.muni_Id = muni_id;
+            construccionesViewModel1.cons_Direccion = cons_Direccion;
+            construccionesViewModel1.cons_FechaInicio = cons_FechaInicio;
+            construccionesViewModel1.cons_FechaFin = cons_FechaFin;
+            construccionesViewModel1.user_UsuCreacion = usuarioId;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ConstruccionesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/Insert", construccionesViewModel1);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                int data = respuestaX.code;
+                return Json(data);
+            }
+            return Json(0);
+        }
+
     }
 }
