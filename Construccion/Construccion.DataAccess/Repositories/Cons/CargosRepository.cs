@@ -40,7 +40,7 @@ namespace Construccion.DataAccess.Repositories.Cons
             throw new NotImplementedException();
         }
 
-        public RequestStatus Insert(tbCargos item)
+        public RequestStatus Inserta(tbCargos item)
         {
             throw new NotImplementedException();
         }
