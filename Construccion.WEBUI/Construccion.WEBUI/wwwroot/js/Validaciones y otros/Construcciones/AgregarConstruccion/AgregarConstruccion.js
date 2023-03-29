@@ -44,6 +44,7 @@ $("#btnCancelarAgregarObra").click(function () {
     //});
     $("#contentHidden").attr("hidden","");
     Limpiar();
+    window.location.reload();
 });
 
 
@@ -171,15 +172,17 @@ $("#btnAgregarObra").click(function () {
             data: { cons_Proyecto: x1, cons_ProyectoDescripcion: x5, muni_id: x4, cons_Direccion: x6, cons_FechaInicio: x2, cons_FechaFin: x3 },
             success: function (data) {
                 if (data.success) {
+                    mostrarInfoToast("Construccion agregada con exito");
                     console.log(data.resultado[0].cons_Id);
-                    $("#txtCons_id").val(data.resultado[0].cons_Id);
+                    $("#txtCons_id").val(data.resultado[0].cons_Id);                    
                     $("#contentHidden").removeAttr("hidden");
-                    $("#ProyectName").prop("disable",true);
-                    $("#dateInicio").prop("disable", true);
-                    $("#dateFin").prop("disable", true);
-                    $("#ddlMunicipio").prop("disable", true);
-                    $("#txtAreaProyecDes").prop("disable", true);
-                    $("#txtAreaDireccionProy").prop("disable", true);
+                    $("#ProyectName").prop("disabled",true);
+                    $("#dateInicio").prop("disabled", true);
+                    $("#dateFin").prop("disabled", true);
+                    $("#ddlMunicipio").prop("disabled", true);
+                    $("#ddlDepto").prop("disabled", true);
+                    $("#txtAreaProyecDes").prop("disabled", true);
+                    $("#txtAreaDireccionProy").prop("disabled", true);
                 }
             }
         });
