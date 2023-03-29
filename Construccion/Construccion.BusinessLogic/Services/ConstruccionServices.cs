@@ -248,6 +248,38 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+
+        public ServiceResult CreateCargos(tbCargos item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.carg_Cargo != "")
+                {
+                    var map = _cargosRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
         #region Incidencias
