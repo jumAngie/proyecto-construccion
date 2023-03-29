@@ -15,8 +15,8 @@ namespace Construccion.API.Models
         [NotMapped]
         public string depa_Nombre { get; set; }
         public string cons_Direccion { get; set; }
-        public DateTime? cons_FechaInicio { get; set; }
-        public DateTime? cons_FechaFin { get; set; }
+        public string cons_FechaInicio { get; set; }
+        public string cons_FechaFin { get; set; }
         public int? user_UsuCreacion { get; set; }
         public DateTime cons_FechaCreacion { get; set; }
         public int? user_UsuModificacion { get; set; }

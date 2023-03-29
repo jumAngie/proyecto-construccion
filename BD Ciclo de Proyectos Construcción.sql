@@ -2150,8 +2150,8 @@ CREATE OR ALTER PROC Cons.UDP_tbConstrucciones_Insert
 	@cons_ProyectoDescripcion	NVARCHAR(MAX),
 	@muni_Id					CHAR(4), 
 	@cons_Direccion				NVARCHAR(MAX), 
-	@cons_FechaInicio			DATE,
-	@cons_FechaFin				DATE, 
+	@cons_FechaInicio			Date,
+	@cons_FechaFin				Date, 
 	@user_UsuCreacion			INT,
 	@status						INT OUTPUT
 AS
@@ -2163,12 +2163,12 @@ BEGIN
 		VALUES							 (@cons_Proyecto, @cons_ProyectoDescripcion, @muni_Id, @cons_Direccion, @cons_FechaInicio,
 										  @cons_FechaFin, @user_UsuCreacion);
 		
-		SELECT TOP 1 @status = cons_Id
+		SELECT TOP 1 cons_Id
 		FROM	Cons.tbConstrucciones
 		ORDER BY cons_Id DESC	
 	END TRY
 	BEGIN CATCH
-		SET @status = 0
+		SELECT 0
 	END CATCH;
 END
 

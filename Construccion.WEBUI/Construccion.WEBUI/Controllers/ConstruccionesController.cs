@@ -25,18 +25,18 @@ namespace Construccion.WEBUI.Controllers
         }
         public IActionResult Index()
         {
-            var UserName = HttpContext.Session.GetString("user_Nombre");
-            if (UserName != "" && UserName != null)
-            {
+            //var UserName = HttpContext.Session.GetString("user_Nombre");
+            //if (UserName != "" && UserName != null)
+            //{
                 ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
                 ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
                 ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Login");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
         }
 
         [HttpPost("/Construcciones/Listar")]
@@ -121,7 +121,7 @@ namespace Construccion.WEBUI.Controllers
         }
 
         [HttpPost("/Construcciones/InsertarConstruccion")]
-        public async Task<JsonResult> Create(string cons_Proyecto, string cons_ProyectoDescripcion, string muni_id, string cons_Direccion,DateTime cons_FechaInicio, DateTime cons_FechaFin)
+        public async Task<JsonResult> Create(string cons_Proyecto, string cons_ProyectoDescripcion, string muni_id, string cons_Direccion,string cons_FechaInicio, string cons_FechaFin)
         {
             var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
             ConstruccionesViewModel construccionesViewModel1 = new ConstruccionesViewModel();
@@ -133,15 +133,37 @@ namespace Construccion.WEBUI.Controllers
             construccionesViewModel1.cons_FechaFin = cons_FechaFin;
             construccionesViewModel1.user_UsuCreacion = usuarioId;
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ConstruccionesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/Insert", construccionesViewModel1);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ConstruccionesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Construcciones/Insert", construccionesViewModel1);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<ConstruccionesViewModel>>(res);
+                var mensaje = respuestaX.message;
+                var resultado = respuestaX.data;
+                return Json(new { success = true, resultado });
+            }
+            return Json(0);
+        }
+
+
+        [HttpPost("/Construcciones/EliminarConstruccion")]
+        public async Task<JsonResult> Delete(int cons_Id)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            ConstruccionesViewModel construccionesViewModel = new ConstruccionesViewModel();
+            construccionesViewModel.cons_Id = cons_Id;
+            construccionesViewModel.user_UsuCreacion = usuarioId;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ConstruccionesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Construcciones/Eliminar", construccionesViewModel);
 
             if (response.IsSuccessStatusCode)
             {
                 string res = await response.Content.ReadAsStringAsync();
                 var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
                 var mensaje = respuestaX.message;
-                int data = respuestaX.code;
-                return Json(data);
+                var resultado = 1;
+                return Json(new { success = true, resultado });
             }
             return Json(0);
         }

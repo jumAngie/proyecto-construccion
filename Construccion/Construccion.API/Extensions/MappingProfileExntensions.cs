@@ -45,6 +45,7 @@ namespace Construccion.API.Extensions
             #region Construcciones
             CreateMap<ConstruccionesViewModel, VW_tbConstrucciones>().ReverseMap();
             CreateMap<tbConstrucciones, ConstruccionesViewModel>().ReverseMap();
+            CreateMap<tbConstrucciones, ConstruccionesViewModelInsert>().ReverseMap();
             #endregion
 
             #region Rol Pantallas

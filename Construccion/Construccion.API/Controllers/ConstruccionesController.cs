@@ -36,7 +36,22 @@ namespace Construccion.API.Controllers
 
         public IActionResult Insert(ConstruccionesViewModel construccionesViewModel)
         {
-            var item = _mapper.Map<tbConstrucciones>(construccionesViewModel);
+            string cons_Proyecto = construccionesViewModel.cons_Proyecto;
+            string cons_ProyectoDescripcion = construccionesViewModel.cons_ProyectoDescripcion;
+            string muni_Id = construccionesViewModel.muni_Id;         
+            string cons_Direccion = construccionesViewModel.cons_Direccion;
+            DateTime date = DateTime.ParseExact(construccionesViewModel.cons_FechaInicio, "MM/dd/yyyy", null);
+            DateTime date2 = DateTime.ParseExact(construccionesViewModel.cons_FechaFin, "MM/dd/yyyy", null);
+            int? usuario = construccionesViewModel.user_UsuCreacion;
+            ConstruccionesViewModelInsert construccionesViewModelInsert = new ConstruccionesViewModelInsert();
+            construccionesViewModelInsert.cons_Proyecto = cons_Proyecto;
+            construccionesViewModelInsert.cons_ProyectoDescripcion = cons_ProyectoDescripcion;
+            construccionesViewModelInsert.muni_Id = muni_Id;
+            construccionesViewModelInsert.cons_Direccion = cons_Direccion;
+            construccionesViewModelInsert.cons_FechaInicio = date;
+            construccionesViewModelInsert.cons_FechaFin = date2;
+            construccionesViewModelInsert.user_UsuCreacion = usuario;
+            var item = _mapper.Map<tbConstrucciones>(construccionesViewModelInsert);
             var response = _construccionServices.CreateConstruccion(item);
             return Ok(response);
         }
