@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Construccion.WEBUI.Models.InsumosViewModel>
+﻿@model IEnumerable<Construccion.WEBUI.Models.UnidadesMedidaViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,10 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.insm_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.insm_Descripcion)
+                @Html.DisplayNameFor(model => model.unim_Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.unim_Descripcion)
@@ -29,10 +26,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.insm_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.insm_Descripcion)
+                @Html.DisplayFor(modelItem => item.unim_Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.unim_Descripcion)
