@@ -5,69 +5,237 @@
 }
 <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
 
-<div class="card">
-    <div class="card-header">
-        <h1>CONSTRUCCIONES</h1>
-    </div>
-    <div class="card-body">
-        <button class="btn btn-primary" type="button">
-            <div class="d-flex align-items-center">
-                <span class="nav-link-icon">
-                    <span></span>
-                </span>
-                <span class="nav-link-text ps-1">Agregar Proyecto</span>
-            </div>
-        </button>
-        <br />
-        <br />
-        <div class="content" id="listado">
-            <div class="table table-responsive">
-                <table class="display" id="TableConstrucciones">
-                    <thead>
-                        <tr>
-                            <th>
 
-                            </th>
-                            <th>
-                                Construcción Id
-                            </th>
-                            <th>
-                                Nombre Proyecto
-                            </th>
-                            <th>
-                                Descripcion del proyecto
-                            </th>
-                            <th>
-                                Departamento
-                            </th>
-                            <th>
-                                Municipio
-                            </th>
-                            <th>
-                                Dirección
-                            </th>
-                            <th>
-                                Editar
-                            </th>
-                            <th>
-                                Insumos
-                            </th>
-                            <th>
-                                Eliminar
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
+    <div class="card ">
+        <div class="card-header">
+            <h5>Construcciones</h5>
+        </div>
+        <div class="card-body">
+            <ul class="nav nav-pills" id="pills-icontab" role="tablist">
+                <li class="nav-item"><a class="nav-link active" id="pills-iconhome-tab" data-bs-toggle="pill" href="#pills-iconhome" role="tab" aria-controls="pills-iconhome" aria-selected="true"><i class="icofont icofont-architecture-alt"></i>Detalles</a></li>
+                <li class="nav-item"><a class="nav-link" id="pills-iconprofile-tab" data-bs-toggle="pill" href="#pills-iconprofile" role="tab" aria-controls="pills-iconprofile" aria-selected="false"><i class="icofont icofont-bricks"></i>Agregar</a></li>
+            </ul>
+            <div class="tab-content" id="pills-icontabContent">
+                <hr />
+                <br />
+                <br />
+                <div class="tab-pane fade show active" id="pills-iconhome" role="tabpanel" aria-labelledby="pills-iconhome-tab">
+                    <button class="btn btn-primary" type="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Agregar Proyecto</span>
+                        </div>
+                    </button>
+                    <br />
+                    <br />
+                    <div class="content" id="listado">
+                        <div class="table table-responsive">
+                            <table class="display" id="TableConstrucciones">
+                                <thead>
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            <span>Construcción Id</span>
+                                        </th>
+                                        <th>
+                                            <span>
+                                                Nombre Proyecto
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span>
+                                                Descripcion del proyecto
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span>Departamento</span>
+                                        </th>
+                                        <th>
+                                            <span>Municipio</span>
+                                        </th>
+                                        <th>
+                                            <span>Dirección</span>
+                                        </th>
+                                        <th>
+                                            Editar
+                                        </th>
+                                        <th>
+                                            Insumos
+                                        </th>
+                                        <th>
+                                            Eliminar
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-iconprofile" role="tabpanel" aria-labelledby="pills-iconprofile-tab">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5><strong>1</strong><span> - Añadir Construccion</span></h5>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Nombre Proyecto</label>
+                                    <input type="text" name="name" value="" class="form-control" id="ProyectName" placeholder="Nombre del proyecto" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Fecha Inicio</label>
+                                    <input type="date" name="name" value="" id="dateInicio" class="form-control" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Fecha Fin</label>
+                                    <input type="date" name="name" value="" id="dateFin" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Departamento</label>
+                                    <select class="form-control" id="ddlDepto" asp-items="ViewBag.Depto">
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Municipio</label>
+                                    <select class="form-control" id="ddlMunicipio" disabled>
+                                        <option value="">Escoja un departamento</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Descripcion del proyecto</label>
+                                    <textarea class="form-control" id="txtAreaProyecDes" rows="5" cols="5"></textarea>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-5"></div>
+                                <div class="col-4">
+                                    <button class="btn btn-success"id="btnAgregarObra">Agregar Obra</button>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div id="contentHidden" hidden>
+                            <hr />
+                            <br />
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <h5><strong>2</strong><span> - Añadir Empleados a la obra</span></h5>
+                                        <br />
+                                        <div class="row">
+                                            <label>Empleados</label>
+                                            <select class="form-control">
+                                                <option value="value">text</option>
+                                            </select>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-success">Agregar</button>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div class="row">
+                                            <div class="table table-responsive">
+                                                <table class="display" id="TableEmpleados">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <span>Empleado Id</span>
+                                                            </th>
+                                                            <th>
+                                                                <span>Nombre Empleado</span>
+                                                            </th>
+                                                            <th>
+                                                                <span>
+                                                                    Cargo
+                                                                </span>
+                                                            </th>
+                                                            <th>
+                                                                Eliminar
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-5">
+                                        <h5><strong>3</strong><span> - Añadir Insumos a la obra</span></h5>
+                                        <br />
+                                        <div class="row">
+                                            <label>Insumos</label>
+                                            <select class="form-control">
+                                                <option value="value">text</option>
+                                            </select>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-success">Agregar</button>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div class="row">
+                                            <div class="table table-responsive">
+                                                <table class="display" id="TableInsumos3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <span>Código Insumo</span>
+                                                            </th>
+                                                            <th>
+                                                                <span>Insumo</span>
+                                                            </th>
+                                                            <th>
+                                                                Eliminar
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-danger">CANCELAR</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-success">GUARDAR</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-primary">Fin</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-
-<partial name="_VerInsumos" />
+<partial name="_VerInsumos">
 @section Scripts{
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
     <script src="~/js/Validaciones y otros/Construcciones/dataTableConstruccionesEmpleados.js"></script>
     <script src="~/js/Validaciones y otros/Construcciones/Insumos/datatableInsumos.js"></script>
+    <script src="~/js/Validaciones y otros/Construcciones/AgregarConstruccion/AgregarConstruccion.js"></script>
 }
 

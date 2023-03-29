@@ -20,26 +20,5 @@ namespace Construccion.WEBUI.Controllers
         {
             _httpClient = httpClient;
         }
-
-        [HttpPost("InsumosPorConstruccion/ListarInsumos")]
-        public async Task<JsonResult> ListarInsumosPorIdConstruccion(int cons_Id)
-        {
-            InsumosPorConstruccionViewModel insumosPorConstruccionViewModel = new InsumosPorConstruccionViewModel();
-            insumosPorConstruccionViewModel.cons_Id = cons_Id;
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<InsumosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "InsumosConstruccion/InsumosPorIdConstruccion", insumosPorConstruccionViewModel);
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResponseAPI<InsumosPorConstruccionViewModel>>(content);
-                var res = result.data;
-                return Json(new { success = true, res });
-            }
-            else
-            {
-                // manejar error
-                return null;
-            }
-        }
     }
 }

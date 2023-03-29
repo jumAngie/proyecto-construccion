@@ -2648,3 +2648,37 @@ BEGIN CATCH
 	SELECT 0
 END CATCH
 END 
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Gral.UDP_tbDepartamentos_ListarDepartamentos
+	 @depa_Id	NVARCHAR(10)
+AS
+BEGIN
+BEGIN TRY
+	SELECT	depa_Id,
+			depa_Nombre
+	FROM	Gral.tbDepartamentos
+END TRY
+BEGIN CATCH
+	SELECT 0;
+END CATCH;
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE Gral.UDP_tbMunicipios_ListarMunicipiosPorIdDepartamentos
+	@depa_Id	NVARCHAR(2)
+AS
+BEGIN
+	BEGIN TRY
+		SELECT	muni_id,
+				muni_Nombre
+		FROM	Gral.tbMunicipios
+		WHERE	depa_Id = @depa_Id
+	END TRY
+	BEGIN CATCH
+		SELECT 0
+	END CATCH;
+END

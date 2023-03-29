@@ -59,8 +59,7 @@ function CargarDataTable() {
 $('#TableConstrucciones tbody').on('click', 'a.btn.btn-outline-success', function () {
     var tr = $(this).closest('tr');
     var row = table.row(tr);
-
-    CargarTable(row.data().cons_Id);
+    CargarTableInsumos(row.data().cons_Id);
 });
 
 

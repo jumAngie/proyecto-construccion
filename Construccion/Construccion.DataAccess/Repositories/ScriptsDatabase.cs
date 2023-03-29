@@ -73,6 +73,7 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Departamentos
+        public static string ListarDepartamentos = "Gral.UDP_tbDepartamentos_ListarDepartamentos";
         #endregion
 
         #region Empleados
@@ -85,6 +86,7 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Municipios
+        public static string ListarMunicipiosPorIdDepartamento = "Gral.UDP_tbMunicipios_ListarMunicipiosPorIdDepartamentos";
         #endregion
 
         #region Insumos Por Construcciones

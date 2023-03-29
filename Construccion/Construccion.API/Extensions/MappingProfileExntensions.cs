@@ -55,6 +55,10 @@ namespace Construccion.API.Extensions
             CreateMap<InsumosPorConstruccionViewModel, VW_tbInsumosConstruccion>().ReverseMap();
             CreateMap<tbInsumosConstruccion, InsumosPorConstruccionViewModel>().ReverseMap();
             #endregion
+
+            #region Municipios
+            CreateMap<tbMunicipios, MunicipiosViewModel>().ReverseMap();
+            #endregion
         }
     }
 }

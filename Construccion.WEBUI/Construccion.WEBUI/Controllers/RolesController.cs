@@ -24,7 +24,18 @@ namespace Construccion.WEBUI.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName != "" && UserName != null)
+            {
+                ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
+                ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
+                ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         [HttpPost("/Roles/Listar")]

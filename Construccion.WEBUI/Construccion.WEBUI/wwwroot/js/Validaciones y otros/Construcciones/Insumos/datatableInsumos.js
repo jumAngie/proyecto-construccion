@@ -1,13 +1,21 @@
-﻿CargarTable(0);
+﻿function AbrirModalInsumos() {
+    $("#ModalInsumosPorConstruccion").modal("show");
+}
 
-function CargarTable(e) {
+function CerrarModalInsumos() {
+    $("#ModalInsumosPorConstruccion").modal("hide");
+}
+
+var table1;
+function CargarTableInsumos(e) {
     $(document).ready(function () {
-        table = $('#TableInsumos').DataTable({
+        console.log(e);
+        table1 = $('#TableInsumos').DataTable({
             destroy: true,
             ajax: ({
-                url: "InsumosPorConstruccion/ListarInsumos",
+                url: "/Construcciones/ListarInsumos",
                 method: "POST",
-                data: { comp_Id: e },
+                data: { cons_Id: e },
                 dataSrc: ""
             }),
             columns: [
@@ -26,5 +34,7 @@ function CargarTable(e) {
                 url: '//cdn.datatables.net/plug-ins/1.13.2/i18n/es-MX.json'
             }
         });
+        AbrirModalInsumos();
     });
 }
+

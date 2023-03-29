@@ -11,12 +11,14 @@ namespace Construccion.BusinessLogic.Services
     public class GeneralesService
     {
         private readonly DepartamentosRepository _departamentosRepository;
-        private readonly EmpleadosRepository     _empleadosRepository;
+        private readonly MunicipiosRepository _municipiosRepository;
+        private readonly EmpleadosRepository  _empleadosRepository;
 
-        public GeneralesService(DepartamentosRepository departamentosRepository, EmpleadosRepository empleadosRepository)
+        public GeneralesService(MunicipiosRepository municipiosRepository,DepartamentosRepository departamentosRepository, EmpleadosRepository empleadosRepository)
         {
             _departamentosRepository = departamentosRepository;
             _empleadosRepository = empleadosRepository;
+            _municipiosRepository = municipiosRepository;
         }
 
 
@@ -65,6 +67,40 @@ namespace Construccion.BusinessLogic.Services
             catch (Exception ex)
             {
 
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Departamentos
+        public ServiceResult ListarDepartamentos()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _departamentosRepository.ListarDepartamentos();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Municipios
+        public ServiceResult ListarMunicipiosPorIdDepartamento(tbMunicipios tbMunicipios)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _municipiosRepository.ListarMunicipiosPorIdDepartamento(tbMunicipios);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
                 return result.Error(ex.Message);
             }
         }
