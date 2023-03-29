@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Construccion.WEBUI.Models.InsumosViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.insm_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.insm_Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.unim_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_UsuCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.insm_FechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_UsuModificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.insm_FechaModificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.unim_Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.insm_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.insm_Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unim_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_UsuCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.insm_FechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_UsuModificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.insm_FechaModificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unim_Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
