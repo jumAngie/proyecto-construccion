@@ -86,5 +86,9 @@ namespace Construccion.DataAccess.Repositories
 
         #region Municipios
         #endregion
+
+        #region Insumos Por Construcciones
+        public static string InsumosPorIdConstruccion = "Cons.UDP_tbInsumosConstruccion_ListarInsumosPorIdConstruccion";
+        #endregion
     }
 }
