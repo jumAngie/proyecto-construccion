@@ -5,7 +5,7 @@ function CargarTable(e) {
         table = $('#TableInsumos').DataTable({
             destroy: true,
             ajax: ({
-                url: "/DetallesCompras/ListarGuardarDetalles",
+                url: "InsumosPorConstruccion/ListarInsumos",
                 method: "POST",
                 data: { comp_Id: e },
                 dataSrc: ""
@@ -16,6 +16,9 @@ function CargarTable(e) {
                 },
                 {
                     data: 'insm_Descripcion'
+                },
+                {
+                    data: 'unim_Descripcion'
                 },
             ],
             order: [[1, 'asc']],

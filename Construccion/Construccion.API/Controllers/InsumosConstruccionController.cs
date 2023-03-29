@@ -31,12 +31,12 @@ namespace Construccion.API.Controllers
             return Ok(list);
         }
 
-        //[HttpPost("InsumosPorIdConstruccion")]
-        //public IActionResult InsumosPorIdConstruccion(InsumosViewModel insumosViewModel)
-        //{
-        //    var item = _mapper.Map<tbInsumos>(insumosViewModel);
-        //    var Insumos = _construccionServices.InsumosPorIdConstruccion(item);
-        //    return Ok(Insumos);
-        //}
+        [HttpPost("InsumosPorIdConstruccion")]
+        public IActionResult InsumosPorIdConstruccion(InsumosPorConstruccionViewModel insumosPorConstruccionViewModel)
+        {
+            var item = _mapper.Map<tbInsumosConstruccion>(insumosPorConstruccionViewModel);
+            var Insumos = _construccionServices.ListarInsumosPorIdConstruccion(item);
+            return Ok(Insumos);
+        }
     }
 }

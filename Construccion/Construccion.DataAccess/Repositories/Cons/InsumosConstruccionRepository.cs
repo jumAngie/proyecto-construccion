@@ -1,7 +1,9 @@
 ﻿using Construccion.Entities.Entities;
 using Dapper;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,15 @@ namespace Construccion.DataAccess.Repositories.Cons
             return con.VW_tbInsumosConstruccion.AsList();
         }
         // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
+        public IEnumerable<tbInsumosConstruccion> InsumosPorIdConstruccion(tbInsumosConstruccion tbInsumosConstruccion)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@cons_Id", tbInsumosConstruccion.cons_Id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbInsumosConstruccion>(ScriptsDatabase.InsumosPorIdConstruccion, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public RequestStatus Delete(tbInsumosConstruccion item)
         {
             throw new NotImplementedException();

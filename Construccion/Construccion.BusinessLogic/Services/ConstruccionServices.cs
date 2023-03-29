@@ -85,6 +85,21 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult ListarInsumosPorIdConstruccion(tbInsumosConstruccion tbInsumosConstruccion)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _insumosConstruccionRepository.InsumosPorIdConstruccion(tbInsumosConstruccion);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
         #region Clientes

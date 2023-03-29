@@ -2637,9 +2637,11 @@ AS
 BEGIN
 BEGIN TRY
 	SELECT	t2.insm_Id,
-			t2.insm_Descripcion
-	FROM	Cons.tbInsumosConstruccion t1 INNER JOIN Cons.tbInsumos t2
-	ON		t1.insm_Id = t2.insm_Id
+			t2.insm_Descripcion,
+			t3.unim_Descripcion
+	FROM	Cons.tbInsumosConstruccion t1 INNER JOIN Cons.tbInsumos t2 
+	ON		t1.insm_Id = t2.insm_Id INNER JOIN Cons.tbUnidadesMedida t3
+	ON		t2.unim_Id = t3.unim_Id
 	WHERE	t1.cons_Id = @cons_Id
 END TRY
 BEGIN CATCH
