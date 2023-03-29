@@ -27,6 +27,11 @@ namespace Construccion.API.Extensions
             CreateMap<tbClientes, ClientesViewModel>().ReverseMap();
             #endregion
 
+            #region Cargos
+            CreateMap<CargosViewModel, VW_tbCargos>().ReverseMap();
+            CreateMap<tbCargos, CargosViewModel>().ReverseMap();
+            #endregion
+
             #region Empleados
             CreateMap<EmpleadosViewModel, VW_tbEmpleados>().ReverseMap();
             CreateMap<tbEmpleados, EmpleadosViewModel>().ReverseMap();

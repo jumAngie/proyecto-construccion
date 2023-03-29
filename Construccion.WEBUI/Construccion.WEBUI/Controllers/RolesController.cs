@@ -78,8 +78,6 @@ namespace Construccion.WEBUI.Controllers
             }
         }
 
-
-
         public IActionResult Create()
         {
             return View();

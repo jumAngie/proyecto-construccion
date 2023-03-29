@@ -2254,7 +2254,8 @@ BEGIN
 	BEGIN TRY
 		UPDATE Gral.tbCargos
 		SET		carg_Cargo = @carg_Cargo,
-				user_IdModificacion = @user_IdModificacion
+				user_IdModificacion = @user_IdModificacion,
+				carg_FechaModificacion = GETDATE()
 		WHERE	carg_Id = @carg_Id
 		SET @status = 1;
 	END TRY
@@ -2293,7 +2294,8 @@ BEGIN
 	BEGIN TRY
 		UPDATE Cons.tbUnidadesMedida
 		SET		unim_Descripcion = @unim_Descripcion,
-				user_UsuModificacion = @user_UsuModificaion
+				user_UsuModificacion = @user_UsuModificaion,
+				user_FechaModificacion = GETDATE()
 		WHERE	unim_Id = @unim_Id
 		SET @status = 1;
 	END TRY
@@ -2313,7 +2315,8 @@ BEGIN
 	BEGIN TRY
 	   UPDATE Cons.tbUnidadesMedida
 	   SET    user_Estado = 0,
-			  user_UsuModificacion = @user_UsuModificacion
+			  user_UsuModificacion = @user_UsuModificacion,
+			  user_FechaModificacion = GETDATE()
 	   WHERE  unim_Id = @unim_Id
 		SET @status = 1;
 	END TRY
@@ -2356,7 +2359,8 @@ BEGIN
 		UPDATE  Gral.tbMunicipios
 		SET		muni_Nombre = @muni_Nombre,
 				depa_Id = @depa_Id,
-				user_UsuModificacion = @user_UsuModificacion
+				user_UsuModificacion = @user_UsuModificacion,
+				muni_FechaModificacion = GETDATE()
 		WHERE	muni_id = @muni_Id
 		SET @status = 1;
 	END TRY
@@ -2427,7 +2431,8 @@ BEGIN
 				empl_FechaNacimiento = @empl_FechaNacimiento, 
 				empl_Telefono = @empl_Telefono, 
 				empl_CorreoEletronico = @empl_CorreoEletronico, 
-				user_IdModificacion  = @user_IdModificacion
+				user_IdModificacion  = @user_IdModificacion,
+				empl_FechaModificacion = GETDATE()
 		WHERE	empl_Id = @empl_Id
 		SET @status = 1;
 	END TRY
@@ -2447,7 +2452,8 @@ BEGIN
 	BEGIN TRY
 	   UPDATE Gral.tbEmpleados
 	   SET    empl_Estado = 0,
-			  user_IdModificacion = @user_IdModificacion
+			  user_IdModificacion = @user_IdModificacion,
+			  empl_FechaModificacion = GETDATE()
 	   WHERE  empl_Id = @empl_Id
 		SET @status = 1;
 	END TRY

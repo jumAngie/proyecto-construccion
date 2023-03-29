@@ -15,7 +15,7 @@ namespace Construccion.WEBUI.Models
         public string carg_Cargo { get; set; }
 
         [Display(Name = "Usuario Creación")]
-        public int user_UsuCreacion { get; set; }
+        public int? user_UsuCreacion { get; set; }
 
         [Display(Name = "Fecha Creación")]
         public DateTime carg_FechaCreacion { get; set; }
