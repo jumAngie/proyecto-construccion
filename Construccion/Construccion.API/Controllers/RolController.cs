@@ -64,7 +64,7 @@ namespace Construccion.API.Controllers
         public IActionResult Update(RolesViewModel roles)
         {
             var item = _mapper.Map<tbRoles>(roles);
-            var response = _accessService.UpdateRoles(1,item);
+            var response = _accessService.UpdateRoles(item);
             return Ok(response);
         }
     }

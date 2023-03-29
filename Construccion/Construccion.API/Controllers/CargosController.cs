@@ -41,5 +41,13 @@ namespace Construccion.API.Controllers
             var response = _construccionServices.CreateCargos(item);
             return Ok(response);
         }
+
+        [HttpPut("Update")]
+        public IActionResult Update(CargosViewModel cargos)
+        {
+            var item = _mapper.Map<tbCargos>(cargos);
+            var response = _construccionServices.EditarCargos(item);
+            return Ok(response);
+        }
     }
 }

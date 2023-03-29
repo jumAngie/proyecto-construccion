@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
@@ -56,6 +57,30 @@ namespace Construccion.WEBUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CargosViewModel cargosViewModel)
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+
+            var proveedorJson = new StringContent(JsonConvert.SerializeObject(cargosViewModel), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Cargos/Update", proveedorJson);
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                var respuesta = JsonConvert.DeserializeObject<INSERTAPI>(content);
+
+                ViewBag.Success = respuesta.message;
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
     }
 }

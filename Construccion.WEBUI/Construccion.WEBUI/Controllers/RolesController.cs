@@ -11,6 +11,7 @@ using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace Construccion.WEBUI.Controllers
 {

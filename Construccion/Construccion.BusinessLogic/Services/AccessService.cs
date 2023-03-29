@@ -87,14 +87,14 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
-        public ServiceResult UpdateRoles(int id,tbRoles item)
+        public ServiceResult UpdateRoles(tbRoles item)
         {
             var result = new ServiceResult();
             try
             {
                 if (item.role_Nombre != "")
                 {
-                    var map = _rolesRepository.Update(id, item);
+                    var map = _rolesRepository.Update(item);
                     if (map.CodeStatus > 0)
                     {
                         return result.Ok(map);

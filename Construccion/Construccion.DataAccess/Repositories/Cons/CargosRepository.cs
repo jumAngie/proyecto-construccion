@@ -29,6 +29,20 @@ namespace Construccion.DataAccess.Repositories.Cons
             var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
             return result;
         }
+
+        public RequestStatus Update(tbCargos item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@carg_Id",              item.carg_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@carg_Cargo",           item.carg_Cargo, DbType.String, ParameterDirection.Input);
+            parameters.Add("@user_IdModificacion",  item.user_IdModificacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.UpdateCargos, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
         // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
         public RequestStatus Delete(tbCargos item)
         {
@@ -50,12 +64,12 @@ namespace Construccion.DataAccess.Repositories.Cons
             throw new NotImplementedException();
         }
 
-        public RequestStatus Update(tbCargos item, int id)
+        IEnumerable<tbCargos> IRepository<tbCargos>.List()
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<tbCargos> IRepository<tbCargos>.List()
+        public RequestStatus Update(tbCargos item, int id)
         {
             throw new NotImplementedException();
         }
