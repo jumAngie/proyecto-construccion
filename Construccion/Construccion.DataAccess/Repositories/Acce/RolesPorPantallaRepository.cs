@@ -31,6 +31,34 @@ namespace Construccion.DataAccess.Repositories.Acce
         }
 
         //////////////////////////////////////////////////
+        /// <summary>
+        public RequestStatus InsertPantallaRoles(tbPantallasRoles item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@role_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@pant_Id", item.pant_Id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@user_UsuCreacion", item.user_UsuCreacion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);  
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.AgregarRolPantalla, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+        public RequestStatus EliminarPantallaRoles(tbPantallasRoles item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@role_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@pant_Id", item.pant_Id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.EliminarRolPantalla, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public RequestStatus Delete(tbPantallasRoles item)
         {
             throw new NotImplementedException();

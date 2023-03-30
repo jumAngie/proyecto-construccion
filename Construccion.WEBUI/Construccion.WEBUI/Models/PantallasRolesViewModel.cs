@@ -13,5 +13,6 @@ namespace Construccion.WEBUI.Models
         public int pant_Id { get; set; }
         [NotMapped]
         public string pant_Nombre { get; set; }
+        public int user_UsuCreacion { get; set; }
     }
 }

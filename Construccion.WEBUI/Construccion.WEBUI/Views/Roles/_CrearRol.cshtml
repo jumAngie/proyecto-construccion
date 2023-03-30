@@ -46,11 +46,6 @@
                                         <input type="checkbox" id="8" class="checkbox-animated" value="8">
                                         Insumos
                                     </label>
-                                    @*<br>
-                                    <label>
-                                        <input type="checkbox" id="ckIncidencias" class="checkbox-animated">
-                                        Incidencias
-                                    </label>*@
                                     <br>
                                     <label>
                                         <input type="checkbox" id="5" class="checkbox-animated" value="5">
@@ -82,3 +77,225 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#1").click(function () {
+        if (document.getElementById("1").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#1").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+             var rol = $("#txtIdRol").val();
+            var pant = $("#1").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+    });
+
+      $("#2").click(function () {
+        if (document.getElementById("2").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#2").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#2").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+      });
+
+      $("#3").click(function () {
+        if (document.getElementById("3").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#3").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+             var rol = $("#txtIdRol").val();
+            var pant = $("#3").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+      });
+
+
+    $("#4").click(function () {
+        if (document.getElementById("4").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#4").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#4").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+    });
+
+    $("#5").click(function () {
+        if (document.getElementById("5").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#5").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#5").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+    });
+
+
+    $("#6").click(function () {
+        if (document.getElementById("6").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#6").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#6").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+    });
+
+
+     $("#7").click(function () {
+        if (document.getElementById("7").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#7").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#7").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+     });
+
+
+     $("#8").click(function () {
+        if (document.getElementById("8").checked) {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#8").val();
+            $.ajax({
+                url: '@Url.Action("AgregarRol","Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarSuccessToast("Acceso Agregado correctamente");
+                }
+            });
+        }
+        else {
+            var rol = $("#txtIdRol").val();
+            var pant = $("#8").val();
+            $.ajax({
+                url: '@Url.Action("EliminarRol", "Roles")',
+                method: "POST",
+                data: { role_Id: rol, pant_Id: pant },
+                success: function (data) {
+                    mostrarWarningToast("Acceso eliminado correctamente");
+                }
+            });
+        }
+    });
+</script>

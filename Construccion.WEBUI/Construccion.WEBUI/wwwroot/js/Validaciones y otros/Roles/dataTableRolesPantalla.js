@@ -51,7 +51,6 @@ $('#TableRoles tbody').on('click', 'a.btn.btn-primary', function () {
         var row = table.row(tr);
 
         $("#txtIdRol").val(row.data().role_Id);
-        alert(row.data().role_Id);
         AbrirModalAccesos();
 });
 
@@ -81,7 +80,6 @@ $('#TableRoles tbody').on('click', 'td.dt-control', function () {
                                 listado += "<td>" + value + "</td>";
                             }
                         })
-                        listado += '<td><button class=\"btn btn-danger\" onclick="PostEliminar(' + item.role_Id + ')">Eliminar</button></td>'
                         listado += "</tr>";
                     })
                     // Open this row
