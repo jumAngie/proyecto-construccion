@@ -132,6 +132,36 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult Delete(tbRoles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                if (item.role_Nombre != "")
+                {
+                    var map = _rolesRepository.DELETE(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
         #region Usuarios

@@ -20,7 +20,7 @@ namespace Construccion.DataAccess.Repositories
         #region Roles
         public static string InsertarRoles = "Acce.UDP_tbRoles_Insert";
         public static string UpdateRoles = "Acce.UDP_tbRoles_EditarRol";
-        public static string DeleteRoles = "Acce.UDP_tbRoles_Delete";
+        public static string DeleteRoles = "Acce.UDP_tbPantallaRoles_EliminarRolCompleto";
         public static string RolesPorPantalla = "Acce.UDP_tbRolesPorPantalla_ListarPantallas";
         public static string CargarDatosEditar = "Acce.UDP_tbRoles_CargarDatosEditarRoles";
         #endregion

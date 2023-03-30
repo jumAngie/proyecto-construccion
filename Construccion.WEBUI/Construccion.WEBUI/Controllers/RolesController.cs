@@ -179,5 +179,25 @@ namespace Construccion.WEBUI.Controllers
             }
             return View();
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(RolesViewModel rolesViewModel)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            rolesViewModel.role_UsuModificacion = Usuario_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<RolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/Delete", rolesViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                HttpContext.Session.SetString("EliminarRol", mensaje);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

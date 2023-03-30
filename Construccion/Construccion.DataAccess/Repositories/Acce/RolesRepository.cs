@@ -51,6 +51,16 @@ namespace Construccion.DataAccess.Repositories.Acce
             return result;
         }
 
+        public RequestStatus DELETE(tbRoles item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@role_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.DeleteRoles, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
 
         public RequestStatus Insert(tbRoles item)
         {

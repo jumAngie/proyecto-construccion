@@ -76,5 +76,14 @@ namespace Construccion.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("Delete")]
+
+        public IActionResult Delete(RolesViewModel roles)
+        {
+            var item = _mapper.Map<tbRoles>(roles);
+            var response = _accessService.Delete(item);
+            return Ok(response);
+        }
+
     }
 }
