@@ -767,3 +767,7 @@ C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Cons
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Empleados\Index.cshtml.g.cs
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\UnidadesDeMedida\Index.cshtml.g.cs
 C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\UnidadesMedida\Index.cshtml.g.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Cargos\_Create.cshtml.g.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Cargos\_Edit.cshtml.g.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\Incidencias\Index.cshtml.g.cs
+C:\Users\axel2\OneDrive\Documentos\proyecto-construccion\Construccion.WEBUI\Construccion.WEBUI\obj\Debug\net5.0\Razor\Views\UnidadesDeMedida\_Create.cshtml.g.cs
