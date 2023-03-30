@@ -60,23 +60,31 @@ namespace Construccion.WEBUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ClientesViewModel clientesView)
         {
-            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
-            clientesView.user_IdCreacion = usuarioId;
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ClientesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Clientes/Insert", clientesView);
-
-            if (response.IsSuccessStatusCode)
+            if(ModelState.IsValid)
             {
-                string content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResponseAPI<ClientesViewModel>>(content);
-                var res = result.data;
-                return Json(res);
+                int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+                clientesView.user_IdCreacion = usuarioId;
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ClientesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Clientes/Insert", clientesView);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<ResponseAPI<ClientesViewModel>>(content);
+                    var res = result.data;
+                    return Json(res);
+                }
+                else
+                {
+                    // manejar error
+                    return null;
+                }
             }
             else
             {
-                // manejar error
-                return null;
+                return View(clientesView);
             }
+            
         }
 
         [HttpGet("/Clientes/ListarDepartamentos")]
