@@ -1,4 +1,6 @@
 ﻿
+
+
 CargarDataTable();
 var table;
 function CargarDataTable() {

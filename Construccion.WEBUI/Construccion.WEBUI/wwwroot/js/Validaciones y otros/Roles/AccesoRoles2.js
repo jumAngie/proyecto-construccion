@@ -5,7 +5,6 @@
         method: "POST",
         data: { role_Id: $("#txtIdRol").val() },
         success: function (data) {
-            console.log(data);
             $.each(data.res, function (i, value) {
                 if (value.pant_Id == 1) {
                     $("#1").prop("checked", true);
@@ -37,10 +36,9 @@
 }
 
 
-$("#btnAplicar").click(function () {
-    window.localtion.reload();
-})
-
+function recargar(){
+    window.location.reload();
+}
 function CerrarModalAccesos() {
     $("#ModalAcceso").modal("hide");
 }

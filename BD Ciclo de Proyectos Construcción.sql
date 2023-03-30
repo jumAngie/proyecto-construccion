@@ -2744,3 +2744,40 @@ BEGIN CATCH
 	SET @Status = 0
 END CATCH
 END;
+GO
+
+EXEC Acce.UDP_InsertUsuario 'Angie','456',0,3,3);
+
+
+GO
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbRoles_CargarDatosEditarRoles
+	@role_Id	INT
+AS
+BEGIN
+	SELECT	role_Nombre
+	FROM	Acce.tbRoles
+	WHERE	role_Id = @role_Id
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbRoles_EditarRol
+	@role_Id				INT,
+	@role_Nombre			NVARCHAR(255),
+	@user_UsuModificacion	INT,
+	@status					INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+			UPDATE [Acce].[tbRoles]
+	   SET [role_Nombre] = @role_Nombre
+		  ,[user_UsuModificacion] = @user_UsuModificacion
+		  ,[role_FechaModificacion] = GETDATE()
+	 WHERE role_Id	= @role_Id
+	 SET @status = 1;
+	END TRY	
+	BEGIN CATCH
+	SET @status = 0;
+	END CATCH
+END;

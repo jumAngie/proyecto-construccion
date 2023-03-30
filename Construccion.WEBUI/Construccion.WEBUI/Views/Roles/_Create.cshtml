@@ -1,27 +1,52 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<div class="modal" id="ModalExample" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Agrega rol</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form asp-action="Create" method="post">
+<form asp-action="Create" method="post" id="CrearRol">
+    <div class="modal fade" id="ModalExample" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header" style="background-color:#ffbd26">
+                    <div class="text-center">
+                        <h3 style="color:black"><strong>Nuevo Rol</strong></h3>
+                    </div>
+                </div>
                 <div class="modal-body">
-                    <label>Rol</label>
-                    <input type="text" name="role_Nombre" id="txtRol" placeholder="Rol" />
+                    <br />
+                    <label class="text-danger">*</label>
+                    <label>Descripción</label>
+                    <input type="text" name="role_Nombre" id="txtRol" placeholder="Rol" class="form-control"/>
+                    <br />
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" onclick="GuardarInsert()" class="btn btn-primary">Guardar</button>
+                        <button type="button" onclick="CerrarModal()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+            </div>
         </div>
     </div>
-</div>
+</form>
+    <script>
+
+        function GuardarInsert() {
+
+            var siuu = true;
+
+
+            if ($('#txtRol').val() == "") {
+                mostrarErrorToast("Campos requeridos.");
+                siuu = false;
+            }
+
+            if (siuu) {
+                $('#CrearRol').submit();
+            }
+
+        };
+
+        function CerrarModal() {
+            $("#ModalExample").modal('hide');
+            $("#txtRol").val("");
+        }
+
+    </script>

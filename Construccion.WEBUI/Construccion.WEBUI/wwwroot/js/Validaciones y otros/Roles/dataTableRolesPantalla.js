@@ -28,10 +28,6 @@ function CargarDataTable() {
             },
             {
                 data: null,
-                defaultContent: '<a class="btn btn-info" style="color:white;">Detalles</a>',
-            },
-            {
-                data: null,
                 defaultContent: '<a class="btn btn-danger" style="color:white;">Eliminar</a>',
             },
             {
@@ -97,6 +93,30 @@ $('#TableRoles tbody').on('click', 'td.dt-control', function () {
         });
     }
 });
+
+$('#TableRoles tbody').on('click', 'a.btn.btn-warning', function () {
+    var tr = $(this).closest('tr');
+    var row = table.row(tr);
+
+    $("#txtRolId").val(row.data().role_Id);
+    AbrirModalEditarAccesoName();
+});
+
+
+function AbrirModalEditarAccesoName() {
+    $("#ModalExampleEditar").modal("show");
+    $.ajax({
+        url: "/Roles/CargarDatos",
+        method: "POST",
+        data: { role_Id: $("#txtRolId").val() },
+        success: function (data) {
+                $("#txtRolEditar").val(data[0].role_Nombre);
+        }
+    });
+}
+
+
+
 
 function format(d) {
     // `d` is the original data object for the row

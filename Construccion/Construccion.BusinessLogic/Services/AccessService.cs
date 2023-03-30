@@ -56,6 +56,22 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult CargarDatosEditar(tbRoles item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _rolesRepository.CargarDatosRoles(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         public ServiceResult CreateRoles(tbRoles item)
         {
             var result = new ServiceResult();
@@ -263,6 +279,68 @@ namespace Construccion.BusinessLogic.Services
             {
                 var list = _rolesPorPantallaRepository.List();
                 return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult InsertarPantallaRoles(tbPantallasRoles item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.role_Id != 0)
+                {
+                    var map = _rolesPorPantallaRepository.InsertPantallaRoles(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EliminarPantallaRoles(tbPantallasRoles item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.role_Id != 0)
+                {
+                    var map = _rolesPorPantallaRepository.EliminarPantallaRoles(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
             }
             catch (Exception ex)
             {

@@ -17,6 +17,9 @@
                 <div class="col-sm-12 col-xl-6 xl-100">
                     <div class="card">
                         <div class="card-body">
+                            <br />
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalExample"><i class="fa fa-plus-square"></i>  Nuevo</a>
+                            <br />
                             <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i class="icofont icofont-ui-home"></i>Roles</a></li>
                             </ul>
@@ -40,9 +43,6 @@
                                                             Editar
                                                         </th>
                                                         <th>
-                                                            Detalles
-                                                        </th>
-                                                        <th>
                                                             Eliminar
                                                         </th>
                                                         <th>
@@ -63,8 +63,20 @@
     </div>
 </div>
 
+@{ 
+    if(ViewBag.Mensaje != "" && ViewBag.Mensaje != null)
+    {
+        string mensaje = ViewBag.Mensaje;
+        <script>
+            mostrarInfoToast('@mensaje');
+        </script>
+    }
+
+}
 
 <partial name="_CrearRol" />
+<partial name="_Create" />
+<partial name="_RoleEditar" />
 @section Scripts{
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
     <script src="~/js/Validaciones y otros/Roles/dataTableRolesPantalla.js"></script>

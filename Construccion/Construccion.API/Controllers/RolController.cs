@@ -49,6 +49,14 @@ namespace Construccion.API.Controllers
             return Ok(list);
         }
 
+        [HttpPost("CargarDatosRoles")]
+        public IActionResult CargarDatosRoles(RolesViewModel item)
+        {
+            var result = _mapper.Map<tbRoles>(item);
+            var list = _accessService.CargarDatosEditar(result);
+            return Ok(list);
+        }
+
 
         [HttpPost("Insert")]
 
@@ -59,7 +67,7 @@ namespace Construccion.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("Update")]
+        [HttpPost("Update")]
 
         public IActionResult Update(RolesViewModel roles)
         {
@@ -68,7 +76,5 @@ namespace Construccion.API.Controllers
             return Ok(response);
         }
 
-
-    
     }
 }

@@ -30,11 +30,20 @@ namespace Construccion.DataAccess.Repositories.Acce
             return db.Query<tbRoles>(ScriptsDatabase.RolesPorPantalla, parametro, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<tbRoles> CargarDatosRoles(tbRoles tbRoles)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@role_Id", tbRoles.role_Id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbRoles>(ScriptsDatabase.CargarDatosEditar, parametro, commandType: CommandType.StoredProcedure);
+        }
+
         public RequestStatus Update(tbRoles item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@role_Id", item.role_Id,DbType.String, ParameterDirection.Input);
             parameters.Add("@role_Nombre", item.role_Nombre, DbType.String, ParameterDirection.Input);
+            parameters.Add("@user_UsuModificacion", item.user_UsuModificacion, DbType.String, ParameterDirection.Input);
             parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
             db.Query<RequestStatus>(ScriptsDatabase.UpdateRoles, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();

@@ -30,7 +30,7 @@ namespace Construccion.WEBUI.Controllers
             {
                 ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
                 ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
-                ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
+                ViewBag.Mensaje = HttpContext.Session.GetString("UsuarioMod");
                 return View();
             }
             else
@@ -77,11 +77,6 @@ namespace Construccion.WEBUI.Controllers
                 // manejar error
                 return null;
             }
-        }
-
-        public IActionResult Create()
-        {
-            return View();
         }
 
         [HttpPost]
@@ -142,6 +137,47 @@ namespace Construccion.WEBUI.Controllers
                 return Json(resultado);
             }
             return Json(0);
+        }
+
+
+        [HttpPost("/Roles/CargarDatos")]
+        public async Task<IActionResult> EditarNameRol(int role_Id)
+        {
+            RolesViewModel rolesViewModel = new RolesViewModel();
+            rolesViewModel.role_Id = role_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/CargarDatosRoles", rolesViewModel);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
+                var res = result.data;
+                return Json(res.ToList());
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(RolesViewModel rolesViewModel)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            rolesViewModel.role_UsuModificacion = Usuario_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<RolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/Update", rolesViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                HttpContext.Session.SetString("UsuarioMod", mensaje);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

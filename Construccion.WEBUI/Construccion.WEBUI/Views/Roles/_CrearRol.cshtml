@@ -21,8 +21,8 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                                     <label>
-                                        <input type="checkbox" id="7" class="checkbox-animated" value="7">
-                                        Unidades de medida
+                                        <input type="checkbox" id="4" class="checkbox-animated" value="4">
+                                        Clientes
                                     </label>
                                     <br>
                                     <label>
@@ -30,13 +30,17 @@
                                         Cargos
                                     </label>
                                     <br>
+                                    <label>
+                                        <input type="checkbox" id="5" class="checkbox-animated" value="5">
+                                        Empleados
+                                    </label>
                                 </div>
                                 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                                     <label>
-                                        <input type="checkbox" id="4" class="checkbox-animated" value="4">
-                                        Clientes
+                                        <input type="checkbox" id="7" class="checkbox-animated" value="7">
+                                        Unidades de medida
                                     </label>
-                                    <br>
+                                    <br>                                    
                                     <label>
                                         <input type="checkbox" id="6" class="checkbox-animated" value="6">
                                         Construcciones
@@ -47,10 +51,7 @@
                                         Insumos
                                     </label>
                                     <br>
-                                    <label>
-                                        <input type="checkbox" id="5" class="checkbox-animated" value="5">
-                                        Empleados
-                                    </label>
+                                    
                                 </div>
                                 <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
                                     <label>
@@ -72,7 +73,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" data-bs-dismiss="modal" onclick="LimpiarAcceso()">Cerrar</button>
-                <button class="btn btn-secondary" type="button" id="btnAplicar">Aplicar</button>
+                <button class="btn btn-secondary" type="button" id="btnAplicar" onclick="recargar()">Aplicar</button>
             </div>
         </div>
     </div>

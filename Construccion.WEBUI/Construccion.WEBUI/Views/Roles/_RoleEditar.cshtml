@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<form asp-action="Update" method="post" id="EditRol">
+    <div class="modal fade" id="ModalExampleEditar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header" style="background-color:#ffbd26">
+                    <div class="text-center">
+                        <h3 style="color:black"><strong>Editar Rol</strong></h3>
+                        <input type="text" id="txtRolId" name="role_Id" hidden />
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <br />
+                    <label class="text-danger">*</label>
+                    <label>Descripción</label>
+                    <input type="text" name="role_Nombre" id="txtRolEditar" placeholder="Rol" class="form-control" />
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="GuardarEdit()" class="btn btn-primary">Guardar Edicion</button>
+                    <button type="button" onclick="CerrarModal()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <script>
+
+            function GuardarEdit() {
+
+                var siuu = true;
+
+
+                if ($('#txtRolEditar').val() == "") {
+                    mostrarErrorToast("Campos requeridos.");
+                    siuu = false;
+                }
+
+                if (siuu) {
+                    $('#EditRol').submit();
+                }
+
+            };
+
+            function CerrarModal() {
+                $("#ModalExampleEditar").modal('hide');
+                $("#txtRolEditar").val("");
+            }
+
+    </script>
