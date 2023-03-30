@@ -122,30 +122,16 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" hidden id="menuGeneral"><i data-feather="globe"></i><span id="menuGeneral">Generales</span></a>
                                     <ul class="sidebar-submenu" id="subMenuGeneral" hidden>
-                                        @*<li><a asp-area="" asp-controller="Departamentos" asp-action="Index"><span>Departamentos</span></a></li>
-                                            <li><a asp-area="" asp-controller="Municipios" asp-action="Index"><span>Municipios</span></a></li>
-                                            <li><a asp-area="" asp-controller="EstadosCiviles" asp-action="Index"><span>Estados Civiles</span></a></li>*@
                                     </ul>
                                 </li>
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" hidden id="menuConstruccion"><i data-feather="dollar-sign"></i><span id="menuConstrucciones"> Construcciones</span></a>
                                     <ul class="sidebar-submenu" id="subMenuConstruccion" hidden>
-                                        @*<li><a asp-area="" asp-controller="Categorias" asp-action="Index"><span>Categorias Productos</span></a></li>
-                                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index"><span>Clientes</span></a></li>
-                                            <li><a asp-area="" asp-controller="Compras" asp-action="Index"><span>Compras</span></a></li>
-                                            <li><a asp-area="" asp-controller="DetallesCompras" asp-action="Index"><span>Detalles de Compras</span></a></li>
-                                            <li><a asp-area="" asp-controller="Ventas" asp-action="Index"><span>Ventas</span></a></li>
-                                            <li><a asp-area="" asp-controller="DetallesVentas" asp-action="Index"><span>Detalles de Ventas</span></a></li>
-                                            <li><a asp-area="" asp-controller="Productos" asp-action="Index"><span>Productos</span></a></li>
-                                            <li><a asp-area="" asp-controller="Proveedores" asp-action="Index"><span>Proveedores</span></a></li>
-                                            <li><a asp-area="" asp-controller="Sucursales" asp-action="Index"><span>Sucursales</span></a></li>*@
                                     </ul>
                                 </li>
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" id="menuAcceso" hidden><i data-feather="users"></i><span id="menuAcceso"> Acceso</span></a>
                                     <ul class="sidebar-submenu" hidden id="subMenuAcceso">
-                                        @*<li><a asp-area="" asp-controller="Roles" asp-action="Index"><span>Roles</span></a></li>
-                                            <li><a asp-area="" asp-controller="Usuarios" asp-action="Index"><span>Usuarios</span></a></li>*@
                                     </ul>
                                 </li>
                             </ul>
@@ -179,7 +165,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 footer-copyright text-center">
-                        <p class="mb-0">Copyright 2023 © ZADICO theme by AHM  </p>
+                        <p class="mb-0">Copyright 2023 © CONSTRUCTORA ACROPOLIS theme by AHM  </p>
                     </div>
                 </div>
             </div>
@@ -218,6 +204,7 @@
     <script src="/Content/js/theme-customizer/customizer.js"></script>
     <!-- login js-->
     <!-- Plugin used-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js" integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
         $(document).ready(function () {
@@ -235,7 +222,6 @@
             $.getJSON('/Home/PantallasMenu', {})
                 .done(function (pantallas) {
                     $.each(pantallas, function (index, item) {
-                        console.log(item);
                         if (item.pant_Menu == "General") {
                             $("#subMenuGeneral").append($('<li>', {
                                 class: 'nav-item',
@@ -278,9 +264,6 @@
                             $("#subMenuAcceso").prop('hidden', false);
                         }
                     })
-
-
-                    console.log(pantallas);
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     console.error('Error al cargar los municipios: ' + textStatus + ', ' + errorThrown);

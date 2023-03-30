@@ -47,5 +47,22 @@ namespace Construccion.API.Controllers
             var list = _generalesServices.ListarEmpleadosSinCons();
             return Ok(list);
         }
+
+        [HttpGet("EmpleadosPorSexo")]
+        public IActionResult EmpleadosChart()
+        {
+            var empleados = db.tbEmpleados.ToList();
+            var total = empleados.Count();
+            var hombres = (int)Math.Round((double)(empleados.Where(e => e.empl_Sexo == "M").Count() * 100) / total);
+            var mujeres = (int)Math.Round((double)(empleados.Where(e => e.empl_Sexo == "F").Count() * 100) / total);
+
+            var data = new List<int> { hombres, mujeres };
+            var labels = new List<string> { "Hombres", "Mujeres" };
+
+            var viewModel = new EmpleadosChartViewModel { data = data, labels = labels };
+
+            return Ok(viewModel);
+        }
+
     }
 }

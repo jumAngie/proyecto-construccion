@@ -43,6 +43,22 @@ namespace Construccion.WEBUI.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> EmpleadosChart()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Empleados/EmpleadosPorSexo");
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<ChartjsAPI<EmpleadosChartViewModel>>(res);
+                var data = respuestaX.data;
+                return Json(data);
+
+            }
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> PantallasMenu(PantallasViewModel pantallasViewModel)
          {
             var EsAdmin = HttpContext.Session.GetString("user_EsAdmin");
