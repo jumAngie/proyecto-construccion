@@ -6,7 +6,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myLargeModalLabel">Permisos de Acceso de roles</h4>
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" onclick="LimpiarAcceso()"></button>
                 <input type="text" name="name" value="" id="txtIdRol" hidden/>
             </div>
             <div class="modal-body">
@@ -21,55 +21,50 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                                     <label>
-                                        <input type="checkbox" id="11" class="checkbox-animated" >
+                                        <input type="checkbox" id="7" class="checkbox-animated" value="7">
                                         Unidades de medida
                                     </label>
                                     <br>
                                     <label>
-                                        <input type="checkbox" id="4" class="checkbox-animated" >
+                                        <input type="checkbox" id="3" class="checkbox-animated" value="3">
                                         Cargos
                                     </label>
                                     <br>
                                 </div>
                                 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                                     <label>
-                                        <input type="checkbox" id="5" class="checkbox-animated">
+                                        <input type="checkbox" id="4" class="checkbox-animated" value="4">
                                         Clientes
                                     </label>
                                     <br>
                                     <label>
-                                        <input type="checkbox" id="8" class="checkbox-animated">
+                                        <input type="checkbox" id="6" class="checkbox-animated" value="6">
                                         Construcciones
                                     </label>
                                     <br>
                                     <label>
-                                        <input type="checkbox" id="12" class="checkbox-animated">
+                                        <input type="checkbox" id="8" class="checkbox-animated" value="8">
                                         Insumos
                                     </label>
-                                    <br>
+                                    @*<br>
                                     <label>
                                         <input type="checkbox" id="ckIncidencias" class="checkbox-animated">
                                         Incidencias
-                                    </label>
+                                    </label>*@
                                     <br>
                                     <label>
-                                        <input type="checkbox" id="6" class="checkbox-animated">
+                                        <input type="checkbox" id="5" class="checkbox-animated" value="5">
                                         Empleados
-                                    </label>
-                                    <br>
-                                    <label>
-                                        <input type="checkbox" id="7" class="checkbox-animated">
-                                        EmpleadosPorConstruccion
                                     </label>
                                 </div>
                                 <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
                                     <label>
-                                        <input type="checkbox" id="2" class="checkbox-animated">
+                                        <input type="checkbox" id="2" class="checkbox-animated" value="2">
                                         Roles
                                     </label>
                                     <br>
                                     <label>
-                                        <input type="checkbox" id="1" class="checkbox-animated">
+                                        <input type="checkbox" id="1" class="checkbox-animated" value="1">
                                         Usuarios
                                     </label>
                                 </div>
@@ -81,8 +76,8 @@
         </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-secondary" type="button">Aplicar</button>
+                <button class="btn btn-primary" type="button" data-bs-dismiss="modal" onclick="LimpiarAcceso()">Cerrar</button>
+                <button class="btn btn-secondary" type="button" id="btnAplicar">Aplicar</button>
             </div>
         </div>
     </div>

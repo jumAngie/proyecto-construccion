@@ -2704,3 +2704,30 @@ BEGIN
 END;
 
 
+GO
+
+CREATE OR ALTER PROCEDURE Acce.tbPantallaRoles_AgregarPantallaRol
+	@role_Id			INT,
+	@pant_Id			INT,
+	@user_UsuCreacion	INT
+AS
+BEGIN
+	INSERT INTO [Acce].[tbPantallasRoles]
+	VALUES(@role_Id,@pant_Id,@user_UsuCreacion,GETDATE(),NULL,NULL,1);
+END;
+
+
+GO
+
+CREATE OR ALTER PROCEDURE Acce.tbPantallaRoles_EliminarPantallaRol
+	@role_Id			INT,
+	@pant_Id			INT,
+	@user_UsuCreacion	INT
+AS
+BEGIN
+	DELETE 
+	FROM	Acce.tbPantallasRoles
+	WHERE	role_Id = @role_Id
+	AND		pant_Id = @pant_Id
+END;
+
