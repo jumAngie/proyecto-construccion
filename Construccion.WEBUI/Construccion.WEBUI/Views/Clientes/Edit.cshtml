@@ -1,0 +1,56 @@
+﻿@model Construccion.WEBUI.Models.ClientesViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>ClientesViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="clie_Identificacion" class="control-label"></label>
+                <input asp-for="clie_Identificacion" class="form-control" />
+                <span asp-validation-for="clie_Identificacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clie_Nombre" class="control-label"></label>
+                <input asp-for="clie_Nombre" class="form-control" />
+                <span asp-validation-for="clie_Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="muni_Id" class="control-label"></label>
+                <input asp-for="muni_Id" class="form-control" />
+                <span asp-validation-for="muni_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clie_DireccionExacta" class="control-label"></label>
+                <input asp-for="clie_DireccionExacta" class="form-control" />
+                <span asp-validation-for="clie_DireccionExacta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clie_Telefono" class="control-label"></label>
+                <input asp-for="clie_Telefono" class="form-control" />
+                <span asp-validation-for="clie_Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clie_CorreoElectronico" class="control-label"></label>
+                <input asp-for="clie_CorreoElectronico" class="form-control" />
+                <span asp-validation-for="clie_CorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

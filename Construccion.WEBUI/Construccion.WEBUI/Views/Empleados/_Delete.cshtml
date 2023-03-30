@@ -1,0 +1,42 @@
+﻿<form action="@Url.Action("Delete","Empleado")" method="post" id="deleteform">
+
+    <div class="modal fade" id="DeleteEmp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content bg-danger text-white">
+                <div class="modal-body text-center">
+                    <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Alert</h3>
+                    <input type="hidden" id="txt_EmpId" name="emp_Id" />
+                    <div class="text-gray-600 mt-2">
+                        ¿Está seguro de eliminar el registro?
+                        <br />
+                        <br />
+                        <button type="button" data-dismiss="modal" class="btn btn-light">Salir</button>
+                        <button type="button" id="confirmar" class="btn btn-light">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    function ShowModal(txt_EmpId) {
+        $('#DeleteEmp').modal('show');
+        $("#confirmar").click(function () {
+            var id = txt_EmpId;
+
+            $.ajax({
+                url: "/Empleado/Eliminar",
+                type: "POST",
+                data: { emp_Id: id },
+                success: function () {
+                    window.location.href = "/Empleado/Listado";
+                },
+                error: function () {
+                    alert("Error al eliminar el registro.");
+                }
+            });
+        });
+    }
+</script>

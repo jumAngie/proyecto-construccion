@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,5 +40,10 @@ namespace Construccion.WEBUI.Models
 
         [Display(Name = "Usuario Creación")]
         public int? user_IdCreacion { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Departamento")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string depto { get; set; }
     }
 }

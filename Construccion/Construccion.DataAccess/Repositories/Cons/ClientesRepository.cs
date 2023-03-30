@@ -35,14 +35,38 @@ namespace Construccion.DataAccess.Repositories.Cons
             var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
             return result;
         }
+        public tbClientes Find(int? id)
+        {
+            using var db = new ConstruccionCon();
+            var result = db.tbClientes.Find(id);
+
+            return result;
+        }
+
+         public RequestStatus Update(tbClientes item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@clie_Id",                  item.clie_Id,                       DbType.Int32,  ParameterDirection.Input);
+            parameters.Add("@clie_Identificacion",      item.clie_Identificacion,           DbType.String, ParameterDirection.Input);
+            parameters.Add("@clie_Nombre",              item.clie_Nombre,                   DbType.String, ParameterDirection.Input);
+            parameters.Add("@muni_Id",                  item.muni_Id,                       DbType.String, ParameterDirection.Input);
+            parameters.Add("@clie_DireccionExacta",     item.clie_DireccionExacta,          DbType.String, ParameterDirection.Input);
+            parameters.Add("@clie_Telefono",            item.clie_Telefono,                 DbType.String, ParameterDirection.Input);
+            parameters.Add("@clie_Telefono",            item.clie_Telefono,                 DbType.String, ParameterDirection.Input);
+            parameters.Add("@clie_CorreoElectronico",   item.clie_CorreoElectronico,        DbType.String, ParameterDirection.Input);
+            parameters.Add("@user_IdModificacion",      item.user_IdModificacion,           DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.UpdateClientes, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+
 
         //   ///   ///// ///  //// /////////////////////////////////////////////////////////////////////////77
         public RequestStatus Delete(tbClientes item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public tbClientes Find(int? id)
         {
             throw new NotImplementedException();
         }
@@ -57,12 +81,12 @@ namespace Construccion.DataAccess.Repositories.Cons
             throw new NotImplementedException();
         }
 
-        public RequestStatus Update(tbClientes item, int id)
+        IEnumerable<tbClientes> IRepository<tbClientes>.List()
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<tbClientes> IRepository<tbClientes>.List()
+        public RequestStatus Update(tbClientes item, int id)
         {
             throw new NotImplementedException();
         }
