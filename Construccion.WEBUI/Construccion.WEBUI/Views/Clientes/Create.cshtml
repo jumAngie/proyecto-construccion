@@ -79,8 +79,13 @@
                                 <div class="form-group">
                                     <label class="text-danger">*</label>
                                     <label>Departamento<label id="Error4" hidden style="color:red; font-size:14px;">*</label></label>
-                                    <select class="form-control" id="ddlDepto">
+                                    <select asp-for="depto" class="form-control" id="ddlDepto">
                                     </select>
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="depto" class="text-danger"></span>
+                                        </strong>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">

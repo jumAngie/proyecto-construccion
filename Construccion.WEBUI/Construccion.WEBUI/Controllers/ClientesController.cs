@@ -70,13 +70,12 @@ namespace Construccion.WEBUI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<ResponseAPI<ClientesViewModel>>(content);
-                    var res = result.data;
-                    return Json(res);
+                    var result = JsonConvert.DeserializeObject<INSERTAPI>(content);
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    // manejar error
+                    // manejar error pantalla
                     return null;
                 }
             }
@@ -85,6 +84,28 @@ namespace Construccion.WEBUI.Controllers
                 return View(clientesView);
             }
             
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int clie_Id)
+        {
+            ClientesViewModel clientesView = new ClientesViewModel();
+            clientesView.clie_Id = clie_Id;
+
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ClientesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Clientes/Find", clientesView);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<ClientesViewModel>>(content);
+                var res = result.data;
+                return Json(res);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
         }
 
         [HttpGet("/Clientes/ListarDepartamentos")]

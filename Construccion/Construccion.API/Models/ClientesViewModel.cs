@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,5 +16,10 @@ namespace Construccion.API.Models
         public string clie_Telefono { get; set; }
         public string clie_CorreoElectronico { get; set; }
         public int user_IdCreacion { get; set; }
+
+        public int user_IdModificacion { get; set; }
+
+        [NotMapped]
+        public string depto { get; set; }
     }
 }

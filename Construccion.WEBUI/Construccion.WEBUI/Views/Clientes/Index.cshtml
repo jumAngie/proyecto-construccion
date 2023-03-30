@@ -66,9 +66,7 @@
                                         @Html.DisplayFor(modelItem => item.clie_CorreoElectronico)
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary" style="color: black" asp-action="Edit" asp-route-id="@item.clie_Id">
-                                            <i class="fa fa-edit"></i> Editar
-                                        </a>
+                                        @Html.ActionLink("Editar", "Edit", new {clie_Id= item.clie_Id})
                                     </td>
                                 </tr>
                             }
@@ -79,3 +77,6 @@
             </div>
         </div>
     </div>
+<script>
+
+</script>
