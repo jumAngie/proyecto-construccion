@@ -66,7 +66,9 @@
                                         @Html.DisplayFor(modelItem => item.clie_CorreoElectronico)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                        <a class="btn btn-primary" style="color: black" asp-action="Edit" asp-route-id="@item.clie_Id">
+                                            <i class="icon-copy fa fa-pencil-square-o" aria-hidden="true"></i> Editar
+                                        </a>
                                         @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                     </td>

@@ -1,0 +1,119 @@
+---- BACK ----
+Repo:
+public IEnumerable<tbDepartamentos> ListarDepartamentos()
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", null, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbDepartamentos>(ScriptsDatabase.ListarDepartamentos, parametros, commandType: CommandType.StoredProcedure);
+
+        }
+Servicio:
+public ServiceResult ListarDepartamentos()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _departamentosRepository.ListarDepartamentos();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+Controlador:
+ [HttpGet("ListarDepartamentos")]
+        public IActionResult ListarDepartamentos()
+        {
+            var list = _generalesServices.ListarDepartamentos();
+            return Ok(list);
+        }
+
+---- Front ----
+Controlador:
+        [HttpGet("/Construcciones/ListarDepartamentos")]
+        public async Task<IActionResult> ListarDepartamentos()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Departamentos/ListarDepartamentos");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<DepartamentosViewModel>>(content);
+                var res = result.data;
+                return Json(res);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
+
+        [HttpPost("/Construcciones/ListarMunicipiosPorIdDepartamento")]
+        public async Task<IActionResult> ListarMunicipiosPorIdDepartamento(string depa_Id)
+        {
+            MunicipiosViewModel municipiosViewModel = new MunicipiosViewModel();
+            municipiosViewModel.depa_Id = depa_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<MunicipiosViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Municipios/ListarMunicipiosPorIdDepartamento", municipiosViewModel);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<MunicipiosViewModel>>(content);
+                var res = result.data;
+                return Json(res);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
+HTML:
+<div class="row">
+                            <div class="col-sm-6">
+                                <label>Departamento<label id="Error4" hidden style="color:red; font-size:14px;">*</label></label>
+                                <select class="form-control" id="ddlDepto">
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Municipio<label id="Error5" hidden style="color:red; font-size:14px;">*</label></label>
+                                <select class="form-control" id="ddlMunicipio" disabled>
+                                    <option value="">Por favor escoja un departamento</option>
+                                </select>
+                            </div>
+                        </div>
+AJAX:
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "/Construcciones/ListarDepartamentos",
+        data: "{}",
+        success: function (data) {
+            var s = '<option value="" selected hidden >Por favor selecciona un departamento</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].depa_Id + '" >' + data[i].depa_Nombre + '</option>';
+            }
+            $("#ddlDepto").html(s);
+        }
+    });
+
+$('#ddlDepto').change(function () {
+    $.ajax({
+        type: "POST",
+        url: "/Construcciones/ListarMunicipiosPorIdDepartamento",
+        data: { depa_Id: $('#ddlDepto').val() },
+        success: function (data) {
+            var s = '<option value="-1" selected hidden >Por favor selecciona un municipio</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].muni_id + '" >' + data[i].muni_Nombre + '</option>';
+            }
+            $("#ddlMunicipio").html(s);
+            $("#ddlMunicipio").prop("disabled", false);
+        }
+    });
+});
