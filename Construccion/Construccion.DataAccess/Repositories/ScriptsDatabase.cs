@@ -29,6 +29,8 @@ namespace Construccion.DataAccess.Repositories
 
         #region RolesPorPantalla
         public static string Menu_PantallaPorRol = "Acce.UDP_Menu_PantallasPorRol";
+        public static string AgregarRolPantalla = "Acce.tbPantallaRoles_AgregarPantallaRol";
+        public static string EliminarRolPantalla = "Acce.tbPantallaRoles_EliminarPantallaRol";
         #endregion
 
         #region Usuarios

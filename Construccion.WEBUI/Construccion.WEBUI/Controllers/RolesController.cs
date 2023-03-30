@@ -100,5 +100,48 @@ namespace Construccion.WEBUI.Controllers
             }
             return View();
         }
+
+        [HttpPost("AgregarRol")]
+        public async Task<JsonResult> AgregarRol(int role_Id, int pant_Id)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            PantallasRolesViewModel pantallasRoles = new PantallasRolesViewModel();
+            pantallasRoles.role_Id = role_Id;
+            pantallasRoles.pant_Id = pant_Id;
+            pantallasRoles.user_UsuCreacion = (int)Usuario_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<PantallasRolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "RolPantallas/AgregarPantallaRol", pantallasRoles);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                var resultado = 1;
+                return Json(resultado);
+            }
+            return Json(0);
+        }
+
+
+        [HttpPost("EliminarRol")]
+        public async Task<JsonResult> EliminarRol(int role_Id, int pant_Id)
+        {
+            PantallasRolesViewModel pantallasRoles = new PantallasRolesViewModel();
+            pantallasRoles.role_Id = role_Id;
+            pantallasRoles.pant_Id = pant_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<PantallasRolesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "RolPantallas/EliminarPantallaRol", pantallasRoles);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                var resultado = 1;
+                return Json(resultado);
+            }
+            return Json(0);
+        }
     }
 }

@@ -41,5 +41,21 @@ namespace Construccion.API.Controllers
 
             return Ok(pantallas);
         }
+
+        [HttpPost("AgregarPantallaRol")]
+        public IActionResult AgregarPantallaRol(PantallasRolesViewModel pantallasRolesViewModel)
+        {
+            var item = _mapper.Map<tbPantallasRoles>(pantallasRolesViewModel);
+            var response = _accessService.InsertarPantallaRoles(item);
+            return Ok(response);
+        }
+
+        [HttpPost("EliminarPantallaRol")]
+        public IActionResult EliminarPantallaRol(PantallasRolesViewModel pantallasRolesViewModel)
+        {
+            var item = _mapper.Map<tbPantallasRoles>(pantallasRolesViewModel);
+            var response = _accessService.EliminarPantallaRoles(item);
+            return Ok(response);
+        }
     }
 }
