@@ -50,9 +50,8 @@ namespace Construccion.WEBUI.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string res = await response.Content.ReadAsStringAsync();
-                var respuestaX = JsonConvert.DeserializeObject<ChartjsAPI<EmpleadosChartViewModel>>(res);
-                var data = respuestaX.data;
-                return Json(data);
+                var respuestaX = JsonConvert.DeserializeObject<EmpleadosChartViewModel>(res);
+                return Json(respuestaX);
 
             }
             return View();

@@ -2730,4 +2730,8 @@ BEGIN
 	WHERE	role_Id = @role_Id
 	AND		pant_Id = @pant_Id
 END;
+GO
+EXEC Acce.UDP_InsertUsuario 'Hola','321',0,2,3
+GO
+
 

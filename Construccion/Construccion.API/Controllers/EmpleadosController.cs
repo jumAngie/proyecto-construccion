@@ -53,8 +53,8 @@ namespace Construccion.API.Controllers
         {
             var empleados = db.tbEmpleados.ToList();
             var total = empleados.Count();
-            var hombres = (int)Math.Round((double)(empleados.Where(e => e.empl_Sexo == "M").Count() * 100) / total);
-            var mujeres = (int)Math.Round((double)(empleados.Where(e => e.empl_Sexo == "F").Count() * 100) / total);
+            var hombres = empleados.Where(e => e.empl_Sexo == "M").Count();
+            var mujeres = empleados.Where(e => e.empl_Sexo == "F").Count();
 
             var data = new List<int> { hombres, mujeres };
             var labels = new List<string> { "Hombres", "Mujeres" };
