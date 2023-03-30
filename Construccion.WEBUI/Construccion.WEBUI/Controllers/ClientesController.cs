@@ -86,7 +86,7 @@ namespace Construccion.WEBUI.Controllers
             
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Edit(int clie_Id)
         {
             ClientesViewModel clientesView = new ClientesViewModel();
