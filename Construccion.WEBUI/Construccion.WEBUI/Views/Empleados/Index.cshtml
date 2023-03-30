@@ -12,11 +12,11 @@
                 <div class="card-header" style="background-color:#ffbd26">
                     <div class="text-center">
                         <img src="~/Content/images/ACROPOLIS-LOGO.png" width="200" />
-                        <h3 style="color:black"><strong>Listado de Clientes</strong></h3>
+                        <h3 style="color:black"><strong>Listado de Empleados</strong></h3>
                     </div>
                 </div>
                 <div class="card-body">
-                  <a class="btn btn-primary" asp-action="Create">Nuevo</a>
+                  <a class="btn btn-primary" asp-action="Create"> <i class="fa fa-plus-square"></i>Nuevo</a>
                     <table class="table table-responsive table-report -mt-2" id="DataTable">
                         <thead>
                             <tr>
@@ -64,9 +64,9 @@
                                         @Html.DisplayFor(modelItem => item.empl_CorreoEletronico)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        <a class="btn btn-primary" style="color: black" asp-action="Edit" asp-route-id="@item.empl_Id">
+                                            <i class="fa fa-edit"></i> Editar</a>
+                                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                     </td>
                                 </tr>
                             }

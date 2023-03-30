@@ -1,4 +1,5 @@
 ﻿using Construccion.WEBUI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -21,7 +22,13 @@ namespace Construccion.WEBUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName != "" && UserName != null)
+            {
+                ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
+                ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
+                ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Incidencias/List");
             if (response.IsSuccessStatusCode)
             {
@@ -34,6 +41,11 @@ namespace Construccion.WEBUI.Controllers
             {
                 // manejar error
                 return null;
+            }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
             }
         }
     }

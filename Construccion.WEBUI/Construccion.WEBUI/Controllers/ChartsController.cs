@@ -12,15 +12,16 @@ using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
 {
-    public class EmpleadosController : Controller
+
+    public class ChartsController : Controller
     {
         private readonly HttpClient _httpClient;
-
-        public EmpleadosController(HttpClient httpClient)
+        public ChartsController(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index()
         {
             var UserName = HttpContext.Session.GetString("user_Nombre");
             if (UserName != "" && UserName != null)
@@ -28,25 +29,27 @@ namespace Construccion.WEBUI.Controllers
                 ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
                 ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
                 ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
-                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Empleados/List");
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResponseAPI<EmpleadosViewModel>>(content);
-                var res = result.data;
-                return View(res);
-            }
-            else
-            {
-                // manejar error
-                return null;
-            }
+                return View();
             }
             else
             {
                 return RedirectToAction("Index", "Login");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EmpleadosChart()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Empleados/EmpleadosPorSexo");
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<EmpleadosChartViewModel>(res);
+                return Json(respuestaX);
+
+            }
+            return View();
         }
     }
 }

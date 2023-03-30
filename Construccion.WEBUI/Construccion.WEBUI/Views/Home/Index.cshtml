@@ -13,65 +13,7 @@
     </div>
 </div>
 
-<div class="row mt-2">
 
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-header" style="background-color:#ffbd26"><h3><strong>Cantidad de Empleados por Sexo</strong></h3></div>
-            <div class="card-body">
-                <canvas id="EmpleadosChart" style="max-height:250px"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '@Url.Action("EmpleadosChart", "Home")',
-            success: function (data) {
-                var chartData = {
-                    labels: data.labels,
-                    datasets: [
-                        {
-                            data: data.data,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)'
-                            ]
-                        }
-                    ]
-                };
-
-                var options = {
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem, data) {
-                                var dataset = data.datasets[tooltipItem.datasetIndex];
-                                var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-                                    return previousValue + currentValue;
-                                });
-                                var currentValue = dataset.data[tooltipItem.index];
-                                var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                return percentage.toLocaleString() + "%";
-                            }
-                        }
-                    }
-                };
-
-                var ctx = document.getElementById('EmpleadosChart').getContext('2d');
-                var empleadosChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: chartData,
-                    options: options
-                });
-            },
-            error: function () {
-                alert('Error al obtener los datos');
-            }
-        });
-    });
-</script>
 
 
 

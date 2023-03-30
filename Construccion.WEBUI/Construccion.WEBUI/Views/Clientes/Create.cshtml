@@ -90,6 +90,11 @@
                                     <select asp-for="muni_Id" class="form-control" id="ddlMunicipio" disabled>
                                         <option value="">Por favor escoja un departamento</option>
                                     </select>
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="muni_Id" class="text-danger"></span>
+                                        </strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +116,7 @@
                         <br />
                         <div class="card-footer">
                             <div class="text-center">
-                                <input type="button" value="Create" onclik="GuardarInsert()" class="btn btn-primary" />
+                                <input type="submit" value="Create" class="btn btn-primary" />
                                 <a class="btn btn-secondary" asp-action="Index">Volver</a>
                             </div>
                         </div>
@@ -121,6 +126,5 @@
         </div>
     </div>
     <script src="~/js/Clientes/Create.js"></script>
-    <script src="~/js/Clientes/Validaciones.js"></script>
 
 

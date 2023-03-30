@@ -79,7 +79,7 @@ namespace Construccion.WEBUI.Controllers
                         int UsuarioId = 0;
                         var usuario = string.Empty;
                         var empleado = string.Empty;
-                        int role_Id;
+                        int role_Id = 0;
                         string admin = string.Empty;
                         foreach (var item in respuestaX.data)
                         {
@@ -102,7 +102,7 @@ namespace Construccion.WEBUI.Controllers
                         HttpContext.Session.SetString("user_EsAdmin", resultado);
                         HttpContext.Session.SetString("empl_Nombre", empleado);
                         HttpContext.Session.SetString("user_Nombre", usuario);
-                        HttpContext.Session.SetInt32("role_Id", role_Id);
+                        HttpContext.Session.SetInt32("rol_Id", role_Id);
                         HttpContext.Session.SetInt32("UsuarioId", UsuarioId);
                         HttpContext.Session.SetString("Mensaje", mensaje);
                         return RedirectToAction("Index", "Home");

@@ -42,27 +42,14 @@ namespace Construccion.WEBUI.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EmpleadosChart()
-        {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Empleados/EmpleadosPorSexo");
-            if (response.IsSuccessStatusCode)
-            {
-                string res = await response.Content.ReadAsStringAsync();
-                var respuestaX = JsonConvert.DeserializeObject<EmpleadosChartViewModel>(res);
-                return Json(respuestaX);
-
-            }
-            return View();
-        }
+        
 
         [HttpGet]
         public async Task<IActionResult> PantallasMenu(PantallasViewModel pantallasViewModel)
          {
             var EsAdmin = HttpContext.Session.GetString("user_EsAdmin");
-            bool esAdmin = false;
-            if(EsAdmin == "Admin")
+            bool esAdmin;
+            if (EsAdmin == "Admin")
             {
                 esAdmin = true;
             }
