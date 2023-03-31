@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-3">
-                            <a class="btn btn-primary" asp-action="Create">Nuevo</a>
+                            <a class="btn btn-primary" onclick="AbrirModalCrearInsumos()"><i class="fa fa-plus-square"></i> Nuevo</a>
                         </div>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="col-sm-3">
@@ -67,7 +67,6 @@
                                     </td>
                                     <td>
                                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                     </td>
                                 </tr>
@@ -79,3 +78,5 @@
         </div>
     </div>
 </div>
+<partial name="_Create" />
+<script src="~/js/Insumos/CreateInsumos.js"></script>

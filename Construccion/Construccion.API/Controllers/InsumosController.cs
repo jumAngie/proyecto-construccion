@@ -63,5 +63,15 @@ namespace Construccion.API.Controllers
                                         .ToList();
             return Ok(insumosMasUtilizados);
         }
+
+        [HttpGet("ListarUnidadesdeMedida")]
+
+        public IActionResult ListadoUnidadesMedida()
+       {
+            var unidadesDeMedida = from u in db.tbUnidadesMedida
+                                   select new { unim_Id = u.unim_Id, unim_Descripcion = u.unim_Descripcion };
+
+            return Ok(unidadesDeMedida.ToList());
+        }
     }
 }

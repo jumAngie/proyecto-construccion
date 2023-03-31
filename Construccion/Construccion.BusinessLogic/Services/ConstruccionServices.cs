@@ -150,9 +150,20 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
-        public tbClientes ObtenerCliente(int? id)
+        public ServiceResult ObtenerCliente(int? id)
         {
-            return _clientesRepository.Find(id);
+            var result = new ServiceResult();
+            try
+            {
+                var find = _clientesRepository.Find(id);
+                return result.Ok(find);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+                throw;
+            }
+
         }
 
         public ServiceResult EditClientes(tbClientes item)
@@ -495,6 +506,69 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult CreateIncidencias(tbIncidencia item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.inci_Descripcion != "")
+                {
+                    var map = _incidenciasRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EditarIncidencias(tbIncidencia item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.inci_Descripcion != "")
+                {
+                    var map = _incidenciasRepository.Update(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         #endregion
 
     }

@@ -60,7 +60,8 @@
                                         @Html.DisplayFor(modelItem => item.clie_CorreoElectronico)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Editar", "Edit", new {clie_Id= item.clie_Id}, new { @class = "btn btn-primary" }))
+                                        @Html.ActionLink("Editar", "Edit", new { clie_Id = item.clie_Id }, new { @class = "btn btn-primary" })
+                                        @Html.ActionLink("Eliminar", "Delete", new { clie_Id = item.clie_Id }, new { @class = "btn btn-danger" })
                                     </td>
                                 </tr>
                             }

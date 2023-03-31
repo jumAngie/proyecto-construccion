@@ -39,7 +39,6 @@ namespace Construccion.DataAccess.Repositories.Cons
         {
             using var db = new ConstruccionCon();
             var result = db.tbClientes.Find(id);
-
             return result;
         }
 
@@ -87,6 +86,11 @@ namespace Construccion.DataAccess.Repositories.Cons
         }
 
         public RequestStatus Update(tbClientes item, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        tbClientes IRepository<tbClientes>.Find(int? id)
         {
             throw new NotImplementedException();
         }

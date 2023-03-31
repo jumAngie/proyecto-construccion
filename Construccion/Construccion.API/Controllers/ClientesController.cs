@@ -56,13 +56,13 @@ namespace Construccion.API.Controllers
         #endregion
 
         #region EditarCliente
-        [HttpGet("Find")]
+        //[HttpGet("Find")]
 
-        public IActionResult Find(int id)
-        {
-            var encontrar = _construccionServices.ObtenerCliente(id);
-            return Ok(encontrar);
-        }
+        //public IActionResult Find(int id)
+        //{
+        //    var encontrar = _construccionServices.ObtenerCliente(id);
+        //    return Ok(encontrar);
+        //}
 
         //[HttpPut("Editar")]
 

@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-primary" asp-action="Create">Nuevo</a>
+                    <a class="btn btn-primary" onclick="AbrirModalCrearIncidencia()"><i class="fa fa-plus-square"></i> Nuevo</a>
                     <br />
                     <br />
                     <table class="table table-responsive table-report -mt-2" id="DataTable">
@@ -48,9 +48,8 @@
                                         @Html.DisplayFor(modelItem => item.inci_Descripcion)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        @Html.ActionLink("Editar", "Edit", new {    id=item.inci_Id }) |
+                                        @Html.ActionLink("Eliminar", "Delete", new { id=item.inci_Id })
                                     </td>
                                 </tr>
                             }
@@ -62,3 +61,5 @@
         </div>
     </div>
 </div>
+<partial name="_Create">
+<script src="~/js/Incidencias/CreateIncidencias.js"></script>

@@ -1,4 +1,5 @@
 ﻿using Construccion.WEBUI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
@@ -36,6 +38,24 @@ namespace Construccion.WEBUI.Controllers
                 // manejar error
                 return null;
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(UnidadesMedidaViewModel medidaViewModel, string unim_Descripcion)
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            medidaViewModel.user_UsuCreacion = HttpContext.Session.GetInt32("UsuarioId");
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UnidadesMedidaViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "UnidadesDeMedida/Insert", medidaViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                HttpContext.Session.SetString("NombreUsuario", mensaje);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

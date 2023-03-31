@@ -43,6 +43,7 @@ namespace Construccion.DataAccess.Repositories
         public static string InsertarClientes = "Cons.UDP_tbClientes_Insert";
         public static string UpdateClientes = "Cons.UDP_tbClientes_Update";
         public static string DeleteClientes = "Cons.UDP_tbClientes_Delete";
+        public static string EncontrarCliente = "Cons.UDP_tbClientes_Encontrar";
         #endregion
 
         #region Construcciones
@@ -57,6 +58,9 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Incidencias
+        public static string InsertarIncidencias = "Cons.UDP_tbIncidencias_Insert";
+        public static string UpdateIncidencias = "Cons.UDP_tbIncidencias_Update";
+        public static string DeleteIncidencias = "Gral.UDP_tbIncidencias_Delete";
         #endregion
 
         #region Insumos
@@ -87,6 +91,7 @@ namespace Construccion.DataAccess.Repositories
         public static string UpdateEmpleados = "Gral.UDP_tbEmpleados_Update";
         public static string DeleteEmpleados = "Gral.UDP_tbEmpleados_Delete";
         public static string DdlEmpleados = "UDP_tbEmpleadosConstruccion_EmpleadosTieneConstruccion";
+        public static string EncontrarEmpleado = "Gral.UDP_tbEmpleados_Encontrar";
         #endregion
 
         #region Estados Civiles

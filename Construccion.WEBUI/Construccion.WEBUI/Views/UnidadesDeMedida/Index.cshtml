@@ -48,7 +48,7 @@
                                 </td>
                                 <td>
                                 <td>
-                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.unim_Id,@item.unim_Descripcion')"><i class="fa fa-edit"></i> Editar</a>
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarIncidencia" onclick="Editar('@item.unim_Id,@item.unim_Descripcion')"><i class="fa fa-edit"></i> Editar</a>
                                 </td>
                                 <td>
                                     <a class="btn btn-success" asp-action="Details" asp-route-id="@item.unim_Id"><i class="fa fa-file-text"></i> Detalles</a>
@@ -64,4 +64,4 @@
     </div>
 </div>
 <br />
-@*<partial name="_Create">*@
+<partial name="_Create">

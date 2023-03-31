@@ -72,6 +72,11 @@ namespace Construccion.API.Extensions
             CreateMap<tbMunicipios, MunicipiosViewModel>().ReverseMap();
             #endregion
 
+            #region Incidencias
+            CreateMap<IncidenciasViewModel, VW_tbIncidencia>().ReverseMap();
+            CreateMap<tbIncidencia, IncidenciasViewModel>().ReverseMap();
+            #endregion
+
         }
     }
 }

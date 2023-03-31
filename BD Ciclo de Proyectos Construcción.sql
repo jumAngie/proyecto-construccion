@@ -363,7 +363,8 @@ VALUES ('Usuarios',                         '/Usuario/Index',                   
        ('Empleados',                        '/Empleados/Index',                        'General',         'empleadosItem',                     1),
        ('Construcciones',                   '/Construcciones/Index',                   'Construccion',    'construccionItem',                  1),
        ('Unidades de Medida',               '/UnidadesDeMedida/Index',                 'Construccion',    'unidadesdemedidaItem',				1),
-       ('Insumos',                          '/Insumos/Index',                          'Construccion',    'insumosItem',						1)
+       ('Insumos',                          '/Insumos/Index',                          'Construccion',    'insumosItem',						1),
+	   ('Incidencias',						'/Incidencias/Index',						'Construccion',   'incidenciasItem',					1)
 
 
 --****************************************************************TABLA ROLES POR PANTALLA********************************************************************--
@@ -1853,13 +1854,12 @@ GO
 --4
 CREATE OR ALTER VIEW Cons.VW_tbClientes
 AS
- SELECT client.clie_Id, clie_Nombre, client.clie_Identificacion, client.clie_Telefono, client.clie_CorreoElectronico, deptos.depa_Nombre,
-		muni.muni_Nombre, client.clie_DireccionExacta FROM Cons.tbClientes client
+  SELECT client.clie_Id, clie_Nombre, client.clie_Identificacion, client.clie_Telefono, client.clie_CorreoElectronico, deptos.depa_Id, deptos.depa_Nombre,
+		muni.muni_id,muni.muni_Nombre, client.clie_DireccionExacta, client.user_IdCreacion, client.user_IdModificacion FROM Cons.tbClientes client
 		INNER JOIN Gral.tbMunicipios muni
 		ON			client.muni_Id = muni.muni_id
 		INNER JOIN  Gral.tbDepartamentos deptos
 		ON			muni.depa_Id = deptos.depa_Id
-		WHERE		client.clie_Estado = 1
 GO
 --5
 CREATE OR ALTER VIEW Cons.VW_tbConstrucciones
@@ -1921,9 +1921,10 @@ GO
 --12
 CREATE OR ALTER VIEW Gral.VW_tbEmpleados
 AS
-SELECT	emp.empl_Id, emp.empl_DNI, emp.empl_Nombre + ' ' + emp.empl_Apellidos AS empl_Nombre,  emp.empl_FechaNacimiento,
-		emp.empl_CorreoEletronico, carg.carg_Cargo, emp.empl_DireccionExacta  FROM Gral.tbEmpleados emp
+SELECT	emp.empl_Id, emp.empl_DNI, emp.empl_Nombre, emp.empl_Apellidos,  emp.empl_Nombre + ' ' + emp.empl_Apellidos AS empl_NombreCompleto,  emp.empl_FechaNacimiento,
+		emp.empl_CorreoEletronico, emp.empl_Sexo, emp.carg_Id, emp.muni_Id, emp.esta_ID, civil.esta_Descripcion, carg.carg_Cargo, emp.empl_DireccionExacta  FROM Gral.tbEmpleados emp
 		INNER JOIN Gral.tbCargos carg ON emp.carg_Id = carg.carg_Id
+		INNER JOIN Gral.tbEstadosCiviles civil ON emp.esta_ID = civil.esta_ID
 		WHERE  emp.empl_Estado = 1
 GO
 
@@ -2853,3 +2854,21 @@ BEGIN
 			cons_FechaFin
 	FROM	Cons.tbConstrucciones
 END;
+
+
+--- //  NUEVOS PROCS PARA EDITAR // -----
+GO
+CREATE OR ALTER PROCEDURE Gral.UDP_tbEmpleados_Encontrar
+@empl_Id				INT
+AS
+BEGIN
+	SELECT * FROM Gral.VW_tbEmpleados WHERE empl_Id = @empl_Id
+END
+
+Go
+CREATE OR ALTER PROCEDURE Cons.UDP_tbClientes_Encontrar
+@cli_Id			INT
+AS
+BEGIN
+	SELECT * FROM Cons.VW_tbClientes WHERE clie_Id = 1
+END

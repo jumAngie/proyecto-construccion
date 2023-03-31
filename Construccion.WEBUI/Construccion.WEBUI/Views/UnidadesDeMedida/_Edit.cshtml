@@ -1,0 +1,73 @@
+﻿@model Construccion.WEBUI.Models.IncidenciasViewModel
+<!-- Modal-->
+<div class="modal fade" id="EditarIncidencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="card-header" style="background-color:#ffbd26">
+                <div class="text-center">
+                    <h3 style="color:black"><strong>Editar Cargo</strong></h3>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Edit" id="IncidenciasEditar">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div>
+                        <div>
+                            <input asp-for="inci_Id" id="car_IDEdit" hidden class="form-control" />
+
+                            <label asp-for="inci_Descripcion" class="control-label"></label>
+                            <input asp-for="inci_Descripcion" id="car_DescripcionEditar" class="form-control" />
+                            <div class="text-center">
+                                <span id="car_DescripcionValidateEdit" class="text-danger" hidden><strong>Campo requerido</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="CerraLimpiar()" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="GuardarEdit()" class="btn btn-secondary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function CerraLimpiar() {
+        $('#car_DescripcionEditar').val("");
+        $('#EditarIncidencia').modal('hide');
+        $('#car_DescripcionValidateEdit').attr('hidden', true);
+
+    }
+
+    function Editar(cadena) {
+        var datastring = cadena;
+        var data = datastring.split(',');
+        $("#car_IDEdit").val(data[0]);
+        $("#car_DescripcionEditar").val(data[1]);
+        $("#EditarCargo").modal('show');
+    };
+
+    function GuardarEdit() {
+
+
+        if ($('#car_DescripcionEditar').val() == "") {
+            $('#car_DescripcionValidateEdit').attr('hidden', false)
+
+        }
+
+
+        if ($('#car_DescripcionEditar').val() == "") {
+            mostrarErrorToast("Campos requeridos.");
+
+        }
+
+        else{
+            $('#CargosEditar').submit();
+            mostrarSuccessToast("Se ha ingresado correctamente los datos.");
+        }
+
+
+    };</script>
