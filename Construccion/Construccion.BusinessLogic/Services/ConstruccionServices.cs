@@ -203,6 +203,21 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ListConstruccionesPorId(tbConstrucciones item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _construccionesRepository.ListConstruccionesPorId(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
         public ServiceResult CreateConstruccion(tbConstrucciones item)
         {
             var result = new ServiceResult();

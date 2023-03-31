@@ -1846,7 +1846,7 @@ AS
 		WHEN '1' THEN 'Sí'
 		WHEN '0' THEN 'No'
 		END AS 'Es Admin' 
-		FROM Acce.tbUsuarios usua INNER JOIN Acce.tbRoles rol
+		FROM Acce.tbUsuarios usua inner JOIN Acce.tbRoles rol
 		ON	 usua.role_Id = rol.role_Id
  WHERE	usua.user_Estado = 1
 GO
@@ -2588,7 +2588,7 @@ BEGIN TRY
 	DECLARE @Role INT;
 	if(@role_Id = 0)
 	BEGIN 
-	SET @Role = null;
+	SET @Role = 8;
 	END
 	ELSE
 	BEGIN
@@ -2765,10 +2765,6 @@ END CATCH
 END;
 GO
 
-EXEC Acce.UDP_InsertUsuario 'Angie','456',0,3,3;
-
-
-GO
 
 CREATE OR ALTER PROCEDURE Acce.UDP_tbRoles_CargarDatosEditarRoles
 	@role_Id	INT
@@ -2843,6 +2839,17 @@ BEGIN
 	 WHERE t1.user_Id IS NULL 
 	   AND t2.[empl_Estado] = 1 
 END
+
 GO
 
-
+CREATE OR ALTER PROCEDURE Cons.UDP_tbConstrucciones_ListarInfoConstruccion
+	@Cons_Id	INT
+AS
+BEGIN
+	SELECT	cons_Id,
+			cons_Proyecto,
+			cons_Direccion,
+			cons_FechaInicio,
+			cons_FechaFin
+	FROM	Cons.tbConstrucciones
+END;
