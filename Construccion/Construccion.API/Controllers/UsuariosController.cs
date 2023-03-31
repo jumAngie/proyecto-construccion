@@ -81,5 +81,22 @@ namespace Construccion.API.Controllers
             var response = _accessService.RestablecerPassword(item);
             return Ok(response);
         }
+
+
+        [HttpGet("ListarUsuarioEmpleads")]
+        public IActionResult ListarUsuarioEmpleads()
+        {
+            var list = _accessService.ListarUsuarioEmpleados();
+            return Ok(list);
+        }
+
+        [HttpPost("InsertarUsuario")]
+
+        public IActionResult InsertarUsuario(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.InsertarUsuario(item);
+            return Ok(response);
+        }
     }
 }
