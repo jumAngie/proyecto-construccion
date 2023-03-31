@@ -321,7 +321,7 @@ namespace Construccion.WEBUI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string res = await response.Content.ReadAsStringAsync();
-                    var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModel>>(res);
+                    var respuestaX = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModelLista>>(res);
                     if (respuestaX.data.Count > 0)
                     {
                         HttpResponseMessage response2 = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/Update", usuarioViewModel);

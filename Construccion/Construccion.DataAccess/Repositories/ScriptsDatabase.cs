@@ -62,6 +62,9 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Incidencias
+        public static string InsertarIncidencias = "Cons.UDP_tbIncidencias_Insert";
+        public static string UpdateIncidencias = "Cons.UDP_tbIncidencias_Update";
+        public static string DeleteIncidencias = "Gral.UDP_tbIncidencias_Delete";
         #endregion
 
         #region Insumos
