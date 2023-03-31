@@ -51,5 +51,21 @@ namespace Construccion.WEBUI.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> InsumosChart()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/InsumosMasUtilizados");
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<List<InsumosMasUtilizadosChart>>(res);
+                return Json(data);
+
+            }
+            return View();
+        }
     }
 }

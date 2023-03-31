@@ -48,5 +48,20 @@ namespace Construccion.API.Controllers
             var response = _construccionServices.EditarInsumos(item);
             return Ok(response);
         }
+
+
+        [HttpGet("InsumosMasUtilizados")]
+        public IActionResult InsumosMasUtilizados()
+        {
+            var insumosMasUtilizados = db.tbInsumos
+                .Select(i => new {
+                            Nombre = i.insm_Descripcion,
+                            CantidadDeUsos = i.tbInsumosConstruccion.Count()
+                                    })
+                                        .OrderByDescending(i => i.CantidadDeUsos)
+                                        .Take(5) // Obtener los 5 insumos más utilizados
+                                        .ToList();
+            return Ok(insumosMasUtilizados);
+        }
     }
 }
