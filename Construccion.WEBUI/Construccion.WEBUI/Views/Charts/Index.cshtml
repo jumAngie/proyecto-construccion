@@ -8,9 +8,17 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header" style="background-color:#ffbd26"><h3><strong>Insumos más Utilizados</strong></h3></div>
+            <div class="card-body">
+                <canvas id="InsumosChart" style="max-height:260px"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
-    $(function () {
+    <script>
+    $(function () { 
         $.ajax({
             type: 'GET',
             url: '@Url.Action("EmpleadosChart", "Charts")',
@@ -56,4 +64,40 @@
             }
         });
     });
-</script>
+        $(function () {
+            $.ajax({
+                url: '/Charts/InsumosChart',
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    var nombresInsumos = [];
+                    var cantidadesUsos = [];
+                    response.forEach(function (insumo) {
+                        nombresInsumos.push(insumo.nombre);
+                        cantidadesUsos.push(insumo.cantidadDeUsos);
+                    });
+                    var chartdata = {
+                        labels: nombresInsumos,
+                        datasets: [
+                            {
+                                label: 'Cantidad de usos',
+                                backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                                borderColor: 'rgba(255, 206, 86, 1)',
+                                hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+                                hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                                data: cantidadesUsos
+                            }
+                        ]
+                    };
+                    var ctx = $("#InsumosChart");
+                    var barGraph = new Chart(ctx, {
+                        type: 'bar',
+                        data: chartdata
+                    });
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
