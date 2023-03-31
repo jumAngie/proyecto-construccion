@@ -68,6 +68,45 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult InsertarEmpleadoPorConstruccion(tbEmpleadosPorConstruccion item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.empl_Id != 0)
+                {
+                    var map = _empleadosPorConstruccionRepository.InsertarEmpleadoPorConstruccion(item);
+                    return result.Ok(map);
+                }
+                return result.Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EliminarEmpleadoPorConstruccion(tbEmpleadosPorConstruccion item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.empl_Id != 0)
+                {
+                    var map = _empleadosPorConstruccionRepository.EliminarEmpleadoPorConstruccion(item);
+                    return result.Ok(map);
+                }
+                return result.Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Insumos Por Construccion
@@ -86,6 +125,27 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult EliminarInsumoConstruccion(tbInsumosConstruccion item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.insm_Id != 0)
+                {
+                    var map = _insumosConstruccionRepository.EliminarInsumoConstruccion(item);
+                    return result.Ok(map);
+                }
+                return result.Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
         public ServiceResult ListarInsumosPorIdConstruccion(tbInsumosConstruccion tbInsumosConstruccion)
         {
             var result = new ServiceResult();
@@ -97,6 +157,26 @@ namespace Construccion.BusinessLogic.Services
             }
             catch (Exception ex)
             {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult InsertarInsumoPorIdConstruccion(tbInsumosConstruccion item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.insm_Id != 0)
+                {
+                    var map = _insumosConstruccionRepository.InsertarInsumosPorIdConstruccion(item);
+                    return result.Ok(map);
+                }
+                return result.Ok();
+            }
+            catch (Exception ex)
+            {
+
                 return result.Error(ex.Message);
             }
         }

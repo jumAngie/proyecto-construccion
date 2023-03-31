@@ -359,7 +359,7 @@ INSERT INTO Acce.tbPantallas(pant_Nombre, pant_Url, pant_Menu, pant_HtmlId, user
 VALUES ('Usuarios',                         '/Usuario/Index',                          'Acceso',          'usuariosItem',                      1),
        ('Roles',                            '/Roles/Index',                            'Acceso',          'rolesItem',                         1),
        ('Cargos',                           '/Cargos/Index',                           'General',         'cargosItem',                        1),
-       ('Clientes',                         '/Clientes/Index',                         'General',         'clientesItem',                      1),
+       ('Incidencias',                      '/Incidencias/Index',                      'Construccion',    'incidenciasItem',                   1),
        ('Empleados',                        '/Empleados/Index',                        'General',         'empleadosItem',                     1),
        ('Construcciones',                   '/Construcciones/Index',                   'Construccion',    'construccionItem',                  1),
        ('Unidades de Medida',               '/UnidadesDeMedida/Index',                 'Construccion',    'unidadesdemedidaItem',				1),
@@ -1654,7 +1654,17 @@ GO
 
 INSERT INTO Gral.tbEmpleados
 VALUES ('789456487254', 'Esdra Maria', 'Cerna', 'F', 'S','0501',2,'Ave Sur, 4ta Calle, Col. Esperanza','04-02-1992','4512-1205', 'Esdra_Cerna@hotmail.com', 1 ,GETDATE(), NULL, NULL,1);
-GO								 
+GO		
+
+
+INSERT INTO Gral.tbEmpleados
+VALUES ('4353543', 'Mario robert', 'Martinez', 'M', 'C','0701',3,'Ave Sur, capital caribe','08-05-2002','4512-1205', 'Mario@hotmail.com', 1 ,GETDATE(), NULL, NULL,1);
+GO		
+
+
+INSERT INTO Gral.tbEmpleados
+VALUES ('675675675', 'JavierTunes', 'UDER', 'F', 'C','0505',1,'Colonia Guadalupe','04-02-2005','4568-7845', 'JavierTunes@hotmail.com', 1 ,GETDATE(), NULL, NULL,1);
+GO		
 								 
 
 --****************************************************************TABLA EMPLEADOS POR CONSTRUCCION ********************************************************************--
@@ -2987,4 +2997,183 @@ END TRY
 BEGIN CATCH
 	SET @status = 0;
 END CATCH
+END
+
+GO
+
+CREATE OR ALTER PROC Cons.UDP_tbIncidencias_Insert
+		@cons_Id INT,
+		@inci_Descripcion NVARCHAR(MAX),
+		@user_UsuCreacion INT,
+		@status						INT OUTPUT
+AS
+BEGIN
+BEGIN TRY
+	INSERT INTO Cons.tbIncidencia(cons_Id, inci_Descripcion, user_UsuCreacion)
+	VALUES  (@cons_Id, @inci_Descripcion, @user_UsuCreacion);
+	SET @status = 1;
+END TRY
+BEGIN CATCH
+	SET @status = 0;
+END CATCH;
+END
+
+GO
+CREATE OR ALTER PROC Cons.UDP_tbIncidencias_Update
+		@inci_Id	INT,
+		@cons_Id INT,
+		@inci_Descripcion NVARCHAR(MAX),
+		@user_UsuModificacion INT,
+		@status						INT OUTPUT
+AS
+BEGIN
+BEGIN TRY
+	UPDATE Cons.tbIncidencia
+	SET		cons_Id = @cons_Id,
+			inci_Descripcion = @inci_Descripcion,
+			user_UsuModificacion = @user_UsuModificacion,
+			inci_FechaModificacion = GETDATE()
+	WHERE	inci_Id = @inci_Id
+	SET @status = 1;
+END TRY
+BEGIN CATCH
+	SET @status = 0;
+END CATCH;
+END
+
+go
+
+CREATE OR ALTER PROC Gral.UDP_tbIncidencias_Delete
+	@inci_Id					INT,
+	@user_UsuModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+
+	BEGIN TRY
+	   UPDATE Cons.tbIncidencia
+	   SET    user_Estado = 0,
+			  user_UsuModificacion = @user_UsuModificacion,
+			  inci_FechaModificacion = GETDATE()
+	   WHERE  inci_Id = @inci_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+
+END
+
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Cons.UDP_tbConstruccion_InsertarEmpleado
+	@cons_Id			INT,
+	@empl_Id			INT,
+	@user_UsuCreacion	INT,
+	@status				INT OUTPUT
+AS
+BEGIN
+BEGIN TRY
+	INSERT INTO [Cons].[tbEmpleadosPorConstruccion]
+           ([cons_Id]
+           ,[empl_Id]
+           ,[user_UsuCreacion]
+           ,[cons_FechaCreacion]
+           ,[user_UsuModificacion]
+           ,[cons_FechaModificacion]
+           ,[cons_Estado])
+     VALUES
+           (@cons_Id
+           ,@empl_Id
+           ,@user_UsuCreacion
+           ,GETDATE()
+           ,NULL
+           ,NULL
+           ,1)
+
+		   SET @status = 1;
+END TRY
+BEGIN CATCH
+			SET @status = 0;
+END CATCH
+END;
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Cons.UDP_tbInsumos_InsertarInsumo
+	@cons_Id			INT,
+	@insm_Id			INT,
+	@user_UsuCreacion	INT,
+	@status				INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+		INSERT INTO [Cons].[tbInsumosConstruccion]
+           ([cons_Id]
+           ,[insm_Id]
+           ,[user_UsuCreacion]
+           ,[user_FechaCreacion]
+           ,[user_UsuModificacion]
+           ,[user_FechaModificacion]
+           ,[user_Estado])
+     VALUES
+           (@cons_Id
+           ,@insm_Id
+           ,@user_UsuCreacion
+           ,GETDATE()
+           ,NULL
+           ,NULL
+           ,1)
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+
+		SET @status = 0;
+	END CATCH	
+END;
+
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Cons.UDP_tbEmpleadosContruccion_EliminarEmpleadoConstruccion
+	@cons_Id	INT,
+	@empl_Id	INT,
+	@status		INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+		DELETE 
+		FROM	Cons.tbEmpleadosPorConstruccion
+		WHERE	cons_Id = @cons_Id
+		AND		empl_Id = @empl_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH
+END
+
+GO
+
+CREATE OR ALTER PROCEDURE Cons.UDP_tbConstruccion_EliminarInsumoConstruccion
+	@cons_Id	INT,
+	@insm_Id	INT,
+	@status		INT OUTPUT
+AS
+BEGIN 
+	BEGIN TRY
+		DELETE 
+		FROM	Cons.tbInsumosConstruccion
+		WHERE	cons_Id = @cons_Id
+		AND		insm_Id = @insm_Id
+
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH
 END

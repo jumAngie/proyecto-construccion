@@ -39,5 +39,32 @@ namespace Construccion.API.Controllers
             var pantallas = _construccionServices.ListarEmpleadosPorConstruccion(item);
             return Ok(pantallas);
         }
+
+        [HttpPost("InsertEmpleadoConstruccion")]
+
+        public IActionResult Insert(tbEmpleadosPorConstruccion tbEmpleadosPorConstruccion)
+        {
+            var item = _mapper.Map<tbEmpleadosPorConstruccion>(tbEmpleadosPorConstruccion);
+            var response = _construccionServices.InsertarEmpleadoPorConstruccion(item);
+            return Ok(response);
+        }
+
+        [HttpPost("EliminarEmpleadoConstruccion")]
+
+        public IActionResult EliminarEmpleadoConstruccion(tbEmpleadosPorConstruccion tbEmpleadosPorConstruccion)
+        {
+            var item = _mapper.Map<tbEmpleadosPorConstruccion>(tbEmpleadosPorConstruccion);
+            var response = _construccionServices.InsertarEmpleadoPorConstruccion(item);
+            return Ok(response);
+        }
+
+        [HttpPost("EliminarInsumoConstruccion")]
+
+        public IActionResult EliminarInsumoConstruccion(tbInsumosConstruccion tbInsumosConstruccion)
+        {
+            var item = _mapper.Map<tbInsumosConstruccion>(tbInsumosConstruccion);
+            var response = _construccionServices.EliminarInsumoConstruccion(item);
+            return Ok(response);
+        }
     }
 }

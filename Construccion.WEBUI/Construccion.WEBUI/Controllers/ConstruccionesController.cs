@@ -199,7 +199,7 @@ namespace Construccion.WEBUI.Controllers
                 string content = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ResponseAPI<EmpleadosPorConstruccionViewModel>>(content);
                 var res = result.data;
-                return Json(new { success = true, res });
+                return Json(res);
             }
             else
             {
@@ -250,6 +250,90 @@ namespace Construccion.WEBUI.Controllers
             }
         }
 
+        [HttpPost("/Construcciones/InsertarEmpleadosPorConstruccion")]
+        public async Task<IActionResult> InsertarEmpleadosPorConstruccion(int cons_Id, int empl_Id)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            EmpleadosPorConstruccionViewModel empleadosPorConstruccionViewModel = new EmpleadosPorConstruccionViewModel();
+            empleadosPorConstruccionViewModel.cons_Id = cons_Id;
+            empleadosPorConstruccionViewModel.empl_Id = empl_Id;
+            empleadosPorConstruccionViewModel.user_UsuCreacion = usuarioId;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<EmpleadosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "EmpleadosConstruccion/InsertEmpleadoConstruccion", empleadosPorConstruccionViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                return Json(1);
+            }
+            return Json(0);
+        }
+
+
+        [HttpPost("/Construcciones/InsertarInsumosPorIdConstruccion")]
+        public async Task<IActionResult> InsertarInsumosPorIdConstruccion(int cons_Id, int insm_Id)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            InsumosPorConstruccionViewModel insumosPorConstruccionViewModel = new InsumosPorConstruccionViewModel();
+            insumosPorConstruccionViewModel.cons_Id = cons_Id;
+            insumosPorConstruccionViewModel.insm_Id = insm_Id;
+            insumosPorConstruccionViewModel.user_UsuCreacion = usuarioId;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<InsumosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "InsumosConstruccion/InsertInsumoPorIdConstruccion", insumosPorConstruccionViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                return Json(1);
+            }
+            return Json(0);
+        }
+
+
+        [HttpPost("/Construcciones/EliminarEmpleadoPorIdConstruccion")]
+        public async Task<IActionResult> EliminarEmpleadoPorIdConstruccion(int cons_Id, int empl_Id)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            EmpleadosPorConstruccionViewModel empleados = new EmpleadosPorConstruccionViewModel();
+            empleados.cons_Id = cons_Id;
+            empleados.empl_Id = empl_Id;
+            empleados.user_UsuCreacion = usuarioId;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<EmpleadosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "EmpleadosConstruccion/EliminarEmpleadoConstruccion", empleados);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                return Json(1);
+            }
+            return Json(0);
+        }
+
+        [HttpPost("/Construcciones/EliminarInsumoPorIdConstruccion")]
+        public async Task<IActionResult> EliminarInsumoPorIdConstruccion(int cons_Id, int insm_Id)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            InsumosPorConstruccionViewModel insumos = new InsumosPorConstruccionViewModel();
+            insumos.cons_Id = cons_Id;
+            insumos.insm_Id = insm_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<InsumosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "EmpleadosConstruccion/EliminarInsumoConstruccion", insumos);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                return Json(1);
+            }
+            return Json(0);
+        }
     }
 }
 

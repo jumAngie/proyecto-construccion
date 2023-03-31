@@ -28,6 +28,30 @@ namespace Construccion.DataAccess.Repositories.Cons
             return db.Query<tbEmpleadosPorConstruccion>(ScriptsDatabase.EmpleadosPorConstruccionListar, parametros, commandType: CommandType.StoredProcedure);
 
         }
+
+        public IEnumerable<tbEmpleadosPorConstruccion> InsertarEmpleadoPorConstruccion(tbEmpleadosPorConstruccion item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@cons_Id", item.cons_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@user_UsuCreacion", item.user_UsuCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var result = db.Query<tbEmpleadosPorConstruccion>(ScriptsDatabase.InsertarEmpleadoPorConstruccion, parameters, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+        public RequestStatus EliminarEmpleadoPorConstruccion(tbEmpleadosPorConstruccion item)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@cons_Id", item.cons_Id, DbType.String, ParameterDirection.Input);
+            parametro.Add("@empl_Id", item.empl_Id, DbType.String, ParameterDirection.Input);
+            parametro.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            db.Query<RequestStatus>(ScriptsDatabase.EliminarEmpleadoPorConstruccion, parametro, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parametro.Get<int>("@status") };
+            return result;
+        }
+
         public RequestStatus Delete(tbEmpleados item)
         {
             throw new NotImplementedException();

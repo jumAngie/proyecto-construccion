@@ -30,19 +30,18 @@ $("#btnCancelarAgregarObra").click(function () {
         $("#pills-iconhome-tab").removeClass("nav-link").addClass("nav-link active");
         $("#pills-iconhome").addClass("tab-pane fade active show");
     }
-    alert($("#txtCons_id").val());
     $.ajax({
         type: "POST",
         url: "/Construcciones/EliminarConstruccion",
         data: { cons_Id: $("#txtCons_id").val() },
         success: function (data) {
             if (data == 1) {
-                $("#contentHidden").attr("hidden", "");              
-                window.location.reload();
+                $("#contentHidden").attr("hidden", "");
                 Limpiar();
+                window.location.reload();
             }
             else {
-                mostrarErrorToast("Error al realizar la operacion");
+                mostrarErrorToast("Error al realizar la operacion")
             }
         }
     });
@@ -175,7 +174,6 @@ $("#btnAgregarObra").click(function () {
             success: function (data) {
                 if (data.success) {
                     mostrarInfoToast("Construccion agregada con exito");
-                    console.log(data.resultado[0].cons_Id);
                     $("#txtCons_id").val(data.resultado[0].cons_Id);                    
                     $("#contentHidden").removeAttr("hidden");
                     $("#ProyectName").prop("disabled",true);
@@ -212,6 +210,8 @@ $("#btnAgregarObra").click(function () {
                             $("#ddlInsumos").html(s);
                         }
                     });
+                    
+
 
                 }
             }
@@ -219,33 +219,85 @@ $("#btnAgregarObra").click(function () {
     }
 });
 
+function btnAgregarEmpleado() {
+    if ($("#ddlEmpleado").val() == "") {
+        mostrarErrorToast("Debe seleccionar un empleado");
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/Construcciones/InsertarEmpleadosPorConstruccion",
+            data: { cons_Id: $("#txtCons_id").val(), empl_Id: $("#ddlEmpleado").val() },
+            success: function (data) {
+                if (data == 1) {
+                    CargarDataTableEmpleados($("#txtCons_id").val());
+                    $.ajax({
+                        type: "GET",
+                        url: "/Construcciones/ListarEmpleados",
+                        data: "{}",
+                        success: function (data) {
+                            var s = '<option value="" selected hidden >selecciona un Empleado</option>';
+                            for (var i = 0; i < data.length; i++) {
+                                s += '<option value="' + data[i].empl_Id + '" >' + data[i].empl_Nombre + '</option>';
+                            }
+                            $("#ddlEmpleado").html(s);
+                        }
+                    });
+                }
+            }
+        });
+    }
+};
+
+
+function btnAgregarInsumo() {
+    if ($("#ddlInsumos").val() == "") {
+        mostrarErrorToast("Debe seleccionar un insumo");
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/Construcciones/InsertarInsumosPorIdConstruccion",
+            data: { cons_Id: $("#txtCons_id").val(), insm_Id: $("#ddlInsumos").val() },
+            success: function (data) {
+                if (data == 1) {
+                    CargarDataTableInsumos($("#txtCons_id").val());
+                    $.ajax({
+                        type: "GET",
+                        url: "/Construcciones/CargarInsumos",
+                        data: "{}",
+                        success: function (data) {
+                            var s = '<option value="" selected hidden >selecciona un Insumo</option>';
+                            for (var i = 0; i < data.length; i++) {
+                                s += '<option value="' + data[i].insm_Id + '" >' + data[i].insm_Descripcion + '</option>';
+                            }
+                            $("#ddlInsumos").html(s);
+                        }
+                    });
+                }
+            }
+        });
+    }
+};
 
 CargarDataTableEmpleados(0);
 var table1;
 function CargarDataTableEmpleados(e) {
+    var cons = e;
     table1 = $('#TableEmpleados').DataTable({
         destroy: true,
         ajax: ({
             url: "/Construcciones/EmpleadosListarPorIdConstruccion",
             method: "POST",
-            data: { cons_Id: e },
+            data: { cons_Id: cons },
             dataSrc: ""
-        }),
-        columns: [
-            {
-                className: 'dt-control',
-                orderable: false,
-                data: null,
-                defaultContent: '',
-            },
+        }),       
+        columns: [           
             {
                 data: 'empl_Id'
             },
             {
                 data: 'empl_Nombre'
-            },
-            {
-                data: 'carg_Cargo'
             },
             {
                 data: null,
@@ -259,28 +311,19 @@ function CargarDataTableEmpleados(e) {
     });
 }
 
-
-
-
-
 CargarDataTableInsumos(0);
 var table2;
 function CargarDataTableInsumos(i) {
+    var cons2 = i;
     table2 = $('#TableInsumos3').DataTable({
         destroy: true,
         ajax: ({
             url: "/Construcciones/ListarInsumosPorIdConstruccionTable",
             method: "POST",
-            data: { cons_Id: i },
+            data: { cons_Id: cons2 },
             dataSrc: ""
         }),
         columns: [
-            {
-                className: 'dt-control',
-                orderable: false,
-                data: null,
-                defaultContent: '',
-            },
             {
                 data: 'insm_Id'
             },
@@ -297,4 +340,26 @@ function CargarDataTableInsumos(i) {
             url: '//cdn.datatables.net/plug-ins/1.13.2/i18n/es-MX.json'
         }
     });
+}
+
+
+
+function CancelarTodo() {
+    $.ajax({
+        type: "POST",
+        url: "/Construcciones/EliminarConstruccion",
+        data: { cons_Id: $("#txtCons_id").val() },
+        success: function (data) {
+            if (data == 1) {
+                window.location.reload();
+            }
+            else {
+                mostrarErrorToast("Error al realizar la operacion")
+            }
+        }
+    });
+}
+
+function GuardarProyecto() {
+    window.location.reload();
 }

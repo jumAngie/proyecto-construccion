@@ -152,7 +152,7 @@
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-2">
-                                            <button class="btn btn-success">Agregar</button>
+                                            <button class="btn btn-success" id="btnAgregarEmpleado" onclick="btnAgregarEmpleado()">Agregar</button>
                                         </div>
                                     </div>
                                     <br />
@@ -167,11 +167,6 @@
                                                         </th>
                                                         <th>
                                                             <span>Nombre Empleado</span>
-                                                        </th>
-                                                        <th>
-                                                            <span>
-                                                                Cargo
-                                                            </span>
                                                         </th>
                                                         <th>
                                                             <span>Eliminar</span>                                                            
@@ -195,7 +190,7 @@
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-2">
-                                            <button class="btn btn-success">Agregar</button>
+                                            <button class="btn btn-success" id="btnAgregarInsumo" onclick="btnAgregarInsumo()">Agregar</button>
                                         </div>
                                     </div>
                                     <br />
@@ -227,14 +222,14 @@
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-danger">CANCELAR</button>
+                                    <button class="btn btn-danger" onclick="CancelarTodo()">CANCELAR</button>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-success">GUARDAR</button>
+                                    <button class="btn btn-success" onclick="GuardarProyecto()">GUARDAR</button>
                                 </div>
-                                <div class="col-sm-2">
+                                @*<div class="col-sm-2">
                                     <button class="btn btn-primary">Fin</button>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
@@ -246,10 +241,12 @@
 
 <partial name="_VerInsumos">
 <partial name="_EliminarConstruccionIndex">
-    @section Scripts{
-        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-        <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
-        <script src="~/js/Validaciones y otros/Construcciones/dataTableConstruccionesEmpleados.js"></script>
-        <script src="~/js/Validaciones y otros/Construcciones/Insumos/datatableInsumos.js"></script>
-        <script src="~/js/Validaciones y otros/Construcciones/AgregarConstruccion/AgregarConstruccion.js"></script>
-    }
+<partial name="_AgregarEmpleadoModal">
+<partial name="_EliminarEmpleado">
+            @section Scripts{
+                <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+                <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+                <script src="~/js/Validaciones y otros/Construcciones/dataTableConstruccionesEmpleados.js"></script>
+                <script src="~/js/Validaciones y otros/Construcciones/Insumos/datatableInsumos.js"></script>
+                <script src="~/js/Validaciones y otros/Construcciones/AgregarConstruccion/AgregarConstruccion.js"></script>
+            }

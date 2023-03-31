@@ -27,6 +27,29 @@ namespace Construccion.DataAccess.Repositories.Cons
             return db.Query<tbInsumosConstruccion>(ScriptsDatabase.InsumosPorIdConstruccion, parametros, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<tbInsumosConstruccion> InsertarInsumosPorIdConstruccion(tbInsumosConstruccion item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@cons_Id", item.cons_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@insm_Id", item.insm_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@user_UsuCreacion", item.user_UsuCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var result = db.Query<tbInsumosConstruccion>(ScriptsDatabase.InsertarInsumoPorConstruccion, parameters, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+
+        public IEnumerable<tbInsumosConstruccion> EliminarInsumoConstruccion(tbInsumosConstruccion item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@cons_Id", item.cons_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@insm_Id", item.insm_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var result = db.Query<tbInsumosConstruccion>(ScriptsDatabase.EliminarInsumoPorConstruccion, parameters, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+
         public RequestStatus Delete(tbInsumosConstruccion item)
         {
             throw new NotImplementedException();

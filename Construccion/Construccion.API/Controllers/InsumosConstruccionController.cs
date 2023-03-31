@@ -38,5 +38,14 @@ namespace Construccion.API.Controllers
             var Insumos = _construccionServices.ListarInsumosPorIdConstruccion(item);
             return Ok(Insumos);
         }
+
+        [HttpPost("InsertInsumoPorIdConstruccion")]
+
+        public IActionResult Insert(InsumosPorConstruccionViewModel insumosPorConstruccionViewModel)
+        {
+            var item = _mapper.Map<tbInsumosConstruccion>(insumosPorConstruccionViewModel);
+            var response = _construccionServices.InsertarInsumoPorIdConstruccion(item);
+            return Ok(response);
+        }
     }
 }

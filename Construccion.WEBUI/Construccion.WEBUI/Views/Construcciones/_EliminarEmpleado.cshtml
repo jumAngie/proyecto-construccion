@@ -1,0 +1,18 @@
+﻿<div class="modal fade" id="DeleteEmpleado" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content bg-danger text-white">
+            <div class="modal-body text-center">
+                <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Alert</h3>
+                <input type="text" id="txtEliminaEmpl"  name="empl_Id" />
+                <input type="text" name="name" value=""  id="txtIdCons"/>
+                <div class="text-gray-600 mt-2">
+                    ¿Está seguro de eliminar el registro?
+                    <br />
+                    <br />
+                    <button type="button" data-dismiss="modal" onclick="CerrarModalEliminar()" class="btn btn-light">Salir</button>
+                    <button type="button" id="confirmar" class="btn btn-primary" onclick="Eliminar() ">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

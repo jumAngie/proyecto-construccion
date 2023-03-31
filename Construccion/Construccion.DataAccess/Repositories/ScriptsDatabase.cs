@@ -59,6 +59,9 @@ namespace Construccion.DataAccess.Repositories
 
         #region EmpleadosPorConstruccion
         public static string EmpleadosPorConstruccionListar = "Cons.UDP_EmpleadosPorConstruccion";
+        public static string InsertarEmpleadoPorConstruccion = "Cons.UDP_tbConstruccion_InsertarEmpleado";
+        public static string EliminarEmpleadoPorConstruccion = "Cons.UDP_tbEmpleadosContruccion_EliminarEmpleadoConstruccion";
+        public static string EliminarInsumoPorConstruccion = "Cons.UDP_tbConstruccion_EliminarInsumoConstruccion";
         #endregion
 
         #region Incidencias
@@ -106,6 +109,7 @@ namespace Construccion.DataAccess.Repositories
 
         #region Insumos Por Construcciones
         public static string InsumosPorIdConstruccion = "Cons.UDP_tbInsumosConstruccion_ListarInsumosPorIdConstruccion";
+        public static string InsertarInsumoPorConstruccion = "Cons.UDP_tbInsumos_InsertarInsumo";
         #endregion
     }
 }

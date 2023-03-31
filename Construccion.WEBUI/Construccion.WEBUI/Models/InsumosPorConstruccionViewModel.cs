@@ -15,5 +15,6 @@ namespace Construccion.WEBUI.Models
         public int unim_Id { get; set; }
         [NotMapped] 
         public string unim_Descripcion { get; set; }
+        public int? user_UsuCreacion { get; set; }
     }
 }
