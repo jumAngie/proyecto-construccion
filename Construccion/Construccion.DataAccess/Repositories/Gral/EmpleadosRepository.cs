@@ -52,8 +52,21 @@ namespace Construccion.DataAccess.Repositories.Gral
         }
 
 
-        // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
         public RequestStatus Delete(tbEmpleados item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@empl_Id",              item.empl_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@user_IdModificacion",  item.user_IdModificacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@status",               DbType.Int32, direction: ParameterDirection.Output);
+
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.DeleteEmpleados, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+        // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+        public RequestStatus Deletes(tbEmpleados item)
         {
             throw new NotImplementedException();
         }

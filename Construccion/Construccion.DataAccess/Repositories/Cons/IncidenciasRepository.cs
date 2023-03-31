@@ -35,9 +35,7 @@ namespace Construccion.DataAccess.Repositories.Cons
         public RequestStatus Update(tbIncidencia item)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@inci_Id",                item.inci_Id,                 DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@cons_Id",                item.cons_Id,                 DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@inci_Descripcion",       item.inci_Descripcion,        DbType.String, ParameterDirection.Input);
+            parameters.Add("@inci_Id",                item.inci_Id,                 DbType.Int32, ParameterDirection.Input);            parameters.Add("@inci_Descripcion",       item.inci_Descripcion,        DbType.String, ParameterDirection.Input);
             parameters.Add("@user_UsuModificacion",   item.user_UsuModificacion,    DbType.Int32, ParameterDirection.Input);
             parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
 

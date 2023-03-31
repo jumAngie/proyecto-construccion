@@ -19,12 +19,11 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                             <a class="btn btn-primary" onclick="AbrirModalCrearInsumos()"><i class="fa fa-plus-square"></i> Nuevo</a>
                         </div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="col-sm-3">
-                            <a class="btn btn-primary" href="/CreatePDF/ReporteInsumos">
+                        <div class="col-sm-5">
+                            <a class="btn btn-defaults" href="/CreatePDF/ReporteInsumos">
                                 <div class="d-flex align-items-center">
                                     <span class="nav-link-icon">
                                         <span>
@@ -38,7 +37,7 @@
                     </div>
                     <br />
                     <br />
-                    <table class="table">
+                    <table class="table table-report -mt-2" id="DataTable">
                         <thead>
                             <tr>
                                 <th>
@@ -50,7 +49,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.unim_Descripcion)
                                 </th>
-                                <th></th>
+                                <th>
+                                    Editar
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,8 +68,7 @@
                                         @Html.DisplayFor(modelItem => item.unim_Descripcion)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.insm_Id,@item.insm_Descripcion')"><i class="fa fa-edit"></i> Editar</a>
                                     </td>
                                 </tr>
                             }
@@ -80,4 +80,5 @@
     </div>
 </div>
 <partial name="_Create" />
+@Html.Partial("_Edit", new Construccion.WEBUI.Models.InsumosViewModel())
 <script src="~/js/Insumos/CreateInsumos.js"></script>

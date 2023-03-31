@@ -48,8 +48,11 @@
                                         @Html.DisplayFor(modelItem => item.inci_Descripcion)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Editar", "Edit", new {    id=item.inci_Id }) |
-                                        @Html.ActionLink("Eliminar", "Delete", new { id=item.inci_Id })
+                                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.inci_Id,@item.inci_Descripcion')"><i class="fa fa-edit"></i> Editar</a>
+
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteIncidencia" onclick="Preliminar('@item.inci_Id')"><i class="fa fa-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
                             }
@@ -61,5 +64,7 @@
         </div>
     </div>
 </div>
-<partial name="_Create">
-<script src="~/js/Incidencias/CreateIncidencias.js"></script>
+    <partial name="_Create">
+    @Html.Partial("_Edit", new Construccion.WEBUI.Models.IncidenciasViewModel())
+    <partial name="_EliminarIncidencia" />
+    <script src="~/js/Incidencias/CreateIncidencias.js"></script>

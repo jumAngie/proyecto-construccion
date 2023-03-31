@@ -17,3 +17,23 @@ function Cargarddls() {
         }
     })
 }
+
+function Preliminar(e) {
+    $("#txtIncidenciaEliminar").val(e);
+}
+
+//**********************
+function EliminarUsuario() {
+    $.ajax({
+        type: "POST",
+        url: "/Incidencias/EliminarIncidencias",
+        data: { inci_Id: $("#txtIncidenciaEliminar").val() },
+        success: function (data) {
+            if (data == 1) {
+                window.location.reload();
+            } else {
+                mostrarErrorToast("Error al eliminar el registro");
+            }
+        }
+    });
+}

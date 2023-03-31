@@ -36,9 +36,7 @@ namespace Construccion.DataAccess.Repositories.Cons
         {
             var parameters = new DynamicParameters();
             parameters.Add("@insm_Id",              item.insm_Id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@insm_Descripcion",     item.insm_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@unim_Id",              item.unim_Id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@user_UsuModificacion", item.user_UsuModificacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@insm_Descripcion",     item.insm_Descripcion, DbType.String, ParameterDirection.Input);            parameters.Add("@user_UsuModificacion", item.user_UsuModificacion, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@status",                DbType.Int32, direction: ParameterDirection.Output);
 
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);

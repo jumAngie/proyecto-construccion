@@ -18,7 +18,6 @@ END
 GO
 CREATE OR ALTER PROC Cons.UDP_tbIncidencias_Update
 		@inci_Id	INT,
-		@cons_Id INT,
 		@inci_Descripcion NVARCHAR(MAX),
 		@user_UsuModificacion INT,
 		@status						INT OUTPUT
@@ -26,8 +25,7 @@ AS
 BEGIN
 BEGIN TRY
 	UPDATE Cons.tbIncidencia
-	SET		cons_Id = @cons_Id,
-			inci_Descripcion = @inci_Descripcion,
+		SET inci_Descripcion = @inci_Descripcion,
 			user_UsuModificacion = @user_UsuModificacion,
 			inci_FechaModificacion = GETDATE()
 	WHERE	inci_Id = @inci_Id
@@ -61,3 +59,22 @@ BEGIN
 
 END
 GO
+
+CREATE OR ALTER PROC Cons.UDP_tbInsumos_Update
+	@insm_Id					INT,
+	@insm_Descripcion			NVARCHAR(200), 
+	@user_UsuModificacion		INT,
+	@status						INT OUTPUT
+AS
+BEGIN	
+	BEGIN TRY
+		UPDATE Cons.tbInsumos
+		SET		insm_Descripcion = @insm_Descripcion,
+				user_UsuModificacion = @user_UsuModificacion
+		WHERE	insm_Id = @insm_Id
+		SET @status = 1;
+	END TRY
+	BEGIN CATCH
+		SET @status = 0;
+	END CATCH;
+END

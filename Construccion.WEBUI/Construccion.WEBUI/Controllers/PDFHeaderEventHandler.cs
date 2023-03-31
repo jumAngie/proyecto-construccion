@@ -15,7 +15,7 @@ namespace Construccion.WEBUI.Controllers
             try
             {
                 PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent; 
-                string logoPath = @"..\Construccion.WEBUI\Construccion.WEBUI\wwwroot\Content\images\ACROPOLIS - LOGO.png";
+                string logoPath = @"..\Construccion.WEBUI\Construccion.WEBUI\wwwroot\Content\images\ACROPOLIS-LOGO.png";
                 var logo = ImageDataFactory.Create(logoPath);
                 PdfPage page = docEvent.GetPage();
                 PdfDocument pdf = docEvent.GetDocument();

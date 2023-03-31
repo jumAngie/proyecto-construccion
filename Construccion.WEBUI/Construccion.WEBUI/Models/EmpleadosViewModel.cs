@@ -62,8 +62,11 @@ namespace Construccion.WEBUI.Models
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Formato inválido")]
         public string empl_CorreoEletronico { get; set; }
 
-
-        public int user_IdCreacion { get; set; }
+        [NotMapped]
+        [Display(Name = "Departamento")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string depto { get; set; }
+        public int? user_IdCreacion { get; set; }
         public DateTime empl_FechaCreacion { get; set; }
         public int? user_IdModificacion { get; set; }
         public DateTime? empl_FechaModificacion { get; set; }
