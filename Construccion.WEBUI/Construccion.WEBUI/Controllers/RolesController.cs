@@ -182,7 +182,7 @@ namespace Construccion.WEBUI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Delete(RolesViewModel rolesViewModel)
+        public async Task<JsonResult> Delete(RolesViewModel rolesViewModel)
         {
             var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
             rolesViewModel.role_UsuModificacion = Usuario_Id;
@@ -195,9 +195,9 @@ namespace Construccion.WEBUI.Controllers
                 var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
                 var mensaje = respuestaX.message;
                 HttpContext.Session.SetString("EliminarRol", mensaje);
-                return RedirectToAction("Index");
+                return Json(1);
             }
-            return View();
+            return Json(0);
         }
     }
 }

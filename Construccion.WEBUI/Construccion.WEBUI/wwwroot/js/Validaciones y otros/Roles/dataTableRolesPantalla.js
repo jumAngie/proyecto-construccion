@@ -102,6 +102,32 @@ $('#TableRoles tbody').on('click', 'a.btn.btn-warning', function () {
     AbrirModalEditarAccesoName();
 });
 
+$('#TableRoles tbody').on('click', 'a.btn.btn-danger', function () {
+    var tr = $(this).closest('tr');
+    var row = table.row(tr);
+
+    $("#txtRoleIdEliminar").val(row.data().role_Id);
+    EliminarRol();
+});
+
+function EliminarRol() {
+    $("#DeleteRol").modal("show");    
+}
+
+function btnEliminar() {
+    $.ajax({
+        url: "/Roles/Delete",
+        method: "POST",
+        data: { role_Id: $("#txtRoleIdEliminar").val() },
+        success: function (data) {
+            window.location.reload();
+        }
+    });
+}
+
+function CerrarModalElminar() {
+    $("#DeleteRol").modal("hide");
+}
 
 function AbrirModalEditarAccesoName() {
     $("#ModalExampleEditar").modal("show");

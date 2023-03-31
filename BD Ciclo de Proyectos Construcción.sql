@@ -2746,7 +2746,7 @@ END CATCH
 END;
 GO
 
-EXEC Acce.UDP_InsertUsuario 'Angie','456',0,3,3);
+EXEC Acce.UDP_InsertUsuario 'Angie','456',0,3,3;
 
 
 GO
@@ -2780,4 +2780,29 @@ BEGIN
 	BEGIN CATCH
 	SET @status = 0;
 	END CATCH
+END;
+
+
+go
+
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbPantallaRoles_EliminarRolCompleto
+	@role_Id	INT,
+	@status		INT OUTPUT
+AS
+BEGIN
+BEGIN TRY
+	DELETE	
+	FROM	Acce.tbPantallasRoles
+	WHERE	role_Id = @role_Id
+
+	DELETE	
+	FROM	Acce.tbRoles
+	WHERE	role_Id = @role_Id
+
+	SET @status = 1
+END TRY
+BEGIN CATCH
+	SET @status = 0
+END CATCH
 END;
