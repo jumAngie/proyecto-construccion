@@ -1,0 +1,374 @@
+PARTE DEL BACK
+**************************************************************BASE DE DATOS************************************************
+----------------------------- VISTA:
+	CREATE OR ALTER VIEW cons.VW_tbEmpleados
+AS
+	SELECT T1.[empe_Id], 
+		   [empe_Nombres],
+		   [empe_Apellido],
+		   ([empe_Nombres] + ' ' + [empe_Apellido]) AS empe_NombreCompleto,
+		   [empe_Identidad],
+		   [empe_Sexo],
+		   T1.[estacivi_Id],
+		   T2.estacivi_Nombre,
+		   [empe_FechaNacimiento],
+		   T1.[muni_Id],
+		   T3.muni_Nombre,
+		   T3.depa_Id,
+		   [empe_Direccion],
+		   [empe_Telefono],
+		   [empe_Correo],
+		   [empe_FechaInicio],
+		   [empe_FechaFinal],
+		   T1.[carg_Id],
+		   T4.carg_Nombre,
+		   t1.clin_Id,
+		   T7.clin_Nombre,
+		   T1.empe_UsuCreacion,
+		   T5.user_NombreUsuario AS empe_UsuCreacionNombre,
+		   T1.empe_UsuModificacion,
+		   T6.user_NombreUsuario AS empe_usuModificacionNombre,
+		   empe_Estado,
+		   empe_FechaCreacion,
+		   empe_FechaModificacion
+FROM cons.tbEmpleados T1 INNER JOIN gral.tbEstadosCiviles T2
+ON T1.estacivi_Id = T2.estacivi_Id INNER JOIN gral.tbMunicipios T3
+ON T1.muni_Id = T3.muni_id INNER JOIN cons.tbCargos T4
+ON T1.carg_Id = T4.carg_Id INNER JOIN acce.tbUsuarios T5
+ON T1.empe_UsuCreacion = T5.user_Id LEFT JOIN acce.tbUsuarios T6
+ON T1.empe_UsuModificacion = T6.user_Id INNER JOIN cons.tbClinicas T7
+ON T1.clin_Id = T7.clin_Id
+
+----------------------------- PROC:
+GO
+CREATE OR ALTER PROCEDURE cons.UDP_tbEmpleados_List
+AS
+BEGIN
+	SELECT * FROM cons.VW_tbEmpleados WHERE empe_Estado = 1
+END
+
+**************************************************************REPOSITORIO*************************************************************
+public VW_tbEmpleados find(int? id)
+        {
+            using var db = new SqlConnection(ConsultorioContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@empe_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<VW_tbEmpleados>(ScriptsDataBase.UDP_Encontrar_Empleados, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+ public RequestStatus Update(VW_tbEmpleados item, int id)
+        {
+            using var db = new SqlConnection(ConsultorioContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@empe_Id", item.empe_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@empe_Nombres", item.empe_Nombres, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_Apellido", item.empe_Apellido, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_Identidad", item.empe_Identidad, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_Sexo", item.empe_Sexo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@estacivi_Id", item.estacivi_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@empe_FechaNacimiento", item.empe_FechaNacimiento, DbType.Date, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_Direccion", item.empe_Direccion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_Telefono", item.empe_Telefono, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_Correo", item.empe_Correo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empe_FechaInicio", item.empe_FechaInicio, DbType.Date, ParameterDirection.Input);
+            parametros.Add("@empe_FechaFinal", item.empe_FechaFinal, DbType.Date, ParameterDirection.Input);
+            parametros.Add("@carg_Id", item.carg_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clin_Id", item.clin_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@empe_UsuModificacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<RequestStatus>(ScriptsDataBase.UDP_Editar_Empleados, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+**************************************************************SERVICIO**************************************************************
+
+	  public ServiceResult EditarEmpleados(VW_tbEmpleados item, int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var update = _empleadosRepository.Update(item, id);
+
+                if (update.MessageStatus == "El registro ha sido editado con éxito")
+                    return result.SetMessage(update.MessageStatus, ServiceResultType.Success);
+                else if (update.MessageStatus == "El registro que intenta editar no existe")
+                    return result.Conflict(update.MessageStatus);
+                else if (update.MessageStatus == "Un empleado con el mismo número de identidad ya existe")
+                    return result.Conflict(update.MessageStatus);
+                else
+                    return result.SetMessage("Por favor llene todos los campos", ServiceResultType.Conflict);
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+
+        }
+
+	public ServiceResult FindEmpleado(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var encontrar = _empleadosRepository.find(id);
+                return result.Ok(encontrar);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+**************************************************************CONTROLADOR************************************************************
+[HttpPut("Edit")]
+        public IActionResult Insert(VW_tbEmpleados item, int id)
+        {
+            var update = _consService.EditarEmpleados(item, id);
+            return Ok(update);
+        }
+
+[HttpGet("Find")]
+        public IActionResult Find(int id)
+        {
+            var encontrar = _consService.FindEmpleado(id);
+            return Ok(encontrar);
+        }
+
+PARTE DEL FRONT
+**************************************************************CONTROLADOR************************************************************
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            EmpleadoViewModel empleado = new EmpleadoViewModel();
+
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync(_baseurl + "api/Empleado/Find?id=" + id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    JObject jsonObjGet = JObject.Parse(content);
+                    empleado = JsonConvert.DeserializeObject<EmpleadoViewModel>(jsonObjGet["data"].ToString());
+
+                    ViewBag.muni_Id = empleado.muni_Id;
+
+                    var responseDepa = await httpClient.GetAsync(_baseurl + "api/Departamento/List");
+                    var responseEstado = await httpClient.GetAsync(_baseurl + "api/EstadoCivil/List");
+                    var responseCargo = await httpClient.GetAsync(_baseurl + "api/Cargo/List");
+                    var responseClinica = await httpClient.GetAsync(_baseurl + "api/Clinica/List");
+
+                    if (responseDepa.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseDepa.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.depa_Id = new SelectList(jsonObj["data"].ToList(), "depa_Id", "depa_Nombre");
+                    }
+
+                    if (responseEstado.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseEstado.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.estacivi_Id = new SelectList(jsonObj["data"].ToList(), "estacivi_Id", "estacivi_Nombre");
+                    }
+
+                    if (responseCargo.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseCargo.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.carg_Id = new SelectList(jsonObj["data"].ToList(), "carg_Id", "carg_Nombre");
+                    }
+
+                    if (responseClinica.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseClinica.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.clin_Id = new SelectList(jsonObj["data"].ToList(), "clin_Id", "clin_Nombre");
+                    }
+
+                    return View(empleado);
+                }
+                else
+                {
+                    return View(empleado);
+                }
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EmpleadoViewModel item, int id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(item);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PutAsync(_baseurl + "api/Empleado/Edit?id=" + id, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    JObject jsonObj = JObject.Parse(jsonResponse);
+
+                    ViewBag.message = jsonObj["message"];
+
+                    if (jsonObj["code"].ToString() == "200")
+                    {
+                        string script = "MostrarMensajeSuccess('" + ViewBag.message + "');";
+                        TempData["script"] = script;
+
+                        return RedirectToAction("Index");
+                    }
+                    else if (jsonObj["code"].ToString() == "409")
+                    {
+                        string script = "MostrarMensajeWarning('" + ViewBag.message + "'); $('#New').click();";
+                        TempData["script"] = script;
+
+                        return View(item);
+                    }
+                    else
+                    {
+                        string script = "MostrarMensajeDanger('" + ViewBag.message + "');";
+                        TempData["script"] = script;
+
+                        return View(item);
+                    }
+
+                }
+                else
+                {
+                    ViewBag.muni_Id = item.muni_Id;
+
+                    var responseDepa = await httpClient.GetAsync(_baseurl + "api/Departamento/List");
+                    var responseEstado = await httpClient.GetAsync(_baseurl + "api/EstadoCivil/List");
+                    var responseCargo = await httpClient.GetAsync(_baseurl + "api/Cargo/List");
+                    var responseClinica = await httpClient.GetAsync(_baseurl + "api/Clinica/List");
+
+                    if (responseDepa.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseDepa.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.depa_Id = new SelectList(jsonObj["data"].ToList(), "depa_Id", "depa_Nombre");
+                    }
+
+                    if (responseEstado.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseEstado.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.estacivi_Id = new SelectList(jsonObj["data"].ToList(), "estacivi_Id", "estacivi_Nombre");
+                    }
+
+                    if (responseCargo.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseCargo.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.carg_Id = new SelectList(jsonObj["data"].ToList(), "carg_Id", "carg_Nombre");
+                    }
+
+                    if (responseClinica.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await responseClinica.Content.ReadAsStringAsync();
+                        JObject jsonObj = JObject.Parse(jsonResponse);
+
+                        ViewBag.clin_Id = new SelectList(jsonObj["data"].ToList(), "clin_Id", "clin_Nombre");
+                    }
+
+                    //var errorContent = await response.Content.ReadAsStringAsync();
+                    //ModelState.AddModelError(string.Empty, errorContent);
+                    return View(item);
+                }
+            }
+        }
+
+
+// POR SI ACASO ACÁ VA EL MODELO:
+public class EmpleadoViewModel
+    {
+        [Display(Name = "ID")]
+        public int empe_Id { get; set; }
+
+        [Display(Name = "Nombres")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Nombres { get; set; }
+
+        [Display(Name = "Apellidos")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Apellido { get; set; }
+        public string empe_NombreCompleto { get; set; }
+
+        [Display(Name = "Identidad")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Identidad { get; set; }
+        
+        [Display(Name = "Sexo")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Sexo { get; set; }
+
+        [Display(Name = "Estado Civil")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public int estacivi_Id { get; set; }
+
+        [Display(Name = "Estado Civil")]
+        public string estacivi_Nombre { get; set; }
+
+        [Display(Name = "Fecha de Nacimiento")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public DateTime empe_FechaNacimiento { get; set; }
+
+        [Display(Name = "Municipio")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string muni_Id { get; set; }
+        public string muni_Nombre { get; set; }
+
+        [Display(Name = "Departamento")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string depa_Id { get; set; }
+
+        [Display(Name = "Dirección exacta")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Direccion { get; set; }
+
+        [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Telefono { get; set; }
+
+        [Display(Name = "Correo electrónico")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string empe_Correo { get; set; }
+
+        [Display(Name = "Fecha de Inicio")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public DateTime empe_FechaInicio { get; set; }
+
+        [Display(Name = "Fecha Final")]
+        public DateTime? empe_FechaFinal { get; set; }
+
+        [Display(Name = "Cargo")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public int carg_Id { get; set; }
+
+        [Display(Name = "Cargo")]
+        public string carg_Nombre { get; set; }
+
+        [Display(Name = "Clínica")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public int clin_Id { get; set; }
+        public string clin_Nombre { get; set; }
+        public int empe_UsuCreacion { get; set; }
+        public DateTime empe_FechaCreacion { get; set; }
+        public string empe_UsuCreacionNombre { get; set; }
+        public int? empe_UsuModificacion { get; set; }
+        public DateTime? empe_FechaModificacion { get; set; }
+        public string empe_usuModificacionNombre { get; set; }
+        public bool empe_Estado { get; set; }

@@ -16,5 +16,12 @@ namespace Construccion.Entities.Entities
         public string depa_Nombre { get; set; }
         public string muni_Nombre { get; set; }
         public string clie_DireccionExacta { get; set; }
+
+        public string depa_Id { get; set; }
+        public string muni_id { get; set; }
+
+        public int user_IdCreacion { get; set; }
+
+        public int user_IdModificacion { get; set; }
     }
 }
