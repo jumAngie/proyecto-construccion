@@ -19,6 +19,14 @@ namespace Construccion.DataAccess.Repositories.Cons
             return con.VW_tbConstrucciones.AsList();
         }
 
+        public IEnumerable<tbConstrucciones> ListConstruccionesPorId(tbConstrucciones item)
+        {   
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@cons_Id", item.cons_Id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbConstrucciones>(ScriptsDatabase.ListarConstruccion, parametro, commandType: CommandType.StoredProcedure);
+        }
+
         public IEnumerable<tbConstrucciones> InsertarConstruccion(tbConstrucciones item)
         {
             var parameters = new DynamicParameters();
