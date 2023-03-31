@@ -2576,15 +2576,34 @@ GO
 --********************************************** UDP INSERTAR USUARIOS *************************************************--
 --Procediminetos de Usuarios
 CREATE OR ALTER PROCEDURE Acce.UDP_InsertUsuario
-	@user_NombreUsuario NVARCHAR(100),	@user_Contrasena NVARCHAR(200),
-	@user_EsAdmin BIT,					@role_Id INT, 
-	@empe_Id INT										
+	@user_NombreUsuario NVARCHAR(100),	
+	@user_EsAdmin		BIT,
+	@user_Contrasena	NVARCHAR(200),
+	@role_Id			INT,
+	@empe_Id			INT,
+	@status				INT OUTPUT
 AS
 BEGIN
+BEGIN TRY
+	DECLARE @Role INT;
+	if(@role_Id = 0)
+	BEGIN 
+	SET @Role = null;
+	END
+	ELSE
+	BEGIN
+	SET @Role = @role_Id;
+	END
+
 	SET @user_Contrasena = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @user_Contrasena),2)
 
 	INSERT Acce.tbUsuarios(user_NombreUsuario, user_Contrasena, user_EsAdmin, role_Id, empe_Id, user_UsuCreacion)
-	VALUES(@user_NombreUsuario, @user_Contrasena, @user_EsAdmin, @role_Id, @empe_Id, 1);
+	VALUES(@user_NombreUsuario, @user_Contrasena, @user_EsAdmin, @Role, @empe_Id, 1);
+	SET @status = 1;
+END TRY
+BEGIN CATCH 
+	SET @status = 0;
+END CATCH 
 END;
 
 GO
@@ -2806,3 +2825,24 @@ BEGIN CATCH
 	SET @status = 0
 END CATCH
 END;
+
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_DDLempleadosTieneusuario
+		@empl_Id INT
+AS
+BEGIN
+	SELECT t2.empl_Id, 
+		   t2.empl_Nombre, 
+		   t2.empl_Apellidos
+	  FROM [Acce].[tbUsuarios] t1 
+ FULL JOIN [Gral].[tbEmpleados] t2  
+		ON t1.empe_Id = t2.empl_Id 
+	 WHERE t1.user_Id IS NULL 
+	   AND t2.[empl_Estado] = 1 
+END
+GO
+
+

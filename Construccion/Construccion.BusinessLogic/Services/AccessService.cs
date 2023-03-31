@@ -181,6 +181,22 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ListarUsuarioEmpleados()
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _usuariosRepository.ListarUsuarioEmpleados();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         public ServiceResult ValidarUsername(tbUsuarios item)
         {
             var result = new ServiceResult();
@@ -205,6 +221,36 @@ namespace Construccion.BusinessLogic.Services
                 if (item.user_Contrasena != "")
                 {
                     var map = _usuariosRepository.UpdatePassword(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult InsertarUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                if (item.user_Contrasena != "")
+                {
+                    var map = _usuariosRepository.InsertarUsuario(item);
                     if (map.CodeStatus > 0)
                     {
                         return result.Ok(map);

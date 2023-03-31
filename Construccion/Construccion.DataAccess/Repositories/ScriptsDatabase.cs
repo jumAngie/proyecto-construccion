@@ -35,6 +35,8 @@ namespace Construccion.DataAccess.Repositories
         #endregion
 
         #region Usuarios
+        public static string EmpleadoNoTieneUser = "Acce.UDP_tbUsuarios_DDLempleadosTieneusuario";
+        public static string InsertarUsuario = "Acce.UDP_InsertUsuario";
         #endregion
 
         #region Clientes

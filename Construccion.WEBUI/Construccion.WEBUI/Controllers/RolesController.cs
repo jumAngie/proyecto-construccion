@@ -42,19 +42,27 @@ namespace Construccion.WEBUI.Controllers
         [HttpPost("/Roles/Listar")]
         public async Task<IActionResult> Listado()
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");
-            if (response.IsSuccessStatusCode)
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName != "" && UserName != null)
             {
-                string content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
-                var res = result.data;
-                return Json(res.ToList());
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+                HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Rol/List");
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<ResponseAPI<RolesViewModel>>(content);
+                    var res = result.data;
+                    return Json(res.ToList());
+                }
+                else
+                {
+                    // manejar error
+                    return null;
+                }
             }
             else
             {
-                // manejar error
-                return null;
+                return RedirectToAction("Index", "Login");
             }
         }
 

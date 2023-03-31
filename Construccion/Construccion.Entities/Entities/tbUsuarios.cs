@@ -36,6 +36,8 @@ namespace Construccion.Entities.Entities
         public int? role_Id { get; set; }
         public int? empe_Id { get; set; }
         [NotMapped]
+        public int empl_Id { get; set; }
+        [NotMapped]
         public string empl_Nombre { get; set; }
         public int? user_UsuCreacion { get; set; }
         public DateTime user_FechaCreacion { get; set; }
