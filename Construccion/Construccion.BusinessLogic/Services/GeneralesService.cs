@@ -85,6 +85,22 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+        public ServiceResult EliminarEmpleado(tbEmpleados item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var map = _empleadosRepository.Delete(item);
+                return result.Ok(map);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Departamentos

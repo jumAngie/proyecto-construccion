@@ -29,10 +29,7 @@
                                     @Html.DisplayNameFor(model => model.carg_Cargo)
                                 </th>
                                 <th>
-                                    Editar
-                                </th>
-                                <th>
-                                    Detalles
+                                    <div class="text-center">Editar</div>
                                 </th>
                             </tr>
                         </thead>
@@ -47,10 +44,9 @@
                                         @Html.DisplayFor(modelItem => item.carg_Cargo)
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.carg_Id,@item.carg_Cargo')"><i class="fa fa-edit"></i> Editar</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-success" asp-action="Details" asp-route-id="@item.carg_Id"><i class="fa fa-file-text"></i> Detalles</a>
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick="Editar('@item.carg_Id,@item.carg_Cargo')"><i class="fa fa-edit"></i> Editar</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }

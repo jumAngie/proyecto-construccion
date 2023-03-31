@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
@@ -70,7 +71,29 @@ namespace Construccion.WEBUI.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(InsumosViewModel insumos)
+        {
 
+            insumos.user_UsuModificacion = (int)HttpContext.Session.GetInt32("UsuarioId");
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            var proveedorJson = new StringContent(JsonConvert.SerializeObject(insumos), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/Update", proveedorJson);
+
+            
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                var respuesta = JsonConvert.DeserializeObject<INSERTAPI>(content);
+
+                ViewBag.Success = respuesta.message;
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
 
 
         [HttpGet("/Insumos/CargarUnidadesMedida")]

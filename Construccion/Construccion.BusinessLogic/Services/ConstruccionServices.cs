@@ -589,6 +589,22 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult EliminarIncidencia(tbIncidencia item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                    var map = _incidenciasRepository.Delete(item);
+                    return result.Ok(map);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         #endregion
 
     }

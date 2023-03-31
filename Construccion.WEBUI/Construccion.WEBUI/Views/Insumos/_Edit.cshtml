@@ -1,22 +1,21 @@
-﻿@model Construccion.WEBUI.Models.UnidadesMedidaViewModel
+﻿@model Construccion.WEBUI.Models.InsumosViewModel
 <!-- Modal-->
-<div class="modal fade" id="EditarUnidadesdeMedida" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="EditarInsumo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="card-header" style="background-color:#ffbd26">
                 <div class="text-center">
-                    <h3 style="color:black"><strong>Editar Unidades de Medida</strong></h3>
+                    <h3 style="color:black"><strong>Editar Cargo</strong></h3>
                 </div>
             </div>
             <div class="modal-body">
-                <form asp-action="Edit" id="UnidadesDeMedidaEditar">
+                <form asp-action="Edit" id="InsumosEditar">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div>
-                        <div>
-                            <input asp-for="unim_Id" id="car_IDEdit" hidden class="form-control" />
-
-                            <label asp-for="unim_Descripcion" class="control-label"></label>
-                            <input asp-for="unim_Descripcion" id="car_DescripcionEditar" class="form-control" />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input asp-for="insm_Id" id="car_IDEdit" hidden class="form-control" />
+                            <label asp-for="insm_Descripcion" class="control-label"></label>
+                            <input asp-for="insm_Descripcion" id="car_DescripcionEditar" class="form-control" />
                             <div class="text-center">
                                 <span id="car_DescripcionValidateEdit" class="text-danger" hidden><strong>Campo requerido</strong></span>
                             </div>
@@ -35,21 +34,28 @@
 </div>
 
 <script>
-function CerraLimpiar() {
+
+
+
+
+
+
+    function CerraLimpiar() {
         $('#car_DescripcionEditar').val("");
-        $('#UnidadesDeMedidaEditar').modal('hide');
+        $('#EditarCargo').modal('hide');
         $('#car_DescripcionValidateEdit').attr('hidden', true);
 
     }
+
+
 
     function Editar(cadena) {
         var datastring = cadena;
         var data = datastring.split(',');
         $("#car_IDEdit").val(data[0]);
         $("#car_DescripcionEditar").val(data[1]);
-        $("#EditarCargo").modal('show');
+        $("#EditarInsumo").modal('show');
     };
-
     function GuardarEdit() {
 
 
@@ -58,15 +64,15 @@ function CerraLimpiar() {
 
         }
 
-
         if ($('#car_DescripcionEditar').val() == "") {
             mostrarErrorToast("Campos requeridos.");
 
         }
 
         else{
-            $('#UnidadesDeMedidaEditar').submit();
+            $('#InsumosEditar').submit();
         }
 
 
-    };</script>
+    };
+</script>

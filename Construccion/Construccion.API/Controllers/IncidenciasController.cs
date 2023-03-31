@@ -50,6 +50,14 @@ namespace Construccion.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("EliminarIncidencia")]
+        public IActionResult EliminarIncidencia(IncidenciasViewModel incidencias)
+        {
+            var item = _mapper.Map<tbIncidencia>(incidencias);
+            var response = _construccionServices.EliminarIncidencia(item);
+            return Ok(response);
+        }
+
         [HttpGet("ListadoConstrucciones")]
 
         public IActionResult ListadoConstruc()

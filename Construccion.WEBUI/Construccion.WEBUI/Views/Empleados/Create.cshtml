@@ -1,0 +1,204 @@
+﻿@model Construccion.WEBUI.Models.EmpleadosViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12 mb-0 order-0">
+    <div class="card" style="background-color: white">
+        <div class="d-flex align-items-end row">
+            <div class="col-sm-12">
+                <div class="card-header" style="background-color: #ffbd26">
+                    <div class="text-center">
+                        <img src="~/Content/images/ACROPOLIS-LOGO.png" width="200" />
+                        <h3 style="color:black"><strong>Cree un Empleado</strong></h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" id="CrearEmpleados" class="needs-validation" method="post" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="empl_DNI" class="control-label"></label>
+                                    <input type="number" asp-for="empl_DNI" class="form-control" />
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="empl_DNI" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="text-danger">*</label>
+                                        <label asp-for="empl_Nombre" class="control-label"></label>
+                                        <input asp-for="empl_Nombre" class="form-control" />
+                                        <div class="text-center">
+                                            <strong>
+                                                <span asp-validation-for="empl_Nombre" class="text-danger"></span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="empl_Apellidos" class="control-label"></label>
+                                    <input asp-for="empl_Apellidos" class="form-control" />
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="empl_Apellidos" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="empl_Sexo" class="control-label"></label>
+                                    <div class="row">
+                                        <label>F</label>
+                                        <input type="radio" value="F" asp-for="empl_Sexo" class="form-check-inline" />
+                                        <label>M</label>
+                                        <input type="radio" value="M" asp-for="empl_Sexo" class="form-check-inline" />
+                                    </div>
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="empl_Sexo" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="esta_ID"  class="control-label"></label>
+                                    <select asp-for="esta_ID" id="esta_ID" class="form-control">
+                                    </select>
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="esta_ID" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="empl_Telefono" class="control-label"></label>
+                                    <input asp-for="empl_Telefono" class="form-control" />
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="empl_Telefono" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="text-danger">*</label>
+                                        <label>Departamento<label id="Error4" hidden style="color:red; font-size:14px;">*</label></label>
+                                        <select asp-for="depto" class="form-control" id="ddlDepto">
+                                        </select>
+                                        <div class="text-center">
+                                            <strong>
+                                                <span asp-validation-for="depto" class="text-danger"></span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="text-danger">*</label>
+                                        <label>Municipio</label>
+                                        <select asp-for="muni_Id" class="form-control" id="ddlMunicipio" disabled>
+                                            <option value="">Por favor selecciona un departamento</option>
+                                        </select>
+                                        <div class="text-center">
+                                            <strong>
+                                                <span asp-validation-for="muni_Id" class="text-danger"></span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="carg_Id" class="control-label"></label>
+                                    <select asp-for="carg_Id" id="carg_Id" class="form-control"></select>
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="carg_Id" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="empl_FechaNacimiento" class="control-label"></label>
+                                    <input type="date" asp-for="empl_FechaNacimiento" class="form-control" />
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="empl_FechaNacimiento" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                        <label asp-for="empl_DireccionExacta" class="control-label"></label>
+                                        <input asp-for="empl_DireccionExacta" class="form-control" />
+                                        <div class="text-center">
+                                            <strong>
+                                                <span asp-validation-for="empl_DireccionExacta" class="text-danger"></span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="text-danger">*</label>
+                                    <label asp-for="empl_CorreoEletronico" class="control-label"></label>
+                                    <input asp-for="empl_CorreoEletronico" id="correo" placeholder="ejemplo@gmail.com" class="mdi-email-box, form-control" type="email" />
+                                    <div class="text-center">
+                                        <strong>
+                                            <span asp-validation-for="empl_CorreoEletronico" class="text-danger"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-center">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <a class="btn btn-secondary" asp-action="Index">Volver</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/Empleados/CreateEmpleados.js"></script>
+

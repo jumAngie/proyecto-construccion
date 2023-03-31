@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
@@ -88,6 +89,49 @@ namespace Construccion.WEBUI.Controllers
                 // manejar error
                 return null;
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(IncidenciasViewModel incidencias)
+        {
+            incidencias.user_UsuModificacion = (int)HttpContext.Session.GetInt32("UsuarioId");
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            var proveedorJson = new StringContent(JsonConvert.SerializeObject(incidencias), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Incidencias/Update", proveedorJson);
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                var respuesta = JsonConvert.DeserializeObject<INSERTAPI>(content);
+
+                ViewBag.Success = respuesta.message;
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost("/Incidencias/EliminarIncidencias")]
+        public async Task<IActionResult> EliminarUsuario(int inci_Id)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            IncidenciasViewModel incidenciasView = new IncidenciasViewModel();
+            incidenciasView.user_UsuModificacion = Usuario_Id;
+            incidenciasView.inci_Id = inci_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<IncidenciasViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Incidencias/EliminarIncidencia", incidenciasView);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<INSERTAPI>(content);
+                var res = result.message;
+                return Json(1);
+            }
+            return Json(0);
         }
     }
 }

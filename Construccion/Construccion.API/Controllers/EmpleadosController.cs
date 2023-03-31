@@ -41,6 +41,14 @@ namespace Construccion.API.Controllers
 
         }
 
+        [HttpPost("EliminarEmpleados")]
+        public IActionResult EliminarEmpleado(EmpleadosViewModel emple)
+        {
+            var item = _mapper.Map<tbEmpleados>(emple);
+            var response = _generalesServices.EliminarEmpleado(item);
+            return Ok(response);
+        }
+
         [HttpGet("ListarEmpleadosSinCons")]
         public IActionResult ListarEmpleadosSinCons()
         {   
@@ -62,6 +70,26 @@ namespace Construccion.API.Controllers
             var viewModel = new EmpleadosChartViewModel { data = data, labels = labels };
 
             return Ok(viewModel);
+        }
+
+        [HttpGet("ListarEstadosCiviles")]
+
+        public IActionResult ListadoEstadosCiviles()
+        {
+            var estadosCiviles = from u in db.tbEstadosCiviles
+                                   select new { esta_ID = u.esta_ID, esta_Descripcion = u.esta_Descripcion };
+
+            return Ok(estadosCiviles.ToList());
+        }
+
+
+        [HttpGet("ListarCargos")]
+        public IActionResult ListadoCargos()
+        {
+            var cargos = from u in db.tbCargos
+                                 select new { carg_Id = u.carg_Id, carg_Cargo = u.carg_Cargo };
+
+            return Ok(cargos.ToList());
         }
 
     }
