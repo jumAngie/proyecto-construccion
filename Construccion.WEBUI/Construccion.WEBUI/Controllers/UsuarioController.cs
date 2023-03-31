@@ -116,5 +116,93 @@ namespace Construccion.WEBUI.Controllers
             return Json(0);
         }
 
+
+        [HttpPost("/Usuario/CargarDatosUsuarios")]
+        public async Task<IActionResult> CargarDatosUsuarios(int user_Id)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+            usuarioViewModel.user_Id = user_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/CargarDatosUsuarios", usuarioViewModel);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<UsuarioViewModel>>(content);
+                var res = result.data;
+                return Json(res);
+            }
+            return Json(0);
+        }
+
+        [HttpPost("EditarUsuarios")]
+        public async Task<IActionResult> EditarUsuarios(int user_Id,int role_Id, int empe_Id, bool user_EsAdmin, string user_NombreUsuario)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+            usuarioViewModel.user_Id = user_Id;
+            usuarioViewModel.empe_Id = empe_Id;
+            usuarioViewModel.role_Id = role_Id;
+            usuarioViewModel.user_EsAdmin = user_EsAdmin;         
+            usuarioViewModel.user_NombreUsuario = user_NombreUsuario;
+            usuarioViewModel.user_UsuModificacion = (int)Usuario_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/UpdateUsuario", usuarioViewModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                return RedirectToAction("Index","Usuario");
+            }
+            return Json(0);
+        }
+
+        //[HttpPost("/Usuario/ExisteUsuario")]
+        //public async Task<IActionResult> ExisteUsuario(string user_NombreUsuario)
+        //{
+        //    var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+        //    UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+        //    usuarioViewModel.user_NombreUsuario = user_NombreUsuario;
+        //    var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+        //    HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/ExisteUsuario", usuarioViewModel);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string content = await response.Content.ReadAsStringAsync();
+        //        var result = JsonConvert.DeserializeObject<INSERTAPI>(content);
+        //        var res = result.message;
+        //        if (res == "Operacion realizada con exito")
+        //        {
+        //            return Json(1);
+        //        }
+        //        else
+        //        {
+        //            return Json(0);
+        //        }
+
+        //    }
+        //    return Json(0);
+        //}
+
+
+        [HttpPost("/Usuario/EliminarUsuario")]
+        public async Task<IActionResult> EliminarUsuario(int user_Id)
+        {
+            var Usuario_Id = HttpContext.Session.GetInt32("UsuarioId");
+            UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+            usuarioViewModel.user_Id = user_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<UsuarioViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Usuarios/EliminarUsuario", usuarioViewModel);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<INSERTAPI>(content);
+                var res = result.message;
+                return Json(1);
+            }
+            return Json(0);
+        }
+
     }
 }

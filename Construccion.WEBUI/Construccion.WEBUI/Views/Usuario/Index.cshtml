@@ -58,10 +58,10 @@
                                             @Html.DisplayFor(modelItem => item.Es_Admin)
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick=""><i class="fa fa-edit"></i> Editar</a>
+                                            <a class="btn btn-warning" onclick="Editar('@item.user_Id')"><i class="fa fa-edit"></i> Editar</a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditarCargo" onclick=""><i class="fa fa-trash"></i> Eliminar</a>
+                                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteUsuario" onclick="Preliminar('@item.user_Id')"><i class="fa fa-trash"></i> Eliminar</a>
                                         </td>
                                     </tr>
                                 }
@@ -75,7 +75,8 @@
 </div>
 
 <partial name="_InsertUsuario" />
-
+<partial name="_EditarUsuarios" />
+<partial name="_EliminarUsuario" />
 @section Scripts{
     <script src="~/js/Usuario/Usuarios.js"></script>
 }

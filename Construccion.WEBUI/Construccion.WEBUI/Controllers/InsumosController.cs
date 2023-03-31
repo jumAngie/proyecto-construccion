@@ -29,19 +29,19 @@ namespace Construccion.WEBUI.Controllers
                 ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
                 ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
                 var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/List");
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResponseAPI<InsumosViewModel>>(content);
-                var res = result.data;
-                return View(res);
-            }
-            else
-            {
-                // manejar error
-                return null;
-            }
+                HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/List");
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<ResponseAPI<InsumosViewModel>>(content);
+                    var res = result.data;
+                    return View(res);
+                }
+                else
+                {
+                    // manejar error
+                    return null;
+                }
             }
             else
             {

@@ -37,6 +37,10 @@ namespace Construccion.DataAccess.Repositories
         #region Usuarios
         public static string EmpleadoNoTieneUser = "Acce.UDP_tbUsuarios_DDLempleadosTieneusuario";
         public static string InsertarUsuario = "Acce.UDP_InsertUsuario";
+        public static string CargarDatosUsuarios = "Acce.UDP_tbUsuarios_CargarDatosUsuarios";
+        public static string EditarUsuarios = "Acce.UDP_tbUsuarios_EditarUsuarios";
+        public static string ExisteUsuario = "Acce.UDP_tbUsuarios_ExisteUsuario";
+        public static string EliminarUsuario = "Acce.UDP_tbUsuarios_EliminarUsuario";
         #endregion
 
         #region Clientes
@@ -50,6 +54,7 @@ namespace Construccion.DataAccess.Repositories
         public static string UpdateConstrucciones = "Cons.UDP_tbConstrucciones_Update";
         public static string DeleteConstrucciones = "Cons.UDP_tbConstrucciones_Delete";
         public static string ListarConstruccion = "Cons.UDP_tbConstrucciones_ListarInfoConstruccion";
+        public static string EliminarConstruccion = "Cons_UDP_tbConstrucciones_EliminarConstruccion";
         #endregion
 
         #region EmpleadosPorConstruccion
@@ -86,7 +91,7 @@ namespace Construccion.DataAccess.Repositories
         public static string InsertarEmpleados = "Gral.UDP_tbEmpleados_Insert";
         public static string UpdateEmpleados = "Gral.UDP_tbEmpleados_Update";
         public static string DeleteEmpleados = "Gral.UDP_tbEmpleados_Delete";
-        public static string DdlEmpleados = "UDP_tbEmpleadosConstruccion_EmpleadosTieneConstruccion";
+        public static string DdlEmpleados = "Gral.UDP_tbEmpleadosConstruccion_EmpleadosTieneConstruccion";
         #endregion
 
         #region Estados Civiles

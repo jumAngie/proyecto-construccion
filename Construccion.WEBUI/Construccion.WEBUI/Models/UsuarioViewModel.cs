@@ -21,5 +21,7 @@ namespace Construccion.WEBUI.Models
 
         [NotMapped]
         public string empl_Nombre { get; set; }
+
+        public int? user_UsuModificacion { get; set; }
     }
 }

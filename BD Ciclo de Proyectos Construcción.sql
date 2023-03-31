@@ -2588,7 +2588,7 @@ BEGIN TRY
 	DECLARE @Role INT;
 	if(@role_Id = 0)
 	BEGIN 
-	SET @Role = 8;
+	SET @Role = 1;
 	END
 	ELSE
 	BEGIN
@@ -2653,9 +2653,10 @@ CREATE OR ALTER PROC Cons.UDP_EmpleadosPorConstruccion
 	@cons_Id  INT
 AS
 BEGIN
-	SELECT empleados.empl_Id, empl_Nombre, empl_Apellidos, empl_Telefono, empl_CorreoEletronico FROM Gral.tbEmpleados empleados
-		   INNER JOIN	Cons.tbEmpleadosPorConstruccion construc
-		   ON			empleados.empl_Id = construc.empl_Id
+	SELECT empleados.empl_Id, empl_Nombre, empl_Apellidos, empl_Telefono, empl_CorreoEletronico, carg_Cargo FROM Gral.tbEmpleados empleados
+		   INNER JOIN	Cons.tbEmpleadosPorConstruccion construc 
+		   ON			empleados.empl_Id = construc.empl_Id INNER JOIN Gral.tbCargos cargos
+		   ON			empleados.carg_Id = cargos.carg_Id
 		   WHERE		construc.cons_Id = @cons_Id
 END
 
@@ -2851,5 +2852,139 @@ BEGIN
 			cons_Direccion,
 			cons_FechaInicio,
 			cons_FechaFin
-	FROM	Cons.tbConstrucciones
+	FROM	Cons.tbConstrucciones;
 END;
+
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_CargarDatosUsuarios
+	@user_Id	INT	
+AS
+BEGIN
+BEGIN TRY
+	SELECT	user_Id,
+			user_EsAdmin,
+			user_NombreUsuario,
+			empe_Id,
+			role_Id,
+			t1.empl_Nombre
+	FROM	Acce.tbUsuarios t2 INNER JOIN Gral.tbEmpleados t1
+	ON		t2.empe_Id = t1.empl_Id
+	WHERE	user_Id = @user_Id
+END TRY
+BEGIN CATCH
+	SELECT 0;
+END CATCH 
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_EditarUsuarios
+	@user_Id				INT,
+	@user_NombreUsuario		NVARCHAR(250),
+	@user_EsAdmin			BIT,
+	@role_Id				INT,
+	@empe_Id				INT,
+	@user_UsuModificacion	INT,
+	@status					INT OUTPUT
+AS
+BEGIN
+BEGIN TRY
+		DECLARE @Role INT;
+	if(@role_Id = 0)
+	BEGIN 
+	SET @Role = 1;
+	END
+	ELSE
+	BEGIN
+	SET @Role = @role_Id;
+	END
+
+	
+UPDATE [Acce].[tbUsuarios]
+   SET [user_NombreUsuario] = @user_NombreUsuario
+      ,[user_EsAdmin] = @user_EsAdmin
+      ,[role_Id] = @Role
+      ,[empe_Id] = @empe_Id
+      ,[user_UsuModificacion] = @user_UsuModificacion
+      ,[user_FechaModificacion] = GETDATE()
+ WHERE user_Id = @user_Id
+	 SET @status = 1;
+END TRY
+BEGIN CATCH
+	 SET @status = 0;
+END CATCH 
+END;
+
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_ExisteUsuario
+	@user_NombreUsuario	NVARCHAR(250),
+	@status				INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+	SELECT	user_Id
+	FROM	Acce.tbUsuarios
+	WHERE	user_NombreUsuario = @user_NombreUsuario
+
+	SET @status = 1;
+	END TRY
+	BEGIN CATCH
+	SET @status = 0;
+	END CATCH
+END;
+
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Acce.UDP_tbUsuarios_EliminarUsuario
+	@user_Id			INT,
+	@status				INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+	DELETE
+	FROM	Acce.tbUsuarios
+	WHERE	user_Id = @user_Id;
+	SET @status = 1;
+	END TRY
+	BEGIN CATCH
+	SET @status = 0;
+	END CATCH
+END;
+
+GO
+
+
+CREATE OR ALTER PROCEDURE Cons_UDP_tbConstrucciones_EliminarConstruccion
+	@cons_Id		INT,
+	@status			INT OUTPUT
+AS
+BEGIN
+BEGIN TRY
+
+	DELETE 
+	FROM	Cons.tbInsumosConstruccion
+	WHERE	cons_Id = @cons_Id;
+
+	DELETE 
+	FROM	Cons.tbEmpleadosPorConstruccion
+	WHERE	cons_Id = @cons_Id;
+
+	DELETE
+	FROM	Cons.tbConstrucciones
+	WHERE	cons_Id = @cons_Id
+
+	SET @status = 1;
+
+END TRY
+BEGIN CATCH
+	SET @status = 0;
+END CATCH
+END

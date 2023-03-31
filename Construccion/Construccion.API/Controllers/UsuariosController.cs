@@ -48,6 +48,14 @@ namespace Construccion.API.Controllers
 
         }
 
+        [HttpPost("CargarDatosUsuarios")]
+        public IActionResult Editar(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var listado = _accessService.CargarDatosUsuario(item);
+            return Ok(listado);
+        }
+
         [HttpPost("Evaluar")]
         public IActionResult Evaluar(UsuariosViewModel usuariosViewModel)
         {
@@ -96,6 +104,31 @@ namespace Construccion.API.Controllers
         {
             var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
             var response = _accessService.InsertarUsuario(item);
+            return Ok(response);
+        }
+
+        [HttpPost("UpdateUsuario")]
+
+        public IActionResult UpdateUsuario(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.UpdateUsuario(item);
+            return Ok(response);
+        }
+
+        [HttpPost("ExisteUsuario")]
+        public IActionResult ExisteUsuario(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.ExisteUsuario(item);
+            return Ok(response);
+        }
+
+        [HttpPost("EliminarUsuario")]
+        public IActionResult EliminarUsuario(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
+            var response = _accessService.EliminarUsuario(item);
             return Ok(response);
         }
     }

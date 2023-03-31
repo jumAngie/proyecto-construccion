@@ -237,6 +237,26 @@ namespace Construccion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult EliminarConstruccion(tbConstrucciones item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                if (item.cons_Proyecto != "")
+                {
+                    var map = _construccionesRepository.EliminiarConstruccion(item);
+                    return result.Ok(map);
+                }
+                return result.Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
         #region Insumos

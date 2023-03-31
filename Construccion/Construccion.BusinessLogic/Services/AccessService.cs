@@ -181,6 +181,53 @@ namespace Construccion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ExisteUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                if (item.user_NombreUsuario != "")
+                {
+                    var map = _usuariosRepository.ExisteUsuario(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+         
+        }
+
+        public ServiceResult CargarDatosUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _usuariosRepository.CargarDatosUsuario(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
         public ServiceResult ListarUsuarioEmpleados()
         {
             var result = new ServiceResult();
@@ -251,6 +298,66 @@ namespace Construccion.BusinessLogic.Services
                 if (item.user_Contrasena != "")
                 {
                     var map = _usuariosRepository.InsertarUsuario(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EliminarUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                if (item.user_Contrasena != "")
+                {
+                    var map = _usuariosRepository.EliminarUsuario(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult UpdateUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                if (item.user_Contrasena != "")
+                {
+                    var map = _usuariosRepository.UpdateUsuario(item);
                     if (map.CodeStatus > 0)
                     {
                         return result.Ok(map);

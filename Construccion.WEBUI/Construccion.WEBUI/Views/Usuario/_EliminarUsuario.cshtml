@@ -1,0 +1,21 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="modal fade" id="DeleteUsuario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content bg-danger text-white">
+            <div class="modal-body text-center">
+                <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Alert</h3>
+                <input type="hidden" id="txtUsuarioIdEliminar" name="role_Id" />
+                <div class="text-gray-600 mt-2">
+                    ¿Está seguro de eliminar el registro?
+                    <br />
+                    <br />
+                    <button type="button" data-dismiss="modal" class="btn btn-light">Salir</button>
+                    <button type="button" id="confirmar" class="btn btn-primary" onclick="EliminarUsuario()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

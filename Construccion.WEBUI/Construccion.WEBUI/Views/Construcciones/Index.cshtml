@@ -50,7 +50,7 @@
                                     </th>
                                     <th>
                                         <span>
-                                            Descripcion del proyecto
+                                            Des del proyecto
                                         </span>
                                     </th>
                                     <th>
@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h5><strong>1</strong><span> - Añadir Construccion</span></h5>
-                        <input type="text" name="cons_id" id="txtCons_id" readonly hidden/>
+                        <input type="text" name="cons_id" id="txtCons_id" hidden/>
                         <br />
                         <div class="row">
                             <div class="col-sm-6">
@@ -145,8 +145,7 @@
                                     <br />
                                     <div class="row">
                                         <label>Empleados</label>
-                                        <select class="form-control">
-                                            <option value="value">text</option>
+                                        <select class="form-control" id="ddlEmpleado">
                                         </select>
                                     </div>
                                     <br />
@@ -175,7 +174,7 @@
                                                             </span>
                                                         </th>
                                                         <th>
-                                                            Eliminar
+                                                            <span>Eliminar</span>                                                            
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -189,8 +188,7 @@
                                     <br />
                                     <div class="row">
                                         <label>Insumos</label>
-                                        <select class="form-control">
-                                            <option value="value">text</option>
+                                        <select class="form-control" id="ddlInsumos">
                                         </select>
                                     </div>
                                     <br />
@@ -247,6 +245,7 @@
 </div>
 
 <partial name="_VerInsumos">
+<partial name="_EliminarConstruccionIndex">
     @section Scripts{
         <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
         <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>

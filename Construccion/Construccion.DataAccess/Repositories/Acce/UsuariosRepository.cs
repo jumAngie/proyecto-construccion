@@ -27,6 +27,14 @@ namespace Construccion.DataAccess.Repositories.Acce
             return db.Query<tbUsuarios>(ScriptsDatabase.EmpleadoNoTieneUser, parametro, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<tbUsuarios> CargarDatosUsuario(tbUsuarios item)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@user_Id", item.user_Id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbUsuarios>(ScriptsDatabase.CargarDatosUsuarios, parametro, commandType: CommandType.StoredProcedure);
+        }
+
         public IEnumerable<tbUsuarios> EvaluarUsuarios(tbUsuarios item)
         {
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
@@ -68,6 +76,44 @@ namespace Construccion.DataAccess.Repositories.Acce
             using var db = new SqlConnection(ConstruccionCon.ConnectionString);
             db.Query<RequestStatus>(ScriptsDatabase.InsertarUsuario, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+        public RequestStatus UpdateUsuario(tbUsuarios item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@user_Id", item.user_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@user_NombreUsuario", item.user_NombreUsuario, DbType.String, ParameterDirection.Input);
+            parameters.Add("@user_EsAdmin", item.user_EsAdmin, DbType.Boolean, direction: ParameterDirection.Input);
+            parameters.Add("@role_Id", item.role_Id, DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add("@empe_Id", item.empe_Id, DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add("@user_UsuModificacion", item.user_UsuModificacion, DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.EditarUsuarios, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+        public RequestStatus ExisteUsuario(tbUsuarios item)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@user_NombreUsuario", item.user_NombreUsuario, DbType.String, ParameterDirection.Input);
+            parametro.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            db.Query<RequestStatus>(ScriptsDatabase.ExisteUsuario, parametro, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parametro.Get<int>("@status") };
+            return result;
+        }
+
+        public RequestStatus EliminarUsuario(tbUsuarios item)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@user_Id", item.user_Id, DbType.String, ParameterDirection.Input);
+            parametro.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            db.Query<RequestStatus>(ScriptsDatabase.EliminarUsuario, parametro, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parametro.Get<int>("@status") };
             return result;
         }
 

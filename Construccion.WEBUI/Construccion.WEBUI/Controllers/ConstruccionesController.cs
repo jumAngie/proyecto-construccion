@@ -153,9 +153,8 @@ namespace Construccion.WEBUI.Controllers
             var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
             ConstruccionesViewModel construccionesViewModel = new ConstruccionesViewModel();
             construccionesViewModel.cons_Id = cons_Id;
-            construccionesViewModel.user_UsuCreacion = usuarioId;
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ConstruccionesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Construcciones/Eliminar", construccionesViewModel);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ConstruccionesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Construcciones/EliminarConstruccion", construccionesViewModel);
 
             if (response.IsSuccessStatusCode)
             {
@@ -163,7 +162,7 @@ namespace Construccion.WEBUI.Controllers
                 var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
                 var mensaje = respuestaX.message;
                 var resultado = 1;
-                return Json(new { success = true, resultado });
+                return Json(resultado);
             }
             return Json(0);
         }
@@ -187,5 +186,70 @@ namespace Construccion.WEBUI.Controllers
                 return null;
             }
         }
+
+        [HttpPost("/Construcciones/EmpleadosListarPorIdConstruccion")]
+        public async Task<JsonResult> EmpleadosListar(int cons_Id)
+        {
+            EmpleadosPorConstruccionViewModel empleadosPorConstruccionViewModel = new EmpleadosPorConstruccionViewModel();
+            empleadosPorConstruccionViewModel.cons_Id = cons_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<EmpleadosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "EmpleadosConstruccion/EmpleadosPorIdConstruccion", empleadosPorConstruccionViewModel);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<EmpleadosPorConstruccionViewModel>>(content);
+                var res = result.data;
+                return Json(new { success = true, res });
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
+
+        [HttpGet("/Construcciones/CargarInsumos")]
+
+        public async Task<JsonResult> ListarInsumos()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/List");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<InsumosViewModel>>(content);
+                var insumos = result.data;
+                return Json(insumos);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
+
+
+        [HttpPost("/Construcciones/ListarInsumosPorIdConstruccionTable")]
+        public async Task<JsonResult> ListarInsumosPorIdConstruccionTable(int cons_Id)
+        {
+            InsumosPorConstruccionViewModel insumosPorConstruccionViewModel = new InsumosPorConstruccionViewModel();
+            insumosPorConstruccionViewModel.cons_Id = cons_Id;
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<InsumosPorConstruccionViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "InsumosConstruccion/InsumosPorIdConstruccion", insumosPorConstruccionViewModel);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ResponseAPI<InsumosPorConstruccionViewModel>>(content);
+                var res = result.data;
+                return Json(res);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
+        }
+
     }
 }
+

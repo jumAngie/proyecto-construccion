@@ -32,6 +32,14 @@ namespace Construccion.API.Controllers
             return Ok(list);
         }
 
+        [HttpPost("ListarConstrucciones")]
+        public IActionResult ListarContruccion(ConstruccionesViewModel item)
+        {
+            var item1 = _mapper.Map<tbConstrucciones>(item);
+            var list = _construccionServices.ListConstruccionesPorId(item1);
+            return Ok(list);
+        }
+
         [HttpPost("Insert")]
 
         public IActionResult Insert(ConstruccionesViewModel construccionesViewModel)
@@ -53,6 +61,14 @@ namespace Construccion.API.Controllers
             construccionesViewModelInsert.user_UsuCreacion = usuario;
             var item = _mapper.Map<tbConstrucciones>(construccionesViewModelInsert);
             var response = _construccionServices.CreateConstruccion(item);
+            return Ok(response);
+        }
+
+        [HttpPost("EliminarConstruccion")]
+        public IActionResult EliminarConstruccion(tbConstrucciones item)
+        {
+            var item1 = _mapper.Map<tbConstrucciones>(item);
+            var response = _construccionServices.EliminarConstruccion(item1);
             return Ok(response);
         }
     }

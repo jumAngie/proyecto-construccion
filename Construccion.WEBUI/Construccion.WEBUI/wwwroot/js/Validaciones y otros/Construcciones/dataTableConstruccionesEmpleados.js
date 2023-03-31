@@ -66,6 +66,35 @@ $('#TableConstrucciones tbody').on('click', 'a.btn.btn-outline-success', functio
 });
 
 
+$('#TableConstrucciones tbody').on('click', 'a.btn.btn-outline-danger', function () {
+    var tr = $(this).closest('tr');
+    var row = table.row(tr);
+
+    Eliminar(row.data().cons_Id);
+});
+
+function Eliminar(e) {
+    $("#txtDeleteIdCons").val(e);
+    $("#DeleteConstruccion").modal("show");
+}
+
+function EliminarCompleto() {
+    $.ajax({
+        type: "POST",
+        url: "/Construcciones/EliminarConstruccion",
+        data: { cons_Id: $("#txtDeleteIdCons").val() },
+        success: function (data) {
+            if (data == 1) {
+                window.location.reload();
+            }
+            else {
+                mostrarErrorToast("Error al realizar la operacion");
+            }
+        }
+    });
+}
+
+
 $('#TableConstrucciones tbody').on('click', 'a.btn.btn-outline-primary', function () {
     var tr = $(this).closest('tr');
     var row = table.row(tr);

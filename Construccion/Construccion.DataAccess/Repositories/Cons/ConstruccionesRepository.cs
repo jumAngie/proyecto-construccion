@@ -43,6 +43,17 @@ namespace Construccion.DataAccess.Repositories.Cons
             return result;
         }
 
+        public RequestStatus EliminiarConstruccion(tbConstrucciones item)
+        {
+            using var db = new SqlConnection(ConstruccionCon.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@cons_Id", item.cons_Id, DbType.String, ParameterDirection.Input);
+            parametro.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            db.Query<RequestStatus>(ScriptsDatabase.EliminarConstruccion, parametro, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parametro.Get<int>("@status") };
+            return result;
+        }
+
         //public RequestStatus Insert(tbConstrucciones item)
         //{
         //    var parameters = new DynamicParameters();
