@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
@@ -48,6 +49,47 @@ namespace Construccion.WEBUI.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(InsumosViewModel insumosView, string insm_Descripcion, int unim_Id)
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            insumosView.user_UsuCreacion = (int)HttpContext.Session.GetInt32("UsuarioId");
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<InsumosViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/Insert", insumosView);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                HttpContext.Session.SetString("NombreUsuario", mensaje);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+
+
+
+
+        [HttpGet("/Insumos/CargarUnidadesMedida")]
+
+        public async Task<IActionResult> CargarUnidadesMedida()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Insumos/ListarUnidadesdeMedida");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var unidadesMedida = JsonConvert.DeserializeObject<List<DDLUnidadesMedida>>(content);
+                return Json(unidadesMedida);
+            }
+            else
+            {
+                // manejar error
+                return null;
+            }
         }
     }
 }

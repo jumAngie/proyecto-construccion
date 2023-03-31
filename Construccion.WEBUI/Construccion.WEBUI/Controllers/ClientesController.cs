@@ -54,8 +54,19 @@ namespace Construccion.WEBUI.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
-        }
+            var UserName = HttpContext.Session.GetString("user_Nombre");
+            if (UserName != "" && UserName != null)
+            {
+                ViewBag.Admin = HttpContext.Session.GetString("user_EsAdmin");
+                ViewBag.Nombre = HttpContext.Session.GetString("empl_Nombre");
+                ViewBag.Mensaje = HttpContext.Session.GetString("Mensaje");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            }
 
         [HttpPost]
         public async Task<IActionResult> Create(ClientesViewModel clientesView)
@@ -86,27 +97,27 @@ namespace Construccion.WEBUI.Controllers
             
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(int clie_Id)
-        {
-            ClientesViewModel clientesView = new ClientesViewModel();
-            clientesView.clie_Id = clie_Id;
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(int clie_Id)
+        //{
+        //    ClientesViewModel clientesView = new ClientesViewModel();
+        //    clientesView.clie_Id = clie_Id;
 
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<ClientesViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Clientes/Find", clientesView);
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResponseAPI<ClientesViewModel>>(content);
-                var res = result.data;
-                return Json(res);
-            }
-            else
-            {
-                // manejar error
-                return null;
-            }
-        }
+        //    var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+        //    HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Clientes/Find?id=" + clie_Id);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string content = await response.Content.ReadAsStringAsync();
+        //        var result = JsonConvert.DeserializeObject<ResponseAPI<ClientesViewModel>>(content);
+        //        var res = result.data;
+        //        return View(res);
+        //    }
+        //    else
+        //    {
+        //        // manejar error
+        //        return null;
+        //    }
+        //}
 
         [HttpGet("/Clientes/ListarDepartamentos")]
         public async Task<IActionResult> ListarDepartamentos()

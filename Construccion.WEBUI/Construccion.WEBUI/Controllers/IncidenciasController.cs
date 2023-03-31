@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Construccion.WEBUI.Controllers
@@ -46,6 +47,46 @@ namespace Construccion.WEBUI.Controllers
             else
             {
                 return RedirectToAction("Index", "Login");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(IncidenciasViewModel incidenciasView, string inci_Descripcion, int cons_Id)
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            incidenciasView.user_UsuCreacion = HttpContext.Session.GetInt32("UsuarioId");
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync<IncidenciasViewModel>(builder.GetSection("ApiSettings:baseUrl").Value + "Incidencias/Insert", incidenciasView);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string res = await response.Content.ReadAsStringAsync();
+                var respuestaX = JsonConvert.DeserializeObject<INSERTAPI>(res);
+                var mensaje = respuestaX.message;
+                HttpContext.Session.SetString("NombreUsuario", mensaje);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+
+
+
+        [HttpGet("/Incidencias/ListarConstrucciones")]
+
+        public async Task<IActionResult> ListarConstrucciones()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            HttpResponseMessage response = await _httpClient.GetAsync(builder.GetSection("ApiSettings:baseUrl").Value + "Incidencias/ListadoConstrucciones");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var construcciones = JsonConvert.DeserializeObject<List<ListarConstrucciones>>(content);
+                return Json(construcciones);
+            }
+            else
+            {
+                // manejar error
+                return null;
             }
         }
     }

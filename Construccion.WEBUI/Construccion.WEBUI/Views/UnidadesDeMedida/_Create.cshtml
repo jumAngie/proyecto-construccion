@@ -1,18 +1,18 @@
-﻿<Form action="@Url.Action("Create","Cargos")" method="post" id="createcargos">
+﻿<Form action="@Url.Action("Create","UnidadesDeMedida")" method="post" id="createunim">
 
-    <div class="modal fade" id="CreateCargos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="CreateMedidas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="card-header" style="background-color:#ffbd26">
                     <div class="text-center">
-                        <h3 style="color:black"><strong>Nuevo Cargo</strong></h3>
+                        <h3 style="color:black"><strong>Nueva Unidad de Medida</strong></h3>
                     </div>
                 </div>
                 <div class="modal-body">
                     <br />
                     <label class="text-danger">*</label>
                     <label>Descripción</label>
-                    <input type="text" id="carg_Cargo" name="carg_Cargo" class="form-control" />
+                    <input type="text" id="unim_Descripcion" name="unim_Descripcion" class="form-control" />
                     <br />
                 </div>
                 <div class="modal-footer">
@@ -30,7 +30,7 @@
         var siuu = true;
 
 
-        if ($('#carg_Cargo').val() == "") {
+        if ($('#unim_Descripcion').val() == "") {
             mostrarErrorToast("Campos requeridos.");
             siuu = false;
             console.log(1);
@@ -38,7 +38,7 @@
         }
 
         if (siuu) {
-            $('#createcargos').submit();
+            $('#createunim').submit();
         }
 
     };
